@@ -11,11 +11,11 @@
     }"
     @drop="onColumnDrop($event)"
   >
-    <Draggable class v-for="column in scene.groups" :key="column.id">
-      <div class="h-full flex flex-col">
+    <Draggable class v-for="group in scene.groups" :key="group.id">
+      <div class="">
         <!-- TASK TITLE/INPUT HERE -->
         <div class>
-          <span>Title</span>
+          <span>{{group.title}}</span>
         </div>
         <!-- column -->
         <Container
@@ -23,16 +23,16 @@
           orientation="vertical"
           group-name="col-items"
           :shouldAcceptDrop="(e, payload) => (e.groupName === 'col-items' && !payload.loading)"
-          :get-child-payload="getCardPayload(column.id)"
+          :get-child-payload="getCardPayload(group.id)"
           :drop-placeholder="{
             className:
               `drop-placeholder-color`
           }"
           drag-class="drop-rotation"
-          @drop="(e) => onCardDrop(column.id, e)"
+          @drop="(e) => onCardDrop(group.id, e)"
         >
           <!-- Items -->
-          <task-preview v-for="item in column.tasks" :key="item.id" :item="item" />
+          <task-preview v-for="item in group.tasks" :key="item.id" :item="item" />
         </Container>
       </div>
     </Draggable>
