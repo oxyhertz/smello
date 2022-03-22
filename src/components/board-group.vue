@@ -33,6 +33,7 @@
         >
           <!-- Items -->
           <task-preview v-for="item in group.tasks" :key="item.id" :item="item" />
+          <task-add/>
         </Container>
       </div>
     </Draggable>
@@ -43,6 +44,7 @@
 <script>
 import { Container, Draggable } from 'vue3-smooth-dnd';
 import taskPreview from './task-preview.vue';
+import taskAdd from './task-add.vue';
 
 export default {
     name: 'board-group',
@@ -60,7 +62,8 @@ export default {
     components: {
         Container,
         Draggable,
-        taskPreview
+        taskPreview,
+        taskAdd,
     },
     methods: {
         applyDrag(arr, dragResult) {
