@@ -11,6 +11,7 @@
 <script>
 export default{
     name: 'board-preview',
+    emits: ["toggleFavorite"],
     props:{
         board:Object
     },
