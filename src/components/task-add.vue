@@ -3,7 +3,7 @@
     <textarea
       v-model="desc"
       type="textarea"
-      :style="{ resize: none }"
+      :style="{ 'resize': 'none' }"
       placeholder="Please input"
     />
     <div class="add-task-btns">

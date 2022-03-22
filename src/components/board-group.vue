@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     updateBoard(ev, groupId) {
+      
       this.$emit();
     },
     applyDrag(arr, dragResult) {
@@ -122,65 +123,60 @@ export default {
       };
     },
     methods: {
-      applyDrag(arr, dragResult) {
-        const { removedIndex, addedIndex, payload } = dragResult;
-        if (removedIndex === null && addedIndex === null) return arr;
-        const result = [...arr];
-        let itemToAdd = payload;
-        if (removedIndex !== null) {
-          itemToAdd = result.splice(removedIndex, 1)[0];
-        }
-        if (addedIndex !== null) {
-          result.splice(addedIndex, 0, itemToAdd);
-        }
-        return result;
-      },
-      onColumnDrop(dropResult) {
-        const scene = Object.assign({}, this.scene);
-        scene.groups = this.applyDrag(scene.groups, dropResult);
-        this.scene = scene;
-        this.$store.dispatch({
-          type: "setCurrGroups",
-          groups: this.scene.groups,
-        });
-      },
-      onCardDrop(columnId, dropResult) {
-        // check if element where ADDED or REMOVED in current collumn
-        if (
-          dropResult.removedIndex !== null ||
-          dropResult.addedIndex !== null
-        ) {
-          const scene = Object.assign({}, this.scene);
-          const column = scene.groups.filter((p) => p._id === columnId)[0];
-          const itemIndex = scene.groups.indexOf(column);
-          const newColumn = Object.assign({}, column);
+        applyDrag(arr, dragResult) {
+            const { removedIndex, addedIndex, payload } = dragResult;
+            if (removedIndex === null && addedIndex === null) return arr;
+            const result = [...arr];
+            let itemToAdd = payload;
+            if (removedIndex !== null) {
+                itemToAdd = result.splice(removedIndex, 1)[0];
+            }
+            if (addedIndex !== null) {
+                result.splice(addedIndex, 0, itemToAdd);
+            }
+            return result;
+        },
+        onColumnDrop(dropResult) {
+            const scene = Object.assign({}, this.scene)
+            scene.groups = this.applyDrag(scene.groups, dropResult)
+            this.scene = scene
+            this.$store.dispatch({type: 'setCurrGroups', groups: this.scene.groups});
+        },
+        onCardDrop(columnId, dropResult) {
 
-          // check if element was ADDED in current column
-          if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
-            // your action / api call
-            // dropResult.payload.loading = true
-            // simulate api call
-            // setTimeout(function () { dropResult.payload.loading = false }, (Math.random() * 5000) + 1000);
-          }
+            // check if element where ADDED or REMOVED in current collumn
+            if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
 
-          newColumn.tasks = this.applyDrag(newColumn.tasks, dropResult);
-          // this.$emit('groupChange', {idx: itemIndex, newCol: newColumn})
-          this.$store.dispatch({ type: "groupDND", idx: itemIndex, newColumn });
-          // this.$emit('drop', {idx: itemIndex, newColumn});
-          // scene.groups.splice(itemIndex, 1, newColumn)
-          // this.scene = scene
+                const scene = Object.assign({}, this.scene)
+                const column = scene.groups.filter(p => p._id === columnId)[0]
+                const itemIndex = scene.groups.indexOf(column)
+                const newColumn = Object.assign({}, column)
+
+                // check if element was ADDED in current column
+                if ((dropResult.removedIndex == null && dropResult.addedIndex >= 0)) {
+                    // your action / api call
+                    // dropResult.payload.loading = true
+                    // simulate api call
+                    // setTimeout(function () { dropResult.payload.loading = false }, (Math.random() * 5000) + 1000);
+
+                }
+
+                newColumn.tasks = this.applyDrag(newColumn.tasks, dropResult)
+                // this.$emit('groupChange', {idx: itemIndex, newCol: newColumn})
+                this.$store.dispatch({type: 'groupDND', idx: itemIndex, newColumn})
+                // this.$emit('drop', {idx: itemIndex, newColumn});
+                // scene.groups.splice(itemIndex, 1, newColumn)
+                // this.scene = scene
+            }
+        },
+        getCardPayload(columnId) {
+            return index => {
+                return this.scene.groups.filter(p => p._id === columnId)[0].tasks[index]
+            }
         }
-      },
-      getCardPayload(columnId) {
-        return (index) => {
-          return this.scene.groups.filter((p) => p._id === columnId)[0].tasks[
-            index
-          ];
-        };
-      },
-    },
-  },
-};
+    }
+}
+}
 </script>
 
 // <!-- <style>
