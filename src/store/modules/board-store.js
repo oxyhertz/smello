@@ -49,6 +49,9 @@ export default {
     },
     addGroup(state, { group }) {
       state.currentBoard.groups.push(group);
+    },
+    setCurrGroups(state, {groups}) {
+      state.currentBoard.groups = [...groups];
     }
   },
   actions: {
@@ -75,8 +78,13 @@ export default {
       boardService.getById(boardId)
         .then(board => commit({ type: 'setCurrentBoard', board }))
     },
-    groupDND({ commit }, { idx, newColumn }) {
+    groupDND({state, commit, dispatch }, { idx, newColumn }) {
       commit({ type: 'groupDND', idx, newColumn })
+      dispatch({type: 'saveBoard', board: state.currentBoard})
+    },
+    setCurrGroups({state, commit, dispatch}, {groups}) {
+      commit({type: 'setCurrGroups', groups});
+      dispatch({type: 'saveBoard', board: state.currentBoard});
     },
     addGroup({ state, commit, dispatch }, { groupTitle }) {
       const group = boardService.getEmptyGroup(groupTitle);

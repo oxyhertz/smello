@@ -11,7 +11,7 @@
     }"
     @drop="onColumnDrop($event)"
   >
-    <Draggable class v-for="group in scene.groups" :key="group.id">
+    <Draggable class v-for="group in scene.groups" :key="group._id">
       <section class="">
         <!-- TASK TITLE/INPUT HERE -->
         <section class="group-title">
@@ -23,17 +23,17 @@
           orientation="vertical"
           group-name="col-items"
           :shouldAcceptDrop="(e, payload) => (e.groupName === 'col-items' && !payload.loading)"
-          :get-child-payload="getCardPayload(group.id)"
+          :get-child-payload="getCardPayload(group._id)"
           :drop-placeholder="{
             className:
               `drop-placeholder-color`
           }"
           drag-class="drop-rotation"
-          @drop="(e) => onCardDrop(group.id, e)"
+          @drop="(e) => onCardDrop(group._id, e)"
         >
           <!-- Items -->
-          <task-preview v-for="item in group.tasks" :key="item.id" :item="item" />
-          <task-add/>
+          <task-preview v-for="item in group.tasks" :key="item._id" :item="item" />
+          <task-add />
         </Container>
       </section>
     </Draggable>
@@ -82,7 +82,8 @@ export default {
         onColumnDrop(dropResult) {
             const scene = Object.assign({}, this.scene)
             scene.groups = this.applyDrag(scene.groups, dropResult)
-            // this.scene = scene
+            this.scene = scene
+            this.$store.dispatch({type: 'setCurrGroups', groups: this.scene.groups});
         },
         onCardDrop(columnId, dropResult) {
 
@@ -90,7 +91,7 @@ export default {
             if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
 
                 const scene = Object.assign({}, this.scene)
-                const column = scene.groups.filter(p => p.id === columnId)[0]
+                const column = scene.groups.filter(p => p._id === columnId)[0]
                 const itemIndex = scene.groups.indexOf(column)
                 const newColumn = Object.assign({}, column)
 
@@ -106,13 +107,14 @@ export default {
                 newColumn.tasks = this.applyDrag(newColumn.tasks, dropResult)
                 // this.$emit('groupChange', {idx: itemIndex, newCol: newColumn})
                 this.$store.dispatch({type: 'groupDND', idx: itemIndex, newColumn})
+                // this.$emit('drop', {idx: itemIndex, newColumn});
                 // scene.groups.splice(itemIndex, 1, newColumn)
                 // this.scene = scene
             }
         },
         getCardPayload(columnId) {
             return index => {
-                return this.scene.groups.filter(p => p.id === columnId)[0].tasks[index]
+                return this.scene.groups.filter(p => p._id === columnId)[0].tasks[index]
             }
         }
     }
