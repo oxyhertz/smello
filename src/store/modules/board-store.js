@@ -16,7 +16,7 @@ export default {
       return copyBoards;
     },
     currBoard({ currentBoard }) {
-      return currentBoard;
+      return JSON.parse(JSON.stringify(currentBoard));
     },
     boardGroups({ currentBoard }) {
       return currentBoard?.groups;

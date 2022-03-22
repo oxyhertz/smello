@@ -1,9 +1,10 @@
 <template>
   <div v-if="isCreating">
     <textarea
-      v-model="desc"
+      v-focus
+      v-model="title"
       type="textarea"
-      :style="{ 'resize': 'none' }"
+      :style="{ resize: 'none' }"
       placeholder="Please input"
     />
     <div class="add-task-btns">
@@ -19,12 +20,12 @@ export default {
   data() {
     return {
       isCreating: null,
-      desc: "",
+      title: "",
     };
   },
   methods: {
     addTask() {
-      this.$emit("updateBoard", this.desc);
+      this.$emit("addTask", this.title);
       this.isCreating = null;
     },
   },
