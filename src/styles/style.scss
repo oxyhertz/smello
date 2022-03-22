@@ -1,12 +1,13 @@
-// BASIC
-@import './basics/typography';
-@import './basics/variables';
-@import './basics/helpers';
-@import './basics/basic';
-@import './basics/functions';
-@import './basics/layout';
-@import './basics/mixins';
+// SETUP
+@import 'setup/typography';
+@import 'setup/variables';
+@import 'setup/mixins';
+@import 'setup/functions';
 
+// BASICS
+@import 'basics/helpers';
+@import 'basics/base';
+@import 'basics/layout';
 // CMPS
 
 
