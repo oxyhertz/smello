@@ -9,6 +9,7 @@ export const boardService = {
   remove,
   save,
   getById,
+  getEmptyGroup
 };
 
 function query(filterBy) {
@@ -24,8 +25,16 @@ function getById(boardId) {
 }
 
 function save(board) {
-  if (board.id) return storageService.put(BOARD_KEY, board);
+  if (board._id) return storageService.put(BOARD_KEY, board);
   else return storageService.post(BOARD_KEY, board);
+}
+
+function getEmptyGroup(title = '', tasks = []) {
+  return {
+    _id: utilService.makeId(),
+    title,
+    tasks
+  }
 }
 
 function _createBoards() {

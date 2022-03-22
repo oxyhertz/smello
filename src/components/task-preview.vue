@@ -1,8 +1,8 @@
 <template>
     <Draggable v-if="item">
-        <div class="task-preview-container" style=" margin-right:10px;">
+        <section class="task-preview-container" style=" margin-right:10px;">
             <p>{{item.title}}</p>
-        </div>
+        </section>
     </Draggable>
 </template>
 

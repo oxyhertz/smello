@@ -12,11 +12,11 @@
     @drop="onColumnDrop($event)"
   >
     <Draggable class v-for="group in scene.groups" :key="group.id">
-      <div class="">
+      <section class="">
         <!-- TASK TITLE/INPUT HERE -->
-        <div class>
+        <section class="group-title">
           <span>{{group.title}}</span>
-        </div>
+        </section>
         <!-- column -->
         <Container
           class
@@ -35,7 +35,7 @@
           <task-preview v-for="item in group.tasks" :key="item.id" :item="item" />
           <task-add/>
         </Container>
-      </div>
+      </section>
     </Draggable>
   </Container>
 </template>
