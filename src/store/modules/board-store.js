@@ -5,7 +5,7 @@ export default {
   state: {
     boards: [],
     filterBy: { name: '', sortBy: '' },
-    currentBoard: null
+    currentBoard: null,
   },
   getters: {
     boards({ boards }) {
@@ -20,7 +20,7 @@ export default {
     },
     boardGroups({ currentBoard }) {
       return currentBoard?.groups;
-    }
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -75,8 +75,9 @@ export default {
       dispatch({ type: 'loadBoards' });
     },
     setCurrentBoard({ commit }, { boardId }) {
-      boardService.getById(boardId)
-        .then(board => commit({ type: 'setCurrentBoard', board }))
+      boardService
+        .getById(boardId)
+        .then(board => commit({ type: 'setCurrentBoard', board }));
     },
     groupDND({state, commit, dispatch }, { idx, newColumn }) {
       commit({ type: 'groupDND', idx, newColumn })
@@ -89,7 +90,10 @@ export default {
     addGroup({ state, commit, dispatch }, { groupTitle }) {
       const group = boardService.getEmptyGroup(groupTitle);
       commit({ type: 'addGroup', group });
-      dispatch({type: 'saveBoard', board: JSON.parse(JSON.stringify(state.currentBoard))});
-    }
+      dispatch({
+        type: 'saveBoard',
+        board: JSON.parse(JSON.stringify(state.currentBoard)),
+      });
+    },
   },
 };
