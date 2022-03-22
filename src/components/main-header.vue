@@ -2,7 +2,7 @@
   <header class="main-header flex space-between">
     <section class="header-container flex">
       <button class="nav-btn">...</button>
-      <div class="logo">Trello</div>
+      <section class="logo">Trello</section>
       <button class="starred-btn header-cmp">
         Starred
         <svg

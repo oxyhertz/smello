@@ -12,11 +12,11 @@
     @drop="onColumnDrop($event)"
   >
     <Draggable class v-for="group in scene.groups" :key="group.id">
-      <div class="">
+      <section class="">
         <!-- TASK TITLE/INPUT HERE -->
-        <div class>
+        <section class="group-title">
           <span>{{group.title}}</span>
-        </div>
+        </section>
         <!-- column -->
         <Container
           class
@@ -33,8 +33,9 @@
         >
           <!-- Items -->
           <task-preview v-for="item in group.tasks" :key="item.id" :item="item" />
+          <task-add/>
         </Container>
-      </div>
+      </section>
     </Draggable>
   </Container>
 </template>
@@ -43,6 +44,7 @@
 <script>
 import { Container, Draggable } from 'vue3-smooth-dnd';
 import taskPreview from './task-preview.vue';
+import taskAdd from './task-add.vue';
 
 export default {
     name: 'board-group',
@@ -60,7 +62,8 @@ export default {
     components: {
         Container,
         Draggable,
-        taskPreview
+        taskPreview,
+        taskAdd,
     },
     methods: {
         applyDrag(arr, dragResult) {

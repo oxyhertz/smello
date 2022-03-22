@@ -3,10 +3,13 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import './styles/style.scss';
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+import { focusDirective } from './directives/';
 
 const app = createApp(App);
+
+app.directive('focus', focusDirective);
 
 app.use(router);
 app.use(store);

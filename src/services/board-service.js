@@ -9,6 +9,7 @@ export const boardService = {
   remove,
   save,
   getById,
+  getEmptyGroup,
 };
 
 function query(filterBy) {
@@ -26,6 +27,14 @@ function getById(boardId) {
 function save(board) {
   if (board._id) return storageService.put(BOARD_KEY, board);
   else return storageService.post(BOARD_KEY, board);
+}
+
+function getEmptyGroup(title = '', tasks = []) {
+  return {
+    _id: utilService.makeId(),
+    title,
+    tasks,
+  };
 }
 
 function _createBoards() {
@@ -49,12 +58,12 @@ function _createBoards() {
         },
         labels: [
           {
-            id: 'l101',
+            _id: 'l101',
             title: 'Done',
             color: '#61bd4f',
           },
           {
-            id: 'l102',
+            _id: 'l102',
             title: 'Progress',
             color: '#61bd33',
           },
@@ -68,37 +77,37 @@ function _createBoards() {
         ],
         groups: [
           {
-            id: 'g101',
+            _id: 'g101',
             title: 'Group 1',
             tasks: [
               {
-                id: 'c101',
+                _id: 'c101',
                 title: 'Replace logo',
               },
               {
-                id: 'c102',
+                _id: 'c102',
                 title: 'Add Samples',
               },
             ],
             style: {},
           },
           {
-            id: 'g102',
+            _id: 'g102',
             title: 'Group 2',
             tasks: [
               // CARD
               {
-                id: 'c103',
+                _id: 'c103',
                 title: 'Do that',
               },
               {
-                id: 'c104',
+                _id: 'c104',
                 title: 'Help me',
                 status: 'in-progress',
                 description: 'description',
                 comments: [
                   {
-                    id: 'ZdPnm',
+                    _id: 'ZdPnm',
                     txt: 'also @yaronb please CR this',
                     createdAt: 1590999817436.0,
                     byMember: {
@@ -111,11 +120,11 @@ function _createBoards() {
                 ],
                 checklists: [
                   {
-                    id: 'YEhmF',
+                    _id: 'YEhmF',
                     title: 'Checklist',
                     todos: [
                       {
-                        id: '212jX',
+                        _id: '212jX',
                         title: 'To Do 1',
                         isDone: false,
                       },
@@ -151,7 +160,7 @@ function _createBoards() {
         ],
         activities: [
           {
-            id: 'a101',
+            _id: 'a101',
             txt: 'Changed Color',
             createdAt: 154514,
             byMember: {
@@ -160,152 +169,7 @@ function _createBoards() {
               imgUrl: 'http://some-img',
             },
             task: {
-              id: 'c101',
-              title: 'Replace Logo',
-            },
-          },
-        ],
-      },
-      {
-        _id: 'b132',
-        title: 'Trello sprint proj',
-        createdAt: 1589923468418,
-        isFavorite: true,
-        createdBy: {
-          _id: 'u101',
-          fullname: 'Admin  ',
-          imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        },
-        style: {
-          bgColor: '#fafaf2',
-        },
-        labels: [
-          {
-            id: 'l101',
-            title: 'Done',
-            color: '#61bd4f',
-          },
-          {
-            id: 'l102',
-            title: 'Progress',
-            color: '#61bd33',
-          },
-          {
-            id: 'l103',
-            title: 'ASAP',
-            color: '#f0f0f0',
-          },
-        ],
-        members: [
-          {
-            _id: 'u101',
-            fullname: 'Dima Pol',
-            imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-          },
-          {
-            _id: 'u101',
-            fullname: 'Admin  ',
-            imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-          },
-        ],
-        groups: [
-          {
-            id: 'g121',
-            title: 'Group 1',
-            tasks: [
-              {
-                id: 'c121',
-                title: 'Change header color',
-              },
-              {
-                id: 'c122',
-                title: 'Add task input',
-              },
-              {
-                id: 'c123e',
-                title: 'Change bg color',
-              },
-            ],
-            style: {},
-          },
-          {
-            id: '21a321gad',
-            title: 'Go to production',
-            tasks: [
-              {
-                id: 'c1233',
-                title: 'Upload patch',
-              },
-              {
-                id: 'c123104',
-                title: 'Help me',
-                status: 'in-progress',
-                description: 'description',
-                comments: [
-                  {
-                    id: 'ZdPnm',
-                    txt: 'also @yaronb please CR this',
-                    createdAt: 1590999780000,
-                    byMember: {
-                      _id: 'u101',
-                      fullname: 'Dima pol',
-                      imgUrl:
-                        'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                    },
-                  },
-                ],
-                checklists: [
-                  {
-                    id: 'YEh2mF',
-                    title: 'Checklist',
-                    todos: [
-                      {
-                        id: '212jX',
-                        title: 'To Do 1',
-                        isDone: false,
-                      },
-                    ],
-                  },
-                ],
-                members: [
-                  {
-                    _id: 'u101',
-                    username: 'Tal',
-                    fullname: 'Tal Tarablus',
-                    imgUrl:
-                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                  },
-                ],
-                labelIds: ['l101', 'l102'],
-                createdAt: 1590999730348,
-                dueDate: 16156215211,
-                byMember: {
-                  _id: 'u101',
-                  username: 'Tal',
-                  fullname: 'Tal Tarablus',
-                  imgUrl:
-                    'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                },
-                style: {
-                  bgColor: '#26de81',
-                },
-              },
-            ],
-            style: {},
-          },
-        ],
-        activities: [
-          {
-            id: 'a101',
-            txt: 'Changed Color',
-            createdAt: 154514,
-            byMember: {
-              _id: 'u101',
-              fullname: 'Abi Abambi',
-              imgUrl: 'http://some-img',
-            },
-            task: {
-              id: 'c101',
+              _id: 'c101',
               title: 'Replace Logo',
             },
           },
