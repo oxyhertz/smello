@@ -37,7 +37,6 @@
       </div>
     </Draggable>
   </Container>
-  <pre>{{scene}}</pre>
 </template>
 
 
