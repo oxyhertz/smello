@@ -53,12 +53,12 @@ function _createBoards() {
         style: {},
         labels: [
           {
-            id: 'l101',
+            _id: 'l101',
             title: 'Done',
             color: '#61bd4f',
           },
           {
-            id: 'l102',
+            _id: 'l102',
             title: 'Progress',
             color: '#61bd33',
           },
@@ -72,37 +72,37 @@ function _createBoards() {
         ],
         groups: [
           {
-            id: 'g101',
+            _id: 'g101',
             title: 'Group 1',
             tasks: [
               {
-                id: 'c101',
+                _id: 'c101',
                 title: 'Replace logo',
               },
               {
-                id: 'c102',
+                _id: 'c102',
                 title: 'Add Samples',
               },
             ],
             style: {},
           },
           {
-            id: 'g102',
+            _id: 'g102',
             title: 'Group 2',
             tasks: [
               // CARD
               {
-                id: 'c103',
+                _id: 'c103',
                 title: 'Do that',
               },
               {
-                id: 'c104',
+                _id: 'c104',
                 title: 'Help me',
                 status: 'in-progress',
                 description: 'description',
                 comments: [
                   {
-                    id: 'ZdPnm',
+                    _id: 'ZdPnm',
                     txt: 'also @yaronb please CR this',
                     createdAt: 1590999817436.0,
                     byMember: {
@@ -115,11 +115,11 @@ function _createBoards() {
                 ],
                 checklists: [
                   {
-                    id: 'YEhmF',
+                    _id: 'YEhmF',
                     title: 'Checklist',
                     todos: [
                       {
-                        id: '212jX',
+                        _id: '212jX',
                         title: 'To Do 1',
                         isDone: false,
                       },
@@ -155,7 +155,7 @@ function _createBoards() {
         ],
         activities: [
           {
-            id: 'a101',
+            _id: 'a101',
             txt: 'Changed Color',
             createdAt: 154514,
             byMember: {
@@ -164,12 +164,11 @@ function _createBoards() {
               imgUrl: 'http://some-img',
             },
             task: {
-              id: 'c101',
+              _id: 'c101',
               title: 'Replace Logo',
             },
           },
         ],
-        // for monday
       },
     ];
     utilService.saveToStorage(BOARD_KEY, boards);
