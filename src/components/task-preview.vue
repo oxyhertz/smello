@@ -1,7 +1,7 @@
 <template>
     <Draggable v-if="item">
         <div class="task-preview-container" style=" margin-right:10px;">
-            <p>Data Comes here {{ item.id }}</p>
+            <p>{{item.title}}</p>
         </div>
     </Draggable>
 </template>
