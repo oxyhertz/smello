@@ -1,19 +1,19 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <section class="wrapper">
-
-      <nav>
-
-      </nav>
-    </section>
-  </header>
-
+  <app-header/>
   <router-view />
 </template>
+
+<script>
+import appHeader from './components/main-header.vue'
+import {userService} from './services/user-manage-service.js'
+export default {
+  name: 'app',
+  created() {
+    this.$store.dispatch({ type: 'loadBoards' })
+    userService.query()
+  },
+  components: {
+    appHeader,
+  },
+}
+</script>
