@@ -1,8 +1,8 @@
 <template>
     <ul class="board-list">
-        <board-preview v-for="board in boards" :board="board" :key="board._id" />
+        <board-preview @toggleFavorite="toggleFavorite" v-for="board in boards" :board="board" :key="board._id" @click="moveToBoard(board._id)" />
     </ul>
-    {{boards}}
+    
 </template>
 
 <script>
@@ -15,11 +15,18 @@ export default{
     },
     data(){
         return {
-
         }
     },
     created(){
+    },
+    methods:{
+        moveToBoard(id){
+             this.$router.push(`/board/${id}`)
+        },
+        toggleFavorite(id){
+            this.$emit('toggleFavorite', id);
 
+        }
     },
     components:{
         boardPreview

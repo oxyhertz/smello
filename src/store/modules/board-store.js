@@ -3,7 +3,7 @@ export default {
   state: {
     boards: [],
     filterBy: { name: '', sortBy: '' },
-    currentBoard: null
+    currentBoard: null,
   },
   getters: {
     boards({ boards }) {
@@ -13,9 +13,9 @@ export default {
       const copyBoards = JSON.parse(JSON.stringify(boards));
       return copyBoards;
     },
-    boardGroups({currentBoard}) {
+    boardGroups({ currentBoard }) {
       return currentBoard?.groups;
-    }
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -36,12 +36,12 @@ export default {
     setSort(state, { sortBy }) {
       state.sortBy = sortBy;
     },
-    setCurrentBoard(state, {board}) {
+    setCurrentBoard(state, { board }) {
       state.currentBoard = board;
     },
-    groupDND(state, {idx, newColumn}) {
+    groupDND(state, { idx, newColumn }) {
       state.currentBoard.groups.splice(idx, 1, newColumn);
-    }
+    },
   },
   actions: {
     loadBoards({ commit, state }) {
@@ -51,7 +51,7 @@ export default {
     },
     saveBoard({ commit }, { board }) {
       boardService.save(board).then(savedboard => {
-        commit({ type: 'saveboard', board: savedboard });
+        commit({ type: 'saveBoard', board: savedboard });
       });
     },
     removeBoard({ commit }, { boardId }) {
@@ -63,12 +63,13 @@ export default {
       commit({ type: 'setFilter', filterBy });
       dispatch({ type: 'loadboards' });
     },
-    setCurrentBoard({commit}, {boardId}) {
-      boardService.getById(boardId)
-      .then(board => commit({type: 'setCurrentBoard', board}))
+    setCurrentBoard({ commit }, { boardId }) {
+      boardService
+        .getById(boardId)
+        .then(board => commit({ type: 'setCurrentBoard', board }));
     },
-    groupDND({commit}, {idx, newColumn}) {
-      commit({type: 'groupDND', idx, newColumn})
-    }
+    groupDND({ commit }, { idx, newColumn }) {
+      commit({ type: 'groupDND', idx, newColumn });
+    },
   },
 };

@@ -24,7 +24,7 @@ function getById(boardId) {
 }
 
 function save(board) {
-  if (board.id) return storageService.put(BOARD_KEY, board);
+  if (board._id) return storageService.put(BOARD_KEY, board);
   else return storageService.post(BOARD_KEY, board);
 }
 
@@ -36,12 +36,17 @@ function _createBoards() {
         _id: 'b101',
         title: 'Robot dev proj',
         createdAt: 1589983468418,
+        isFavorite: false,
         createdBy: {
           _id: 'u101',
           fullname: 'Abi Abambi',
           imgUrl: 'http://some-img',
         },
-        style: {},
+        style: {
+          bgColor: '#26de81',
+          bgImg:
+            'https://images.unsplash.com/photo-1647735282508-1ad1d771f9be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+        },
         labels: [
           {
             id: 'l101',
@@ -160,7 +165,151 @@ function _createBoards() {
             },
           },
         ],
-        // for monday
+      },
+      {
+        _id: 'b132',
+        title: 'Trello sprint proj',
+        createdAt: 1589923468418,
+        isFavorite: true,
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Admin  ',
+          imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+        },
+        style: {
+          bgColor: '#fafaf2',
+        },
+        labels: [
+          {
+            id: 'l101',
+            title: 'Done',
+            color: '#61bd4f',
+          },
+          {
+            id: 'l102',
+            title: 'Progress',
+            color: '#61bd33',
+          },
+          {
+            id: 'l103',
+            title: 'ASAP',
+            color: '#f0f0f0',
+          },
+        ],
+        members: [
+          {
+            _id: 'u101',
+            fullname: 'Dima Pol',
+            imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+          },
+          {
+            _id: 'u101',
+            fullname: 'Admin  ',
+            imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+          },
+        ],
+        groups: [
+          {
+            id: 'g121',
+            title: 'Group 1',
+            tasks: [
+              {
+                id: 'c121',
+                title: 'Change header color',
+              },
+              {
+                id: 'c122',
+                title: 'Add task input',
+              },
+              {
+                id: 'c123e',
+                title: 'Change bg color',
+              },
+            ],
+            style: {},
+          },
+          {
+            id: '21a321gad',
+            title: 'Go to production',
+            tasks: [
+              {
+                id: 'c1233',
+                title: 'Upload patch',
+              },
+              {
+                id: 'c123104',
+                title: 'Help me',
+                status: 'in-progress',
+                description: 'description',
+                comments: [
+                  {
+                    id: 'ZdPnm',
+                    txt: 'also @yaronb please CR this',
+                    createdAt: 1590999780000,
+                    byMember: {
+                      _id: 'u101',
+                      fullname: 'Dima pol',
+                      imgUrl:
+                        'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                    },
+                  },
+                ],
+                checklists: [
+                  {
+                    id: 'YEh2mF',
+                    title: 'Checklist',
+                    todos: [
+                      {
+                        id: '212jX',
+                        title: 'To Do 1',
+                        isDone: false,
+                      },
+                    ],
+                  },
+                ],
+                members: [
+                  {
+                    _id: 'u101',
+                    username: 'Tal',
+                    fullname: 'Tal Tarablus',
+                    imgUrl:
+                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  },
+                ],
+                labelIds: ['l101', 'l102'],
+                createdAt: 1590999730348,
+                dueDate: 16156215211,
+                byMember: {
+                  _id: 'u101',
+                  username: 'Tal',
+                  fullname: 'Tal Tarablus',
+                  imgUrl:
+                    'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                },
+                style: {
+                  bgColor: '#26de81',
+                },
+              },
+            ],
+            style: {},
+          },
+        ],
+        activities: [
+          {
+            id: 'a101',
+            txt: 'Changed Color',
+            createdAt: 154514,
+            byMember: {
+              _id: 'u101',
+              fullname: 'Abi Abambi',
+              imgUrl: 'http://some-img',
+            },
+            task: {
+              id: 'c101',
+              title: 'Replace Logo',
+            },
+          },
+        ],
       },
     ];
     utilService.saveToStorage(BOARD_KEY, boards);
