@@ -1,13 +1,13 @@
 <template>
   <header class="main-header flex space-between">
     <section class="header-container flex">
-     <div class="header-logo">
+     <section class="header-logo">
         <img class="logo-img" src="../images/logo.png" alt="trello logo">
         <span>Trello</span>
-     </div>
+     
      <div class="create-board-container">
-      <button class="create-btn" @click="isCreateBoard = !isCreateBoard">Create</button>
-      <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard" ></createBoard>
+        <button class="create-btn" @click="isCreateBoard = !isCreateBoard">Create</button>
+        <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard" ></createBoard>
      </div>
     </section>
     <section class="flex">
@@ -17,12 +17,8 @@
           size="small"
         />
     </section>
-    <div>
       <i class="fa-regular fa-bell"></i>
-    </div>
-    <div>
-  
-    </div>
+    </section>
   </header>
 </template>
 

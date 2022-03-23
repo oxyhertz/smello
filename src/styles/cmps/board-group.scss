@@ -1,0 +1,58 @@
+.group-container {
+    width: 270px;
+    background-color: $clr7;
+    border-radius: $border-rsize;
+    margin-left: $spacing;
+    
+}
+
+.group-title {
+    padding-top: $spacing;
+    margin-bottom: $spacing;
+    margin-left: calc($spacing * 2)
+}
+
+.task-preview-container {
+    background-color: $clr2;
+    margin: 0 $spacing $spacing;
+    border-radius: $border-rsize;
+    > * {
+        margin: $spacing;
+    }
+}
+
+.drop-rotation {
+    transform: rotate(5deg);
+}
+
+.smooth-dnd-container.horizontal {
+    display: flex !important;
+  }
+
+.smooth-dnd-draggable-wrapper.horizontal {
+    height: inherit;
+}
+
+.smooth-dnd-container.vertical {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        border-radius: $border-rsize;
+        background: $scroll-y-bg-clr;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: $border-rsize;
+        background: $scroll-y-clr;
+    }
+}
+
+.drop-placeholder {
+    background-color: $clr8;
+    margin: $spacing;
+}

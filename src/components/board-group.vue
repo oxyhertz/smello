@@ -1,22 +1,17 @@
 <template>
   <Container
-    class="board-group-container"
     group-name="cols"
     tag="div"
     orientation="horizontal"
     drag-class="drop-rotation"
-    :drop-placeholder="{
-      className: `drop-placeholder-color`,
-    }"
     @drop="onColumnDrop($event)"
   >
     <Draggable class v-for="(group, index) in scene.groups" :key="group._id">
-      <section class="">
-        <!-- TASK TITLE/INPUT HERE -->
+      <section class="group-container">
         <section class="group-title">
           <h1>{{ group.title }}</h1>
         </section>
-        <!-- column -->
+
         <Container
           class
           orientation="vertical"
@@ -26,7 +21,7 @@
           "
           :get-child-payload="getCardPayload(group._id)"
           :drop-placeholder="{
-            className: `drop-placeholder-color`,
+            className: `drop-placeholder`,
           }"
           drag-class="drop-rotation"
           @drop="(e) => onCardDrop(group._id, e)"
@@ -35,11 +30,12 @@
           <task-preview
             @removeTask="removeTask($event, index)"
             v-for="task in group.tasks"
+            @click="openTaskDetails(group._id, task._id)"
             :key="task._id"
             :task="task"
           />
-          <task-add @addTask="addTask($event, index)" />
         </Container>
+        <task-add @addTask="addTask($event, index)" />
       </section>
     </Draggable>
   </Container>
@@ -84,6 +80,9 @@ export default {
       };
       this.$emit("addTask", task);
     },
+    openTaskDetails(groupId, taskId) {
+      this.$router.push(`/board/${this.$route.params.boardId}/${groupId}/${taskId}`)
+    },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
       if (removedIndex === null && addedIndex === null) return arr;
@@ -101,7 +100,7 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.groups = this.applyDrag(scene.groups, dropResult);
       this.scene = scene;
-      this.$emit('columnChange', this.scene.groups);
+      this.$emit("columnChange", this.scene.groups);
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
@@ -123,7 +122,7 @@ export default {
         // this.$emit('drop', {idx: itemIndex, newColumn});
         // scene.groups.splice(itemIndex, 1, newColumn)
         // this.scene = scene
-        this.$emit('taskChange', {groupIdx: itemIndex, newGroup: newColumn})
+        this.$emit('taskChange', { groupIdx: itemIndex, newGroup: newColumn })
       }
     },
     getCardPayload(columnId) {
