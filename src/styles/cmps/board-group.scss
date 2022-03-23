@@ -1,5 +1,5 @@
 .group-container {
-    width: 270px;
+    width: $group-size;
     background-color: $clr7;
     border-radius: $border-rsize;
     margin-left: $spacing;
@@ -34,7 +34,7 @@
 }
 
 .smooth-dnd-container.vertical {
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px); // 200px needs to change
     overflow-y: auto;
     &::-webkit-scrollbar {
         height: 8px;

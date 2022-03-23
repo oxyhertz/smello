@@ -1,14 +1,8 @@
 <template>
     <section class="add-group">
-        <p v-if="!isFocused" @click="isFocused = true">Add another list</p>
+        <span v-if="!isFocused" @click="isFocused = true">Add another list</span>
         <section v-else>
-            <textarea
-                v-model="groupTitle"
-                v-focus
-                cols="20"
-                rows="1"
-                placeholder="Enter list title..."
-            ></textarea>
+            <input type="text" v-model="groupTitle" v-focus placeholder="Enter list title..." />
             <button @click="addGroup">Add list</button>
             <button @click="isFocused = false">x</button>
         </section>

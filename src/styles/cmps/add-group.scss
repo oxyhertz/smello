@@ -1,0 +1,17 @@
+.add-group {
+    width: $group-size;
+    margin-left: $spacing;
+    min-height: 38px;
+    height: 100%;
+    background-color: $header-btn-clr;
+    display: flex;
+    align-items: center;
+    span {
+        margin-left: $spacing;
+    }
+    
+}
+
+.add-group:hover {
+    background-color: $header-btn-clr-dark;
+}

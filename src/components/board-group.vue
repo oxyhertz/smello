@@ -38,6 +38,7 @@
         <task-add @addTask="addTask($event, index)" />
       </section>
     </Draggable>
+    <add-group @add="addGroup" />
   </Container>
 </template>
 
@@ -46,6 +47,8 @@
 import { Container, Draggable } from "vue3-smooth-dnd";
 import taskPreview from "./task-preview.vue";
 import taskAdd from "./task-add.vue";
+import addGroup from "../components/add-group.vue";
+
 export default {
   name: "board-group",
   props: {
@@ -64,8 +67,12 @@ export default {
     Draggable,
     taskPreview,
     taskAdd,
+    addGroup
   },
   methods: {
+    addGroup(title) {
+      this.$emit("addGroup", title);
+    },
     removeTask(taskId, groupIdx) {
       const task = {
         taskId,

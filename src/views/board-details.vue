@@ -6,17 +6,16 @@
             @addTask="addTask"
             @taskChange="taskChange"
             @columnChange="columnChange"
+            @addGroup="addGroup"
             :groups="board.groups"
         />
-        <add-group @add="addGroup" />
-        <!-- <board-group /> -->
+
     </section>
 </template>
 
 <script>
 
 import boardGroup from "../components/board-group.vue";
-import addGroup from "../components/add-group.vue";
 import { utilService } from "../services/utils-service.js";
 import { boardService } from "../services/board-service.js";
 import boardMenu from "../components/board-menu.vue"
@@ -25,7 +24,6 @@ export default {
     name: "board-details",
     components: {
         boardGroup,
-        addGroup,
         boardMenu
     },
     data() {
