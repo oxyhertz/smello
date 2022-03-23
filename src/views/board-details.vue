@@ -1,5 +1,5 @@
 <template>
-    <section v-if="groups" class="board-container">
+    <section v-if="groups && board" class="board-container">
         <board-menu></board-menu>
         <board-group
             @removeTask="removeTask"

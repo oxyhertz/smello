@@ -25,6 +25,7 @@ export default {
     },
     methods: {
         addGroup() {
+            if (!this.groupTitle) return
             this.$emit('add', this.groupTitle)
             this.groupTitle = '';
         }
