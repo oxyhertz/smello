@@ -27,6 +27,7 @@ export default {
     addTask() {
       this.$emit("addTask", this.title);
       this.isCreating = null;
+      this.title = '';
     },
   },
 };

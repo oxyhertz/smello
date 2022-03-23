@@ -1,17 +1,19 @@
 <template>
   <section v-if="groups && board" class="board-container">
-    <board-group @removeTask="removeTask" @addTask="addTask" :groups="groups" />
+    <board-group
+      @removeTask="removeTask"
+      @addTask="addTask"
+      :groups="board.groups"
+    />
     <add-group @add="addGroup" />
     <!-- <board-group /> -->
   </section>
 </template>
-
 <script>
 import boardGroup from "../components/board-group.vue";
 import addGroup from "../components/add-group.vue";
-import { utilService } from "../services/utils-service";
-import { boardService } from "../services/board-service";
-
+import { utilService } from "../services/utils-service.js";
+import { boardService } from "../services/board-service.js";
 export default {
   name: "board-details",
   components: {
@@ -28,11 +30,13 @@ export default {
       type: "setCurrentBoard",
       boardId: this.$route.params.boardId,
     });
-    this.board = this.$store.getters.currBoard;
+    this.board = this.currBoard;
+    // this.boardGroups = this.currBoard.groups;
+    // console.log(this.boardGroups)
   },
   methods: {
     removeTask({ taskId, groupIdx }) {
-        // var activity = boardService.createActivity()
+      // var activity = boardService.createActivity()
       var idx = this.board.groups[groupIdx].tasks.findIndex(
         (task) => task._id === taskId
       );
@@ -48,13 +52,23 @@ export default {
       this.board.groups[groupIdx].tasks.push(task);
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
-    addGroup(groupTitle) {
-      this.$store.dispatch({ type: "addGroup", groupTitle });
+    addGroup(title) {
+      const group = boardService.getEmptyGroup(title);
+      this.board.groups.push(group);
+      this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
+    columnChange(boardGroups) {
+      this.board.groups = boardGroups;
+      this.$store.dispatch({ type: "saveBoard", board: this.board });
+    },
+    taskChange({ groupIdx, newGroup }) {},
   },
   computed: {
     groups() {
       return this.$store.getters.boardGroups;
+    },
+    currBoard() {
+      return this.$store.getters.currBoard;
     },
   },
 };

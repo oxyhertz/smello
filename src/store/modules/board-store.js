@@ -62,7 +62,7 @@ export default {
     },
     saveBoard({ commit }, { board }) {
       boardService.save(board).then(savedboard => {
-        commit({ type: 'saveBoard', board: savedboard });
+        commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedboard)) });
       });
     },
     removeBoard({ commit }, { boardId }) {
