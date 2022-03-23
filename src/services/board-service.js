@@ -10,6 +10,7 @@ export const boardService = {
   save,
   getById,
   getEmptyGroup,
+  getEmptyBoard,
 };
 
 function query(filterBy) {
