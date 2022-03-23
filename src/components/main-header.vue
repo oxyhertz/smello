@@ -20,17 +20,14 @@
     <div>
   
     </div>
-    <div v-if="isCreateBoard" class="create-modal">
-        <input type="text" placeholder="Board title">
-        <h3>Create Modal</h3>
-    </div>
+    <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard" ></createBoard>
   </header>
 </template>
 
 
 <script>
 import { Search } from '@element-plus/icons-vue'
-
+import createBoard from './create-board.vue'
 export default {
     data(){
         return{
@@ -42,8 +39,10 @@ export default {
       home(){
         this.$router.push('/home')
       }
-
     },
+    components:{
+      createBoard
+    }
 };
 </script>
 
