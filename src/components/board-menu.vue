@@ -1,7 +1,7 @@
 <template>
     <header class="board-menu">
         <h2>board menu</h2>
-        <board-menu-title @editTitle="editTitle" :title="boardTitle" @createdBy="boardCreatorId"/>
+        <board-menu-title @editTitle="editTitle" :title="boardTitle" :createdBy="boardCreatorId"/>
         <board-menu-favorite @toggleFavorite="toggleFavorite" :favorite="boardFavoriteStatus"/>
     </header>
 </template>

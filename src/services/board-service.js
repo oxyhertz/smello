@@ -39,10 +39,8 @@ function getEmptyGroup(title = '', tasks = []) {
 }
 
 function getEmptyBoard() {
-  return {
-    _id: utilService.makeId(),
+  return Promise.resolve({
     title: '',
-    createdAt: Date.now(),
     isFavorite: false,
     createdBy: '',
     style: {
@@ -50,8 +48,14 @@ function getEmptyBoard() {
     },
     labels: [],
     members: [],
-    groups: [],
-  };
+    groups: [
+      {
+        _id: utilService.makeId(),
+        title: 'New List',
+        tasks: [],
+      },
+    ],
+  });
 }
 
 function _createBoards() {

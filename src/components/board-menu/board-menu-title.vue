@@ -1,6 +1,6 @@
 <template>
     <section class="board-menu-title">
-        <h1 v-if="!isClicked" @click="">{{title}}</h1>
+        <h1 v-if="!isClicked" @click="toggleInput">{{title}}</h1>
         <textarea v-else v-focus v-model="title" @blur="editTitle">{{title}}</textarea>
     </section>
 </template>
@@ -23,7 +23,7 @@ export default {
             this.$emit('editTitle', this.title);
         },
         toggleInput() {
-            if(createdBy !== userId) return;
+            if(this.createdBy !== this.userId) return;
             this.isClicked = true
         }
     },
