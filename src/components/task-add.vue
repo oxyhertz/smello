@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isCreating">
+  <section v-if="isCreating" class="task-add">
     <textarea
       v-focus
       v-model="title"

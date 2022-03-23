@@ -1,7 +1,7 @@
 <template>
   <Draggable v-if="task">
-    <section class="task-preview-container" style="margin-right: 10px">
-      <p>{{ task.title }}</p>
+    <section class="task-preview-container">
+      <span>{{ task.title }}</span>
       <button @click="removeTask">Delete</button>
     </section>
   </Draggable>
