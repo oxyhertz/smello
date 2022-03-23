@@ -1,10 +1,10 @@
 <template>
   <header class="main-header flex space-between">
     <section class="header-container flex">
-     <div class="header-logo">
+     <section class="header-logo">
         <img class="logo-img" src="../images/logo.png" alt="trello logo">
         <span>Trello</span>
-     </div>
+     </section>
       <button class="create-btn" @click="isCreateBoard = !isCreateBoard">Create</button>
     </section>
     <section class="flex">
@@ -14,16 +14,16 @@
           size="small"
         />
     </section>
-    <div>
+    <section>
       <i class="fa-regular fa-bell"></i>
-    </div>
-    <div>
+    </section>
+    <section>
   
-    </div>
-    <div v-if="isCreateBoard" class="create-modal">
+    </section>
+    <section v-if="isCreateBoard" class="create-modal">
         <input type="text" placeholder="Board title">
         <h3>Create Modal</h3>
-    </div>
+    </section>
   </header>
 </template>
 

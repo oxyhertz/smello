@@ -1,10 +1,10 @@
 <template>
     <li :style="boardStyle" v-if="board">
         {{board.title}}
-        <div class="star" @click.stop="toggleFavorite(board._id)">
+        <section class="star" @click.stop="toggleFavorite(board._id)">
             <i v-if="!board.isFavorite" class="fa-regular fa-star"></i>
             <i v-else class="fa-solid fa-star"></i>
-        </div>
+        </section>
     </li>
 </template>
 
