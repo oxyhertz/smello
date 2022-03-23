@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     addTask() {
+      if (!this.title) return
       this.$emit("addTask", this.title);
       this.isCreating = null;
       this.title = '';

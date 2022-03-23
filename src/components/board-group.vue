@@ -30,6 +30,7 @@
           <task-preview
             @removeTask="removeTask($event, index)"
             v-for="task in group.tasks"
+            @click="openTaskDetails(group._id, task._id)"
             :key="task._id"
             :task="task"
           />
@@ -79,6 +80,9 @@ export default {
       };
       this.$emit("addTask", task);
     },
+    openTaskDetails(groupId, taskId) {
+      this.$router.push(`/board/${this.$route.params.boardId}/${groupId}/${taskId}`)
+    },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
       if (removedIndex === null && addedIndex === null) return arr;
@@ -96,7 +100,7 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.groups = this.applyDrag(scene.groups, dropResult);
       this.scene = scene;
-      this.$emit('columnChange', this.scene.groups);
+      this.$emit("columnChange", this.scene.groups);
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
