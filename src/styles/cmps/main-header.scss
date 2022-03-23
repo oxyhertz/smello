@@ -2,6 +2,46 @@
   background-color: $clr1;
   max-height: 44px;
   padding: 6px 4px;
+  position: relative;
+
+   .logo-img{
+    width: 20px;
+    height: 20px;
+  }
+   .header-logo{
+    display: flex;
+    align-items: center;
+  }
+  
+  .create-btn{
+    background-color: $clr4;
+    color: white;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    font-weight: 400;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .create-btn:hover{
+    background-color: $clr6;
+  }
+
+  .fa-bell{
+    cursor: pointer;
+    color:white;
+  }
+
+  .create-modal{
+    position: absolute;
+    top:35px;
+    background-color: blanchedalmond;
+    width: 500px;
+    height: 250px;
+    z-index: 10;
+  }
+  
 }
 
 .header-cmp {
@@ -26,9 +66,4 @@
   }
 }
 
-.header-container .create-btn {
-  background-color: $clr4;
-  &:hover {
-    background-color: $clr5;
-  }
-}
+

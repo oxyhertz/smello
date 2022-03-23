@@ -37,6 +37,22 @@ function getEmptyGroup(title = '', tasks = []) {
   };
 }
 
+function getEmptyBoard() {
+  return {
+    _id: utilService.makeId(),
+    title: '',
+    createdAt: Date.now(),
+    isFavorite: false,
+    createdBy: '',
+    style: {
+      bgColor: '#cacabb',
+    },
+    labels: [],
+    members: [],
+    groups: [],
+  };
+}
+
 function _createBoards() {
   let boards = utilService.loadFromStorage(BOARD_KEY);
   if (!boards || !boards.length) {
