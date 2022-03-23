@@ -16,7 +16,7 @@ export default {
       return copyBoards;
     },
     currBoard({ currentBoard }) {
-      return JSON.parse(JSON.stringify(currentBoard));
+      return currentBoard;
     },
     boardGroups({ currentBoard }) {
       return currentBoard?.groups;
@@ -52,6 +52,24 @@ export default {
     },
     setCurrGroups(state, { groups }) {
       state.currentBoard.groups = [...groups];
+    },
+    addTask(state, { task }) {
+      var newTask = {
+        _id: utilService.makeId(),
+        title: task.title,
+      }
+      state.currentBoard.groups[task.groupIdx].tasks.push(newTask)
+    },
+    updateTask(state, { task }) {
+      const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
+        (currTask) => currTask._id === task.taskId)
+      state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1 , task)
+    },
+    removeTask(state, { task }) {
+      const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
+        (currTask) => currTask._id === task.taskId
+      )
+      state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1)
     },
   },
   actions: {
@@ -99,5 +117,21 @@ export default {
         board: JSON.parse(JSON.stringify(state.currentBoard)),
       });
     },
+    setTask({ commit, state, dispatch }, { task }) {
+      var groupIdx = state.currentBoard.groups.findIndex((group) => group._id === task.groupId)
+      
+      if (!task.taskId) {
+        commit({ type: 'addTask', task: { groupIdx, title:task.title } })
+      } else {
+        commit({ type: 'updateTask', task: { groupIdx, task } })
+      }
+      dispatch({ type: 'saveBoard', board: state.currentBoard })
+    },
+    removeTask({ commit, state, dispatch }, { task }) {
+      var groupIdx = state.currentBoard.groups.findIndex((group) => group._id === task.groupId)
+      commit({ type: 'removeTask', task: { groupIdx, taskId: task.taskId } })
+      dispatch({ type: 'saveBoard', board: state.currentBoard })
+    },
+    
   },
 };

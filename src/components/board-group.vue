@@ -6,7 +6,7 @@
     drag-class="drop-rotation"
     @drop="onColumnDrop($event)"
   >
-    <Draggable class v-for="(group, index) in scene.groups" :key="group._id">
+    <Draggable class v-for="group in scene.groups" :key="group._id">
       <section class="group-container">
         <section class="group-title">
           <h1>{{ group.title }}</h1>
@@ -28,14 +28,14 @@
         >
           <!-- tasks -->
           <task-preview
-            @removeTask="removeTask($event, index)"
+            @removeTask="removeTask($event, group._id)"
             v-for="task in group.tasks"
             @click="openTaskDetails(group._id, task._id)"
             :key="task._id"
             :task="task"
           />
         </Container>
-        <task-add @addTask="addTask($event, index)" />
+        <task-add @addTask="addTask($event, group._id)" />
       </section>
     </Draggable>
     <add-group @add="addGroup" />
@@ -73,18 +73,19 @@ export default {
     addGroup(title) {
       this.$emit("addGroup", title);
     },
-    removeTask(taskId, groupIdx) {
+    removeTask(taskId, groupId) {
       const task = {
         taskId,
-        groupIdx,
+        groupId,
       };
       this.$emit("removeTask", task);
     },
-    addTask(title, groupIdx) {
+    addTask(title, groupId) {
       const task = {
         title,
-        groupIdx,
+        groupId,
       };
+
       this.$emit("addTask", task);
     },
     openTaskDetails(groupId, taskId) {
