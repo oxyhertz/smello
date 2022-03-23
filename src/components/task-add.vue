@@ -1,23 +1,34 @@
 <template>
   <div v-if="isCreating">
-    <el-input
-      v-model="desc"
-      :autosize="{ minRows: 2, maxRows: 4 }"
+    <textarea
+      v-focus
+      v-model="title"
       type="textarea"
+      :style="{ resize: 'none' }"
       placeholder="Please input"
     />
+    <div class="add-task-btns">
+      <button @click="addTask">Add card</button>
+      <button @click="isCreating = false">X</button>
+    </div>
   </div>
-  <div v-else @click="isCreating = !isCreating">+ Add a card</div>
+  <div v-else @click="isCreating = true">+ Add a card</div>
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
   data() {
     return {
       isCreating: null,
-      desc: ref(""),
+      title: "",
     };
+  },
+  methods: {
+    addTask() {
+      this.$emit("addTask", this.title);
+      this.isCreating = null;
+      this.title = '';
+    },
   },
 };
 </script>
