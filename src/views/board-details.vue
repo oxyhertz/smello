@@ -1,6 +1,6 @@
 <template>
-  <section v-if="groups && board" class="board-container">
-    <board-group @addTask="addTask" :groups="groups" />
+  <section v-if="groups" class="board-container">
+    <board-group @addTask="addTask" :groups="board.groups" />
     <add-group @add="addGroup" />
     <!-- <board-group /> -->
   </section>
@@ -9,7 +9,8 @@
 <script>
 import boardGroup from '../components/board-group.vue';
 import addGroup from '../components/add-group.vue';
-import { utilService } from '../services/utils-service';
+import { utilService } from '../services/utils-service.js';
+import {boardService} from '../services/board-service.js';
 
 export default {
     name: 'board-details',
@@ -19,13 +20,15 @@ export default {
     },
     data(){
         return{
-            board:null
+            board: null,
+            boardGroups: null
         }
     },
     async created() {
         await this.$store.dispatch({type: 'setCurrentBoard', boardId: this.$route.params.boardId})
-        this.board = this.$store.getters.currBoard
-
+        this.board = this.currBoard;
+        // this.boardGroups = this.currBoard.groups;
+        // console.log(this.boardGroups)
     },
     methods: {
         addTask({title,groupIdx}){
@@ -34,17 +37,25 @@ export default {
                 title,
             }
             this.board.groups[groupIdx].tasks.push(task)
-            this.$store.dispatch({type: 'saveBoard', board:this.board})
+            this.$store.dispatch({type: 'saveBoard', board: this.board})
 
         },
-        addGroup(groupTitle) {
-            this.$store.dispatch({type: 'addGroup', groupTitle})
+        addGroup(title) {
+            const group = boardService.getEmptyGroup(title);
+            this.board.groups.push(group)
+            this.$store.dispatch({type: 'saveBoard', board: this.board})
         }
     },
     computed: {
         groups() {
             return this.$store.getters.boardGroups;
+        },
+        currBoard() {
+            return this.$store.getters.currBoard;
         }
+    },
+    watch: {
+        
     }
 }
 </script>
