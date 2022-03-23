@@ -6,8 +6,9 @@ import './styles/style.scss';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { focusDirective } from './directives/';
+import Avatar from 'vue3-avatar';
 
-const app = createApp(App);
+const app = createApp(App).component('avatar', Avatar);
 app.directive('focus', focusDirective);
 
 app.use(router);

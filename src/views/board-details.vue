@@ -1,6 +1,6 @@
 <template>
     <section v-if="groups && board" class="board-container">
-        <board-menu @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite"/>
+        <board-menu :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite"/>
         <board-group
             @removeTask="removeTask"
             @addTask="addTask"
@@ -40,7 +40,6 @@ export default {
                     boardId: this.$route.params.boardId,
                 });
                 this.board = this.currBoard;
-                console.log(this.board._id)
                 this.$router.push(`/board/${this.board._id}`)
        }
     },

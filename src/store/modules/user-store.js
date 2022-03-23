@@ -1,4 +1,5 @@
 import { userService } from '../../services/user-service';
+import { userManageService } from '../../services/user-manage-service';
 import { utilService } from '../../services/utils-service';
 
 export default {
@@ -10,11 +11,15 @@ export default {
       password: 'guest',
       imgUrl: 'http://some-img.jpg',
       mentions: [],
+      allUsers: [],
     },
   },
   getters: {
     user(state) {
       return state.loggedinUser;
+    },
+    getAllUsers(state) {
+      return state.allUsers;
     },
     miniUser({ loggedinUser }) {
       const miniUser = {
@@ -29,8 +34,15 @@ export default {
     setUser(state, { user }) {
       state.loggedinUser = user;
     },
+    setUsers(state, { users }) {
+      state.allUsers = users;
+    },
   },
   actions: {
+    async loadUsers({ commit, state }) {
+      const users = await userManageService.query();
+      commit({ type: 'setUsers', users });
+    },
     async login({ commit }, { cred }) {
       try {
         const user = await userService.login(cred);

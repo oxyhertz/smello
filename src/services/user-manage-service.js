@@ -4,7 +4,7 @@ import { storageService } from './storage-service.js';
 const USER_KEY = 'userDB';
 _createUsers();
 
-export const userService = {
+export const userManageService = {
   query,
   remove,
   save,
