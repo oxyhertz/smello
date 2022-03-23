@@ -1,5 +1,5 @@
 <template>
-    <section v-if="groups && board" class="board-container">
+    <section v-if="board" class="board-container">
         <board-menu :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
         <board-group
             @removeTask="removeTask"
@@ -93,7 +93,7 @@ export default {
             return this.$store.getters.boardGroups;
         },
         currBoard() {
-            return this.$store.getters.currBoard;
+            return JSON.parse(JSON.stringify(this.$store.getters.currBoard));
         }
     }
 }
