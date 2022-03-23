@@ -14,7 +14,7 @@
       <section class="">
         <!-- TASK TITLE/INPUT HERE -->
         <section class="group-title">
-          <span>{{ group.title }}</span>
+          <h1>{{ group.title }}</h1>
         </section>
         <!-- column -->
         <Container
@@ -31,11 +31,12 @@
           drag-class="drop-rotation"
           @drop="(e) => onCardDrop(group._id, e)"
         >
-          <!-- Items -->
+          <!-- tasks -->
           <task-preview
-            v-for="item in group.tasks"
-            :key="item._id"
-            :item="item"
+            @removeTask="removeTask"
+            v-for="task in group.tasks"
+            :key="task._id"
+            :task="task"
           />
           <task-add @addTask="addTask($event, index)" />
         </Container>
@@ -69,6 +70,9 @@ export default {
     taskAdd,
   },
   methods: {
+    removeTask(){
+
+    },
     addTask(title, groupIdx) {
       const task = {
         title,

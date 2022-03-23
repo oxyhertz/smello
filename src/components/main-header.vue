@@ -2,7 +2,7 @@
   <header class="main-header flex space-between">
     <section class="header-container flex">
       <button class="nav-btn">...</button>
-      <section class="logo">Trello</section>
+      <div class="logo" @click="home">Trello</div>
       <button class="starred-btn header-cmp">
         Starred
         <svg
@@ -43,7 +43,13 @@ export default {
             input3:ref(''),
             Search,
         }
-    }
+    },
+    methods:{
+      home(){
+        this.$router.push('/home')
+      }
+
+    },
 };
 </script>
 
