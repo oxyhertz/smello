@@ -1,7 +1,7 @@
 <template>
     <section class="add-group">
         <p v-if="!isFocused" @click="isFocused = true">Add another list</p>
-        <div v-else>
+        <section v-else>
             <textarea
                 v-model="groupTitle"
                 v-focus
@@ -11,7 +11,7 @@
             ></textarea>
             <button @click="addGroup">Add list</button>
             <button @click="isFocused = false">x</button>
-        </div>
+        </section>
     </section>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
     <section v-if="groups && board" class="board-container">
-        <board-menu></board-menu>
+        <board-menu @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite"/>
         <board-group
             @removeTask="removeTask"
             @addTask="addTask"
@@ -72,6 +72,14 @@ export default {
         },
         taskChange({ groupIdx, newGroup }) {
             this.board.groups.splice(groupIdx, 1, newGroup)
+            this.$store.dispatch({ type: 'saveBoard', board: this.board });
+        },
+        editBoardTitle(newTitle) {
+            this.board.title = newTitle;
+            this.$store.dispatch({ type: 'saveBoard', board: this.board });
+        },
+        toggleFavorite(isFavorite) {
+            this.board.isFavorite = isFavorite;
             this.$store.dispatch({ type: 'saveBoard', board: this.board });
         }
     },
