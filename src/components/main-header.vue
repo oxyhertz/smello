@@ -4,8 +4,11 @@
      <section class="header-logo">
         <img class="logo-img" src="../images/logo.png" alt="trello logo">
         <span>Trello</span>
-     </section>
-      <button class="create-btn" @click="isCreateBoard = !isCreateBoard">Create</button>
+     
+     <div class="create-board-container">
+        <button class="create-btn" @click="isCreateBoard = !isCreateBoard">Create</button>
+        <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard" ></createBoard>
+     </div>
     </section>
     <section class="flex">
           <el-input
@@ -14,10 +17,8 @@
           size="small"
         />
     </section>
-    <section>
       <i class="fa-regular fa-bell"></i>
     </section>
-    <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard" ></createBoard>
   </header>
 </template>
 
@@ -25,6 +26,7 @@
 <script>
 import { Search } from '@element-plus/icons-vue'
 import createBoard from './create-board.vue'
+import Avatar from "vue3-avatar";
 export default {
     data(){
         return{
@@ -38,7 +40,8 @@ export default {
       }
     },
     components:{
-      createBoard
+      createBoard,
+      Avatar,
     }
 };
 </script>

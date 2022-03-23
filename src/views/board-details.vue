@@ -1,6 +1,6 @@
 <template>
     <section v-if="groups && board" class="board-container">
-        <board-menu @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite"/>
+        <board-menu :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite"/>
         <board-group
             @removeTask="removeTask"
             @addTask="addTask"
@@ -31,14 +31,22 @@ export default {
             board: null,
         };
     },
+    watch:{
+       async '$route.params.boardId'(after,before){
+            await this.$store.dispatch({
+                    type: "setCurrentBoard",
+                    boardId: this.$route.params.boardId,
+                });
+                this.board = this.currBoard;
+                this.$router.push(`/board/${this.board._id}`)
+       }
+    },
     async created() {
         await this.$store.dispatch({
             type: "setCurrentBoard",
             boardId: this.$route.params.boardId,
         });
         this.board = this.currBoard;
-        // this.boardGroups = this.currBoard.groups;
-        // console.log(this.boardGroups)
     },
     methods: {
         removeTask({ taskId, groupIdx }) {
