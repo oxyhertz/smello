@@ -33,7 +33,7 @@
         >
           <!-- tasks -->
           <task-preview
-            @removeTask="removeTask"
+            @removeTask="removeTask($event, index)"
             v-for="task in group.tasks"
             :key="task._id"
             :task="task"
@@ -70,8 +70,12 @@ export default {
     taskAdd,
   },
   methods: {
-    removeTask(){
-
+    removeTask(taskId, groupIdx) {
+      const task = {
+        taskId,
+        groupIdx,
+      };
+      this.$emit("removeTask", task);
     },
     addTask(title, groupIdx) {
       const task = {
