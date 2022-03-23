@@ -101,10 +101,7 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.groups = this.applyDrag(scene.groups, dropResult);
       this.scene = scene;
-      this.$store.dispatch({
-        type: "setCurrGroups",
-        groups: this.scene.groups,
-      });
+      this.$emit('columnChange', this.scene.groups);
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
@@ -122,10 +119,11 @@ export default {
         }
         newColumn.tasks = this.applyDrag(newColumn.tasks, dropResult);
         // this.$emit('groupChange', {idx: itemIndex, newCol: newColumn})
-        this.$store.dispatch({ type: "groupDND", idx: itemIndex, newColumn });
+        // this.$store.dispatch({ type: "groupDND", groupIdx: itemIndex, newGroup: newColumn });
         // this.$emit('drop', {idx: itemIndex, newColumn});
         // scene.groups.splice(itemIndex, 1, newColumn)
         // this.scene = scene
+        this.$emit('taskChange', {groupIdx: itemIndex, newGroup: newColumn})
       }
     },
     getCardPayload(columnId) {

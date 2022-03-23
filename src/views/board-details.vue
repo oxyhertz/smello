@@ -1,8 +1,10 @@
 <template>
-  <section v-if="groups && board" class="board-container">
+  <section v-if="groups" class="board-container">
     <board-group
       @removeTask="removeTask"
       @addTask="addTask"
+      @taskChange="taskChange"
+      @columnChange="columnChange"
       :groups="board.groups"
     />
     <add-group @add="addGroup" />
@@ -61,7 +63,10 @@ export default {
       this.board.groups = boardGroups;
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
-    taskChange({ groupIdx, newGroup }) {},
+    taskChange({ groupIdx, newGroup }) {
+      this.board.groups.splice(groupIdx, 1, newGroup);
+      this.$store.dispatch({ type: "saveBoard", board: this.board });
+    },
   },
   computed: {
     groups() {
