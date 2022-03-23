@@ -1,6 +1,6 @@
 <template>
   <section v-if="groups" class="board-container">
-    <board-group @addTask="addTask" :groups="board.groups" />
+    <board-group @addTask="addTask" @taskChange="taskChange " @columnChange="columnChange" :groups="board.groups" />
     <add-group @add="addGroup" />
     <!-- <board-group /> -->
   </section>
@@ -20,8 +20,7 @@ export default {
     },
     data(){
         return{
-            board: null,
-            boardGroups: null
+            board: null
         }
     },
     async created() {
@@ -44,6 +43,14 @@ export default {
             const group = boardService.getEmptyGroup(title);
             this.board.groups.push(group)
             this.$store.dispatch({type: 'saveBoard', board: this.board})
+        },
+        columnChange(boardGroups) {
+            this.board.groups = boardGroups;
+            this.$store.dispatch({type: 'saveBoard', board: this.board});
+        },
+        taskChange({groupIdx, newGroup}) {
+            this.board.groups.splice(groupIdx, 1, newGroup)
+             this.$store.dispatch({type: 'saveBoard', board: this.board});
         }
     },
     computed: {
@@ -53,9 +60,6 @@ export default {
         currBoard() {
             return this.$store.getters.currBoard;
         }
-    },
-    watch: {
-        
     }
 }
 </script>
