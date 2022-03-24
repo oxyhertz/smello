@@ -77,6 +77,7 @@ export default {
         );
         state.currentBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task);
       } else {
+        task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
     },
