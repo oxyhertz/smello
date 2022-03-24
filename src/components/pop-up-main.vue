@@ -20,14 +20,14 @@
             </span>
         </header>
         <main>
-             <component :is="action" ></component>
+             <component :is="action" @addItem="addItem"></component>
         </main>
     </div>
 </template>
 <script>
 import labelsItem from "./pop-up-items/labels-item.vue"
 import checklistItem from "./pop-up-items/checklist-item.vue"
-
+import attachmentItem from "./pop-up-items/attachment-item.vue"
 export default {
     name:'pop-up-main',
     props:{
@@ -39,8 +39,8 @@ export default {
         closePopup(){
             this.$emit("closePopup")
         },
-        addItem(){
-
+        addItem(item){
+             this.$emit('addItem',item)
         },
         removeItem(){
 
@@ -48,7 +48,8 @@ export default {
     },
     components:{
         labelsItem,
-        checklistItem
+        checklistItem,
+        attachmentItem
     }
 }
 </script>
