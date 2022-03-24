@@ -2,7 +2,7 @@
   <header class="main-header flex space-between">
     <div class="flex ">
         <span class="menu-btn"></span>
-        <section class="header-logo">
+        <section class="header-logo flex align-items" >
           <svg
             aria-hidden="true"
             focusable="false"
