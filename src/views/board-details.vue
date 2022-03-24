@@ -1,16 +1,15 @@
 <template>
-    <section v-if="groups && board" class="board-container">
-        <board-menu :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite"/>
+    <section v-if="board" class="board-container">
+        <board-menu :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
         <board-group
             @removeTask="removeTask"
-            @addTask="addTask"
+            @addTask="setTask"
             @taskChange="taskChange"
             @columnChange="columnChange"
             @addGroup="addGroup"
             :groups="board.groups"
             :board="board"
         />
-
     </section>
 </template>
 
@@ -32,15 +31,15 @@ export default {
             board: null,
         };
     },
-    watch:{
-    //    async '$route.params.boardId'(after,before){
-    //         await this.$store.dispatch({
-    //                 type: "setCurrentBoard",
-    //                 boardId: this.$route.params.boardId,
-    //             });
-    //             this.board = this.currBoard;
-    //             this.$router.push(`/board/${this.board._id}`)
-    //    }
+    watch: {
+        async '$route.params.boardId'(after, before) {
+            await this.$store.dispatch({
+                type: "setCurrentBoard",
+                boardId: this.$route.params.boardId,
+            });
+            this.board = this.currBoard;
+            this.$router.push(`/board/${this.board._id}`)
+        }
     },
     async created() {
         await this.$store.dispatch({
@@ -50,23 +49,23 @@ export default {
         this.board = this.currBoard;
     },
     methods: {
-        removeTask({ taskId, groupIdx }) {
-            // var activity = boardService.createActivity()
-            var idx = this.board.groups[groupIdx].tasks.findIndex(
-                (task) => task._id === taskId
-            );
-            this.board.groups[groupIdx].tasks.splice(idx, 1);
-            this.board.activity;
-            this.$store.dispatch({ type: "saveBoard", board: this.board });
+        removeTask(task) {
+            // var activity = boardService.addActivity(
+            //   "Task removed ",
+            //   this.user, <--from a getter
+            //   currTask
+            // );
+            this.$store.dispatch({
+                type: "removeTask",
+                task,
+            });
         },
-        addTask({ title, groupIdx }) {
+        setTask({ title, groupId }) {
             var task = {
-                "_id": utilService.makeId(),
                 title,
-            }
-            this.board.groups[groupIdx].tasks.push(task)
-            this.$store.dispatch({ type: 'saveBoard', board: this.board })
-
+                groupId,
+            };
+            this.$store.dispatch({ type: "setTask", task, });
         },
         addGroup(title) {
             const group = boardService.getEmptyGroup(title);
@@ -95,7 +94,7 @@ export default {
             return this.$store.getters.boardGroups;
         },
         currBoard() {
-            return this.$store.getters.currBoard;
+            return JSON.parse(JSON.stringify(this.$store.getters.currBoard));
         }
     }
 }

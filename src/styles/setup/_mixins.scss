@@ -118,6 +118,23 @@
   }
 }
 
+
+@mixin board-btn($type: regular, $bg: $header-btn-clr, $clr: $clr3, $padding: $spacing, $hover: $header-btn-clr-dark) {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  padding: $padding;
+  background-color: $bg;
+  margin-left: $spacing;
+  // color: $clr;
+
+  @if ($type == regular) {
+    height: 30px;
+  } @else {
+    min-height: 38px;
+  }
+}
+
 // Type
 
 @mixin type($type: bold) {

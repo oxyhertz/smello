@@ -6,4 +6,8 @@
     .fa-solid {
         color: $favorite-clr;
     }
+
+    > * {
+        @include board-btn;
+    }
 }
