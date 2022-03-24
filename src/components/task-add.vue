@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isCreating" class="task-add">
+  <section v-if="isCreating" class="task-add open">
     <textarea
       v-focus
       v-model="title"
@@ -12,7 +12,11 @@
       <button @click="isCreating = false">X</button>
     </section>
   </section>
-  <section v-else @click="isCreating = true">+ Add a card</section>
+
+  <section v-else @click="isCreating = true" class="task-add">
+  <span class="plus-icon"></span>
+   Add a card
+   </section>
 </template>
 
 <script>
