@@ -2,8 +2,9 @@
     <section class="task-details-modal">
         <div class="header">
             <span class="icon"></span>
-            <input type="text" v-model="taskToEdit.title" class="task-details-title">
+            <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title">
         </div>
+        <task-combo-list :comboData="comboData" />
         <section class="task-detail-main">
             <div class="task-content">
                 <div class="task-description">
@@ -11,9 +12,9 @@
                              <span class="icon"></span>
                              <h3>Description</h3>
                         </div>
-                        <textarea  @blur="showSaveBtn = false" @focus="showSaveBtn = true" v-model="taskToEdit.description" spellcheck="false" placeholder="Add a more detailed description" class="description-textarea"></textarea>
-                        <div v-if="showSaveBtn" class="save-close-description">
-                            <button class="save">Save</button>
+                        <textarea v-model="taskToEdit.description" spellcheck="false" placeholder="Add a more detailed description" class="description-textarea"></textarea>
+                        <div class="save-close-description">
+                            <button class="save" @click="onTaskEdit">Save</button>
 
                         </div>
                 </div>
@@ -58,6 +59,8 @@
 <script>
 import popupMain from "./pop-up-main.vue";
 import attachment from "./attachment-cmp.vue";
+import { Comment } from '@vue/runtime-core';
+import taskComboList  from './task-details-cmps/task-combo-list.vue';
 export default {
     data(){
         return{
@@ -67,6 +70,26 @@ export default {
             popupData: null,
             actionType: null,
 
+            comboData: {
+                labelIds: ['l101', 'l102'],
+                members: [
+                       {
+                    '_id': 'u101',
+                    username: 'Tal',
+                    fullname: 'Tal Tarablus',
+                    imgUrl:
+                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  },
+                       {
+                    '_id': 'u102',
+                    username: 'Eal',
+                    fullname: 'Ral Tarablus',
+                    imgUrl:
+                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  },
+                ],
+                dueDate: 181562152111,
+            }
         }
     },
     created(){
@@ -94,9 +117,12 @@ export default {
             this.$store.dispatch({
                 type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
             })
+        },
+         onTaskEdit() {
+            this.$emit('editTask', this.taskToEdit);
         }
-        
     },
+
     computed:{
         board(){
             return this.$store.getters.currBoard;
@@ -110,8 +136,10 @@ export default {
     },
     components:{
         popupMain,
-        attachment
+        attachment,
+        taskComboList,
     }
 }
+
 </script>
 

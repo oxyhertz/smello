@@ -30,8 +30,7 @@
           <task-preview
             @removeTask="removeTask($event, group._id)"
             v-for="task in group.tasks"
-            
-            @click="openTask(board,group,task)"
+            @click="openTask(board, group, task)"
             :key="task._id"
             :task="task"
           />
@@ -41,19 +40,20 @@
     </Draggable>
     <add-group @add="addGroup" />
   </Container>
-  <task-details-modal v-if="isTaskDetail"></task-details-modal>
+  <task-details-modal v-if="isTaskDetail" @editTask="editTask" />
 </template>
 
 <script>
 // @click="openTaskDetails(group._id, task._id)"
-import { Container, Draggable } from "vue3-smooth-dnd";
-import taskPreview from "./task-preview.vue";
-import taskAdd from "./task-add.vue";
-import addGroup from "../components/add-group.vue";
+import { Container, Draggable } from 'vue3-smooth-dnd';
+import taskPreview from './task-preview.vue';
+import taskAdd from './task-add.vue';
+import addGroup from '../components/add-group.vue';
 import taskDetailsModal from '../components/task-details-modal.vue'
 
 export default {
-  name: "board-group",
+  name: 'board-group',
+  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask'],
   props: {
     groups: {
       type: Array,
@@ -76,20 +76,20 @@ export default {
     taskDetailsModal
   },
   methods: {
-    openTask(board,group,task){
+    openTask(board, group, task){
       this.isTaskDetail = true;
-      this.$store.commit({type: 'setCurrGroup',group})
-      this.$store.commit({type: 'setCurrTask',task})
+      this.$store.commit({type: 'setCurrGroup', group})
+      this.$store.commit({type: 'setCurrTask', task})
     },
     addGroup(title) {
-      this.$emit("addGroup", title);
+      this.$emit('addGroup', title);
     },
     removeTask(taskId, groupId) {
       const task = {
         taskId,
         groupId,
       };
-      this.$emit("removeTask", task);
+      this.$emit('removeTask', task);
     },
     addTask(title, groupId) {
       const task = {
@@ -97,11 +97,14 @@ export default {
         groupId,
       };
 
-      this.$emit("addTask", task);
+      this.$emit('addTask', task);
     },
-    openTaskDetails(groupId, taskId) {
-      this.$router.push(`/board/${this.$route.params.boardId}/${groupId}/${taskId}`)
+    editTask(editedTask) {
+        this.$emit('editTask', editedTask);
     },
+    // openTaskDetails(groupId, taskId) {
+    //   this.$router.push(`/board/${this.$route.params.boardId}/${groupId}/${taskId}`)
+    // },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
       if (removedIndex === null && addedIndex === null) return arr;

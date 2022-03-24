@@ -1,8 +1,13 @@
 .flex{
     display: flex;
 }
+
 .column{
     flex-direction:column;
+}
+
+.warp{
+    flex-wrap: wrap;
 }
 
 .space-between{
@@ -12,3 +17,4 @@
 .red-text{
     color:red
 }
+
