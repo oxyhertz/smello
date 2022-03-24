@@ -45,14 +45,14 @@
                 <button  @click="setLabels('labelsItem')">Labels</button>
                 <button>Checklist</button>
                 <button>Dates</button>
-                <button>Attachments</button>
+                <button @click="setAttachments('attachmentItem')">Attachments</button>
                 <button>Location</button>
                 <button>cover</button>
                 <h3>Actions</h3>
                 <button>Copy</button>
                 <button>Archive</button>
                 <button>Share</button>
-                <popup-main :task="task" @closePopup="closePopup" :popupData="popupData" :action="actionType" v-if="actionType" @setItem="setItem" />
+                <popup-main :task="task" @closePopup="closePopup" :popupData="popupData" :action="actionType" v-if="actionType" @addItem="addItem" @setItem="setItem" />
             </div>
         </section>
     </section>
@@ -104,6 +104,10 @@ export default {
             this.popupData = {name:'Labels', style:{"top": '147px'}}
             
         },
+        setAttachments(action){
+            this.actionType = action,
+            this.popupData = {name:'Labels',style:{"top": '268px'}}
+        },
         closePopup(){
             this.actionType = null,
             this.popupData = null
@@ -112,7 +116,11 @@ export default {
 
         },
         addItem(item){
-
+            if(item.type === 'attachment'){
+                if(!this.taskToEdit.attachments) this.taskToEdit.attachments = []
+                 this.taskToEdit.attachments.push(item.item);
+                 console.log(this.taskToEdit)
+            }
         },
         updateAttachments(attachments){
             console.log(attachments)

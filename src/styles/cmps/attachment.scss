@@ -1,7 +1,5 @@
 .attachments-container{
-    &:hover{
-        background-color: #eaecf0;
-    }
+ 
     .attachment-item{
         display: flex;
         gap: 20px;
@@ -9,6 +7,7 @@
         margin: 0 0 8px;
         cursor: pointer;
         img{
+            border-radius: 3px;
             object-fit: cover;
             width: 112px;
             height: 80px;
@@ -19,6 +18,9 @@
         }
         .main-actions{
             margin-bottom: 22px;
+        }
+        &:hover{
+            background-color: #eaecf0;
         }
     }
 
