@@ -4,6 +4,7 @@
         <board-group
             @removeTask="removeTask"
             @addTask="setTask"
+            @editTask="editTask"
             @taskChange="taskChange"
             @columnChange="columnChange"
             @addGroup="addGroup"
@@ -56,16 +57,16 @@ export default {
             //   currTask
             // );
             this.$store.dispatch({
-                type: "removeTask",
+                type: 'removeTask',
                 task,
             });
         },
         setTask({ title, groupId }) {
-            var task = {
-                title,
-                groupId,
-            };
-            this.$store.dispatch({ type: "setTask", task, });
+            var task = {title};
+            this.$store.dispatch({ type: 'setTask', groupId, task, });
+        },
+        editTask(editedTask) {
+            this.$store.dispatch({ type: 'setTask', task: editedTask });
         },
         addGroup(groupTitle) {
             this.$store.dispatch({ type: 'addGroup', groupTitle })

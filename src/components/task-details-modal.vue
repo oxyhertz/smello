@@ -1,7 +1,7 @@
 <template>
     <section class="task-details-modal">
         <div class="header">
-            <input type="text" v-model="taskToEdit.title" class="task-details-title">
+            <input type="text" v-model="taskToEdit.title" @blur="onTaskEdit" class="task-details-title">
         {{taskToEdit}}
         </div>
         <section class="task-detail-main">
@@ -10,7 +10,7 @@
                         <div>
                             <h3>Description</h3>
                         </div>
-                        <textarea v-model="taskToEdit.description" spellcheck="false" placeholder="Add a more detailed description" class="description-textarea"></textarea>
+                        <textarea v-model="taskToEdit.description" @blur="onTaskEdit" spellcheck="false" placeholder="Add a more detailed description" class="description-textarea"></textarea>
                 </div>
                 <div class="activity-show-details">
                     <h3>Activity</h3>
@@ -33,6 +33,11 @@ export default {
     },
     created(){
         this.taskToEdit = JSON.parse(JSON.stringify(this.task))
+    },
+    methods: {
+        onTaskEdit() {
+            this.$emit('editTask', this.taskToEdit);
+        }
     },
     computed:{
         board(){
