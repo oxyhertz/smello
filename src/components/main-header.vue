@@ -1,6 +1,6 @@
 <template>
-  <header class="main-header flex ">
-    <div class="flex">
+  <header class="main-header flex space-between">
+    <div class="flex ">
         <span class="menu-btn"></span>
         <section class="header-logo">
           <svg
@@ -22,7 +22,7 @@
           <span class="logo">Trello</span>
         </section>
       
-        <div class="create-board-container">
+        <div class="create-board-container flex align-items">
           <button class="create-btn" @click="isCreateBoard = !isCreateBoard">
             Create
           </button>
@@ -33,7 +33,7 @@
         </div>
      </div> 
 
-      <section class="flex">
+      <section class="flex align-items">
           <el-input v-model="search" placeholder="Search" size="small" />
           <i class="fa-regular fa-bell"></i>
       </section>
