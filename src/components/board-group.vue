@@ -9,7 +9,7 @@
     <Draggable class v-for="group in scene.groups" :key="group._id">
       <section class="group-container">
         <section class="group-title">
-          <h1>{{ group.title }}</h1>
+          <textarea class="group-title inline-input">{{ group.title }}</textarea>
         </section>
 
         <Container
@@ -102,9 +102,6 @@ export default {
     editTask(editedTask) {
         this.$emit('editTask', editedTask);
     },
-    // openTaskDetails(groupId, taskId) {
-    //   this.$router.push(`/board/${this.$route.params.boardId}/${groupId}/${taskId}`)
-    // },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
       if (removedIndex === null && addedIndex === null) return arr;

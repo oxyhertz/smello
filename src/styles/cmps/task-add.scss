@@ -1,4 +1,23 @@
+.task-add {
+  cursor: pointer;
+  margin-left: calc($spacing);
+  padding: 4px 4px $spacing;
+  display: flex;
+
+  .plus-icon::before {
+      content: "\e901";
+      font-family: Trello;
+      padding: 3px;
+      font-size: 16px;
+      line-height: 20px;
+  }
+}
+
+.task-add.open {
+  margin: 0 4px $spacing 5px;
+  flex-direction: column;
+}
 
 textarea {
     resize: none;
-  }
+}
