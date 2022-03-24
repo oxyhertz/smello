@@ -1,0 +1,96 @@
+.task-checklist {
+    .checklist-icon {
+        &::before{
+            content: "\e919";
+            font-family: Trello;
+            font-size: 24px;
+            line-height: 24px;
+        }
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+
+        input {
+            margin-left: $spacing;
+        }
+
+        > * {
+            display: flex;
+        }
+
+        .hide-show-btn {
+            margin-right: $spacing;
+        }
+
+        .header-logo {
+            flex-grow: 1;
+            input {
+                flex-grow: 1;
+                margin-right: $spacing;
+            }
+        }
+
+        .header-options > * {
+            margin-bottom: 0;
+        }
+    }
+
+    .todos-container textarea{
+        &:not(:focus) {
+            background: inherit;
+            border: none;
+        }
+        
+        outline: 0;
+        border-radius: $border-rsize;
+        font-family: inherit;
+        font-size: inherit;
+        resize: none;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        
+       &:focus {
+            box-shadow: inset 0 0 0 2px #0079bf;
+       }
+
+       &.completed {
+           text-decoration: line-through;
+       }
+    }
+
+    .progress-bar {
+        display: flex;
+        align-items: center;
+        progress {
+            flex-grow: 1;
+            height: 8px;
+            overflow: hidden;
+            border-radius: $border-rsize; // must to reset defualt browser values. will not work without
+            margin-left: $spacing;
+
+            &::-webkit-progress-bar {
+                background-color: #091e4214;
+            }
+
+            &::-webkit-progress-value  {
+                background-color: #5ba4cf;
+                transition: width .5s ease-in-out;
+            }
+
+            &[value="100"]::-webkit-progress-value { // happens when progress bar is full
+                background-color: #61bd4f;
+            }
+        }
+    }
+
+    .todo-container {
+        padding: $spacing 0;
+        display: inline-flex;
+        align-items: flex-end;
+    }
+    
+}
