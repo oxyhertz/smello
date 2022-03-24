@@ -66,26 +66,20 @@ export default {
             };
             this.$store.dispatch({ type: "setTask", task, });
         },
-        addGroup(title) {
-            const group = boardService.getEmptyGroup(title);
-            this.board.groups.push(group)
-            this.$store.dispatch({ type: 'saveBoard', board: this.board })
+        addGroup(groupTitle) {
+            this.$store.dispatch({ type: 'addGroup', groupTitle })
         },
         columnChange(boardGroups) {
-            this.board.groups = boardGroups;
-            this.$store.dispatch({ type: 'saveBoard', board: this.board });
+            this.$store.dispatch({ type: 'setGroups', groups: boardGroups });
         },
         taskChange({ groupIdx, newGroup }) {
-            this.board.groups.splice(groupIdx, 1, newGroup)
-            this.$store.dispatch({ type: 'saveBoard', board: this.board });
+            this.$store.dispatch({ type: 'setGroup', groupIdx, newGroup });
         },
         editBoardTitle(newTitle) {
-            this.board.title = newTitle;
-            this.$store.dispatch({ type: 'saveBoard', board: this.board });
+            this.$store.dispatch({ type: 'setBoardPrefs', key: 'title', val: newTitle });
         },
         toggleFavorite(isFavorite) {
-            this.board.isFavorite = isFavorite;
-            this.$store.dispatch({ type: 'saveBoard', board: this.board });
+            this.$store.dispatch({ type: 'setBoardPrefs', key: 'isFavorite', val: isFavorite });
         }
     },
     computed: {
@@ -93,7 +87,7 @@ export default {
             return this.$store.getters.boardGroups;
         },
         currBoard() {
-            return JSON.parse(JSON.stringify(this.$store.getters.currBoard));
+            return this.$store.getters.currBoard;
         }
     }
 }

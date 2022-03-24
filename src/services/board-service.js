@@ -5,29 +5,75 @@ const BOARD_KEY = 'boardDB';
 _createBoards();
 
 export const boardService = {
-  query,
-  remove,
-  save,
-  getById,
-  getEmptyGroup,
+  getBoards,
+  removeBoard,
+  saveBoard,
+  getBoardById,
+  setBoardPrefs,
   getEmptyBoard,
+  getGroups,
+  getGroupById,
+  removeGroup,
+  getEmptyGroup,
+  getTasks,
+  getTaskById,
+  removeTask
 };
 
-function query(filterBy) {
+function getBoards(filterBy) {
   return storageService.query(BOARD_KEY);
 }
 
-function remove(boardId) {
+function removeBoard(boardId) {
   return storageService.remove(BOARD_KEY, boardId);
 }
 
-function getById(boardId) {
+function getBoardById(boardId) {
   return storageService.get(BOARD_KEY, boardId);
 }
 
-function save(board) {
+function saveBoard(board) {
   if (board._id) return storageService.put(BOARD_KEY, board);
   else return storageService.post(BOARD_KEY, board);
+}
+
+function setBoardPrefs(boardId, key, val) {
+  return getBoardById(boardId)
+    .then(board => {
+      board[key] = val;
+      return board;
+    })
+}
+
+function getGroups(boardId) {
+  return getBoardById(boardId)
+    .then(board => board.groups);
+}
+
+function removeGroup(currBoard, groupId) {
+  const idx = currBoard.groups.findIndex(group => group._id === groupId);
+  currBoard.groups.splice(idx, 1);
+  return Promise.resolve(currBoard);
+}
+
+function getGroupById(currBoard, groupId) {
+  return Promise.resolve(currBoard.find(group => group._id === groupId));
+}
+
+function getTasks(currBoard, groupId) {
+  return getGroupById(currBoard, groupId)
+    .then(group => group.tasks);
+}
+
+function getTaskById(currBoard, groupId, taskId) {
+  return getTasks(currBoard, groupId)
+    .then(tasks => tasks.find(task => task._id === taskId))
+}
+
+function removeTask(currGroup, taskId) {
+  const idx = currGroup.findIndex(task => task._id === taskId);
+  currGroup.tasks.splice(idx, 1);
+  return currGroup;
 }
 
 function getEmptyGroup(title = '', tasks = []) {
