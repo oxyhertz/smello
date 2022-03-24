@@ -61,7 +61,7 @@ export default {
       state.currentBoard.groups.push(group);
     },
     setCurrGroups(state, { groups }) {
-      state.currentBoard.groups = [...groups];
+      state.currentBoard.groups = groups;
     },
     setGroup(state, { groupIdx, newGroup }) {
       state.currentBoard.groups.splice(groupIdx, 1, newGroup);
