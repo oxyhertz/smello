@@ -1,0 +1,27 @@
+.attachments-container{
+    &:hover{
+        background-color: #eaecf0;
+    }
+    .attachment-item{
+        display: flex;
+        gap: 20px;
+        border-radius: 3px;
+        margin: 0 0 8px;
+        cursor: pointer;
+        img{
+            object-fit: cover;
+            width: 112px;
+            height: 80px;
+        }
+        .attachment-action{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .main-actions{
+            margin-bottom: 22px;
+        }
+    }
+
+
+
+}
