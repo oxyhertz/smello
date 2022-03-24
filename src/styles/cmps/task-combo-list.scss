@@ -1,5 +1,5 @@
-.task-combo-list{
-    gap: 20px;
+.task-combo-list {
+  gap: 20px;
 }
 .task-combo-list h3 {
   color: #5e6c84;
@@ -31,6 +31,7 @@
   cursor: pointer;
   left: 0;
   font-weight: 800;
+  height: 32.5px;
   font-size: 1.2rem;
   text-align: center;
   border-radius: 50%;
@@ -41,7 +42,7 @@
     border-radius: 3px;
   }
 
-  &:hover{
+  &:hover {
     background-color: #091e4214;
   }
 
@@ -56,7 +57,9 @@
   }
 }
 
-.task-combo-list .members .avatar{
-    margin: 0 4px 4px 0;
-    padding: 0 12px;
+.task-combo-list .members .avatar {
+  margin: 0 4px 4px 0;
+  padding: 0 12px;
+  font-family: system-ui;
+  letter-spacing: 0.6px;
 }

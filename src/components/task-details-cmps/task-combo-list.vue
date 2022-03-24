@@ -22,7 +22,7 @@
             label.title
           }}</span>
         </div>
-        <div class="combo-add-icon label"></div>
+        <div class="combo-add-icon label"  @click="setLabels"></div>
       </section>
     </section>
     <section v-if="dueDate" class="due-date">
@@ -52,7 +52,11 @@ export default {
     this.labelIds = this.comboData.labelIds;
     this.dueDate = this.comboData.dueDate;
   },
-  methods: {},
+  methods: {
+      setLabels(){
+          this.$emit('setLabels')
+      }
+  },
   computed: {
     boardLabels() {
       return this.$store.getters.currBoard.labels;
