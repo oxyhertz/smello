@@ -9,16 +9,7 @@
 .group-title {
     padding-top: $spacing;
     margin-bottom: $spacing;
-    margin-left: calc($spacing * 2)
-}
-
-.task-preview-container {
-    background-color: $clr2;
-    margin: 0 $spacing $spacing;
-    border-radius: $border-rsize;
-    > * {
-        margin: $spacing;
-    }
+    margin-left: calc($spacing * 1.5)
 }
 
 .drop-rotation {

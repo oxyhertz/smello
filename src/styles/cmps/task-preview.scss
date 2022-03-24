@@ -1,0 +1,12 @@
+.task-preview {
+    cursor: pointer;
+    background-color: $clr2;
+    padding: 6px 8px 2px;
+    margin: 0 7px $spacing 8px;
+    border-radius: $border-rsize;
+    box-shadow: 0 1px 0 #091e4240;
+     p {
+        margin: 0 0 4px;
+        word-break: break-word;
+    }
+}
