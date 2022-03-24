@@ -18,7 +18,6 @@
                             <button class="save" @click.stop="onTaskEdit">Save</button>
                         </div>
                 </div>
-                <task-check-list />
                 <div class="attachment-container">
                     <div class="block-title">
                         <span class="icon"></span>
@@ -28,6 +27,7 @@
                         <attachment @updateAttachments="updateAttachments" />
                     </div>
                 </div>
+                <task-check-list />
                 <div class="activity-show-details">
                        <div class="block-title">
                             <span class="icon"></span>
@@ -35,23 +35,56 @@
                         </div>
                     <button>Show Details</button>
                 </div>
+                 <div class="comment-text">
+                    <input  type="text">
+                </div>
             </div>
             <!-- <location :card="card" /> -->
             <div class="actions-btns-container">
                 <h3>Suggested</h3>
-                <button>Join</button>
+                <button>
+                    <span class="icon-member"></span>
+                    Join
+                </button>
                 <h3>Add To card</h3>
-                <button>Members</button>
-                <button  @click="setLabels('labelsItem')">Labels</button>
-                <button>Checklist</button>
-                <button>Dates</button>
-                <button @click="setAttachments('attachmentItem')">Attachments</button>
-                <button>Location</button>
-                <button>cover</button>
+                <button>
+                    <span class="icon-members"></span>
+                    Members
+                </button>
+                <button  @click="setLabels('labelsItem')">
+                    <span class="icon-label"></span>
+                    Labels
+                    </button>
+                <button>
+                    <span class="icon-checklist"></span>
+                    Checklist
+                </button>
+                <button>
+                    <span class="icon-time"></span>
+                    Dates
+                </button>
+                <button @click="setAttachments('attachmentItem')">
+                    <span class="icon-attachment"></span>
+                    Attachments
+                </button>
+                <button>
+                    <span class="icon-location"></span>
+                    Location
+                </button>
+                <button>
+                    <span class="icon-cover"></span>
+                    cover
+                </button>
                 <h3>Actions</h3>
-                <button>Copy</button>
-                <button>Archive</button>
-                <button>Share</button>
+                <button>
+                    <span class="icon-copy"></span>
+                    Copy
+                </button>
+                <button>
+                    <span class="icon-share"></span>
+                    Share
+                </button>
+               
                 <popup-main :task="task" @closePopup="closePopup" :popupData="popupData" :action="actionType" v-if="actionType" @addItem="addItem" @setItem="setItem" />
             </div>
         </section>
