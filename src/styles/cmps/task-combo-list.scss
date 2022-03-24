@@ -1,0 +1,62 @@
+.task-combo-list{
+    gap: 20px;
+}
+.task-combo-list h3 {
+  color: #5e6c84;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0 8px 4px 0;
+  text-overflow: ellipsis;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans,
+    Helvetica Neue, sans-serif;
+}
+.task-combo-list .labels span {
+  text-transform: capitalize;
+  color: #fff;
+  border-radius: 3px;
+  display: block;
+  float: left;
+  font-weight: 600;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 4px 4px 0;
+  min-width: 40px;
+  padding: 0 12px;
+  width: auto;
+}
+
+.combo-add-icon {
+  cursor: pointer;
+  left: 0;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(9, 30, 66, 0.04);
+
+  &.label {
+    border-radius: 3px;
+  }
+
+  &:hover{
+    background-color: #091e4214;
+  }
+
+  &::before {
+    content: '\e901';
+    font-family: Trello;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.task-combo-list .members .avatar{
+    margin: 0 4px 4px 0;
+    padding: 0 12px;
+}

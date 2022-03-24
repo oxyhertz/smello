@@ -4,6 +4,7 @@
             <span class="icon"></span>
             <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title">
         </div>
+        <task-combo-list :comboData="comboData" />
         <section class="task-detail-main">
             <div class="task-content">
                 <div class="task-description">
@@ -45,10 +46,32 @@
     </section>
 </template>
 <script>
+import { Comment } from '@vue/runtime-core';
+import taskComboList  from './task-details-cmps/task-combo-list.vue';
 export default {
     data(){
         return{
             taskToEdit: null,
+            comboData: {
+                labelIds: ['l101', 'l102'],
+                members: [
+                       {
+                    '_id': 'u101',
+                    username: 'Tal',
+                    fullname: 'Tal Tarablus',
+                    imgUrl:
+                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  },
+                       {
+                    '_id': 'u102',
+                    username: 'Eal',
+                    fullname: 'Ral Tarablus',
+                    imgUrl:
+                      'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  },
+                ],
+                dueDate: 181562152111,
+            }
         }
     },
     created(){
@@ -69,6 +92,9 @@ export default {
         task(){
             return this.$store.getters.currTask;
         }
+    },
+    components:{
+        taskComboList,
     }
 }
 </script>
