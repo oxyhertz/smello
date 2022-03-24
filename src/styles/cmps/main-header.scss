@@ -16,7 +16,7 @@
   background-color: $clr1;
   max-height: 44px;
   padding: 6px 4px;
-
+  align-items: center;
   .logo-img {
     margin: -4px 5px;
     height: 20px;
@@ -44,10 +44,8 @@
     outline: none;
     border: none;
     font-weight: 400;
-    padding: 7px 13px;
     font-size: 12px;
-    margin-top: -5px;
-    margin-left: 24px;
+    margin: 0;
   }
 
   .create-btn:hover {
