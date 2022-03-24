@@ -2,7 +2,7 @@
     <section class="task-checklist">
         <header>
             <section class="header-logo">
-                 <span class="checklist-icon"></span>
+                <span class="checklist-icon"></span>
                 <input type="text" class="checklist-title" v-model="listTitle" />
             </section>
 

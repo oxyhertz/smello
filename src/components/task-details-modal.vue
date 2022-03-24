@@ -1,24 +1,24 @@
 <template>
     <section class="task-details-modal">
         <div class="header">
-            <span class="icon"></span>
+            <span class="icon title-icon"></span>
             <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title">
         </div>
-        <task-combo-list @setLabels="setLabels('labelsItem')" :comboData="comboData" />
-        <task-check-list />
+            <p>In list {{board.title}}</p>
         <section class="task-detail-main">
             <div class="task-content">
+            <task-combo-list @setLabels="setLabels('labelsItem')" :comboData="comboData" />
                 <div class="task-description">
                         <div class="block-title">
                              <span class="icon"></span>
                              <h3>Description</h3>
                         </div>
-                        <textarea v-model="taskToEdit.description" spellcheck="false" placeholder="Add a more detailed description" class="description-textarea"></textarea>
-                        <div class="save-close-description">
-                            <button class="save" @click="onTaskEdit">Save</button>
-
+                        <textarea  @blur="isDisplaySave = false" @focus="isDisplaySave = true" v-model="taskToEdit.description" spellcheck="false" placeholder="Add a more detailed description" class="description-textarea" :class="{'desc-with-content' : taskToEdit.description }"></textarea>
+                        <div v-if="isDisplaySave" class="save-close-description" >
+                            <button class="save" @click.stop="onTaskEdit">Save</button>
                         </div>
                 </div>
+                <task-check-list />
                 <div class="attachment-container">
                     <div class="block-title">
                         <span class="icon"></span>
@@ -72,6 +72,7 @@ export default {
             isPopup: false,
             popupData: null,
             actionType: null,
+            isDisplaySave: false,
 
             comboData: {
                 labelIds: ['l101', 'l102'],
@@ -130,7 +131,8 @@ export default {
             })
         },
          onTaskEdit() {
-            this.$emit('editTask', this.taskToEdit);
+            console.log('edit')
+            this.$emit('editTask', JSON.parse(JSON.stringify(this.taskToEdit)));
         },
         onDetailEdit(key, val) {
             
@@ -147,6 +149,7 @@ export default {
         task(){
             return this.$store.getters.currTask;
         }
+
     },
     components:{
         popupMain,

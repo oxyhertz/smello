@@ -1,15 +1,8 @@
 .add-group {
     @include board-btn;
-    width: $group-size;
-    // margin-left: $spacing;
-    // min-height: 38px;
+    min-width: $group-size;
+    max-width: $group-size;
     height: 100%;
-    // background-color: $header-btn-clr;
-    // display: flex;
-    // align-items: center;
-    // span {
-    //     margin-left: $spacing;
-    // }
 }
 
 .add-group:hover {
