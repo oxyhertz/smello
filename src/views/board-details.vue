@@ -32,16 +32,6 @@ export default {
             board: null,
         };
     },
-    watch: {
-        async '$route.params.boardId'(after, before) {
-            await this.$store.dispatch({
-                type: "setCurrentBoard",
-                boardId: this.$route.params.boardId,
-            });
-            this.board = this.currBoard;
-            this.$router.push(`/board/${this.board._id}`)
-        }
-    },
     async created() {
         await this.$store.dispatch({
             type: "setCurrentBoard",
