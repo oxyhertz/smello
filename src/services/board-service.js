@@ -110,7 +110,7 @@ function _createBoards() {
     boards = [
       {
         _id: 'b101',
-        title: 'Robot dev proj',
+        title: 'trello copy project',
         createdAt: 1589983468418,
         isFavorite: false,
         createdBy: {

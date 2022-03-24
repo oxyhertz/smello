@@ -157,3 +157,10 @@
     font-variation-settings: "wght" 200;
   }
 }
+
+@mixin boardHeader($content: none){
+  color: white;
+  content: $content;
+  font-size: 16px;
+  font-family: trello;
+}
