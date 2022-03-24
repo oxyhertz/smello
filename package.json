@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "element-plus": "^2.1.4",
+    "moment": "^2.29.1",
     "sass": "^1.49.9",
     "vue": "^3.2.31",
     "vue-avatar": "^2.3.3",

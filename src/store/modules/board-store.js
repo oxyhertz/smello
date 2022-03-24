@@ -1,6 +1,5 @@
 import { boardService } from '../../services/board-service.js';
 import { utilService } from '../../services/utils-service.js';
-
 export default {
   state: {
     boards: [],
@@ -68,38 +67,41 @@ export default {
       state.currentBoard.groups.splice(groupIdx, 1, newGroup);
     },
     setTask(state, { groupId, task }) {
-      if(state.currentGroup) groupId = state.currentGroup._id;
-      const groupIdx = state.currentBoard.groups.findIndex(group => group._id === groupId)
+      if (state.currentGroup) groupId = state.currentGroup._id;
+      const groupIdx = state.currentBoard.groups.findIndex(
+        group => group._id === groupId
+      );
       if (task._id) {
-        const taskIdx = state.currentBoard.groups[groupIdx].tasks.findIndex(currTask => currTask._id === task._id)
-        state.currentBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task)
+        const taskIdx = state.currentBoard.groups[groupIdx].tasks.findIndex(
+          currTask => currTask._id === task._id
+        );
+        state.currentBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task);
       } else {
-        state.currentBoard.groups[groupIdx].tasks.push(task)
+        state.currentBoard.groups[groupIdx].tasks.push(task);
       }
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
-        (currTask) => currTask._id === task.taskId
-      )
-      state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1)
+        currTask => currTask._id === task.taskId
+      );
+      state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1);
     },
   },
   actions: {
     async loadBoards({ commit, state }) {
       try {
         const boards = await boardService.getBoards(state.filterBy);
-        commit({ type: 'setBoards', boards })
+        commit({ type: 'setBoards', boards });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     async saveBoard({ getters, commit }, { board }) {
       if (!board._id) {
         board.createdBy = getters.miniUser;
-        board.members = [getters.miniUser]
+        board.members = [getters.miniUser];
         board.createdAt = Date.now(); // should come from server later
       }
-
       try {
         const savedBoard = await boardService.saveBoard(board);
         commit({
@@ -108,15 +110,15 @@ export default {
         });
         return savedBoard;
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     async removeBoard({ commit }, { boardId }) {
       try {
         await boardService.removeBoard(boardId);
-        commit({ type: 'removeBoard', boardId })
+        commit({ type: 'removeBoard', boardId });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     async setCurrentBoard({ commit }, { boardId }) {
@@ -124,13 +126,17 @@ export default {
         const board = await boardService.getBoardById(boardId);
         commit({ type: 'setCurrentBoard', board });
       } catch {
-        console.log(err)
+        console.log(err);
       }
     },
     async setBoardPrefs({ state, commit, dispatch }, { key, val }) {
       try {
-        const savedBoard = await boardService.setBoardPrefs(state.currentBoard._id, key, val);
-        commit({ type: 'setCurrentBoard', board: savedBoard })
+        const savedBoard = await boardService.setBoardPrefs(
+          state.currentBoard._id,
+          key,
+          val
+        );
+        commit({ type: 'setCurrentBoard', board: savedBoard });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
       } catch (err) {
         console.log(err);
@@ -142,10 +148,10 @@ export default {
         commit({ type: 'addGroup', group });
         await dispatch({
           type: 'saveBoard',
-          board: state.currentBoard
+          board: state.currentBoard,
         });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     async setGroups({ state, commit, dispatch }, { groups }) {
@@ -153,16 +159,19 @@ export default {
         commit({ type: 'setCurrGroups', groups });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     async removeGroup({ state, commit, dispatch }, { groupId }) {
       try {
-        const board = await boardService.removeGroup(state.currentBoard, groupId);
+        const board = await boardService.removeGroup(
+          state.currentBoard,
+          groupId
+        );
         commit({ type: 'setCurrentBoard', board });
         await dispatch({ type: 'saveBoard', board });
       } catch {
-        console.log(err)
+        console.log(err);
       }
     },
     async setGroup({ state, commit, dispatch }, { groupIdx, newGroup }) {
@@ -170,23 +179,23 @@ export default {
         commit({ type: 'setGroup', groupIdx, newGroup });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
     setTask({ commit, state, dispatch }, { groupId, task }) {
       commit({ type: 'setTask', groupId, task });
-      dispatch({ type: 'saveBoard', board: state.currentBoard })
+      dispatch({ type: 'saveBoard', board: state.currentBoard });
     },
     removeTask({ commit, state, dispatch }, { task }) {
-      const groupIdx = state.currentBoard.groups.findIndex((group) => group._id === task.groupId)
-      commit({ type: 'removeTask', task: { groupIdx, taskId: task.taskId } })
-      dispatch({ type: 'saveBoard', board: state.currentBoard })
+      const groupIdx = state.currentBoard.groups.findIndex(
+        group => group._id === task.groupId
+      );
+      commit({ type: 'removeTask', task: { groupIdx, taskId: task.taskId } });
+      dispatch({ type: 'saveBoard', board: state.currentBoard });
     },
     setFilter({ dispatch, commit }, { filterBy }) {
       commit({ type: 'setFilter', filterBy });
       dispatch({ type: 'loadBoards' });
-    }
+    },
   },
 };
-
-

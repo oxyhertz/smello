@@ -100,9 +100,9 @@
         border-radius: 3px;
         display: block;
         min-height: 56px;
-        width: 100%;
         resize: none;
         padding: 8px 12px;
+        margin-left:32px;
         text-decoration: none;
         text-align: left;
         font-size: 14px;
@@ -117,6 +117,7 @@
     }
 
     .actions-btns-container{
+        position: relative;
         h3{
             color: #5e6c84;
             font-size: 12px;
@@ -131,14 +132,10 @@
         }
     }
 
-    .icon{
-        &::before{
-            content: "\e911";
-            font-family: Trello;
-            font-size: 25px;
-            line-height: 24px;
+    .attachment-container{
+        .icon::before{
+            content: "\e908";
         }
-    
     }
 
     button.save{

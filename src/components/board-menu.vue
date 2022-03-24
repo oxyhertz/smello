@@ -16,6 +16,7 @@ import boardMenuTitle from './board-menu/board-menu-title.vue';
 import boardMenuFavorite from './board-menu/board-menu-favorite.vue';
 import membersPreview from './members-preview.vue';
 import inviteMembers from './invite-members.vue';
+
 export default {
     name: 'board-menu',
     emits: ['editTitle', 'toggleFavorite'],
