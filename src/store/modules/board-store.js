@@ -6,6 +6,9 @@ export default {
     boards: [],
     filterBy: { name: '', sortBy: '' },
     currentBoard: null,
+    currentGroup: null,
+    currentTask: null,
+    currentTask: null,
   },
   getters: {
     boards({ boards }) {
@@ -20,6 +23,12 @@ export default {
     },
     boardGroups({ currentBoard }) {
       return currentBoard?.groups;
+    },
+    currGroup({ currentGroup }) {
+      return currentGroup;
+    },
+    currTask({ currentTask }) {
+      return currentTask;
     },
   },
   mutations: {
@@ -37,6 +46,14 @@ export default {
     },
     setFilter(state, { filterBy }) {
       state.filterBy = filterBy;
+    },
+    setCurrGroup(state, { group }) {
+      console.log(group);
+      state.currentGroup = group;
+    },
+    setCurrTask(state, { task }) {
+      state.currentTask = task;
+      console.log(state.currentTask);
     },
     setSort(state, { sortBy }) {
       state.sortBy = sortBy;
