@@ -68,10 +68,9 @@
 
 //modal 
 
-@mixin modal-act() {
+@mixin modal-act($top: 36px) {
   position: absolute;
-  top:36px;
-  background-color: blanchedalmond;
+  top:$top;
   width: 304px;
   padding: 10px;
   z-index: 10;

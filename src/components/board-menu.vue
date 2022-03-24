@@ -6,7 +6,7 @@
         <members-preview :board="board" />
         <div class="invite-members-container">
             <button @click="isInviteModal = !isInviteModal">Invite</button>
-            <invite-members v-if="isInviteModal" />
+            <invite-members :board="board" @closeInviteModal="closeModal" v-if="isInviteModal" />
         </div>
     </header>
 </template>
@@ -39,6 +39,9 @@ export default {
         },
         toggleFavorite(isFavorite) {
             this.$emit('toggleFavorite', isFavorite);
+        },
+        closeModal(){
+            this.isInviteModal = false
         }
     },
     computed: {

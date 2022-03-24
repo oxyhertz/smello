@@ -8,6 +8,7 @@
             @columnChange="columnChange"
             @addGroup="addGroup"
             :groups="board.groups"
+            :board="board"
         />
     </section>
 </template>

@@ -30,7 +30,8 @@
           <task-preview
             @removeTask="removeTask($event, group._id)"
             v-for="task in group.tasks"
-            @click="openTaskDetails(group._id, task._id)"
+            
+            @click="openTask(board,group,task)"
             :key="task._id"
             :task="task"
           />
@@ -40,14 +41,16 @@
     </Draggable>
     <add-group @add="addGroup" />
   </Container>
+  <task-details-modal v-if="isTaskDetail"></task-details-modal>
 </template>
 
-
 <script>
+// @click="openTaskDetails(group._id, task._id)"
 import { Container, Draggable } from "vue3-smooth-dnd";
 import taskPreview from "./task-preview.vue";
 import taskAdd from "./task-add.vue";
 import addGroup from "../components/add-group.vue";
+import taskDetailsModal from '../components/task-details-modal.vue'
 
 export default {
   name: "board-group",
@@ -56,10 +59,12 @@ export default {
       type: Array,
       required: true,
     },
+    board: Object
   },
   data() {
     return {
       scene: { groups: this.groups },
+      isTaskDetail:false
     };
   },
   components: {
@@ -67,9 +72,15 @@ export default {
     Draggable,
     taskPreview,
     taskAdd,
-    addGroup
+    addGroup,
+    taskDetailsModal
   },
   methods: {
+    openTask(board,group,task){
+      this.isTaskDetail = true;
+      this.$store.commit({type: 'setCurrGroup',group})
+      this.$store.commit({type: 'setCurrTask',task})
+    },
     addGroup(title) {
       this.$emit("addGroup", title);
     },
