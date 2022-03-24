@@ -4,7 +4,7 @@
             <span class="icon"></span>
             <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title">
         </div>
-        <task-combo-list :comboData="comboData" />
+        <task-combo-list @setLabels="setLabels('labelsItem')" :comboData="comboData" />
         <task-check-list />
         <section class="task-detail-main">
             <div class="task-content">
