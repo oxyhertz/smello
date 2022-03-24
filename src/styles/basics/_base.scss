@@ -19,6 +19,15 @@ img{
     height: 100%;
 }
 
-button{
+button, .button{
     cursor: pointer;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 3px;
+    display: inline-block;
+    line-height: 20px;
+    margin-bottom: 8px;
+    padding: 6px 12px;
+    // position: relative;
+    text-decoration: none;
 }

@@ -14,7 +14,7 @@
                 </div>
                 <div class="activity-show-details">
                     <h3>Activity</h3>
-                    <span>Show Details</span>
+                    <button>Show Details</button>
                 </div>
             </div>
             <div>
