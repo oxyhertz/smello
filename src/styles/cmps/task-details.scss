@@ -180,7 +180,10 @@
 
     .comment-text{
         input{
+            border: none;
+            outline: none;
             width: 100%;
+            box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
         }
     }
 }
