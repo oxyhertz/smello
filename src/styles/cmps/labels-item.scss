@@ -3,7 +3,7 @@
     margin-top: 12px;
 }
 
-.labels-item {
+.labels-item input{
     margin-top: 7px;
     display: block;
     line-height: 20px;
@@ -17,4 +17,5 @@
     transition-duration: 85ms;
     transition-property: background-color,border-color,box-shadow;
     transition-timing-function: ease;
+    width: 100%;
 }

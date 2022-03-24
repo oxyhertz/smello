@@ -1,5 +1,5 @@
 <template>
-    <div class="label-item">
+    <div class="labels-item">
         <input type="text" placeholder="Search labels...">
         <h3>Labels item</h3>
     </div>
