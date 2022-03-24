@@ -44,15 +44,14 @@ import { utilService } from '../../services/utils-service';
 export default {
     name: 'task-checklist',
     // props: {
-    //     listTitle: String,
-    //     todos: Array
+    //     checklist: Object
     // },
     data() {
         return {
             addItemMode: false,
             newTodoTitle: '',
             isHideDone: false,
-            listTitle: 'Hello hello',
+            listTitle: 'hello hello',
             todos: [
                 {
                     "id": "212jX",

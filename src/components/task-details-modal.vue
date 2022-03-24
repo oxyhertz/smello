@@ -5,6 +5,7 @@
             <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title">
         </div>
         <task-combo-list :comboData="comboData" />
+        <task-check-list />
         <section class="task-detail-main">
             <div class="task-content">
                 <div class="task-description">
@@ -61,6 +62,8 @@ import popupMain from "./pop-up-main.vue";
 import attachment from "./attachment-cmp.vue";
 import { Comment } from '@vue/runtime-core';
 import taskComboList  from './task-details-cmps/task-combo-list.vue';
+import taskCheckList from './task-details-cmps/task-checklist.vue';
+
 export default {
     data(){
         return{
@@ -98,7 +101,7 @@ export default {
     methods:{
         setLabels(action){
             this.actionType = action,
-            this.popupData = {name:'Labels',style:{"top": '147px'}}
+            this.popupData = {name:'Labels', style:{"top": '147px'}}
             
         },
         closePopup(){
@@ -120,11 +123,14 @@ export default {
         },
          onTaskEdit() {
             this.$emit('editTask', this.taskToEdit);
+        },
+        onDetailEdit(key, val) {
+            
         }
     },
 
     computed:{
-        board(){
+        board() {
             return this.$store.getters.currBoard;
         },
         group(){
@@ -138,6 +144,7 @@ export default {
         popupMain,
         attachment,
         taskComboList,
+        taskCheckList
     }
 }
 
