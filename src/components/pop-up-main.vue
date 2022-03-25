@@ -48,7 +48,7 @@ export default {
     },
     computed:{
         currBoard(){
-            this.$store.getter.currBoard
+          return  this.$store.getters.currBoard
         }
     },
     components:{
