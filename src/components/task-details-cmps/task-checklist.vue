@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { nextTick } from 'vue';
 import { utilService } from '../../services/utils-service';
 
 export default {
