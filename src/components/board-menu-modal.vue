@@ -1,6 +1,7 @@
 <template>
   <div v-if="isOpen" class="board-menu-modal flex" :class="{ open: isOpen }">
     <h4>Menu</h4>
+    <span class="close-board-modal"></span>
   </div>
 </template>
 
