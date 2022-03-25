@@ -1,19 +1,9 @@
 .board-header {
   margin: 18px 0 10px 12px;
   & .btn {
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-    box-shadow: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+   @include lightBtn;
   }
+  
   .fa-star:hover {
     color: $favorite-clr;
     transform: scale(1.2);
