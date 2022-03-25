@@ -4,6 +4,7 @@
 @import 'setup/mixins';
 @import 'setup/functions';
 @import 'setup/icons';
+
 // BASICS
 @import 'basics/helpers';
 @import 'basics/base';
@@ -32,3 +33,4 @@
 
 // VIEWS
 @import 'views/home-page.scss';
+@import 'views/board-details.scss';

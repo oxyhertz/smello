@@ -1,16 +1,18 @@
 <template>
-    <section v-if="board" class="board-container">
+    <section v-if="board" class="board-container" :style="boardStyle" >
         <board-header :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
-        <board-group
-            @removeTask="removeTask"
-            @addTask="setTask"
-            @editTask="editTask"
-            @taskChange="taskChange"
-            @columnChange="columnChange"
-            @addGroup="addGroup"
-            :groups="board.groups"
-            :board="board"
-        />
+        <section class="group-container-scrollable">
+            <board-group
+                @removeTask="removeTask"
+                @addTask="setTask"
+                @editTask="editTask"
+                @taskChange="taskChange"
+                @columnChange="columnChange"
+                @addGroup="addGroup"
+                :groups="board.groups"
+                :board="board"
+            />
+        </section>
     </section>
 </template>
 
@@ -52,7 +54,7 @@ export default {
             });
         },
         setTask({ title, groupId }) {
-            var task = {title};
+            var task = { title };
             this.$store.dispatch({ type: 'setTask', groupId, task, });
         },
         editTask(editedTask) {
@@ -80,6 +82,10 @@ export default {
         },
         currBoard() {
             return this.$store.getters.currBoard;
+        },
+        boardStyle(){
+    
+            return {"background-color": this.board.style.bgColor};
         }
     }
 }
