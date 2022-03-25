@@ -59,7 +59,7 @@
                     <span class="icon-label"></span>
                     Labels
                     </button>
-                <button>
+                <button @click="setChecklist('checklistItem')">
                     <span class="icon-checklist"></span>
                     Checklist
                 </button>
@@ -145,6 +145,10 @@ export default {
         setAttachments(action){
             this.actionType = action,
             this.popupData = {name:'Labels',style:{"top": '268px'}}
+        },
+        setChecklist(action) {
+            this.actionType = action,
+            this.popupData = {name:'Add checklist', style:{"top": '200px'}}
         },
         closePopup(){
             this.actionType = null,
