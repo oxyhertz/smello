@@ -1,5 +1,5 @@
-.board-container {
-    height: calc(100vh - 55px);
+.group-container-scrollable {
+    height: calc(100vh - 110px);
     overflow-x: auto;
     
     &::-webkit-scrollbar {
