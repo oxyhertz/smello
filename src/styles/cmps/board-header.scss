@@ -1,4 +1,4 @@
-.board-menu {
+.board-header {
   margin: 18px 0 10px 12px;
   & .btn {
     &:hover {
@@ -27,7 +27,7 @@
     @include board-btn($bg: rgba(240, 248, 255, 0));
   }
 }
-.board-menu-title {
+.board-header-title {
   margin-inline-start: 1rem;
   margin-bottom: 7px;
   font-size: 1.3rem;
@@ -54,7 +54,7 @@
   @include boardHeader('\e923');
 }
 
-.board-menu-favorite {
+.board-header-favorite {
   @include boardHeader();
   height: 32px;
   width: 32px;

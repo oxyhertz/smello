@@ -1,8 +1,8 @@
 <template>
     <section class="task-checklist">
         <header>
-            <section class="header-logo">
-                <span class="checklist-icon"></span>
+            <section class="block-title">
+                <span class="icon checklist-icon"></span>
                 <input type="text" class="checklist-title" v-model="listTitle" />
             </section>
 
@@ -28,10 +28,10 @@
 
         <button v-if="!addItemMode" @click="addItemMode = true">Add an item</button>
         <section v-else>
-            <textarea v-model="newTodoTitle" cols="30" rows="2"></textarea>
+            <textarea v-model="newTodoTitle" v-focus placeholder="Add an item" class="add-todo-inp"></textarea>
             <section class="actions">
-                <button @click="addTodo">Add</button>
-                <button @click="addItemMode = false">X</button>
+                <button class="blue-btn" @click="addTodo">Add</button>
+                <i @click="addItemMode = false" class="fa-solid fa-x"></i>
             </section>
         </section>
         

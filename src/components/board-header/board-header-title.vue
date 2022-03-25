@@ -1,5 +1,5 @@
 <template>
-    <section class="board-menu-title">
+    <section class="board-header-title">
         <h1 v-if="!isClicked" @click="toggleInput">{{title}}</h1>
         <textarea v-else v-focus v-model="title" @blur="editTitle">{{title}}</textarea>
     </section>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    name: 'board-menu-title',
+    name: 'board-header-title',
     props: {
         title: String,
         createdBy: String

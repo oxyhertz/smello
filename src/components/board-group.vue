@@ -41,6 +41,7 @@
     </Draggable>
     <add-group @add="addGroup" />
   </Container>
+  <div class="overlay" :class="{'open-overlay':isTaskDetail}" @click="isTaskDetail = null"></div>
   <task-details-modal v-if="isTaskDetail" @editTask="editTask" />
 </template>
 

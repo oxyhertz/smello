@@ -1,5 +1,5 @@
 <template>
-    <section class="board-menu-favorite">
+    <section class="board-header-favorite">
         <i @click="toggleFavorite" :class="favoriteIcon"></i>
     </section>
 </template>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    name: 'board-menu-favorite',
+    name: 'board-header-favorite',
     props: {
         favorite: Boolean
     },
