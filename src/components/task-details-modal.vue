@@ -161,22 +161,15 @@ export default {
             if(item.type === 'attachment'){
                 if(!this.taskToEdit.attachments) this.taskToEdit.attachments = []
                  this.taskToEdit.attachments.push(item.item);
-                 console.log(this.taskToEdit)
+            } else if(item.type === 'checklist') {
+                if(!this.taskToEdit.checklists) this.taskToEdit.checklists = []
+                 this.taskToEdit.checklists.push(item.item);
             }
-        },
-        updateAttachments(attachments){
-            console.log(attachments)
-            this.taskToEdit.attachments = attachments;
-            this.$store.dispatch({
-                type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
-            })
+            this.onTaskEdit();
         },
          onTaskEdit() {
             console.log('edit')
             this.$emit('editTask', JSON.parse(JSON.stringify(this.taskToEdit)));
-        },
-        onDetailEdit(key, val) {
-            
         }
     },
 
