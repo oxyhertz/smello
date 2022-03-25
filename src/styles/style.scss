@@ -3,7 +3,7 @@
 @import 'setup/variables';
 @import 'setup/mixins';
 @import 'setup/functions';
-
+@import 'setup/icons';
 // BASICS
 @import 'basics/helpers';
 @import 'basics/base';
@@ -17,7 +17,6 @@
 @import 'cmps/board-group.scss';
 @import 'cmps/task-preview.scss';
 @import 'cmps/add-group.scss';
-
 @import 'cmps/color-picker.scss';
 @import 'cmps/members-preview.scss';
 @import 'cmps/invite-members.scss';
@@ -26,9 +25,13 @@
 @import 'cmps/attachment.scss';
 @import 'cmps/task-combo-list.scss';
 @import 'cmps/labels-item.scss';
+<<<<<<< HEAD
 @import 'cmps/board-menu.scss';
 
+=======
+>>>>>>> 5e56cd738f6611e932001c8915d43169cdc60022
 @import 'cmps/task-checklist.scss';
+@import 'cmps/overlay.scss';
 
 // VIEWS
 @import 'views/home-page.scss';

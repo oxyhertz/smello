@@ -158,6 +158,14 @@
   }
 }
 
+@mixin icon($icon,$fz : 16px,$lh : 16px){
+  font-family: Trello;
+  font-size: $fz;
+  line-height: $lh;
+  &::before{
+    content: $icon;
+  }
+}
 @mixin boardHeader($content: none){
   color: white;
   content: $content;
