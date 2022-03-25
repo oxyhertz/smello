@@ -4,14 +4,21 @@
       <p>{{ task.title }}</p>
 
       <div class="icon-container flex">
+
+        <div class="preview-icon" v-if="task.description">
+          <span class="icon-description"></span>
+        </div>
+
         <div class="preview-icon" v-if="task.attachments?.length">
           <span class="icon-attachment"></span>
           <p>{{ task.attachments?.length }}</p>
         </div>
+
         <div class="preview-icon" v-if="task.checklists?.length" :class="{completed: tasksDone === numOfTodos}">
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
+
       </div>
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
@@ -43,12 +50,12 @@ export default {
   },
   computed: {
     tasksDone() {
-      const numDone = this.task.checklists.reduce((acc, { todos }) => {
+      const numOfDoneTodos = this.task.checklists.reduce((acc, { todos }) => {
         return acc + todos.reduce((acc, todo) => {
           return todo.isDone ? acc + 1 : acc;
         }, 0)
       }, 0)
-      return numDone;
+      return numOfDoneTodos;
     },
     numOfTodos() {
       return this.task.checklists.reduce((acc, { todos }) => acc + todos.length, 0)
