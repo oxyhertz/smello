@@ -9,6 +9,8 @@
           <span class="icon-description"></span>
         </div>
 
+
+
         <div class="preview-icon" v-if="task.attachments?.length">
           <span class="icon-attachment"></span>
           <p>{{ task.attachments?.length }}</p>
@@ -18,8 +20,13 @@
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
-
       </div>
+      
+                <!-- <div class="preview-icon" v-if="task.members">
+<ul>
+  <li></li>
+</ul>
+        </div> -->
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
   </Draggable>
