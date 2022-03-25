@@ -6,32 +6,50 @@
           <span class="icon-attachment"></span>
           <p>{{task.attachments?.length}}</p>
       </div>
+      <div class="checklist-count" v-if="task.checklists?.length">
+          <span class="icon-checklist"></span>
+          <p>{{tasksDone}} / {{numOfTodos}}</p>
+      </div>
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
   </Draggable>
 </template>
 
 <script>
-import { Draggable } from "vue3-smooth-dnd";
+import { Draggable } from 'vue3-smooth-dnd';
 
 export default {
-  name: "task-preview",
-  data() {
-    return {};
-  },
-  methods: {
-    removeTask(){
-        this.$emit("removeTask",this.task._id)
-    }
-  },
-  components: {
-    Draggable,
-  },
+  name: 'task-preview',
   props: {
     task: {
       type: Object,
       required: true,
     },
   },
+  
+  data() {
+    return {};
+  },
+  components: {
+    Draggable,
+  },
+  methods: {
+    removeTask(){
+        this.$emit('removeTask', this.task._id)
+    }
+  },
+  computed: {
+    tasksDone() {
+        const numDone = this.task.checklists.reduce((acc, {todos}) => {
+          return acc + todos.reduce((acc, todo) => {
+           return  todo.isDone ? acc + 1 : acc;
+          }, 0)
+        }, 0)
+        return numDone;
+    },
+    numOfTodos() {
+      return this.task.checklists.reduce((acc, {todos}) => acc + todos.length, 0)
+    }
+  }
 };
 </script>

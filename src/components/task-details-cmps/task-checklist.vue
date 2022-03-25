@@ -84,7 +84,7 @@ export default {
             return parseInt(numOfDoneTodos / numOfTodos * 100);
         },
         isAnyTodoDone() {
-            return this.checklist.todos.some(todo => todo.isDone);
+            return this.checklistToEdit.todos.some(todo => todo.isDone);
         },
         hideBtnTxt() {
             if(!this.isHideDone) return 'Hide checked items';
