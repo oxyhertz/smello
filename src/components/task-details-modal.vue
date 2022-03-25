@@ -184,17 +184,13 @@ export default {
         },
         updateItem({ type, val }) {
             if (type === 'checklists') {
+                console.log(type, val);
                 const checklists = this.taskToEdit.checklists;
                 const idx = checklists.findIndex(checklist => checklist._id === val._id);
                 if (val.title) checklists.splice(idx, 1, val); // edit
                 else checklists.splice(idx, 1); // deletion
 
             } else this.taskToEdit[type] = val;
-            this.onTaskEdit();
-        },
-        updateItem({type, val}){
-            console.log(type,val)
-            this.taskToEdit[type] = val;
             this.onTaskEdit();
         },
         onTaskEdit() {
