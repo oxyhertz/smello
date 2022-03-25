@@ -72,7 +72,7 @@
                     Join
                 </button>
                 <h3>Add To card</h3>
-                <button>
+                <button  @click="setMembers('membersItem')">
                     <span class="icon-members"></span>
                     Members
                 </button>
@@ -145,13 +145,17 @@ export default {
         console.log("this.taskToEdit", this.taskToEdit);
     },
     methods: {
+        setMembers(action) {
+            (this.actionType = action),
+                (this.popupData = { name: "Members", style: { top: "126px" } });
+        },
         setLabels(action) {
             (this.actionType = action),
-                (this.popupData = { name: "Labels", style: { top: "147px" } });
+                (this.popupData = { name: "Labels", style: { top: "165px" } });
         },
         setAttachments(action) {
             (this.actionType = action),
-                (this.popupData = { name: "Labels", style: { top: "268px" } });
+                (this.popupData = { name: "Attachments", style: { top: "268px" } });
         },
         setChecklist(action) {
             (this.actionType = action),
