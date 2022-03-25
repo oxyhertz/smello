@@ -1,0 +1,14 @@
+.members-item {
+  & h3 {
+    margin-top: 28px;
+  }
+  & .member {
+    margin: 10px 0 0 6px;
+  }
+  & .name{
+      margin-inline-start: 11px;
+  }
+  & .username{
+      margin-inline-start: 7px;
+  }
+}
