@@ -18,9 +18,17 @@
     }
 }
 
-.drop-placeholder {
+.drop-placeholder-task {
     background-color: $clr8;
-    margin: $spacing;
+    border-radius: $border-rsize;
+    padding: 6px 8px 2px;
+    margin: 0 7px 8px 8px;
+    line-height: 20px;
+}
+
+.dragging {
+    transform: rotate(5deg);
+    box-shadow: 1px 10px 15px -4px rgba(0,0,0,0.25);
 }
 
 .preview-icon {
