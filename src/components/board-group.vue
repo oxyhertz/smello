@@ -3,7 +3,7 @@
     group-name="cols"
     tag="div"
     orientation="horizontal"
-    drag-class="drop-rotation"
+    drag-class="dragging"
     @drop="onColumnDrop($event)"
   >
     <Draggable class v-for="group in scene.groups" :key="group._id">
@@ -22,9 +22,9 @@
           "
           :get-child-payload="getCardPayload(group._id)"
           :drop-placeholder="{
-            className: `drop-placeholder`,
+            className: `drag-placeholder-task`,
           }"
-          drag-class="drop-rotation"
+          drag-class="dragging"
           @drop="(e) => onCardDrop(group._id, e)"
         >
           <!-- tasks -->
@@ -41,7 +41,7 @@
     </Draggable>
     <add-group @add="addGroup" />
   </Container>
-  <div class="overlay" :class="{'open-overlay': isTaskDetail}" @click.stop="closeModal"></div>
+  <div class="overlay" :class="{ 'open-overlay': isTaskDetail }" @click.stop="closeModal"></div>
   <task-details-modal v-if="isTaskDetail" @editTask="editTask" />
 </template>
 
@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       scene: { groups: this.groups },
-      isTaskDetail:false
+      isTaskDetail: false
     };
   },
   components: {
@@ -78,10 +78,10 @@ export default {
     taskDetailsModal
   },
   methods: {
-    openTask(board, group, task){
+    openTask(board, group, task) {
       this.isTaskDetail = true;
-      this.$store.commit({type: 'setCurrGroup', group})
-      this.$store.commit({type: 'setCurrTask', task})
+      this.$store.commit({ type: 'setCurrGroup', group })
+      this.$store.commit({ type: 'setCurrTask', task })
     },
     addGroup(title) {
       this.$emit('addGroup', title);
@@ -102,11 +102,11 @@ export default {
       this.$emit('addTask', task);
     },
     editTask(editedTask) {
-        this.$emit('editTask', editedTask);
+      this.$emit('editTask', editedTask);
     },
     closeModal() {
       this.isTaskDetail = false
-      this.$emit('cleanStore',  ['Task', 'Group']);
+      this.$emit('cleanStore', ['Task', 'Group']);
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
