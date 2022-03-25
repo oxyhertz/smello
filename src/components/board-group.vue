@@ -41,7 +41,7 @@
     </Draggable>
     <add-group @add="addGroup" />
   </Container>
-  <div class="overlay" :class="{'open-overlay':isTaskDetail}" @click="isTaskDetail = null"></div>
+  <div class="overlay" :class="{'open-overlay': isTaskDetail}" @click.stop="closeModal"></div>
   <task-details-modal v-if="isTaskDetail" @editTask="editTask" />
 </template>
 
@@ -55,7 +55,7 @@ import taskDetailsModal from '../components/task-details-modal.vue'
 
 export default {
   name: 'board-group',
-  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask'],
+  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask', 'cleanStore'],
   props: {
     groups: {
       type: Array,
@@ -103,6 +103,10 @@ export default {
     },
     editTask(editedTask) {
         this.$emit('editTask', editedTask);
+    },
+    closeModal() {
+      this.isTaskDetail = false
+      this.$emit('cleanStore',  ['Task', 'Group']);
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;

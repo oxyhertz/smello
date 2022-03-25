@@ -2,7 +2,7 @@
     <section class="checklist-popup flex column">
         <label for="checklist-input">Title</label>
         <input type="text" v-model="checklistTitle" id="checklist-input" placeholder="Checklist" />
-        <button class="add-btn">Add</button>
+        <button class="save">Add</button>
     </section>
 </template>
 

@@ -9,6 +9,7 @@
                 @taskChange="taskChange"
                 @columnChange="columnChange"
                 @addGroup="addGroup"
+                @cleanStore="cleanStore"
                 :groups="board.groups"
                 :board="board"
             />
@@ -74,6 +75,16 @@ export default {
         },
         toggleFavorite(isFavorite) {
             this.$store.dispatch({ type: 'setBoardPrefs', key: 'isFavorite', val: isFavorite });
+        },
+        cleanStore(itemsToClean) {
+            itemsToClean.forEach(item => {
+                const toCommit = {
+                    type: `setCurr${item}`
+                }
+                toCommit[item.toLowerCase()] = null;
+                this.$store.commit(toCommit)
+            })
+
         }
     },
     computed: {
