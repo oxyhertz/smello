@@ -67,10 +67,14 @@ export default {
             this.checklistToEdit.todos.push(todo);
             this.newTodoTitle = '';
             this.addItemMode = false;
-            this.$emit('updateItem', {type: 'checklists', val: JSON.parse(JSON.stringify(this.checklistToEdit))})
+             this.$emit('updateItem', {type: 'checklists', val: JSON.parse(JSON.stringify(this.checklistToEdit))});
         },
         deleteChecklist() {
-            
+            this.$emit('updateItem', {type: 'checklists', val: {_id: this.checklistToEdit._id}});
+        },
+        updateTask(todo) {
+            console.log(this.checklistToEdit, todo);
+           
         }
     },
     computed: {
