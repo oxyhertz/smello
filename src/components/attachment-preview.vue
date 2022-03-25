@@ -1,6 +1,8 @@
 <template >
     <li class="attachment-item">
-        <img :src="attachment.url" alt="">
+        <div class="image-container">
+            <img :src="attachment.url" alt="">
+        </div>
         <div class="attachment-details">
             <h4>{{attachment.fileName}}</h4>
             <div class="main-actions">

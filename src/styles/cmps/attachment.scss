@@ -6,6 +6,11 @@
         border-radius: 3px;
         margin: 0 0 8px;
         cursor: pointer;
+        
+        .image-container{
+            background-color: #091e420a;
+            border-radius: 3px;
+        }
         img{
             border-radius: 3px;
             object-fit: fill;
@@ -78,4 +83,12 @@
         border-top: 1px solid rgba(9, 30, 66, 0.13);
         padding-top: 23px;
     }
+}
+.drag-container{
+    height: 195px;
+    cursor: pointer;
+    border: 1px dashed #ebecf0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

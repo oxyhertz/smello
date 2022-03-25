@@ -24,21 +24,57 @@
 .labels-item ul li {
   cursor: pointer;
   height: 32px;
-  border-radius: 0 3px 3px 0;
   margin-bottom: 4px;
   display: flex;
   justify-content: space-between;
   width: 248px;
 
-  & span{
+  & .label-txt {
+    z-index: 5;
     color: white;
-    border-radius: 3px;
+    border-radius: 0 3px 3px 0;
     cursor: pointer;
     font-weight: 700;
-    margin: 0 0 4px;
-    min-height: 20px;
-    padding: 6px 6px;
+    margin: 2px 0 4px 6px;
+    min-height: 31px;
+    padding: 6px 3px;
     position: relative;
     transition: padding 85ms;
+    min-width: 239px;
   }
+
+  & .edit-labels {
+    @include icon('\e927');
+    padding: 9px;
+    margin-right: -19px;
+    z-index: 5;
+  }
+
+  & .hover-marker {
+    border-radius: 3px;
+    min-width: 246px;
+    min-height: 31px;
+    padding-left: -13vw;
+    position: absolute;
+    margin-left: -1px;
+    margin-top: 2px;
+    background-color: rgb(102, 84, 84);
+  }
+}
+
+.delete-label {
+  background-color: #b04632 !important;
+  border: none;
+  color: white;
+  width: 53px !important;
+  margin: 5px 0 0 0;
+  justify-content: center;
+}
+
+.labels-actions {
+  margin-top: 10px;
+}
+
+.create {
+  width: 70px !important;
 }

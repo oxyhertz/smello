@@ -3,8 +3,10 @@
         <label v-if="!isLoading" for="imgUploader"
          @drop.prevent="handleFile"
          @dragover.prevent=""
+         class="drag-container"
         >
-            <img src="https://clippingpathgreat.com/wp-content/uploads/2021/04/upload-files-1024x707.jpg" alt="">
+          <h3>Choose an image  or drag it here</h3>
+            <!-- <img src="https://clippingpathgreat.com/wp-content/uploads/2021/04/upload-files-1024x707.jpg" alt=""> -->
             <!-- <input hidden type="file" @change="onUploadImg"/> -->
         </label>
         <img v-else src="../../images/Bar-Preloader-1.gif" alt="">

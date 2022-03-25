@@ -1,9 +1,9 @@
 <template>
-    <section class="task-checklist">
+    <section class="task-checklist" v-if="checklist">
         <header>
             <section class="block-title">
                 <span class="icon checklist-icon"></span>
-                <input type="text" class="checklist-title" v-model="listTitle" />
+                <input type="text" class="checklist-title" v-model="checklist.title" />
             </section>
 
             <section class="header-options">
@@ -18,7 +18,7 @@
         </div>
 
         <div class="todos-container">
-            <div v-for="todo in todos" :key="todo._id">
+            <div v-for="todo in checklist.todos" :key="todo._id">
                 <div class="todo-container" v-if="isHideDone ? !todo.isDone : true">
                     <input type="checkbox" v-model="todo.isDone" />
                     <textarea :class="{completed: todo.isDone}" v-model="todo.title" rows="1"></textarea>
@@ -43,33 +43,19 @@ import { utilService } from '../../services/utils-service';
 
 export default {
     name: 'task-checklist',
-    // props: {
-    //     checklist: Object
-    // },
+    props: {
+        checklist: Object
+    },
     data() {
         return {
-            addItemMode: false,
+            checklistToEdit: null,
             newTodoTitle: '',
+            addItemMode: false,
             isHideDone: false,
-            listTitle: 'hello hello',
-            todos: [
-                {
-                    "id": "212jX",
-                    "title": "To Do 1",
-                    "isDone": false
-                },
-                {
-                    "id": "212jXx",
-                    "title": "To Do 2",
-                    "isDone": false
-                },
-                {
-                    "id": "212jXa",
-                    "title": "To Do 3",
-                    "isDone": false
-                }
-            ]
         }
+    },
+    created() {
+        this.checklistToEdit = JSON.parse(JSON.stringify(this.checklist));
     },
     methods: {
         addTodo() {
@@ -78,25 +64,32 @@ export default {
                 title: this.newTodoTitle,
                 isDone: false
             }
-            this.todos.push(todo);
+            this.checklistToEdit.todos.push(todo);
             this.newTodoTitle = '';
             this.addItemMode = false;
+             this.$emit('updateItem', {type: 'checklists', val: JSON.parse(JSON.stringify(this.checklistToEdit))});
         },
         deleteChecklist() {
-            
+            this.$emit('updateItem', {type: 'checklists', val: {_id: this.checklistToEdit._id}});
+        },
+        updateTask(todo) {
+            console.log(this.checklistToEdit, todo);
+           
         }
     },
     computed: {
         doneTodosPerecent() {
-            const numOfDoneTodos = this.todos.reduce((acc, todo) => todo.isDone ? acc + 1 : acc, 0);
-            return parseInt(numOfDoneTodos / this.todos.length * 100);
+            const numOfTodos = this.checklist.todos.length;
+            if(!numOfTodos) return 0;
+            const numOfDoneTodos = this.checklist.todos.reduce((acc, todo) => todo.isDone ? acc + 1 : acc, 0);
+            return parseInt(numOfDoneTodos / this.checklist.todos.length * 100);
         },
         isAnyTodoDone() {
-            return this.todos.some(todo => todo.isDone);
+            return this.checklist.todos.some(todo => todo.isDone);
         },
         hideBtnTxt() {
             if(!this.isHideDone) return 'Hide checked items';
-            const numOfDoneTodos = this.todos.reduce((acc, todo) => todo.isDone ? acc + 1 : acc, 0);
+            const numOfDoneTodos = this.checklist.todos.reduce((acc, todo) => todo.isDone ? acc + 1 : acc, 0);
             return `Show checked items (${numOfDoneTodos})`;
         }
     }
