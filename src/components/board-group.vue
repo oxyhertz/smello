@@ -22,7 +22,7 @@
           "
           :get-child-payload="getCardPayload(group._id)"
           :drop-placeholder="{
-            className: `drop-placeholder`,
+            className: `drag-placeholder-task`,
           }"
           drag-class="dragging"
           @drop="(e) => onCardDrop(group._id, e)"
