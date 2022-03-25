@@ -1,6 +1,6 @@
 <template>
   <div v-if="board && !isCreating" class="labels-item">
-    <input type="text" placeholder="Search labels..." />
+    <input type="text" placeholder="Search labels..." v-focus />
     <h3>Labels</h3>
     <ul>
       <li class="label" v-for="label in board.labels" :key="label._id">
@@ -11,20 +11,23 @@
           >{{ label.title }}</span
         >
         <div :class="{ 'hover-marker': null }"></div>
-        <span @click="editLabel" class="edit-labels"></span>
+        <span
+          @click.stop="updateCurrData(label), (isCreating = true)"
+          class="edit-labels"
+        ></span>
       </li>
     </ul>
-    <button @click="isCreating = true" class="create-label-btn">
+    <button @click="setLabel(), (isCreating = true)" class="create-label-btn">
       Create a new label
     </button>
   </div>
   <section v-else>
     <h3>Name</h3>
-    <input type="text" v-model="title" />
+    <input type="text" v-model="title" v-focus />
     <h3>Select a color</h3>
     <color-picker @updateColor="updateColor"></color-picker>
     <div class="labels-actions flex space-between">
-      <button class="save create" @click="createLabel">Create</button>
+      <button class="save create" @click="setLabel(null)">Create</button>
     </div>
   </section>
 </template>
@@ -40,6 +43,7 @@ export default {
       title: "",
       color: "",
       boardLabels: null,
+      currentTaskId: "",
     };
   },
   created() {
@@ -47,21 +51,36 @@ export default {
   },
   computed: {},
   methods: {
+    updateCurrData(label) {
+      this.currentTaskId = label._id
+      this.title = label.title
+      this.color = label.color
+    },
     updateColor(selectedColor) {
       this.color = selectedColor;
     },
-    createLabel() {
+    setLabel() {
+      if (!this.color) return;
+      var id = this.currentTaskId || utilService.makeId();
       const item = {
         type: "labels",
         item: {
           color: this.color,
           title: this.title,
-          _id: utilService.makeId(),
+          _id: id,
         },
       };
-      this.boardLabels.push(item.item);
+      if (this.currentTaskId) {
+        var idx = this.boardLabels.findIndex(
+          (label) => label._id === this.currentTaskId
+        );
+        this.boardLabels.splice(idx, 1, item.item);
+      } else {
+        this.boardLabels.push(item.item);
+      }
       var updatedLabels = this.boardLabels;
-        this.$emit("updateLabels", updatedLabels, item);
+      this.$emit("updateLabels", updatedLabels, item);
+      this.currentTaskId = "";
     },
     addLabel(id) {
       const item = {

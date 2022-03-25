@@ -47,6 +47,7 @@
     @include icon('\e927');
     padding: 9px;
     margin-right: -19px;
+    z-index: 5;
   }
 
   & .hover-marker {

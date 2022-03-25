@@ -185,7 +185,6 @@ export default {
       }
     },
     setTask({ commit, state, dispatch }, { groupId, task }) {
-      console.log(groupId, task);
       commit({ type: 'setTask', groupId, task });
       dispatch({ type: 'saveBoard', board: state.currentBoard });
     },
