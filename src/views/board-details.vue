@@ -84,7 +84,6 @@ export default {
                 toCommit[item.toLowerCase()] = null;
                 this.$store.commit(toCommit)
             })
-
         }
     },
     computed: {
