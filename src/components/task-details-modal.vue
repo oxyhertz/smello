@@ -4,7 +4,7 @@
             <span class="icon title-icon"></span>
             <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title">
         </div>
-            <p>In list {{board.title}}</p>
+        <p class="boad-title">In list {{board.title}}</p>
         <section class="task-detail-main">
             <div class="task-content">
             <task-combo-list @setLabels="setLabels('labelsItem')" :comboData="comboData" />
@@ -36,6 +36,8 @@
                     <button>Show Details</button>
                 </div>
                  <div class="comment-text">
+                     <avatar  size="32" :name="currUser.fullname"></avatar>
+
                     <input  type="text">
                 </div>
             </div>
@@ -181,7 +183,11 @@ export default {
         },
         task(){
             return this.$store.getters.currTask;
-        }
+        },
+        currUser(){
+            return this.$store.getters.user;
+        },
+
 
     },
     components:{

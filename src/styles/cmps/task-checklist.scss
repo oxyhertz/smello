@@ -1,5 +1,10 @@
 .task-checklist {
 
+    .percentage{
+        font-size: 11px;
+        position: absolute;
+        margin-left: -35px;
+    }
     .actions{
         display: flex;
         align-items: baseline;
@@ -110,6 +115,7 @@
     .progress-bar {
         display: flex;
         align-items: center;
+        position: relative;
         progress {
             flex-grow: 1;
             height: 8px;
@@ -133,9 +139,14 @@
     }
 
     .todo-container {
+        position: relative;
         padding: $spacing 0;
         display: inline-flex;
         align-items: flex-end;
+        input{
+            position: absolute;
+            margin-left:-34px
+        }
     }
     
 }
