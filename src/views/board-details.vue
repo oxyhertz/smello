@@ -84,8 +84,7 @@ export default {
             return this.$store.getters.currBoard;
         },
         boardStyle(){
-    
-            return {"background-color": this.board.style.bgColor};
+            return {"background-color":","};
         }
     }
 }

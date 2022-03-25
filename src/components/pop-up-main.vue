@@ -20,7 +20,7 @@
             </span>
         </header>
         <main>
-             <component :is="action" @addItem="addItem"></component>
+             <component :is="action" @addItem="addItem" :board="currBoard"></component>
         </main>
     </div>
 </template>
@@ -44,6 +44,11 @@ export default {
         },
         removeItem(){
 
+        }
+    },
+    computed:{
+        currBoard(){
+            this.$store.getter.currBoard
         }
     },
     components:{
