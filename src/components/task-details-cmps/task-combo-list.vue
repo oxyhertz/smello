@@ -1,6 +1,6 @@
 <template>
   <section class="task-combo-list flex wrap">
-    <section v-if="members.length" class="members flex column">
+    <section v-if="members?.length" class="members flex column">
       <h3>Members</h3>
       <section class="flex">
         <div v-for="member in members" :key="member._id">
@@ -14,7 +14,7 @@
         <span class="combo-add-icon"></span>
       </section>
     </section>
-    <section v-if="taskLabels.length" class="labels flex column">
+    <section v-if="taskLabels?.length" class="labels flex column">
       <h3>Labels</h3>
       <section class="flex">
         <div  v-for="(label,idx) in taskLabels" :key="idx">
@@ -49,6 +49,7 @@ export default {
     this.members = this.comboData.members;
     this.labelIds = this.comboData.labelIds;
     this.dueDate = this.comboData.dueDate;
+    console.log(this.members, this.labelIds, this.dueDate);
   },
   methods: {
       setLabels(){
@@ -60,6 +61,7 @@ export default {
       return this.$store.getters.currBoard.labels;
     },
     taskLabels() {
+      if(!this.labelIds?.length) return;
       return this.labelIds.map((lableId) => {
         return this.boardLabels.find(
           (boardLable) => boardLable._id === lableId

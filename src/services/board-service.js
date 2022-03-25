@@ -91,7 +91,6 @@ function getEmptyBoard() {
       bgColor: '#cacabb',
     },
     labels: [
-      [
         {
           _id: 'l101',
           title: 'Done',
@@ -107,7 +106,6 @@ function getEmptyBoard() {
           title: 'ASAP',
           color: '#f0f0f0',
         },
-      ],
     ],
     members: [],
     groups: [
