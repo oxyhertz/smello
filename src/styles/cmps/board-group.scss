@@ -57,9 +57,14 @@
     height: fit-content;
 }
 
+.smooth-dnd-container {
+    min-height: 0;
+}
+
 .smooth-dnd-container.vertical {
     max-height: calc(100vh - 200px); // 200px needs to change
     overflow-y: auto;
+    
     &::-webkit-scrollbar {
         height: 8px;
         width: 8px;

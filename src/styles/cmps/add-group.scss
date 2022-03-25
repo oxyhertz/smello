@@ -1,10 +1,18 @@
 .add-group {
+    @include icon($icon: "\e901", $margin: 0 0 0 2px);
+    @include lightBtn;
     @include board-btn;
     min-width: $group-size;
     max-width: $group-size;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 20px;
     height: 100%;
-}
+    font-weight: 400;
 
-.add-group:hover {
-    background-color: $header-btn-clr-dark;
+    :not(.icon) {
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+        font-size: 14px;
+        margin-left: 4px;
+    }
 }

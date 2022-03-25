@@ -20,7 +20,7 @@
     margin-left: 2px;
   }
 
-  &:hover {
+  &:not(.open):hover {
     color: #172b4d;
     background-color: #091e4220;
     border-radius: $border-rsize;
