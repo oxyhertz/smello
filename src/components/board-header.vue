@@ -35,7 +35,7 @@
       <button class="btn show-menu" @click="toggleBoardMenu">
         <span class="board-header-menu-icon"> </span>Show menu
       </button>
-      <board-menu-modal v-if="isMenuModal"/>
+      <board-menu-modal :isOpen="isMenuModal"/>
     </section>
   </header>
 </template>
