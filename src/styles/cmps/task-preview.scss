@@ -22,3 +22,12 @@
     background-color: $clr8;
     margin: $spacing;
 }
+
+.preview-icon {
+    @include taskPreviewIcon();
+
+    &.completed {
+        background-color: #61bd4f;
+        border-radius: $border-rsize;
+    }
+}

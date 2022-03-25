@@ -93,17 +93,17 @@ function getEmptyBoard() {
     labels: [
       [
         {
-          id: 'l101',
+          _id: 'l101',
           title: 'Done',
           color: '#61bd4f',
         },
         {
-          id: 'l102',
+          _id: 'l102',
           title: 'Progress',
           color: '#61bd33',
         },
         {
-          id: 'l103',
+          _id: 'l103',
           title: 'ASAP',
           color: '#f0f0f0',
         },
@@ -273,17 +273,17 @@ function _createBoards() {
         },
         labels: [
           {
-            id: 'l101',
+            _id: 'l101',
             title: 'Done',
             color: '#61bd4f',
           },
           {
-            id: 'l102',
+            _id: 'l102',
             title: 'Progress',
             color: '#61bd33',
           },
           {
-            id: 'l103',
+            _id: 'l103',
             title: 'ASAP',
             color: '#f0f0f0',
           },
@@ -302,40 +302,40 @@ function _createBoards() {
         ],
         groups: [
           {
-            id: 'g121',
+            _id: 'g121',
             title: 'Group 1',
             tasks: [
               {
-                id: 'c121',
+                _id: 'c121',
                 title: 'Change header color',
               },
               {
-                id: 'c122',
+                _id: 'c122',
                 title: 'Add task input',
               },
               {
-                id: 'c123e',
+                _id: 'c123e',
                 title: 'Change bg color',
               },
             ],
             style: {},
           },
           {
-            id: '21a321gad',
+            _id: '21a321gad',
             title: 'Go to production',
             tasks: [
               {
-                id: 'c1233',
+                _id: 'c1233',
                 title: 'Upload patch',
               },
               {
-                id: 'c123104',
+                _id: 'c123104',
                 title: 'Help me',
                 status: 'in-progress',
                 description: 'description',
                 comments: [
                   {
-                    id: 'ZdPnm',
+                    _id: 'ZdPnm',
                     txt: 'also @yaronb please CR this',
                     createdAt: 1590999780000,
                     byMember: {
@@ -348,11 +348,11 @@ function _createBoards() {
                 ],
                 checklists: [
                   {
-                    id: 'YEh2mF',
+                    _id: 'YEh2mF',
                     title: 'Checklist',
                     todos: [
                       {
-                        id: '212jX',
+                        _id: '212jX',
                         title: 'To Do 1',
                         isDone: false,
                       },
@@ -388,7 +388,7 @@ function _createBoards() {
         ],
         activities: [
           {
-            id: 'a101',
+            _id: 'a101',
             txt: 'Changed Color',
             createdAt: 154514,
             byMember: {
@@ -397,7 +397,7 @@ function _createBoards() {
               imgUrl: 'http://some-img',
             },
             task: {
-              id: 'c101',
+              _id: 'c101',
               title: 'Replace Logo',
             },
           },
