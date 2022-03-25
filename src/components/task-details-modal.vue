@@ -201,7 +201,6 @@ export default {
         }
       }
       this.onTaskEdit();
-      this.closePopup();
     },
     updateItem({ type, val }) {
       if (type === "checklists") {

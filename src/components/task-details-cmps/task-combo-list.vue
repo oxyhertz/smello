@@ -1,6 +1,6 @@
 <template>
   <section class="task-combo-list flex wrap">
-    <section v-if="members" class="members flex column">
+    <section v-if="members.length" class="members flex column">
       <h3>Members</h3>
       <section class="flex">
         <div v-for="member in members" :key="member._id">
@@ -14,7 +14,7 @@
         <span class="combo-add-icon"></span>
       </section>
     </section>
-    <section v-if="taskLabels" class="labels flex column">
+    <section v-if="taskLabels.length" class="labels flex column">
       <h3>Labels</h3>
       <section class="flex">
         <div  v-for="(label,idx) in taskLabels" :key="idx">
