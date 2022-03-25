@@ -1,5 +1,6 @@
 <template>
     <section class="task-details-modal">
+        <div class="task-cover"></div>
         <div class="header">
             <span class="icon title-icon"></span>
             <input
