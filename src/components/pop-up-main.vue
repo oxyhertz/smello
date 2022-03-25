@@ -48,7 +48,11 @@ export default {
     },
     computed:{
         currBoard(){
+<<<<<<< HEAD
           return  this.$store.getters.currBoard
+=======
+            this.$store.getters.currBoard
+>>>>>>> ba973568db76227a1d88378e56012f2a71c14f7f
         }
     },
     components:{
