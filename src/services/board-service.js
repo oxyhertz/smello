@@ -17,7 +17,7 @@ export const boardService = {
   getEmptyGroup,
   getTasks,
   getTaskById,
-  removeTask
+  removeTask,
 };
 
 function getBoards(filterBy) {
@@ -38,16 +38,14 @@ function saveBoard(board) {
 }
 
 function setBoardPrefs(boardId, key, val) {
-  return getBoardById(boardId)
-    .then(board => {
-      board[key] = val;
-      return board;
-    })
+  return getBoardById(boardId).then(board => {
+    board[key] = val;
+    return board;
+  });
 }
 
 function getGroups(boardId) {
-  return getBoardById(boardId)
-    .then(board => board.groups);
+  return getBoardById(boardId).then(board => board.groups);
 }
 
 function removeGroup(currBoard, groupId) {
@@ -61,13 +59,13 @@ function getGroupById(currBoard, groupId) {
 }
 
 function getTasks(currBoard, groupId) {
-  return getGroupById(currBoard, groupId)
-    .then(group => group.tasks);
+  return getGroupById(currBoard, groupId).then(group => group.tasks);
 }
 
 function getTaskById(currBoard, groupId, taskId) {
-  return getTasks(currBoard, groupId)
-    .then(tasks => tasks.find(task => task._id === taskId))
+  return getTasks(currBoard, groupId).then(tasks =>
+    tasks.find(task => task._id === taskId)
+  );
 }
 
 function removeTask(currGroup, taskId) {
@@ -92,7 +90,25 @@ function getEmptyBoard() {
     style: {
       bgColor: '#cacabb',
     },
-    labels: [],
+    labels: [
+      [
+        {
+          id: 'l101',
+          title: 'Done',
+          color: '#61bd4f',
+        },
+        {
+          id: 'l102',
+          title: 'Progress',
+          color: '#61bd33',
+        },
+        {
+          id: 'l103',
+          title: 'ASAP',
+          color: '#f0f0f0',
+        },
+      ],
+    ],
     members: [],
     groups: [
       {
