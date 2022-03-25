@@ -5,7 +5,7 @@
             <img src="https://clippingpathgreat.com/wp-content/uploads/2021/04/upload-files-1024x707.jpg" alt="">
             <input hidden type="file" @change="onUploadImg"/>
         </label>
-        <img v-else src="https://static.wixstatic.com/media/4035b4_90498ec9cac74e92aefb1072d848e388~mv2.gif" alt="">
+        <img v-else src="../../images/Bar-Preloader-1.gif" alt="">
     </div>
 </template>
 <script>

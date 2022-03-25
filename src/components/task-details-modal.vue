@@ -18,7 +18,7 @@
                             <button class="save" @click.stop="onTaskEdit">Save</button>
                         </div>
                 </div>
-                <div class="attachment-container">
+                <div v-if="taskToEdit.attachments?.length" class="attachment-container">
                     <div class="block-title">
                         <span class="icon"></span>
                         <h3>Attachments</h3>
@@ -59,7 +59,7 @@
                     <span class="icon-label"></span>
                     Labels
                     </button>
-                <button>
+                <button >
                     <span class="icon-checklist"></span>
                     Checklist
                 </button>
@@ -106,7 +106,6 @@ export default {
         return{
             taskToEdit: null,
             showSaveBtn: false,
-            isPopup: false,
             popupData: null,
             actionType: null,
             isDisplaySave: false,
@@ -157,16 +156,12 @@ export default {
             if(item.type === 'attachment'){
                 if(!this.taskToEdit.attachments) this.taskToEdit.attachments = []
                  this.taskToEdit.attachments.push(item.item);
-                 console.log(this.taskToEdit)
+                 this.$store.dispatch({
+                 type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
+            })
             }
         },
-        updateAttachments(attachments){
-            console.log(attachments)
-            this.taskToEdit.attachments = attachments;
-            this.$store.dispatch({
-                type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
-            })
-        },
+        
          onTaskEdit() {
             console.log('edit')
             this.$emit('editTask', JSON.parse(JSON.stringify(this.taskToEdit)));

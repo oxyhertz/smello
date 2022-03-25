@@ -165,7 +165,8 @@
   }
 }
 
-@mixin icon($icon, $fz: 16px, $lh: 16px, $margin: inherit, $clr:  #ffffff) {
+@mixin icon($icon, $fz: 16px, $lh: 16px, $margin: inherit, $clr:  #172b4d
+) {
   font-family: Trello;
   font-size: $fz;
   line-height: $lh;
