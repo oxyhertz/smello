@@ -10,26 +10,11 @@
 import attachmentPreview from "./attachment-preview.vue"
 export default {
     name: 'attachment',
+    props:{
+        attachments:Array
+    },
     data(){
-        return{
-            attachments:[
-                 {
-                    createdAt: 1641923431774,
-                    url: "https://images.unsplash.com/photo-1610972221114-c48c6bb5d2eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
-                    fileName: "Winter",
-                    type: "image",
-                    suffix: "jpg",
-                    id: "0oZ9SFc1"
-                },
-                {
-                    createdAt: 1641223431774,
-                    url: "https://images.unsplash.com/photo-1610972221114-c48c6bb5d2eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
-                    fileName: "Homeland",
-                    type: "image",
-                    suffix: "jpg",
-                    id: "0o229SFc1"
-                }
-            ]
+        return{      
         }
     },
     methods:{
@@ -38,9 +23,13 @@ export default {
             this.attachments.splice(idx,1);
             this.updateAttachments(JSON.parse(JSON.stringify(this.attachments)))
         },
+        // updateAttachments(attachments){
+        //     this.$emit("updateAttachments",attachments)
+        // },
         updateAttachments(attachments){
-            this.$emit("updateAttachments",attachments)
+            this.$emit("updateAttachments",{type:'attachments',val: attachments})
         }
+        
     },
     components:{
        attachmentPreview 

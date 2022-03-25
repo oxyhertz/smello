@@ -1,6 +1,8 @@
 <template >
     <li class="attachment-item">
-        <img :src="attachment.url" alt="">
+        <div class="image-container">
+            <img :src="attachment.url" alt="">
+        </div>
         <div class="attachment-details">
             <h4>{{attachment.fileName}}</h4>
             <div class="main-actions">
@@ -30,6 +32,9 @@ export default {
     },
     computed:{
         createdAt(){
+            console.log(this.attachment.createdAt)
+            // return moment(this.attachment.createdAt).format();
+            return moment(this.attachment.createdAt).startOf('hour').fromNow();  
             return moment(this.attachment.createdAt).startOf('day').fromNow();  
         }
     }

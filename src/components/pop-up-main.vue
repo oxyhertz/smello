@@ -25,6 +25,7 @@
         @addItem="addItem"
         :board="currBoard"
         @updateLabels="updateLabels"
+        @closePopup="closePopup"
       ></component>
     </main>
   </div>

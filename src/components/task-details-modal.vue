@@ -41,7 +41,7 @@
                         <h3>Attachments</h3>
                     </div>
                     <div class="attachment-content">
-                        <attachment @updateAttachments="updateAttachments" />
+                        <attachment :attachments="taskToEdit.attachments" @updateAttachments="updateItem" />
                     </div>
                 </div>
                 <task-check-list
@@ -169,6 +169,7 @@ export default {
             if (item.type === "attachment") {
                 if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];
                 this.taskToEdit.attachments.push(item.item);
+                this.onTaskEdit()
             } else if (item.type === "checklist") {
                 if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
                 this.taskToEdit.checklists.push(item.item);
@@ -193,6 +194,11 @@ export default {
                 else checklists.splice(idx, 1); // deletion
 
             } else this.taskToEdit[type] = val;
+            this.onTaskEdit();
+        },
+        updateItem({type, val}){
+            console.log(type,val)
+            this.taskToEdit[type] = val;
             this.onTaskEdit();
         },
         onTaskEdit() {
