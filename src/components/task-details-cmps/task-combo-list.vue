@@ -5,7 +5,7 @@
       <section class="flex">
         <div v-for="member in members" :key="member._id">
           <avatar
-            :size="32"
+            size="32"
             color="white"
             :name="member.fullname"
             class="avatar"
@@ -18,7 +18,7 @@
       <h3>Labels</h3>
       <section class="flex">
         <div  v-for="(label,idx) in taskLabels" :key="idx">
-          <span :style="{ 'background-color': label.color }">{{
+          <span v-if="label" :style="{ 'background-color': label.color }">{{
             label.title
           }}</span>
         </div>

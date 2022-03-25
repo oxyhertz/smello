@@ -77,6 +77,7 @@ export default {
         );
         state.currentBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task);
       } else {
+        console.log('new task');
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
@@ -184,6 +185,7 @@ export default {
       }
     },
     setTask({ commit, state, dispatch }, { groupId, task }) {
+      console.log(groupId, task);
       commit({ type: 'setTask', groupId, task });
       dispatch({ type: 'saveBoard', board: state.currentBoard });
     },

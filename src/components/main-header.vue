@@ -89,7 +89,7 @@
       </div>
       <i class="fa-regular fa-bell notification-header"></i>
       <avatar
-        :size="32"
+        size="32"
         color="white"
         :name="member.fullname"
         class="avatar-header"

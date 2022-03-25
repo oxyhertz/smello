@@ -28,6 +28,7 @@
 import labelsItem from "./pop-up-items/labels-item.vue"
 import checklistItem from "./pop-up-items/checklist-item.vue"
 import attachmentItem from "./pop-up-items/attachment-item.vue"
+
 export default {
     name:'pop-up-main',
     props:{
