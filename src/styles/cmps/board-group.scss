@@ -4,6 +4,7 @@
     border-radius: $border-rsize;
     margin-left: $draggable-spacing;
     padding-bottom: $draggable-spacing;
+    box-shadow: 1px 7px 5px -4px rgba(0,0,0,0.15);
 }
 
 .board-container > .group-container-scrollable > .smooth-dnd-container > .smooth-dnd-draggable-wrapper:first-of-type {
@@ -50,7 +51,7 @@
 
 .dragging-group {
     transform: rotate(5deg);
-    box-shadow: 1px 10px 15px -4px rgba(0,0,0,0.25);
+    box-shadow: 1px 10px 10px -4px rgba(0,0,0,0.25);
 }
 
 .smooth-dnd-container.horizontal {
