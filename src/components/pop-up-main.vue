@@ -20,7 +20,7 @@
             </span>
         </header>
         <main>
-             <component :is="action" @addItem="addItem" :board="currBoard"></component>
+             <component :is="action" @closePopup="closePopup" @addItem="addItem" :board="currBoard"></component>
         </main>
     </div>
 </template>

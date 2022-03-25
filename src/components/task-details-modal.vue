@@ -24,7 +24,7 @@
                         <h3>Attachments</h3>
                     </div>
                     <div class="attachment-content">
-                        <attachment @updateAttachments="updateAttachments" />
+                        <attachment :attachments="taskToEdit.attachments" @updateAttachments="updateItem" />
                     </div>
                 </div>
                 <task-check-list />
@@ -159,18 +159,23 @@ export default {
         addItem(item){
             if(item.type === 'attachment'){
                 if(!this.taskToEdit.attachments) this.taskToEdit.attachments = []
+                console.log(this.taskToEdit.attachments)
                  this.taskToEdit.attachments.push(item.item);
-                 this.$store.dispatch({
-                 type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
-            })
+                 this.onTaskEdit()
             } else if(item.type === 'checklist') {
                 if(!this.taskToEdit.checklists) this.taskToEdit.checklists = []
                  this.taskToEdit.checklists.push(item.item);
             }
         },
+        updateItem({type, val}){
+            console.log(type,val)
+            this.taskToEdit[type] = val;
+            this.onTaskEdit();
+        },
         onTaskEdit() {
-            console.log('edit')
-            this.$emit('editTask', JSON.parse(JSON.stringify(this.taskToEdit)));
+           this.$store.dispatch({
+                 type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
+            })
         }
     },
 

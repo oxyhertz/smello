@@ -30,6 +30,9 @@ export default {
     },
     computed:{
         createdAt(){
+            console.log(this.attachment.createdAt)
+            // return moment(this.attachment.createdAt).format();
+            return moment(this.attachment.createdAt).startOf('hour').fromNow();  
             return moment(this.attachment.createdAt).startOf('day').fromNow();  
         }
     }

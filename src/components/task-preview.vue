@@ -2,6 +2,10 @@
   <Draggable v-if="task">
     <section class="task-preview">
       <p>{{ task.title }}</p>
+      <div class="attachment-count" v-if="task.attachments?.length">
+          <span class="icon-attachment"></span>
+          <p>{{task.attachments?.length}}</p>
+      </div>
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
   </Draggable>
