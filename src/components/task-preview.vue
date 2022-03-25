@@ -2,13 +2,16 @@
   <Draggable v-if="task">
     <section class="task-preview">
       <p>{{ task.title }}</p>
-      <div class="attachment-count" v-if="task.attachments?.length">
+
+      <div class="icon-container flex">
+        <div class="preview-icon" v-if="task.attachments?.length">
           <span class="icon-attachment"></span>
-          <p>{{task.attachments?.length}}</p>
-      </div>
-      <div class="checklist-count" v-if="task.checklists?.length">
+          <p>{{ task.attachments?.length }}</p>
+        </div>
+        <div class="preview-icon" v-if="task.checklists?.length" :class="{completed: tasksDone === numOfTodos}">
           <span class="icon-checklist"></span>
-          <p>{{tasksDone}} / {{numOfTodos}}</p>
+          <p>{{ tasksDone }} / {{ numOfTodos }}</p>
+        </div>
       </div>
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
@@ -26,7 +29,7 @@ export default {
       required: true,
     },
   },
-  
+
   data() {
     return {};
   },
@@ -34,21 +37,21 @@ export default {
     Draggable,
   },
   methods: {
-    removeTask(){
-        this.$emit('removeTask', this.task._id)
+    removeTask() {
+      this.$emit('removeTask', this.task._id)
     }
   },
   computed: {
     tasksDone() {
-        const numDone = this.task.checklists.reduce((acc, {todos}) => {
-          return acc + todos.reduce((acc, todo) => {
-           return  todo.isDone ? acc + 1 : acc;
-          }, 0)
+      const numDone = this.task.checklists.reduce((acc, { todos }) => {
+        return acc + todos.reduce((acc, todo) => {
+          return todo.isDone ? acc + 1 : acc;
         }, 0)
-        return numDone;
+      }, 0)
+      return numDone;
     },
     numOfTodos() {
-      return this.task.checklists.reduce((acc, {todos}) => acc + todos.length, 0)
+      return this.task.checklists.reduce((acc, { todos }) => acc + todos.length, 0)
     }
   }
 };
