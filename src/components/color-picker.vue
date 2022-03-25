@@ -6,7 +6,7 @@
             :style="{ 'background-color': color.color }"
             :key="color.title"
             @click="updateColor(color.color)"
-        ></div>
+        > <span class="selected"></span></div>
     </section>
 </template>
 
@@ -28,6 +28,7 @@ export default {
     },
     methods: {
         updateColor(color) {
+            this.selectedColor = true
             this.$emit('updateColor', color);
         },
     },

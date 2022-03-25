@@ -1,6 +1,10 @@
 .color-picker{
   display: flex;
   justify-content: space-between;
+
+  // & .selected{
+  //   @include icon("")
+  // }
 }
 
 .color-picker > div {
@@ -9,4 +13,6 @@
     cursor: pointer;
     border-radius: 3px;
   }
+
+
   
