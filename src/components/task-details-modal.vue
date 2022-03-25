@@ -35,10 +35,12 @@
                         </div>
                     <button>Show Details</button>
                 </div>
-                 <div class="comment-text">
+                 <div class="comment-text-container">
                      <avatar  size="32" :name="currUser.fullname"></avatar>
-
-                    <input  type="text">
+                    <div class="comment-text">
+                        <input placeholder="Write a comment..." type="text"/>
+                    </div>
+                    
                 </div>
             </div>
             <!-- <location :card="card" /> -->

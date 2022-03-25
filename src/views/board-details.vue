@@ -1,5 +1,5 @@
 <template>
-    <section v-if="board" class="board-container">
+    <section v-if="board" class="board-container" :style="boardStyle" >
         <board-header :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
         <board-group
             @removeTask="removeTask"
@@ -80,6 +80,10 @@ export default {
         },
         currBoard() {
             return this.$store.getters.currBoard;
+        },
+        boardStyle(){
+    
+            return {"background-color": this.board.style.bgColor};
         }
     }
 }
