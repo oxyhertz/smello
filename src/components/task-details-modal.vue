@@ -97,9 +97,9 @@
                     <span class="icon-location"></span>
                     Location
                 </button>
-                <button>
+                <button @click="setCover('coverItem')"> 
                     <span class="icon-cover"></span>
-                    cover
+                    Cover
                 </button>
                 <h3>Actions</h3>
                 <button>
@@ -147,16 +147,20 @@ export default {
     },
     methods: {
         setLabels(action) {
-            (this.actionType = action),
-                (this.popupData = { name: "Labels", style: { top: "147px" } });
+                this.actionType = action
+                this.popupData = { name: "Labels", style: { top: "147px" } }
         },
         setAttachments(action) {
-            (this.actionType = action),
-                (this.popupData = { name: "Labels", style: { top: "268px" } });
+            this.actionType = action
+                this.popupData = { name: "Labels", style: { top: "268px" } }
         },
         setChecklist(action) {
-            (this.actionType = action),
-                (this.popupData = { name: "Add checklist", style: { top: "200px" } });
+            this.actionType = action
+            this.popupData = { name: "Add checklist", style: { top: "200px" } }
+        },
+        setCover(action){
+            this.actionType = action;
+            this.popupData = {name: 'Cover' , style: {top: "250px"}}
         },
         closePopup() {
             (this.actionType = null), (this.popupData = null);
