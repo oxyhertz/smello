@@ -34,10 +34,8 @@
     </section>
   </section>
 </template>
-
 <script>
 import moment from "moment";
-
 export default {
   props: ["comboData"],
   data() {
@@ -74,4 +72,3 @@ export default {
   },
 };
 </script>
-
