@@ -1,7 +1,8 @@
 <template>
-    <section class="checklist-popup">
-        <label>Title</label>
-        <input type="text" v-model="checklistTitle" placeholder="Checklist" />
+    <section class="checklist-popup flex column">
+        <label for="checklist-input">Title</label>
+        <input type="text" v-focus v-model="checklistTitle" id="checklist-input" placeholder="Checklist" />
+        <button class="save" @click="addCheckList">Add</button>
     </section>
 </template>
 
@@ -18,13 +19,13 @@ export default {
     },
     methods: {
         addCheckList() {
-            if(!checklistTitle) checklistTitle = 'Checklist';
+            if(!this.checklistTitle) this.checklistTitle = 'Checklist';
             const checklist = {
                 _id: utilService.makeId(),
-                title: checklistTitle,
+                title: this.checklistTitle,
                 todos: []
             }
-            this.$emit('addItem', {type:'checklists',  checklist});
+            this.$emit('addItem', {type:'checklist',  item: checklist});
         }
     }
 }

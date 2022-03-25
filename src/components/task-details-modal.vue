@@ -59,7 +59,7 @@
                     <span class="icon-label"></span>
                     Labels
                     </button>
-                <button >
+                <button @click="setChecklist('checklistItem')">
                     <span class="icon-checklist"></span>
                     Checklist
                 </button>
@@ -145,6 +145,10 @@ export default {
             this.actionType = action,
             this.popupData = {name:'Labels',style:{"top": '268px'}}
         },
+        setChecklist(action) {
+            this.actionType = action,
+            this.popupData = {name:'Add checklist', style:{"top": '200px'}}
+        },
         closePopup(){
             this.actionType = null,
             this.popupData = null
@@ -159,15 +163,14 @@ export default {
                  this.$store.dispatch({
                  type: "setTask",task: JSON.parse(JSON.stringify(this.taskToEdit))
             })
+            } else if(item.type === 'checklist') {
+                if(!this.taskToEdit.checklists) this.taskToEdit.checklists = []
+                 this.taskToEdit.checklists.push(item.item);
             }
         },
-        
-         onTaskEdit() {
+        onTaskEdit() {
             console.log('edit')
             this.$emit('editTask', JSON.parse(JSON.stringify(this.taskToEdit)));
-        },
-        onDetailEdit(key, val) {
-            
         }
     },
 

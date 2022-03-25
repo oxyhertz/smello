@@ -163,15 +163,7 @@
     }
 
     button.save{
-        background-color: #0079bf;
-        border: none;
-        color: #fff;
-        width: 53px ;
-        margin:5px 0 0 0;
-
-        &:hover{
-            background-color: #026aa7;
-        }
+        @include addSaveBtn();
     }
     
     .fa-x{

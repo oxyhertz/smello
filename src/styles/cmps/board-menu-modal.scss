@@ -1,13 +1,11 @@
 .board-menu-modal {
   background-color: #f4f5f7;
-  //   margin-right: -50vw;
-  //   margin-top: 78.9vh;
-  //   margin-left: 9px;
-  margin: 84.3vh -50vw 0 9px;
+  margin: 90.8vh -50vw 0 9px;
   width: 305px;
   height: 100vh;
   overflow-y: scroll;
   transition: all 2s ease-in-out;
+  z-index: 5;
   &.open {
     margin-right: -10px;
     transition: right 2s ease-in-out;

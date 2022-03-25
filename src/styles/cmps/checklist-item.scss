@@ -1,0 +1,6 @@
+.checklist-popup {
+    & .add-btn {
+        @include addSaveBtn();
+    }
+}
+
