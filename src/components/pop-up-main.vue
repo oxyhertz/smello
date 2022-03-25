@@ -32,6 +32,7 @@
 </template>
 <script>
 import labelsItem from "./pop-up-items/labels-item.vue";
+import membersItem from "./pop-up-items/members-item.vue";
 import checklistItem from "./pop-up-items/checklist-item.vue";
 import attachmentItem from "./pop-up-items/attachment-item.vue";
 import coverItem from "./pop-up-items/cover-item.vue";
@@ -63,7 +64,8 @@ export default {
     labelsItem,
     checklistItem,
     attachmentItem,
-    coverItem
+    coverItem,
+    membersItem
   },
 };
 </script>

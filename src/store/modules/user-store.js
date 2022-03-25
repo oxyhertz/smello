@@ -25,6 +25,7 @@ export default {
       const miniUser = {
         _id: loggedinUser._id,
         fullname: loggedinUser.fullname,
+        username: loggedinUser.username,
         imgUrl: loggedinUser.imgUrl,
       };
       return miniUser;

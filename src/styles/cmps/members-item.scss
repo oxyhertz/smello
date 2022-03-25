@@ -1,0 +1,25 @@
+.members-item {
+  & h3 {
+    margin-top: 28px;
+  }
+  & ul li {
+    &:hover {
+      background-color: rgba(9, 30, 66, 0.0392156862745098);
+    }
+    & .avatar{
+        margin-inline-start: 5px;
+    }
+  }
+  & .member {
+    margin: 6px 0 0px 6px;
+    cursor: pointer;
+    height: 39px;
+    line-height: 32px;
+  }
+  & .name {
+    margin-inline-start: 11px;
+  }
+  & .username {
+    margin-inline-start: 7px;
+  }
+}
