@@ -10,6 +10,7 @@
       <section class="group-container">
         <section class="group-title">
           <textarea class="group-title inline-input">{{ group.title }}</textarea>
+          <span class="menu-icon"></span>
         </section>
 
         <Container
