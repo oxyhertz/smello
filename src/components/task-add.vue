@@ -15,7 +15,7 @@
 
   <section v-else @click="isCreating = true" class="task-add">
   <span class="plus-icon"></span>
-   Add a card
+   <span class="add-task-txt">Add a card</span>
    </section>
 </template>
 
