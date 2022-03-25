@@ -1,6 +1,6 @@
 <template>
     <section v-if="board" class="board-container">
-        <board-menu :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
+        <board-header :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
         <board-group
             @removeTask="removeTask"
             @addTask="setTask"
@@ -19,13 +19,13 @@
 import boardGroup from "../components/board-group.vue";
 import { utilService } from "../services/utils-service.js";
 import { boardService } from "../services/board-service.js";
-import boardMenu from "../components/board-menu.vue"
+import boardHeader from "../components/board-header.vue"
 
 export default {
     name: "board-details",
     components: {
         boardGroup,
-        boardMenu
+        boardHeader
     },
     data() {
         return {

@@ -1,21 +1,26 @@
 <template>
-  <header class="board-menu flex space-between">
+  <header class="board-header flex space-between">
     <section class="menu-left-header">
-      <button class="btn" ><span class="board-header-board-icon"></span> Board <span class="board-header-open-icon"></span></button>
-      <board-menu-title
-      :style="{color:'black'}"
+      <button class="btn">
+        <span class="board-header-board-icon"></span> Board
+        <span class="board-header-open-icon"></span>
+      </button>
+      <board-header-title
+        :style="{ color: 'black' }"
         @editTitle="editTitle"
         :title="boardTitle"
         :createdBy="boardCreatorId"
       />
-      <board-menu-favorite
-      class="board-header-invite btn"
+      <board-header-favorite
+        class="board-header-invite btn"
         @toggleFavorite="toggleFavorite"
         :favorite="boardFavoriteStatus"
       />
       <members-preview :board="board" />
       <div class="invite-members-container">
-      <button  class="btn" @click="isInviteModal = !isInviteModal" ><span class="board-header-invite-icon"></span> Invite</button>
+        <button class="btn" @click="isInviteModal = !isInviteModal">
+          <span class="board-header-invite-icon"></span> Invite
+        </button>
         <invite-members
           :board="board"
           @closeInviteModal="closeModal"
@@ -24,20 +29,26 @@
       </div>
     </section>
     <section>
-      <button class="btn" ><span class="board-header-filter-icon"></span>Filter</button>
-      <button class="btn show-menu" ><span class="board-header-menu-icon"></span>Show menu</button>
+      <button class="btn">
+        <span class="board-header-filter-icon"></span>Filter
+      </button>
+      <button class="btn show-menu" @click="toggleBoardMenu">
+        <span class="board-header-menu-icon"> </span>Show menu
+      </button>
+      <board-menu-modal v-if="isMenuModal"/>
     </section>
   </header>
 </template>
 
 <script>
-import boardMenuTitle from "./board-menu/board-menu-title.vue";
-import boardMenuFavorite from "./board-menu/board-menu-favorite.vue";
+import boardHeaderTitle from "./board-header/board-header-title.vue";
+import boardHeaderFavorite from "./board-header/board-header-favorite.vue";
 import membersPreview from "./members-preview.vue";
 import inviteMembers from "./invite-members.vue";
+import boardMenuModal from "./board-menu-modal.vue";
 
 export default {
-  name: "board-menu",
+  name: "board-header",
   emits: ["editTitle", "toggleFavorite"],
   props: {
     board: Object,
@@ -45,13 +56,15 @@ export default {
   data() {
     return {
       isInviteModal: false,
+      isMenuModal: false,
     };
   },
   components: {
-    boardMenuTitle,
-    boardMenuFavorite,
+    boardHeaderTitle,
+    boardHeaderFavorite,
     membersPreview,
     inviteMembers,
+    boardMenuModal,
   },
   methods: {
     editTitle(title) {
@@ -62,6 +75,9 @@ export default {
     },
     closeModal() {
       this.isInviteModal = false;
+    },
+    toggleBoardMenu() {
+      this.isMenuModal = !this.isMenuModal;
     },
   },
   computed: {

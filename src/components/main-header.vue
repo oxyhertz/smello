@@ -61,7 +61,7 @@
         :prefix-icon="Search"
       />
       <div>
-        <span class="info-header" role="img" aria-label="InformationIcon"
+        <span class="info-header flex" role="img" aria-label="InformationIcon"
           ><svg
             width="24"
             height="24"
