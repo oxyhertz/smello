@@ -44,6 +44,12 @@
     }
   }
 
+  .add-task-btns {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
   .add-card-btn {
     @include addSaveBtn();
     padding: 6px 12px;
@@ -59,12 +65,6 @@
     &:hover {
       color: #172b4d;
     }
-  }
-
-  .add-task-btns {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
   }
 }
 

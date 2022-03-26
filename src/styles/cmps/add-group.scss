@@ -1,5 +1,4 @@
 .add-group {
-    @include icon($icon: "\e901", $margin: 0 0 0 2px);
     @include lightBtn;
     @include board-btn;
     min-width: $group-size;
@@ -9,10 +8,55 @@
     line-height: 20px;
     height: 100%;
     font-weight: 400;
-
+    
     :not(.icon) {
         font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
         font-size: 14px;
-        margin-left: 4px;
+    }
+
+    .group-add-input-container {
+        cursor: auto;
+        width: 100%;
+        input {
+            width: 100%;
+            padding: 8px 12px;
+            box-shadow: inset 0 0 0 2px #0079bf;
+            background-color: #fff;
+        }
+
+        & .add-group-btns {
+            display: flex;
+            align-items: flex-end;
+            column-gap: 10px;
+          }
+
+        & .add-group-btn {
+            @include addSaveBtn();
+            width: fit-content;
+        }
+    }
+
+    .icon-plus {
+        @include icon($icon: "\e901", $margin: 0 0 0 2px);
+        color:white;
+    }
+
+    .icon-cancel {
+        @include icon($icon: '\e91b');
+        padding-bottom: 2px;
+        font-size: 24px;
+        line-height: 24px;
+        color: #42526e;
+        cursor: pointer;
+
+        &:hover {
+            color: #172b4d;
+        }
+    }
+
+    &.editable {
+        padding: 5px;
+        background-color: #ebecf0;
+        box-shadow: 1px 7px 5px -4px rgb(0 0 0 / 15%);
     }
 }
