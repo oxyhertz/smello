@@ -13,6 +13,7 @@
   color: $mainClr;
   margin: 48px auto;
   overflow: visible;
+
   .task-details-title {
     cursor: pointer;
     background: none;
@@ -34,6 +35,29 @@
       box-shadow: inset 0 0 0 2px #0079bf;
     }
   }
+
+  button {
+    background-color: #091e420a;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+      background-color: #091e4214;
+    }
+
+    &:active {
+      background-color: #e4f0f6;
+      color: #0079bf;
+
+      span {
+        // for icons inside th buttons
+        color: #0079bf;
+      }
+    }
+  }
+
   .block-title {
     display: flex;
     align-items: center;
@@ -58,7 +82,7 @@
       position: absolute;
       margin-left: -40px;
       &::before {
-        content: '\e911';
+        content: "\e911";
       }
     }
   }
@@ -76,10 +100,7 @@
     align-items: center;
     margin-top: 45px;
     .icon::before {
-      content: '\e900';
-    }
-    button {
-      background-color: rgba(9, 30, 66, 0.0392156863);
+      content: "\e900";
     }
   }
   .task-description {
@@ -89,7 +110,7 @@
     margin-bottom: 30px;
     span {
       &::before {
-        content: '\e921';
+        content: "\e921";
       }
     }
   }
@@ -118,7 +139,7 @@
       box-shadow: inset 0 0 0 2px #0079bf;
     }
     &[contenteditable]:empty::before {
-      content: 'Add a more detailed description';
+      content: "Add a more detailed description";
     }
   }
   .save-close-description {
@@ -137,28 +158,15 @@
     }
     button {
       width: 100%;
-      background-color: #091e420a;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      &:hover {
-        background-color: #091e4214;
-      }
     }
   }
   .attachment-container {
     .icon::before {
-      content: '\e908';
+      content: "\e908";
     }
   }
   button.save {
     @include addSaveBtn();
-  }
-
-  .show-details-btn:hover {
-    background-color: #091e4214;
   }
 
   .fa-x {
