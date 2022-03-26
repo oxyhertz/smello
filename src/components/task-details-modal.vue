@@ -177,8 +177,8 @@ export default {
       this.popupData = { name: 'Cover', style: { top: "250px" } }
     },
     closePopup() {
-       this.actionType = null
-       this.popupData = null
+      this.actionType = null
+      this.popupData = null
     },
     setItem(item) { },
     addItem(item) {
@@ -250,7 +250,7 @@ export default {
       this.taskToEdit.description = this.task.description;
       this.isDescEditMode = false;
     },
-    closeModal(){
+    closeModal() {
       this.$emit('closeModal')
     }
   },
