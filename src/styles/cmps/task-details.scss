@@ -27,6 +27,7 @@
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;
+
     &:focus {
       width: 100%;
       background-color: #fff;
@@ -151,6 +152,7 @@
   button.save {
     @include addSaveBtn();
   }
+
   .fa-x {
     cursor: pointer;
     color: #42526e;
@@ -163,6 +165,7 @@
     position: relative;
     display: flex;
     align-items: center;
+
     .avatar {
       position: absolute;
       margin-left: -40px;
