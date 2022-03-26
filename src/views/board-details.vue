@@ -41,6 +41,7 @@ export default {
             boardId: this.$route.params.boardId,
         });
         this.board = this.currBoard;
+        this.$store.commit({ type: 'setIsBoardPage', isBoard:true })
     },
     methods: {
         removeTask(task) {

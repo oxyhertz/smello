@@ -14,7 +14,7 @@
           <p>{{ task.attachments?.length }}</p>
         </div>
 
-        <div class="preview-icon" v-if="task.checklists?.length" :class="{completed: tasksDone === numOfTodos}">
+        <div class="preview-icon" v-if="task.checklists?.length && numOfTodos" :class="{completed: tasksDone === numOfTodos}">
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
