@@ -4,7 +4,7 @@
       <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline'"></div>
       <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
 
-      <div v-if="labels" class="preview-icon">
+      <div v-if="labels" class="preview-icon labels">
         <div v-for="label, idx in labels" :key="idx">
           <div
             @click.stop="openLabel = !openLabel"
@@ -92,6 +92,8 @@ export default {
       return this.$store.getters.currBoard
     },
     labels() {
+      console.log('this.tas898989898989898k', this.task)
+      console.log('this.boarddddddddddddddddddddddddd', this.board)
       if (!this.task.labelIds?.length) return false
       return this.task.labelIds.map(label => {
         return this.board.labels.find(currLabel => currLabel._id === label)
