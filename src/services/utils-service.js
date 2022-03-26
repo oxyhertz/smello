@@ -19,6 +19,7 @@ export const utilService = {
   debounce,
   getRandomInt,
   getRandomColor,
+  getRandomWord,
   getLoremIpsum,
   loadFromStorage,
   saveToStorage,
@@ -67,6 +68,31 @@ function getLoremIpsum(length = 5) {
     length--;
   }
   return sentence.trim();
+}
+
+function getRandomWord(count = 5){
+  let words = [
+    'Animal',
+    'Africa',
+    'Moscow',
+    'Ukraine',
+    'Space',
+    'Motorcycle',
+    'Yamaha',
+    'Life',
+    'Business',
+    'Nature',
+    'Colorful',
+    'Productivity',
+    'Gaming'
+  ]
+  let chosenWords = []
+  for(var i = 0 ; i < count; i++){
+    let randIdx = getRandomInt(0,words.length-1);
+    chosenWords.push(words[randIdx]);
+    words.splice(randIdx,1)
+  }
+  return chosenWords;
 }
 
 function getRandomColor() {

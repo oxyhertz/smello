@@ -4,6 +4,7 @@
         <section class="star" @click.stop="toggleFavorite(board._id)">
             <i v-if="!board.isFavorite" class="fa-regular fa-star"></i>
             <i v-else class="fa-solid fa-star"></i>
+            <div class></div>
         </section>
     </li>
 </template>

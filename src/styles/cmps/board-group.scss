@@ -1,77 +1,80 @@
 .group-container {
-    width: $group-size;
-    background-color: $clr7;
-    border-radius: $border-rsize;
-    margin-left: $draggable-spacing;
-    padding-bottom: $draggable-spacing;
-    box-shadow: 1px 7px 5px -4px rgba(0,0,0,0.15);
+  width: $group-size;
+  background-color: $clr7;
+  border-radius: $border-rsize;
+  margin-left: $draggable-spacing;
+  padding-bottom: $draggable-spacing;
+  box-shadow: 1px 7px 5px -4px rgba(0, 0, 0, 0.15);
 }
 
-.board-container > .group-container-scrollable > .smooth-dnd-container > .smooth-dnd-draggable-wrapper:first-of-type {
-    margin-left: 25px;
+.board-container
+  > .group-container-scrollable
+  > .smooth-dnd-container
+  > .smooth-dnd-draggable-wrapper:first-of-type {
+  margin-left: 25px;
 }
 
 .group-title {
-    cursor: pointer;
-    padding-top: 3px;
-    margin-left: 4px;
-    margin-bottom: 3px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  cursor: pointer;
+  padding-top: 3px;
+  margin-left: 4px;
+  margin-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    textarea {
-        padding-left: 7px;
-        flex-grow: 1;
-        font-size: 14px;
-        color: darken(#172b4d, 5%);
-     }
+  textarea {
+    padding-left: 7px;
+    flex-grow: 1;
+    font-size: 14px;
+    color: darken(#172b4d, 5%);
+  }
 
-     .menu-icon {
-        padding: 6px;
-        margin-right: $draggable-spacing;
-        &::before {
-            content: "\e951";
-            font-size: 16px;
-            font-family: trello;
-        }
-        
-        &:hover {
-            border-radius: $border-rsize;
-            background-color: #091e4214;
-            color: #172b4d;
-        }
+  .menu-icon {
+    padding: 6px;
+    margin-right: $draggable-spacing;
+    &::before {
+      content: '\e951';
+      font-size: 16px;
+      font-family: trello;
     }
+
+    &:hover {
+      border-radius: $border-rsize;
+      background-color: #091e4214;
+      color: #172b4d;
+    }
+  }
 }
 
 .smooth-dnd-container.horizontal {
-    display: flex !important;
-  }
+  display: flex !important;
+}
 
 .smooth-dnd-draggable-wrapper.horizontal {
-    height: fit-content;
+  height: fit-content;
 }
 
 .smooth-dnd-container {
-    min-height: 4px; // need to change
+  min-height: 4px; // need to change
 }
 
 .smooth-dnd-container.vertical {
-    max-height: calc(100vh - 200px); // 200px needs to change
-    overflow-y: auto;
-    
-    &::-webkit-scrollbar {
-        height: 8px;
-        width: 8px;
-    }
+  max-height: calc(100vh - 200px); // 200px needs to change
+  overflow-y: auto;
 
-    &::-webkit-scrollbar-track-piece {
-        border-radius: $border-rsize;
-        background: $scroll-y-bg-clr;
-    }
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        border-radius: $border-rsize;
-        background: $scroll-y-clr;
-    }
+  &::-webkit-scrollbar-track-piece {
+    border-radius: $border-rsize;
+    background: $scroll-y-bg-clr;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $border-rsize;
+    background: $scroll-y-clr;
+  }
 }

@@ -1,5 +1,5 @@
 <template>
-    <section class="cover-item">
+    <section class="cover-item" v-if="!photoSearch">
         <div class="cover-preview">
             <h4>Size</h4>
             <div class="demo-images">
@@ -36,14 +36,27 @@
                 <img src="../../images/loader.svg" alt />
             </div>
         </div>
-        {{ currTask.cover }}
+        <h4>Photos from Unsplash</h4>
+        <div class="cover-mini-photos">
+            <div
+                v-for="pic in randPics"
+                :key="pic._id"
+                @click="setImgUrl(pic.sm)"
+                :class="{ 'selected-type': pic.sm === coverToEdit.imgUrl }"
+            >
+                <img :src="pic.thumb" alt />
+            </div>
+            <button @click="photoSearch = true">Search for photos</button>
+        </div>
     </section>
+    <search-photo v-else :coverToEdit="coverToEdit" @setImgUrl="setImgUrl"></search-photo>
 </template>
 
 <script>
 import colorPicker from '../color-picker.vue'
+import searchPhoto from '../pop-up-items/search-photo-item.vue'
 import { uploadImg } from '../../services/imgUpload.service.js'
-
+import { imagesService } from '../../services/images-service.js'
 export default {
     name: 'cover-item',
     data() {
@@ -53,10 +66,13 @@ export default {
                 color: null,
                 imgUrl: null,
                 type: null,
-            }
+            },
+            randPics: null,
+            photoSearch: false,
         }
     },
-    created() {
+    async created() {
+        this.randPics = await imagesService.getRandomImages(6)
         this.coverToEdit.color = this.currTask?.cover?.color ? this.currTask?.cover.color : '#cfd3da'
         this.coverToEdit.imgUrl = this.currTask?.cover?.imgUrl ? this.currTask?.cover?.imgUrl : '';
         this.coverToEdit.type = this.currTask?.cover?.type ? this.currTask?.cover?.type : 'header'
@@ -80,7 +96,14 @@ export default {
         },
         updateCover() {
             this.$emit('updateCover', this.coverToEdit)
-        }
+        },
+        setImgUrl(url) {
+            console.log(url)
+            this.coverToEdit.imgUrl = url
+            this.updateCover()
+
+        },
+
     },
     computed: {
         currColor() {
@@ -95,7 +118,8 @@ export default {
         }
     },
     components: {
-        colorPicker
+        colorPicker,
+        searchPhoto
     }
 }
 </script>

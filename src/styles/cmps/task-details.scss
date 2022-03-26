@@ -4,7 +4,6 @@
         font-size: 24px;
         line-height: 24px;
     }
-
     width: 768px;
     background-color: #f4f5f7;
     min-height: 900px;
@@ -14,7 +13,6 @@
     color: $mainClr;
     margin: 48px auto;
     overflow: visible;
-
     .task-details-title {
         cursor: pointer;
         background: none;
@@ -36,7 +34,6 @@
             box-shadow: inset 0 0 0 2px #0079bf;
         }
     }
-
     .block-title {
         display: flex;
         align-items: center;
@@ -65,7 +62,6 @@
             }
         }
     }
-
     .task-detail-main {
         display: flex;
         gap: 15px;
@@ -74,7 +70,6 @@
             flex: 3;
         }
     }
-
     .activity-show-details {
         display: flex;
         justify-content: space-between;
@@ -87,7 +82,6 @@
             background-color: rgba(9, 30, 66, 0.0392156863);
         }
     }
-
     .task-description {
         display: flex;
         flex-grow: 1;
@@ -117,25 +111,21 @@
         outline: none;
         transition: min-height 0.1s;
         background-color: #e2e4e9;
-
         &.focused {
             padding: 8px 12px;
             min-height: 108px;
             background-color: #fff;
             box-shadow: inset 0 0 0 2px #0079bf;
         }
-
         &[contenteditable]:empty::before {
             content: "Add a more detailed description";
         }
     }
-
     .save-close-description {
         display: flex;
         align-items: baseline;
         gap: 10px;
     }
-
     .actions-btns-container {
         position: relative;
         flex: 1;
@@ -154,13 +144,11 @@
             gap: 10px;
         }
     }
-
     .attachment-container {
         .icon::before {
             content: "\e908";
         }
     }
-
     button.save {
         @include addSaveBtn();
     }
@@ -169,12 +157,10 @@
         cursor: pointer;
         color: #42526e;
     }
-
     .desc-with-content {
         padding: 0;
         background-color: $lightGrey;
     }
-
     .comment-text-container {
         position: relative;
         display: flex;
