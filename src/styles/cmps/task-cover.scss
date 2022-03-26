@@ -13,3 +13,85 @@
         overflow-x: hidden;
     }
 }
+
+.cover-item{
+
+    .selected-type{
+        box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0079bf;
+    }
+    .cover-preview{
+        
+       button{
+        margin-top: 10px;
+        justify-content: center;
+       }
+    }
+    .demo-img{
+        width: 134px;
+        height: 64px;
+        // background-color: #cfd3da;
+        border: 1px solid #cfd3da;
+        border-radius: 3px;
+        background-size: cover;
+        img{
+            object-fit: cover;
+        }
+    }
+
+    .demo-images{
+        display: flex;
+        gap: 16px;
+    }
+
+    h4{
+        color: #5e6c84;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+        margin-top: 16px;
+        margin-top: 0;
+        margin-bottom: 4px;
+    }
+
+      .color-picker-container{
+          margin-top: 20px;
+          
+
+      }
+      
+      .cover-attachments{
+          margin-top: 20px;
+          
+          button{
+              justify-content: center;
+          }
+      }
+
+      .upload-img{
+        cursor: pointer;
+        margin-top: 5px;
+        display: block;
+        padding: 6px 12px;
+        background-color: rgba(9,30,66,.0392156862745098);
+        color: #758195;
+        border-radius: 3px;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+
+        &:hover{
+            background-color: rgba(9,30,66,.0784313725490196);
+        }
+      }
+
+      .loader-svg{
+         
+          display: flex;
+          justify-content: center;
+          img{
+            width: 30px;
+            height: 30px;
+          }
+      }
+}

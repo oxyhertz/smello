@@ -1,15 +1,14 @@
 <template>
   <Draggable v-if="task">
-    <section class="task-preview">
-      <p>{{ task.title }}</p>
-
+    <section class="task-preview" :style="taskStyle">
+      <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
+        <p>{{ task.title }}</p>
+          {{task}}
       <div class="icon-container flex">
 
         <div class="preview-icon" v-if="task.description">
           <span class="icon-description"></span>
         </div>
-
-
 
         <div class="preview-icon" v-if="task.attachments?.length">
           <span class="icon-attachment"></span>
@@ -20,13 +19,8 @@
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
+
       </div>
-      
-                <!-- <div class="preview-icon" v-if="task.members">
-<ul>
-  <li></li>
-</ul>
-        </div> -->
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
   </Draggable>
@@ -66,6 +60,25 @@ export default {
     },
     numOfTodos() {
       return this.task.checklists.reduce((acc, { todos }) => acc + todos.length, 0)
+    },
+    coverStyle(){
+      if(this.task.cover?.color && !this.task.cover.imgUrl)
+        return {'background-color':this.task.cover.color};
+      if(this.task.cover?.imgUrl){
+        return {'background-image': 'url('+this.task.cover.imgUrl+')','height':'260px'}
+      }  
+      
+    },
+    taskStyle(){
+      if(this.task.cover?.type === 'inline'){
+          const style = {
+            'background-color': this.task.cover.color,
+            'font-weight' : 500,
+            'font-size' : '16px',
+            'padding-top' : '30px'
+          }
+          return style 
+      }
     }
   }
 };
