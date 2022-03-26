@@ -61,7 +61,7 @@
             <span class="icon"></span>
             <h3>Activity</h3>
           </div>
-          <button>Show Details</button>
+          <button class="show-details-btn">Show Details</button>
         </div>
         <div class="comment-text-container">
           <avatar size="32" :name="currUser.fullname"></avatar>

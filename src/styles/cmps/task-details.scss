@@ -137,11 +137,15 @@
         }
         button {
             width: 100%;
-            background-color: rgba(9, 30, 66, 0.0392156862745098);
+            background-color: #091e420a;
             font-size: 14px;
             display: flex;
             align-items: center;
             gap: 10px;
+
+            &:hover {
+                background-color: #091e4214;
+            }
         }
     }
     .attachment-container {
@@ -151,6 +155,10 @@
     }
     button.save {
         @include addSaveBtn();
+    }
+
+    .show-details-btn:hover {
+        background-color: #091e4214;
     }
 
     .fa-x {
