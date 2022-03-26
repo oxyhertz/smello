@@ -47,7 +47,9 @@ export default {
       dateStatus: false,
     };
   },
-  created() { },
+  created() {
+    if (this.status === 'completed') this.dateStatus = true
+  },
   methods: {
     updateStatus() {
       var status
