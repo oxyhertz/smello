@@ -12,8 +12,6 @@
   }
 }
 
-
-
 .main-header {
   background-color: $clr1;
   max-height: 44px;
@@ -26,9 +24,9 @@
     color: white;
   }
 
-  &.header-bg-color{
-    background-color: rgba(0, 0, 0, 0.041);
-  } 
+  &.header-bg-color {
+    background-color: rgb(0 0 0 / 53%);
+  }
   .logo {
     font-weight: 700;
     line-height: 20px;
