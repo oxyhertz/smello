@@ -36,14 +36,23 @@
                 <img src="../../images/loader.svg" alt />
             </div>
         </div>
-        {{ currTask.cover }}
+        <div class="cover-mini-photos">
+            <div
+                class="selected-type"
+                v-for="pic in randPics"
+                :key="pic._id"
+                @click="setImgUrl(pic.sm)"
+            >
+                <img :src="pic.thumb" alt />
+            </div>
+        </div>
     </section>
 </template>
 
 <script>
 import colorPicker from '../color-picker.vue'
 import { uploadImg } from '../../services/imgUpload.service.js'
-
+import { imagesService } from '../../services/images-service.js'
 export default {
     name: 'cover-item',
     data() {
@@ -53,10 +62,12 @@ export default {
                 color: null,
                 imgUrl: null,
                 type: null,
-            }
+            },
+            randPics: null,
         }
     },
-    created() {
+    async created() {
+        this.randPics = await imagesService.getRandomImages(6)
         this.coverToEdit.color = this.currTask?.cover?.color ? this.currTask?.cover.color : '#cfd3da'
         this.coverToEdit.imgUrl = this.currTask?.cover?.imgUrl ? this.currTask?.cover?.imgUrl : '';
         this.coverToEdit.type = this.currTask?.cover?.type ? this.currTask?.cover?.type : 'header'
@@ -80,6 +91,12 @@ export default {
         },
         updateCover() {
             this.$emit('updateCover', this.coverToEdit)
+        },
+        setImgUrl(url) {
+            console.log(url)
+            this.coverToEdit.imgUrl = url
+            this.updateCover()
+
         }
     },
     computed: {
