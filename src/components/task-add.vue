@@ -4,12 +4,12 @@
       v-focus
       v-model="title"
       type="textarea"
-      :style="{ resize: 'none' }"
-      placeholder="Please input"
+      placeholder="Enter a title for this card..."
+      class="inline-input"
     />
     <section class="add-task-btns">
-      <button @click="addTask">Add card</button>
-      <button @click="isCreating = false">X</button>
+      <button @click="addTask" class="add-card-btn">Add card</button>
+      <span class="icon-cancel" @click="isCreating = false"></span>
     </section>
   </section>
 
