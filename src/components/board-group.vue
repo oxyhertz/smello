@@ -3,6 +3,7 @@
     group-name="cols"
     tag="div"
     orientation="horizontal"
+    drag-handle-selector=".group-title"
     drag-class="dragging"
     @drop="onColumnDrop($event)"
   >
@@ -41,8 +42,15 @@
     </Draggable>
     <add-group @add="addGroup" />
   </Container>
-  <div class="overlay" :class="{ 'open-overlay': isTaskDetail }" @click.stop="closeModal"></div>
-  <task-details-modal @closeModal="closeModal" v-if="isTaskDetail" @editTask="editTask" />
+
+  <div class="overlay" :class="{ 'open-overlay': isTaskDetail }">
+    <task-details-modal
+      v-click-outside="closeModal"
+      @closeModal="closeModal"
+      v-if="isTaskDetail"
+      @editTask="editTask"
+    />
+  </div>
 </template>
 
 <script>

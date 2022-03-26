@@ -1,26 +1,19 @@
-
-.task-details-modal{
-    
-
-    span.icon{
+.task-details-modal {
+    span.icon {
         font-family: Trello;
         font-size: 24px;
         line-height: 24px;
     }
-
-    position: fixed;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 768px;
     background-color: #f4f5f7;
-    min-height: 600px;
+    min-height: 900px;
     z-index: 15;
     border-radius: 2px;
     padding: 25px 20px 30px 60px;
-    color:$mainClr;
-
-    .task-details-title{
+    color: $mainClr;
+    margin: 48px auto;
+    overflow: visible;
+    .task-details-title {
         cursor: pointer;
         background: none;
         border: none;
@@ -34,87 +27,77 @@
         font-size: 20px;
         line-height: 24px;
         font-weight: 600;
-        
-        
-        &:focus{
+
+        &:focus {
             width: 100%;
             background-color: #fff;
             box-shadow: inset 0 0 0 2px #0079bf;
         }
     }
-
-    .block-title{
+    .block-title {
         display: flex;
         align-items: center;
         position: relative;
         margin-bottom: 15px;
-        h3{
+        h3 {
             display: flex;
         }
-        span{
+        span {
             position: absolute;
-            margin-left:-40px;
+            margin-left: -40px;
         }
     }
-    .header{
+    .header {
         align-items: center;
         display: flex;
         position: relative;
-        & + p{
+        & + p {
             margin-top: 5px;
         }
-        span.icon{
+        span.icon {
             position: absolute;
-            margin-left:-40px;
-            &::before{
+            margin-left: -40px;
+            &::before {
                 content: "\e911";
-                
             }
         }
-        
-        input{
-        }
     }
-    .task-detail-main{
+    .task-detail-main {
         display: flex;
-        gap:15px;
+        gap: 15px;
         margin-top: 20px;
-        .task-content{
-
-            flex:3;
+        .task-content {
+            flex: 3;
         }
     }
-
-    .activity-show-details{
+    .activity-show-details {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-top: 45px;
-        .icon::before{
+        .icon::before {
             content: "\e900";
-            // content: "\e96e";
         }
-        button{
+        button {
             background-color: rgba(9, 30, 66, 0.0392156863);
         }
     }
-
-    .task-description{
+    .task-description {
         display: flex;
         flex-grow: 1;
         flex-direction: column;
         margin-bottom: 30px;
-        span{
-            &::before{
+        span {
+            &::before {
                 content: "\e921";
             }
         }
     }
-    .description-textarea{
+    .description-textarea {
         max-width: 500px;
         cursor: pointer;
         background: none;
-        font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+        font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
         box-shadow: none;
         border: none;
         border-radius: 3px;
@@ -126,77 +109,68 @@
         text-align: left;
         font-size: 14px;
         outline: none;
-        transition: min-height .1s;
+        transition: min-height 0.1s;
         background-color: #e2e4e9;
-
         &.focused {
             padding: 8px 12px;
             min-height: 108px;
             background-color: #fff;
             box-shadow: inset 0 0 0 2px #0079bf;
         }
-
         &[contenteditable]:empty::before {
             content: "Add a more detailed description";
         }
     }
-
     .save-close-description {
         display: flex;
         align-items: baseline;
         gap: 10px;
     }
-
-    .actions-btns-container{
+    .actions-btns-container {
         position: relative;
-        flex:1;
-        h3{
+        flex: 1;
+        h3 {
             color: #5e6c84;
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 4px;
         }
-        button{
+        button {
             width: 100%;
-            background-color: rgba(9,30,66,.0392156862745098);
+            background-color: rgba(9, 30, 66, 0.0392156862745098);
             font-size: 14px;
             display: flex;
             align-items: center;
             gap: 10px;
-            
         }
     }
-
-    .attachment-container{
-        .icon::before{
+    .attachment-container {
+        .icon::before {
             content: "\e908";
         }
     }
-
-    button.save{
+    button.save {
         @include addSaveBtn();
     }
-    
-    .fa-x{
+
+    .fa-x {
         cursor: pointer;
         color: #42526e;
     }
-
-    .desc-with-content{
+    .desc-with-content {
         padding: 0;
-        background-color:$lightGrey;
+        background-color: $lightGrey;
     }
-
-    .comment-text-container{
+    .comment-text-container {
         position: relative;
         display: flex;
         align-items: center;
-        
-        .avatar{
+
+        .avatar {
             position: absolute;
             margin-left: -40px;
         }
-        input{
+        input {
             overflow: hidden;
             overflow-wrap: break-word;
             border: none;
@@ -206,13 +180,8 @@
             padding: 8px 12px;
             height: 35px;
         }
-        .comment-text{
+        .comment-text {
             flex-grow: 1;
         }
-
-
     }
 }
-
-
-

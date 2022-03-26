@@ -7,6 +7,9 @@
     box-shadow: 0 1px 0 #091e4240;
     line-height: 20px;
     position: relative;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
     & .title {
         word-break: break-word;
         margin-bottom: 10px;
