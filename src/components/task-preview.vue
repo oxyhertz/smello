@@ -3,7 +3,7 @@
     <section class="task-preview" :style="taskStyle">
       <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline' "></div>
       <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
-        <p>{{ task.title }}</p>
+        <p :class="{'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl}">{{ task.title }}</p>
       <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
 
         <div class="preview-icon" v-if="task.description">
@@ -78,8 +78,9 @@ export default {
             'font-size' : '16px',
             'padding-top' : '30px',
             'background-image': 'url('+this.task.cover.imgUrl+')',
-            // 'min-height': '260px'
-
+            'min-height': this.task.cover.imgUrl ? '250px' : '',
+             'color': '#fff',
+             'padding-top': this.task.cover.imgUrl ? '215px' : '30px', 
           }
           return style 
       }
