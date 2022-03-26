@@ -179,6 +179,11 @@ export default {
         if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];
         this.taskToEdit.attachments.push(item.item);
         this.onTaskEdit();
+      } else if (item.type === "dueDate") {
+        console.log('item', item)
+        if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
+        this.taskToEdit.dueDate = item.item;
+        this.onTaskEdit();
       } else if (item.type === "checklist") {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);

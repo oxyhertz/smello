@@ -1,6 +1,6 @@
 <template>
   <Datepicker v-model="date" inline autoApply></Datepicker>
-  <button @click="log" class="save">save</button>
+  <button @click="saveDueDate" class="save">save</button>
 </template>
 
 
@@ -17,8 +17,13 @@ export default {
     };
   },
   methods:{
-      log(){
-      console.log(this.date);
+      saveDueDate(){
+          const date={
+              type: 'dueDate',
+              item:(Date.parse((this.date)))
+          }
+          console.log('date', date)
+      this.$emit('addItem',date );
       }
   }
 };
