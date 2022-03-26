@@ -23,18 +23,22 @@
             <span class="icon"></span>
             <h3>Description</h3>
           </div>
-          <contenteditable
-            @click="isDescEditMode = true"
-            tag="div"
-            :contenteditable="true"
-            v-model="taskToEdit.description"
-            :noHTML="true"
-            class="description-textarea"
-            :class="{ 'desc-with-content': taskToEdit.description, 'focused': isDescEditMode }"
-          />
-          <div v-if="isDescEditMode" class="save-close-description">
-            <button class="save" @click="onTaskEdit(); isDescEditMode = false">Save</button>
-            <i class="fa-solid fa-x" @click="cancelDescEdit"></i>
+
+          <div v-click-outside="saveDescEdit" class="description-container">
+            <contenteditable
+              @click="isDescEditMode = true"
+              tag="div"
+              contenteditable="true"
+              spellcheck="false"
+              v-model="taskToEdit.description"
+              :noHTML="true"
+              class="description-textarea"
+              :class="{ 'desc-with-content': taskToEdit.description, 'focused': isDescEditMode }"
+            />
+            <div v-if="isDescEditMode" class="save-close-description">
+              <button class="save" @click="saveDescEdit">Save</button>
+              <i class="fa-solid fa-x" @click="cancelDescEdit"></i>
+            </div>
           </div>
         </div>
         <div v-if="taskToEdit.attachments?.length" class="attachment-container">
@@ -250,6 +254,10 @@ export default {
     cancelDescEdit() {
       this.taskToEdit.description = this.task.description;
       this.isDescEditMode = false;
+    },
+    saveDescEdit() {
+      this.onTaskEdit();
+      this.isDescEditMode = false
     },
     closeModal() {
       this.$emit('closeModal')
