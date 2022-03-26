@@ -28,12 +28,20 @@
     <section v-if="dueDate" class="due-date">
       <h3>Due date</h3>
       <section class="due-date flex">
-        <input type="checkbox" class="date-checkbox" />
-        <div class="title">{{ date }} <span class="open-icon"></span></div>
+        <input type="checkbox" class="date-checkbox" v-model="dateStatus" />
+        <div class="title">
+          {{ date }}
+          <span
+            v-if="status"
+            class="status"
+            :class="{ completed: status === 'completed' }"
+            >{{ status }}</span
+          >
+          <span class="open-icon"></span>
+        </div>
       </section>
     </section>
   </section>
-  <button @click="log">log</button>
 </template>
 <script>
 import moment from "moment";
@@ -41,23 +49,19 @@ export default {
   props: ["comboData"],
   data() {
     return {
-      // members: null,
-      // labelIds: null,
-      // dueDate: null,
+      dateStatus: null
     };
   },
-  created() {},
   methods: {
     setLabels() {
       this.$emit("setLabels");
     },
-    log() {
-      console.log("this.members", this.members);
-      console.log(" this.labelIds", this.labelIds);
-      console.log(" this.comboooooooooo", this.comboData);
-    },
   },
   computed: {
+    status() {
+      if (this.comboData.status === "completed") return "completed";
+      else if (this.dueDate < Date.now()) return "overdue";
+    },
     dueDate() {
       return this.comboData.dueDate;
     },
