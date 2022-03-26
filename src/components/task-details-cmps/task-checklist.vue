@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <button v-if="!addItemMode" @click="addItemMode = true">Add an item</button>
+        <button v-if="!addItemMode" @click="addItemMode = true" class="add-todo-btn">Add an item</button>
         <section v-else>
             <textarea v-model="newTodoTitle" v-focus placeholder="Add an item" class="add-todo-inp"></textarea>
             <section class="actions">
