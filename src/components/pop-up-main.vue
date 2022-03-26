@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     updateCover(cover) {
-      console.log(cover)
       this.$emit('updateCover', cover)
     },
     updateLabels(updatedLabels, item) {

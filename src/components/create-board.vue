@@ -64,7 +64,6 @@ export default {
     async created() {
         this.boardToAdd = await boardService.getEmptyBoard();
         this.randPics = await imagesService.getImages('mountains', 4);
-        console.log(this.randPics)
     },
     methods: {
         async addBoard() {

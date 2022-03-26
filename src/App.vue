@@ -15,12 +15,12 @@ export default {
 		this.$store.dispatch({ type: 'loadBoards' })
 		this.$store.dispatch({ type: 'loadUsers' })
 		userManageService.query()
-		console.log(this.$store.getters.currBoard?.style.bgColor)
+
 
 	},
 	computed: {
 		currBoardStyle() {
-			console.log(this.$store.getters?.currBoard?.style?.bgColor)
+
 			return this.$store.getters.currBoard?.style?.bgColor
 		},
 		currBoard() {

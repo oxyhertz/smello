@@ -92,8 +92,6 @@ export default {
       return this.$store.getters.currBoard
     },
     labels() {
-      console.log('this.tas898989898989898k', this.task)
-      console.log('this.boarddddddddddddddddddddddddd', this.board)
       if (!this.task.labelIds?.length) return false
       return this.task.labelIds.map(label => {
         return this.board.labels.find(currLabel => currLabel._id === label)
