@@ -1,7 +1,4 @@
-
 .task-details-modal{
-    
-
     span.icon{
         font-family: Trello;
         font-size: 24px;
@@ -68,13 +65,10 @@
             margin-left:-40px;
             &::before{
                 content: "\e911";
-                
             }
         }
-        
-        input{
-        }
     }
+
     .task-detail-main{
         display: flex;
         gap:15px;
@@ -92,7 +86,6 @@
         margin-top: 45px;
         .icon::before{
             content: "\e900";
-            // content: "\e96e";
         }
         button{
             background-color: rgba(9, 30, 66, 0.0392156863);
@@ -213,6 +206,3 @@
 
     }
 }
-
-
-
