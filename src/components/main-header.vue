@@ -23,7 +23,11 @@
       </section>
 
       <div class="create-board-container flex align-items">
-        <button class="create-btn" @click="isCreateBoard = !isCreateBoard">Create</button>
+        <button
+          class="create-btn"
+          @click="isCreateBoard = !isCreateBoard"
+          :class="{ 'light-btn-bg': isBoard }"
+        >Create</button>
         <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard"></createBoard>
       </div>
     </div>

@@ -30,8 +30,8 @@
             <p>Background</p>
             <div class="cover-mini-photos">
                 <div v-for="pic in randPics" :key="pic._id" @click="updateBgImg(pic.full, pic._id)">
-                    <img :src="pic.thumb" alt />
-                    <span class="icon-check"></span>
+                    <img :src="pic.thumb" :class="{ 'low-opacity ': currPic === pic._id }" />
+                    <span class="icon-check" v-if="currPic === pic._id"></span>
                 </div>
             </div>
             <color-picker @updateColor="updateBgColor"></color-picker>

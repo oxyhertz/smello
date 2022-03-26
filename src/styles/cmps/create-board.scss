@@ -73,20 +73,26 @@
     justify-content: space-between;
     margin-bottom: 8px;
     div {
+      background-color: black;
       position: relative;
       width: 64px;
       height: 40px;
+
       .icon-check {
         position: absolute;
         top: 12px;
         right: 23px;
+        color: white;
       }
       img {
+        &:hover {
+          opacity: 0.75;
+        }
       }
     }
   }
 }
 
-.low-dark-overlay {
-  background: rgba(0, 0, 0, 0.4);
+.low-opacity {
+  opacity: 0.65;
 }
