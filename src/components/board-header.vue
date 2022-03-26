@@ -5,38 +5,49 @@
         <span class="board-header-board-icon"></span> Board
         <span class="board-header-open-icon"></span>
       </button>
+
       <board-header-title
         :style="{ color: 'black' }"
         @editTitle="editTitle"
         :title="boardTitle"
         :createdBy="boardCreatorId"
       />
+
       <board-header-favorite
         class="board-header-invite btn"
         @toggleFavorite="toggleFavorite"
         :favorite="boardFavoriteStatus"
       />
+
       <members-preview :board="board" />
+
       <div class="invite-members-container">
+
         <button class="btn" @click="isInviteModal = !isInviteModal">
           <span class="board-header-invite-icon"></span> Invite
         </button>
+
         <invite-members
           :board="board"
           @closeInviteModal="closeModal"
           v-if="isInviteModal"
         />
       </div>
+
     </section>
+
     <section>
       <button class="btn">
         <span class="board-header-filter-icon"></span>Filter
       </button>
+
       <button class="btn show-menu" @click="toggleBoardMenu">
         <span class="board-header-menu-icon"> </span>Show menu
       </button>
+
       <board-menu-modal :isOpen="isMenuModal"/>
     </section>
+
   </header>
 </template>
 
