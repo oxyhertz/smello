@@ -14,13 +14,14 @@
 .group-title {
     cursor: pointer;
     padding-top: 3px;
-    margin-left: 6px;
+    margin-left: 4px;
     margin-bottom: 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     textarea {
+        padding-left: 7px;
         flex-grow: 1;
         font-size: 14px;
         color: darken(#172b4d, 5%);
