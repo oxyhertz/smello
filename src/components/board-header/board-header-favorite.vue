@@ -19,18 +19,17 @@ export default {
     },
     methods: {
         toggleFavorite() {
-            this.isFavorite = !this.isFavorite
-            this.$emit('toggleFavorite', this.isFavorite)
+            this.isFavorite = !this.isFavorite;
+            this.$emit('toggleFavorite', this.isFavorite);
         }
     },
     computed: {
         favoriteIcon() {
-            return this.isFavorite ? 'fa-solid fa-star' : 'fa-regular fa-star'
+            return this.isFavorite ? 'fa-solid fa-star' : 'fa-regular fa-star';
         }
     }
 }
 </script>
 
 <style>
-
 </style>

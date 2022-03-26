@@ -5,9 +5,9 @@
 
 
 <script>
-import Datepicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
-import { ref } from "vue";
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { ref } from 'vue';
 
 export default {
   components: { Datepicker },
@@ -16,14 +16,14 @@ export default {
       date: ref(Date.now()),
     };
   },
-  methods:{
-      saveDueDate(){
-          const date={
-              type: 'dueDate',
-              item:(Date.parse((this.date))),
-          }
-      this.$emit('addItem',date );
+  methods: {
+    saveDueDate() {
+      const date = {
+        type: 'dueDate',
+        item: (Date.parse((this.date))),
       }
+      this.$emit('addItem', date);
+    }
   }
 };
 </script>
