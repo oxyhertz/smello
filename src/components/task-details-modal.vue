@@ -14,23 +14,28 @@
           :comboData="taskToEdit"
         />
         <div class="task-description">
+
           <div class="block-title">
             <span class="icon"></span>
             <h3>Description</h3>
           </div>
+
           <textarea
-            @blur="isDisplaySave = false"
-            @focus="isDisplaySave = true"
+            @focus="isDescEditMode = true"
             v-model="taskToEdit.description"
             spellcheck="false"
             placeholder="Add a more detailed description"
             class="description-textarea"
-            :class="{ 'desc-with-content': taskToEdit.description }"
+            :class="{ 'desc-with-content': taskToEdit.description, 'focused': isDescEditMode}"
           ></textarea>
-          <div v-if="isDisplaySave" class="save-close-description">
-            <button class="save" @click.stop="onTaskEdit">Save</button>
+          
+          <div v-if="isDescEditMode" class="save-close-description">
+            <button class="save" @click="onTaskEdit(); isDescEditMode = false">Save</button>
+            <i class="fa-solid fa-x" @click="cancelDescEdit"></i>
           </div>
+
         </div>
+
         <div v-if="taskToEdit.attachments?.length" class="attachment-container">
           <div class="block-title">
             <span class="icon"></span>
@@ -134,12 +139,11 @@ export default {
       showSaveBtn: false,
       popupData: null,
       actionType: null,
-      isDisplaySave: false,
+      isDescEditMode: false,
     };
   },
   created() {
     this.taskToEdit = JSON.parse(JSON.stringify(this.task));
-    console.log("this.taskToEdit", this.taskToEdit);
   },
   methods: {
     setDate(action) {
@@ -230,6 +234,10 @@ export default {
         console.log("err", err);
       }
     },
+    cancelDescEdit() {
+      this.taskToEdit.description = this.task.description;
+      this.isDescEditMode = false;
+    }
   },
   computed: {
     board() {
