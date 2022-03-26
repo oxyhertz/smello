@@ -14,9 +14,9 @@
   </section>
 
   <section v-else @click="isCreating = true" class="task-add">
-  <span class="plus-icon"></span>
-   <span class="add-task-txt">Add a card</span>
-   </section>
+    <span class="plus-icon"></span>
+    <span class="add-task-txt">Add a card</span>
+  </section>
 </template>
 
 <script>
@@ -24,13 +24,13 @@ export default {
   data() {
     return {
       isCreating: null,
-      title: "",
+      title: '',
     };
   },
   methods: {
     addTask() {
-      if (!this.title) return
-      this.$emit("addTask", this.title);
+      if (!this.title) return;
+      this.$emit('addTask', this.title);
       this.isCreating = null;
       this.title = '';
     },
