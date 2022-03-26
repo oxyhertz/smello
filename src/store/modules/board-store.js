@@ -7,8 +7,12 @@ export default {
     currentBoard: null,
     currentGroup: null,
     currentTask: null,
+    openLabels: false
   },
   getters: {
+    openLabel({ openLabels }) {
+      return openLabels
+    },
     boards({ boards }) {
       return boards;
     },
@@ -30,6 +34,11 @@ export default {
     },
   },
   mutations: {
+    toggleLabel(state) {
+      // console.log('openLabel', openLabels)
+      state.openLabels = !state.openLabels
+      console.log('openLabel', state.openLabels)
+    },
     setBoards(state, { boards }) {
       state.boards = boards;
     },

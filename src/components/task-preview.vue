@@ -3,6 +3,19 @@
     <section class="task-preview" :style="taskStyle">
       <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline'"></div>
       <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
+
+      <div v-if="labels" class="preview-icon">
+        <div v-for="label, idx in labels" :key="idx">
+          <div
+            @click.stop="openLabel = !openLabel"
+            class="label"
+            :style="{ 'background-color': label.color }"
+            :class="{ 'openLabel': openLabel }"
+          >
+            <span class="label" v-if="openLabel">{{ label.title }}</span>
+          </div>
+        </div>
+      </div>
       <p
         class="title"
         :class="{ 'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl }"
@@ -31,7 +44,7 @@
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
         <div class="preview-icon members" v-if="task.members?.length">
-          <div v-for="member in task.members" :key="member._id">
+          <div v-for="member in task.members" :key="member._id" class="member">
             <avatar :size="28" color="white" :name="member.fullname"></avatar>
           </div>
         </div>
@@ -55,17 +68,35 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      openLabel: false,
+    };
   },
   components: {
     Draggable,
   },
   methods: {
+    toggleLabel() {
+      this.$store.commit({ type: 'toggleLabel' })
+    },
     removeTask() {
       this.$emit('removeTask', this.task._id)
     }
   },
   computed: {
+    // openLabel() {
+    //   console.log('openLabel', this.$store.getters.openLabel)
+    //   return this.$store.getters.openLabels;
+    // },
+    board() {
+      return this.$store.getters.currBoard
+    },
+    labels() {
+      if (!this.task.labelIds?.length) return false
+      return this.task.labelIds.map(label => {
+        return this.board.labels.find(currLabel => currLabel._id === label)
+      })
+    },
     date() {
       return moment(this.task.dueDate).format('lll').split(',')[0];
     },
@@ -88,7 +119,6 @@ export default {
       }
     },
     taskStyle() {
-      console.log(this.task.cover)
       if (this.task.cover?.type === 'inline') {
         const style = {
           'background-color': this.task.cover.color,

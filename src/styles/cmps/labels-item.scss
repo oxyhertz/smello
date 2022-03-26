@@ -4,7 +4,7 @@
   margin-left: 3px;
 }
 
-.labels-item input {
+.label-item-input {
   margin-top: 7px;
   display: block;
   line-height: 20px;
@@ -44,7 +44,7 @@
   }
 
   & .edit-labels {
-    @include icon('\e927');
+    @include icon("\e927");
     padding: 9px;
     margin-right: -19px;
     z-index: 5;
@@ -77,4 +77,9 @@
 
 .create {
   width: 70px !important;
+}
+
+.create-label-btn {
+  padding: 6px;
+  margin-top: 18px;
 }
