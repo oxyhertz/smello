@@ -1,6 +1,6 @@
 <template>
   <div v-if="board && !isCreating" class="labels-item">
-    <input type="text" placeholder="Search labels..." v-focus />
+    <input type="text" placeholder="Search labels..." v-focus class="label-item-input" />
     <h3>Labels</h3>
     <ul>
       <li class="label" v-for="label in board.labels" :key="label._id">
@@ -17,7 +17,7 @@
   </div>
   <section v-else>
     <h3>Name</h3>
-    <input type="text" v-model="title" v-focus />
+    <input type="text" v-model="title" v-focus class="label-item-input" />
     <h3>Select a color</h3>
     <color-picker @updateColor="updateColor"></color-picker>
     <div class="labels-actions flex space-between">

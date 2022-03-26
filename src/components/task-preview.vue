@@ -76,11 +76,18 @@ export default {
     Draggable,
   },
   methods: {
+    toggleLabel() {
+      this.$store.commit({ type: 'toggleLabel' })
+    },
     removeTask() {
       this.$emit('removeTask', this.task._id)
     }
   },
   computed: {
+    // openLabel() {
+    //   console.log('openLabel', this.$store.getters.openLabel)
+    //   return this.$store.getters.openLabels;
+    // },
     board() {
       return this.$store.getters.currBoard
     },
