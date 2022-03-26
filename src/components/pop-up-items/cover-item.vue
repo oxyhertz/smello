@@ -1,5 +1,5 @@
 <template>
-    <section class="cover-item">
+    <section class="cover-item" v-if="!photoSearch">
         <div class="cover-preview">
             <h4>Size</h4>
             <div class="demo-images">
@@ -36,21 +36,25 @@
                 <img src="../../images/loader.svg" alt />
             </div>
         </div>
+        <h4>Photos from Unsplash</h4>
         <div class="cover-mini-photos">
             <div
-                class="selected-type"
                 v-for="pic in randPics"
                 :key="pic._id"
                 @click="setImgUrl(pic.sm)"
+                :class="{ 'selected-type': pic.sm === coverToEdit.imgUrl }"
             >
                 <img :src="pic.thumb" alt />
             </div>
+            <button @click="photoSearch = true">Search for photos</button>
         </div>
     </section>
+    <search-photo v-else :coverToEdit="coverToEdit" @setImgUrl="setImgUrl"></search-photo>
 </template>
 
 <script>
 import colorPicker from '../color-picker.vue'
+import searchPhoto from '../pop-up-items/search-photo-item.vue'
 import { uploadImg } from '../../services/imgUpload.service.js'
 import { imagesService } from '../../services/images-service.js'
 export default {
@@ -64,6 +68,7 @@ export default {
                 type: null,
             },
             randPics: null,
+            photoSearch: false,
         }
     },
     async created() {
@@ -97,7 +102,8 @@ export default {
             this.coverToEdit.imgUrl = url
             this.updateCover()
 
-        }
+        },
+
     },
     computed: {
         currColor() {
@@ -112,7 +118,8 @@ export default {
         }
     },
     components: {
-        colorPicker
+        colorPicker,
+        searchPhoto
     }
 }
 </script>

@@ -3,6 +3,9 @@
   background-color: lightgreen;
   margin: -25px -20px 25px -60px;
   position: relative;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
   .icon-cancel {
     position: absolute;
     //  background-color: #00000014;
@@ -29,10 +32,12 @@
   .selected-type {
     box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0079bf;
   }
+  button {
+    justify-content: center;
+  }
   .cover-preview {
     button {
       margin-top: 10px;
-      justify-content: center;
     }
   }
   .demo-img {
@@ -57,7 +62,7 @@
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
-    margin-top: 16px;
+    margin-top: 20px;
     margin-top: 0;
     margin-bottom: 4px;
   }
@@ -100,17 +105,21 @@
       height: 30px;
     }
   }
-  .cover-mini-photos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    div {
-      width: 88px;
-      height: 48px;
-      img {
-        border-radius: 3px;
-        object-fit: cover;
-      }
+}
+.cover-mini-photos {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  div {
+    width: 88px;
+    height: 48px;
+    border-radius: 3px;
+    cursor: pointer;
+    img {
+      border-radius: 3px;
+      object-fit: cover;
     }
   }
 }
