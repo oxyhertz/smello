@@ -1,6 +1,7 @@
 <template>
   <Draggable v-if="task">
     <section class="task-preview" :style="taskStyle">
+      <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline' "></div>
       <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
         <p>{{ task.title }}</p>
       <div class="icon-container flex">
@@ -69,12 +70,16 @@ export default {
       
     },
     taskStyle(){
+      console.log(this.task.cover)
       if(this.task.cover?.type === 'inline'){
           const style = {
             'background-color': this.task.cover.color,
             'font-weight' : 500,
             'font-size' : '16px',
-            'padding-top' : '30px'
+            'padding-top' : '30px',
+            'background-image': 'url('+this.task.cover.imgUrl+')',
+            'min-height': '260px'
+
           }
           return style 
       }

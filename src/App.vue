@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :style="{'background-color': currBoard}">
+  <div class="wrapper" :style="boardStlye">
     <app-header/>
     <router-view />
    </div> 
@@ -10,12 +10,6 @@ import appHeader from './components/main-header.vue'
 import {userManageService} from './services/user-manage-service.js'
 export default {
   name: 'app',
-  data(){
-    return{
-      color:'red',
-      bg:'beige'
-    }
-  },
   created() {
     this.$store.dispatch({ type: 'loadBoards' })
     this.$store.dispatch({ type: 'loadUsers' })
@@ -24,9 +18,15 @@ export default {
 
   },
   computed:{
-    currBoard(){
+    currBoardStyle(){
       console.log(this.$store.getters?.currBoard?.style?.bgColor)
       return this.$store.getters.currBoard?.style?.bgColor
+    },
+    currBoard(){
+      return this.$store.getters.currBoard?.style
+    },
+    boardStlye(){
+       return {'background-color': this.currBoard?.bgColor,'background-image': 'url('+this. currBoard?.bgImg+')'}
     }
   },
   components: {
