@@ -9,7 +9,7 @@
     />
     <section class="add-task-btns">
       <button @click="addTask" class="add-card-btn">Add card</button>
-      <i class="fa-solid fa-x close-btn" @click="isCreating = false"></i>
+      <span class="icon-cancel" @click="isCreating = false"></span>
     </section>
   </section>
 
