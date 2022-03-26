@@ -76,6 +76,8 @@ export default {
     },
     methods: {
         addTodo() {
+            if (!this.newTodoTitle) return;
+
             const todo = {
                 _id: utilService.makeId(),
                 title: this.newTodoTitle,
