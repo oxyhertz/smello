@@ -11,7 +11,7 @@
             class="avatar"
           ></avatar>
         </div>
-        <span class="combo-add-icon"></span>
+        <span @click="setMembers" class="combo-add-icon"></span>
       </section>
     </section>
     <section v-if="taskLabels?.length" class="labels flex column">
@@ -28,13 +28,12 @@
     <section v-if="dueDate" class="due-date">
       <h3>Due date</h3>
       <section class="due-date flex">
-        <input type="checkbox" class="date-checkbox" v-model="dateStatus" />
-        <div class="title">
+        <input type="checkbox" class="date-checkbox" v-model="dateStatus" @change="updateStatus" />
+        <div class="title" @click="setDate">
           {{ date }}
           <span
-            v-if="status"
             class="status"
-            :class="{ completed: status === 'completed' }"
+            :class="{ completed: status === 'completed', overdue: status === 'overdue' }"
             >{{ status }}</span
           >
           <span class="open-icon"></span>
@@ -49,18 +48,40 @@ export default {
   props: ["comboData"],
   data() {
     return {
-      dateStatus: null
+      dateStatus: false,
     };
   },
+  created() {},
   methods: {
+    updateStatus() {
+      var status 
+      if (this.dateStatus) status = "completed";
+      else status = ""
+      const item ={
+        type: 'status',
+        item:status
+      }
+      this.$emit("addItem", item)
+    },
     setLabels() {
       this.$emit("setLabels");
+    },
+    setDate() {
+      this.$emit("setDate");
+    },
+    setMembers() {
+      this.$emit("setMembers");
     },
   },
   computed: {
     status() {
-      if (this.comboData.status === "completed") return "completed";
+      console.log('this.currStatus', this.currStatus)
+      console.log('this.currStatus', this.currStatus)
+      if (this.currStatus === "completed") return "completed";
       else if (this.dueDate < Date.now()) return "overdue";
+    },
+    currStatus() {
+      return this.comboData.status;
     },
     dueDate() {
       return this.comboData.dueDate;
