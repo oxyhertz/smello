@@ -174,8 +174,13 @@
       content: "\e908";
     }
   }
+
   button.save {
     @include addSaveBtn();
+
+    &:active {
+      color: #fff;
+    }
   }
 
   .fa-x {
