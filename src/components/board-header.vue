@@ -26,7 +26,12 @@
           <span class="board-header-invite-icon"></span> Invite
         </button>
 
-        <invite-members :board="board" @closeInviteModal="closeModal" v-if="isInviteModal" />
+        <invite-members
+          :board="board"
+          @closeInviteModal="closeModal"
+          v-if="isInviteModal"
+          v-click-outside="closeModal"
+        />
       </div>
     </section>
 
