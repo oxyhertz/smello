@@ -8,7 +8,7 @@
     .actions{
         display: flex;
         align-items: baseline;
-        gap:10px
+        gap: 10px
     }
 
     .add-todo-inp{
@@ -32,7 +32,8 @@
     }
 
     .add-todo-btn {
-        margin-left: $spacing;
+        margin: 8px 0;
+        padding: 6px 12px;
     }
 
     .checklist-icon {
@@ -72,8 +73,6 @@
         align-items: center;
         padding: 8px 0;
 
-
-
         > * {
             display: flex;
         }
@@ -102,9 +101,8 @@
             border: none;
         }
         
-        margin-left: $spacing;
-        outline: 0;
         border-radius: $border-rsize;
+        outline: 0;
         font-family: inherit;
         font-size: inherit;
         resize: none;
@@ -129,7 +127,6 @@
             height: 8px;
             overflow: hidden;
             border-radius: $border-rsize; // must to reset defualt browser values. will not work without
-            margin-left: $spacing;
 
             &::-webkit-progress-bar {
                 background-color: #091e4214;
@@ -148,17 +145,17 @@
 
     .todo-container {
         position: relative;
-        padding: $spacing 0;
+        padding: 6px 0;
         display: flex;
         width: 100%;
         align-items: flex-end;
+
         input{
             position: absolute;
             margin-left:-34px
             
         }
-        textarea{
-            
+        textarea{        
             flex-grow: 1;
             outline: none;
             border: none;
