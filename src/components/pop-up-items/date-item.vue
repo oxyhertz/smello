@@ -1,6 +1,6 @@
 <template>
   <Datepicker v-model="date" inline autoApply></Datepicker>
-  <button @click="log"></button>
+  <button @click="log" class="save">save</button>
 </template>
 
 
