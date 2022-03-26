@@ -3,6 +3,7 @@
     group-name="cols"
     tag="div"
     orientation="horizontal"
+    drag-handle-selector=".group-title"
     drag-class="dragging"
     @drop="onColumnDrop($event)"
   >
