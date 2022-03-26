@@ -52,22 +52,22 @@ export default {
         }
     },
     async created() {
-        this.boardToAdd = await boardService.getEmptyBoard()
+        this.boardToAdd = await boardService.getEmptyBoard();
     },
     methods: {
         async addBoard() {
-            const board = this.boardToAdd
-            this.closeModal()
-            const savedBoard = await this.$store.dispatch({ type: 'saveBoard', board })
-            this.$router.push(`/board/${savedBoard._id}`)
+            const board = this.boardToAdd;
+            this.closeModal();
+            const savedBoard = await this.$store.dispatch({ type: 'saveBoard', board });
+            this.$router.push(`/board/${savedBoard._id}`);
 
         },
         closeModal() {
-            this.$emit('closeCreateModal')
+            this.$emit('closeCreateModal');
         },
         updateBgColor(color) {
-            this.boardToAdd.style.bgColor = color
-            console.log(this.boardToAdd.style.bgColor)
+            this.boardToAdd.style.bgColor = color;
+            console.log(this.boardToAdd.style.bgColor);
         }
 
     },

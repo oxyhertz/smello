@@ -4,12 +4,7 @@
       <h3>Members</h3>
       <section class="flex">
         <div v-for="member in members" :key="member._id">
-          <avatar
-            size="32"
-            color="white"
-            :name="member.fullname"
-            class="avatar"
-          ></avatar>
+          <avatar size="32" color="white" :name="member.fullname" class="avatar"></avatar>
         </div>
         <span @click="setMembers" class="combo-add-icon"></span>
       </section>
@@ -18,9 +13,11 @@
       <h3>Labels</h3>
       <section class="flex">
         <div v-for="(label, idx) in taskLabels" :key="idx">
-          <span v-if="label" :style="{ 'background-color': label.color }">{{
-            label.title
-          }}</span>
+          <span v-if="label" :style="{ 'background-color': label.color }">
+            {{
+              label.title
+            }}
+          </span>
         </div>
         <div class="combo-add-icon label" @click="setLabels"></div>
       </section>
@@ -34,8 +31,7 @@
           <span
             class="status"
             :class="{ completed: status === 'completed', overdue: status === 'overdue' }"
-            >{{ status }}</span
-          >
+          >{{ status }}</span>
           <span class="open-icon"></span>
         </div>
       </section>
@@ -43,41 +39,41 @@
   </section>
 </template>
 <script>
-import moment from "moment";
+import moment from 'moment';
 export default {
-  props: ["comboData"],
+  props: ['comboData'],
   data() {
     return {
       dateStatus: false,
     };
   },
-  created() {},
+  created() { },
   methods: {
     updateStatus() {
-      var status 
-      if (this.dateStatus) status = "completed";
-      else if (this.dueDate < Date.now()) status = "overdue"
-      else status = ""
-      const item ={
+      var status
+      if (this.dateStatus) status = 'completed';
+      else if (this.dueDate < Date.now()) status = 'overdue'
+      else status = ''
+      const item = {
         type: 'status',
-        item:status
+        item: status
       }
-      this.$emit("addItem", item)
+      this.$emit('addItem', item)
     },
     setLabels() {
-      this.$emit("setLabels");
+      this.$emit('setLabels');
     },
     setDate() {
-      this.$emit("setDate");
+      this.$emit('setDate');
     },
     setMembers() {
-      this.$emit("setMembers");
+      this.$emit('setMembers');
     },
   },
   computed: {
     status() {
-      if (this.currStatus === "completed") return "completed";
-      else if (this.dueDate < Date.now()) return "overdue";
+      if (this.currStatus === 'completed') return 'completed';
+      else if (this.dueDate < Date.now()) return 'overdue';
     },
     currStatus() {
       return this.comboData.status;
@@ -103,7 +99,7 @@ export default {
       });
     },
     date() {
-      return moment(this.dueDate).format("lll");
+      return moment(this.dueDate).format('lll');
     },
   },
 };
