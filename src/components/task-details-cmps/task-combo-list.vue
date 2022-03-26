@@ -11,7 +11,7 @@
     </section>
     <section v-if="taskLabels?.length" class="labels flex column">
       <h3>Labels</h3>
-      <section class="flex">
+      <section class="flex label">
         <div v-for="(label, idx) in taskLabels" :key="idx">
           <span v-if="label" :style="{ 'background-color': label.color }">
             {{
