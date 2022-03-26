@@ -1,7 +1,14 @@
 <template>
     <section class="board-header-title">
-        <h1 v-if="!isClicked" @click="toggleInput">{{title}}</h1>
-        <textarea v-else v-focus v-model="title" @blur="editTitle">{{title}}</textarea>
+        <input
+            type="text"
+            :size="inputSize"
+            v-model="titleToEdit"
+            class="inline-input"
+            :class="{ editable: isEditAble }"
+            :disabled="!isEditAble"
+            @blur="editTitle"
+        />
     </section>
 </template>
 
@@ -14,22 +21,31 @@ export default {
     },
     data() {
         return {
-            isClicked: false
+            titleToEdit: this.title
         }
     },
     methods: {
         editTitle() {
-            this.isClicked = false;
-            this.$emit('editTitle', this.title);
-        },
-        toggleInput() {
-            if(this.createdBy !== this.userId) return;
-            this.isClicked = true
+            if (!this.titleToEdit) return this.titleToEdit = this.title;
+            if (!this.isEditAble) return;
+            this.$emit('editTitle', this.titleToEdit);
         }
     },
     computed: {
         userId() {
             return this.$store.getters.miniUser._id;
+        },
+        isEditAble() {
+            return this.createdBy === this.userId;
+        },
+        inputSize() {
+            const MAX_SIZE = 60;
+            const MIN_SIZE = 1;
+            const size = this.titleToEdit.length - 4;
+
+            if(size < MIN_SIZE) return MIN_SIZE;
+            else if(size > MAX_SIZE) return MAX_SIZE;
+            return size;
         }
     }
 }
