@@ -2,12 +2,7 @@
   <section class="task-details-modal">
     <div class="header">
       <span class="icon title-icon"></span>
-      <input
-        type="text"
-        @blur="onTaskEdit"
-        v-model="taskToEdit.title"
-        class="task-details-title"
-      />
+      <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title" />
     </div>
     <p class="boad-title">In list {{ board.title }}</p>
     <section class="task-detail-main">
@@ -41,10 +36,7 @@
             <h3>Attachments</h3>
           </div>
           <div class="attachment-content">
-            <attachment
-              :attachments="taskToEdit.attachments"
-              @updateAttachments="updateItem"
-            />
+            <attachment :attachments="taskToEdit.attachments" @updateAttachments="updateItem" />
           </div>
         </div>
         <task-check-list
@@ -167,7 +159,7 @@ export default {
     closePopup() {
       (this.actionType = null), (this.popupData = null);
     },
-    setItem(item) {},
+    setItem(item) { },
     addItem(item) {
       if (item.type === "attachment") {
         if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];
@@ -177,14 +169,9 @@ export default {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);
       } else if (item.type === "members") {
-        console.log("item", item);
         if (!this.taskToEdit.members) this.taskToEdit.members = [];
-        if (
-          this.taskToEdit.members.some((member) => member._id === item.item._id)
-        ) {
-          const idx = this.taskToEdit.members.findIndex(
-            (member) => member === item.item._id
-          );
+        if (this.taskToEdit.members.some((member) => member._id === item.item._id)) {
+          const idx = this.taskToEdit.members.findIndex((member) => member._id === item.item._id);
           this.taskToEdit.members.splice(idx, 1);
         } else {
           this.taskToEdit.members.push(item.item);
@@ -192,9 +179,7 @@ export default {
       } else if (item.type === "labels") {
         if (!this.taskToEdit.labelIds) this.taskToEdit.labelIds = [];
         if (this.taskToEdit.labelIds.includes(item.item._id)) {
-          const idx = this.taskToEdit.labelIds.findIndex(
-            (label) => label === item.item._id
-          );
+          const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
           this.taskToEdit.labelIds.splice(idx, 1);
         } else {
           this.taskToEdit.labelIds.push(item.item._id);
@@ -204,13 +189,9 @@ export default {
     },
     updateItem({ type, val }) {
       if (type === "checklists") {
-        console.log(type, val);
         const checklists = this.taskToEdit.checklists;
-        const idx = checklists.findIndex(
-          (checklist) => checklist._id === val._id
-        );
-        if (val.title) checklists.splice(idx, 1, val);
-        // edit
+        const idx = checklists.findIndex((checklist) => checklist._id === val._id);
+        if (val.title) checklists.splice(idx, 1, val); // edit
         else checklists.splice(idx, 1); // deletion
       } else this.taskToEdit[type] = val;
       this.onTaskEdit();

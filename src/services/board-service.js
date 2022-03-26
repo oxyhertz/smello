@@ -293,7 +293,7 @@ function _createBoards() {
             imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
           },
           {
-            _id: 'u101',
+            _id: 'u102',
             fullname: 'Admin  ',
             imgUrl: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
           },
