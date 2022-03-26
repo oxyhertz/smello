@@ -1,5 +1,6 @@
 <template>
   <section class="task-details-modal">
+    <div v-if="taskToEdit.cover" :style="coverStyle" class="task-cover" ></div>
     <div class="header">
       <span class="icon title-icon"></span>
       <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title" />
@@ -91,7 +92,7 @@
           <span class="icon-location"></span>
           Location
         </button>
-        <button>
+        <button @click="setCover('coverItem')">
           <span class="icon-cover"></span>
           cover
         </button>
@@ -108,6 +109,7 @@
           :task="task"
           @closePopup="closePopup"
           :popupData="popupData"
+           @updateCover="updateCover"
           :action="actionType"
           v-if="actionType"
           @addItem="addItem"
@@ -140,6 +142,10 @@ export default {
     console.log("this.taskToEdit", this.taskToEdit);
   },
   methods: {
+     updateCover(cover){
+           this.taskToEdit.cover = cover;
+           this.onTaskEdit();
+      },
     setMembers(action) {
       (this.actionType = action),
         (this.popupData = { name: "Members", style: { top: "126px" } });
@@ -156,6 +162,10 @@ export default {
       (this.actionType = action),
         (this.popupData = { name: "Add checklist", style: { top: "200px" } });
     },
+    setCover(action){
+        this.actionType = action;
+        this.popupData = {name: 'Cover' , style: {top: "250px"}}
+      },
     closePopup() {
       (this.actionType = null), (this.popupData = null);
     },
@@ -230,6 +240,9 @@ export default {
     currUser() {
       return this.$store.getters.user;
     },
+    coverStyle(){
+            return {'background-color': this.taskToEdit.cover.color,'background-image': 'url('+this.taskToEdit.cover.imgUrl+')'}
+    }
   },
   components: {
     popupMain,
