@@ -28,7 +28,37 @@
 }
 
 .task-add.open {
-  margin: 0 4px $spacing 5px;
+  margin: 0 4px 0 5px;
   flex-direction: column;
+
+  textarea {
+    height: 50px;
+    box-shadow: 0 1px 0 #091e4240;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: unset;
+  }
+
+  .add-card-btn {
+    @include addSaveBtn();
+    padding: 6px 12px;
+    width: fit-content;
+  }
+
+  .close-btn {
+    font-size: 16px;
+    line-height: 24px;
+    color: #6b778c;
+
+    &:hover {
+      color: #172b4d;
+    }
+  }
+
+  .add-task-btns {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
 }
 
