@@ -4,7 +4,7 @@
       <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline' "></div>
       <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
         <p>{{ task.title }}</p>
-      <div class="icon-container flex">
+      <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
 
         <div class="preview-icon" v-if="task.description">
           <span class="icon-description"></span>
@@ -78,7 +78,7 @@ export default {
             'font-size' : '16px',
             'padding-top' : '30px',
             'background-image': 'url('+this.task.cover.imgUrl+')',
-            'min-height': '260px'
+            // 'min-height': '260px'
 
           }
           return style 
