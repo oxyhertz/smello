@@ -64,10 +64,36 @@
     & .label {
         height: 8px;
         margin: 0 4px 4px 0;
-        min-width: 40px;
+        width: 40px;
         border-radius: 4px;
         font-size: 0;
         overflow: hidden;
-        transition: width 1px;
+        // transition: height 1s;
+        transition: height 0.7s ease-out, width 0.3s;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        animation: labels 1s;
+    }
+
+    &.openLabel {
+        margin: 0 2px 2px;
+        padding: 0 8px;
+        height: 16px;
+        line-height: 16px;
+        font-weight: 700;
+        display: inline;
+        width: inherit;
+    }
+}
+
+@keyframes labels {
+    50% {
+        height: 8px;
+        width: 40px;
+    }
+    100% {
+        height: 16px;
+        width: inherit;
     }
 }

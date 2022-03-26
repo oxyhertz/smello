@@ -10,8 +10,9 @@
             @click.stop="openLabel = !openLabel"
             class="label"
             :style="{ 'background-color': label.color }"
+            :class="{ 'openLabel': openLabel }"
           >
-            <span v-if="openLabel">{{ label.title }}</span>
+            <span class="label" v-if="openLabel">{{ label.title }}</span>
           </div>
         </div>
       </div>
