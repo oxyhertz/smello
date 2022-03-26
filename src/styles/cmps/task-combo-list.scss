@@ -73,7 +73,7 @@
     min-height: 32px;
     min-height: 32px;
     padding: 5px;
-    &:hover{
+    &:hover {
       background-color: rgba(9, 30, 66, 0.08);
     }
   }
@@ -89,15 +89,17 @@
   margin-right: 6px;
 }
 
-.status{
+.status {
   font-size: 12px;
-    line-height: 16px;
-    padding: 0 4px;
-    border-radius: 2px;
-    margin: auto 0 auto 8px;
-    color: #FFFFFF;
-    background-color: #EC9488;
-    & .completed{
-      background-color: #61BD4F;
-    }
+  line-height: 16px;
+  padding: 0 4px;
+  border-radius: 2px;
+  margin: auto 0 auto 8px;
+  color: #ffffff;
+  &.completed {
+    background-color: #61bd4f;
+  }
+  &.overdue {
+    background-color: #ec9488;
+  }
 }

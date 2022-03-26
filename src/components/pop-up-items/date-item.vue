@@ -20,9 +20,8 @@ export default {
       saveDueDate(){
           const date={
               type: 'dueDate',
-              item:(Date.parse((this.date)))
+              item:(Date.parse((this.date))),
           }
-          console.log('date', date)
       this.$emit('addItem',date );
       }
   }

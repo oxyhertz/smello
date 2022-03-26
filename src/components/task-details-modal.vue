@@ -1,6 +1,6 @@
 <template>
   <section class="task-details-modal">
-    <div v-if="taskToEdit.cover" :style="coverStyle" class="task-cover" ></div>
+    <div v-if="taskToEdit.cover" :style="coverStyle" class="task-cover"></div>
     <div class="header">
       <span class="icon title-icon"></span>
       <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title" />
@@ -10,32 +10,31 @@
       <div class="task-content">
         <task-combo-list
           v-if="taskToEdit.members || taskToEdit.labelIds || taskToEdit.dueDate"
-          @setLabels="setLabels('labelsItem')"
           :comboData="taskToEdit"
+          @setLabels="setLabels('labelsItem')"
+          @setDate="setDate('dateItem')"
+          @setMembers="setMembers('membersItem')"
+          @addItem="addItem"
         />
         <div class="task-description">
-
           <div class="block-title">
             <span class="icon"></span>
             <h3>Description</h3>
           </div>
-
-          <textarea
-            @focus="isDescEditMode = true"
+          <contenteditable
+            @click="isDescEditMode = true"
+            tag="div"
+            :contenteditable="true"
             v-model="taskToEdit.description"
-            spellcheck="false"
-            placeholder="Add a more detailed description"
+            :noHTML="true"
             class="description-textarea"
-            :class="{ 'desc-with-content': taskToEdit.description, 'focused': isDescEditMode}"
-          ></textarea>
-          
+            :class="{ 'desc-with-content': taskToEdit.description, 'focused': isDescEditMode }"
+          />
           <div v-if="isDescEditMode" class="save-close-description">
             <button class="save" @click="onTaskEdit(); isDescEditMode = false">Save</button>
             <i class="fa-solid fa-x" @click="cancelDescEdit"></i>
           </div>
-
         </div>
-
         <div v-if="taskToEdit.attachments?.length" class="attachment-container">
           <div class="block-title">
             <span class="icon"></span>
@@ -85,7 +84,7 @@
           <span class="icon-checklist"></span>
           Checklist
         </button>
-        <button  @click="setDate('dateItem')">
+        <button @click="setDate('dateItem')">
           <span class="icon-time"></span>
           Dates
         </button>
@@ -114,7 +113,7 @@
           :task="task"
           @closePopup="closePopup"
           :popupData="popupData"
-           @updateCover="updateCover"
+          @updateCover="updateCover"
           :action="actionType"
           v-if="actionType"
           @addItem="addItem"
@@ -132,6 +131,7 @@ import { Comment } from "@vue/runtime-core";
 import taskComboList from "./task-details-cmps/task-combo-list.vue";
 import taskCheckList from "./task-details-cmps/task-checklist.vue";
 import { utilService } from "../services/utils-service";
+import contenteditable from 'vue-contenteditable'
 export default {
   data() {
     return {
@@ -150,10 +150,10 @@ export default {
       (this.actionType = action),
         (this.popupData = { name: "Dates", style: { top: "-24vh" } });
     },
-     updateCover(cover){
-           this.taskToEdit.cover = cover;
-           this.onTaskEdit();
-      },
+    updateCover(cover) {
+      this.taskToEdit.cover = cover;
+      this.onTaskEdit();
+    },
     setMembers(action) {
       (this.actionType = action),
         (this.popupData = { name: "Members", style: { top: "126px" } });
@@ -170,10 +170,10 @@ export default {
       (this.actionType = action),
         (this.popupData = { name: "Add checklist", style: { top: "200px" } });
     },
-    setCover(action){
-        this.actionType = action;
-        this.popupData = {name: 'Cover' , style: {top: "250px"}}
-      },
+    setCover(action) {
+      this.actionType = action;
+      this.popupData = { name: 'Cover', style: { top: "250px" } }
+    },
     closePopup() {
       (this.actionType = null), (this.popupData = null);
     },
@@ -184,11 +184,14 @@ export default {
         this.taskToEdit.attachments.push(item.item);
         this.onTaskEdit();
       } else if (item.type === "dueDate") {
-        console.log('item', item)
         if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
         this.taskToEdit.dueDate = item.item;
         this.onTaskEdit();
-      } else if (item.type === "checklist") {
+        this.closePopup();
+      } else if (item.type === "status") {
+        this.taskToEdit.status = item.item;
+      }
+      else if (item.type === "checklist") {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);
       } else if (item.type === "members") {
@@ -225,6 +228,7 @@ export default {
         type: "setTask",
         task: JSON.parse(JSON.stringify(this.taskToEdit)),
       });
+      this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
     },
     async updateLabels(updatedLabels, item) {
       try {
@@ -257,8 +261,8 @@ export default {
     currUser() {
       return this.$store.getters.user;
     },
-    coverStyle(){
-            return {'background-color': this.taskToEdit.cover.color,'background-image': 'url('+this.taskToEdit.cover.imgUrl+')'}
+    coverStyle() {
+      return { 'background-color': this.taskToEdit.cover.color, 'background-image': 'url(' + this.taskToEdit.cover.imgUrl + ')' }
     }
   },
   components: {
@@ -266,6 +270,20 @@ export default {
     attachment,
     taskComboList,
     taskCheckList,
+    contenteditable
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
