@@ -169,8 +169,8 @@
             }
         }
     }
-}
 
-.blue-btn {
-    @include addSaveBtn();
+    .blue-btn {
+        @include addSaveBtn();
+    }
 }
