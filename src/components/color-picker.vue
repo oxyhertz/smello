@@ -7,6 +7,8 @@
             :key="color.title"
             @click="updateColor(color.color)"
         > <span class="selected"></span></div>
+        
+       
     </section>
 </template>
 
@@ -14,6 +16,9 @@
 
 export default {
     name: "color-picker",
+    props:{
+        importedColors:Array,
+    },
     data() {
         return {
             colors: [
@@ -22,7 +27,11 @@ export default {
                 { color: '#a7ffeb', title: 'Greenblue' },
                 { color: '#f28b82', title: 'Lightorange' },
                 { color: '#d7aefb', title: 'Lightpink' },
-                { color: '#e8eaed', title: 'lightgreen' },
+                { color: '#e8eaed', title: 'lightgrey' },
+                { color: '#16243d', title: 'darkblue' },
+                { color: '#69c494', title: 'lightdarkgreen' },
+                { color: '#33a9bb', title: 'lightblue' },
+                { color: '#f5dd29', title: 'yellowbanana' },
             ],
         }
     },

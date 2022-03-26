@@ -26,6 +26,7 @@
         :board="currBoard"
         @updateLabels="updateLabels"
         @closePopup="closePopup"
+        @updateCover="updateCover"
       ></component>
     </main>
   </div>
@@ -44,6 +45,10 @@ export default {
     task: Object,
   },
   methods: {
+    updateCover(cover){
+      console.log(cover)
+      this.$emit('updateCover',cover)
+    },
     updateLabels(updatedLabels, item) {
       this.$emit("updateLabels", updatedLabels, item);
     },
