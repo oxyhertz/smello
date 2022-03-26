@@ -3,11 +3,20 @@
         <header>
             <section class="block-title">
                 <span class="icon checklist-icon"></span>
-                <input type="text" class="checklist-title" @blur="updateTask" v-model="checklistToEdit.title" />
+                <input
+                    type="text"
+                    class="checklist-title"
+                    @blur="updateTask"
+                    v-model="checklistToEdit.title"
+                />
             </section>
 
             <section class="header-options">
-                <button v-if="isAnyTodoDone" @click="isHideDone = !isHideDone" class="hide-show-btn">{{hideBtnTxt}}</button>
+                <button
+                    v-if="isAnyTodoDone"
+                    @click="isHideDone = !isHideDone"
+                    class="hide-show-btn"
+                >{{ hideBtnTxt }}</button>
                 <button @click="deleteChecklist">Delete</button>
             </section>
         </header>
@@ -21,7 +30,12 @@
             <div v-for="todo in checklistToEdit.todos" :key="todo._id">
                 <div class="todo-container" v-if="isHideDone ? !todo.isDone : true">
                     <input type="checkbox" v-model="todo.isDone" @change="updateTask" />
-                    <textarea :class="{completed: todo.isDone}" @blur="updateTask" v-model="todo.title" rows="1"></textarea>
+                    <textarea
+                        :class="{ completed: todo.isDone }"
+                        @blur="updateTask"
+                        v-model="todo.title"
+                        rows="1"
+                    ></textarea>
                 </div>
             </div>
         </div>
@@ -34,7 +48,6 @@
                 <i @click="addItemMode = false" class="fa-solid fa-x"></i>
             </section>
         </section>
-        
     </section>
 </template>
 
@@ -70,16 +83,16 @@ export default {
             this.updateTask();
         },
         deleteChecklist() {
-            this.$emit('updateItem', {type: 'checklists', val: {_id: this.checklistToEdit._id}});
+            this.$emit('updateItem', { type: 'checklists', val: { _id: this.checklistToEdit._id } });
         },
         updateTask() {
-            this.$emit('updateItem', {type: 'checklists', val: JSON.parse(JSON.stringify(this.checklistToEdit))});
+            this.$emit('updateItem', { type: 'checklists', val: JSON.parse(JSON.stringify(this.checklistToEdit)) });
         }
     },
     computed: {
         doneTodosPerecent() {
             const numOfTodos = this.checklistToEdit.todos.length;
-            if(!numOfTodos) return 0;
+            if (!numOfTodos) return 0;
             const numOfDoneTodos = this.checklistToEdit.todos.reduce((acc, todo) => todo.isDone ? acc + 1 : acc, 0);
             return parseInt(numOfDoneTodos / numOfTodos * 100);
         },
@@ -87,7 +100,7 @@ export default {
             return this.checklistToEdit.todos.some(todo => todo.isDone);
         },
         hideBtnTxt() {
-            if(!this.isHideDone) return 'Hide checked items';
+            if (!this.isHideDone) return 'Hide checked items';
             const numOfDoneTodos = this.checklistToEdit.todos.reduce((acc, todo) => todo.isDone ? acc + 1 : acc, 0);
             return `Show checked items (${numOfDoneTodos})`;
         }

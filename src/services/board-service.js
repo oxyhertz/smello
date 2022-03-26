@@ -91,21 +91,21 @@ function getEmptyBoard() {
       bgColor: '#cacabb',
     },
     labels: [
-        {
-          _id: 'l101',
-          title: 'Done',
-          color: '#61bd4f',
-        },
-        {
-          _id: 'l102',
-          title: 'Progress',
-          color: '#61bd33',
-        },
-        {
-          _id: 'l103',
-          title: 'ASAP',
-          color: '#f0f0f0',
-        },
+      {
+        _id: 'l101',
+        title: 'Done',
+        color: '#61bd4f',
+      },
+      {
+        _id: 'l102',
+        title: 'Progress',
+        color: '#61bd33',
+      },
+      {
+        _id: 'l103',
+        title: 'ASAP',
+        color: '#f0f0f0',
+      },
     ],
     members: [],
     groups: [

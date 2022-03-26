@@ -1,45 +1,39 @@
 <template>
-  <div class="wrapper" :style="boardStlye">
-    <app-header/>
-    <router-view />
-   </div> 
+	<div class="wrapper" :style="boardStlye">
+		<app-header />
+		<router-view />
+	</div>
 </template>
 
 <script>
 import appHeader from './components/main-header.vue'
-import {userManageService} from './services/user-manage-service.js'
-export default {
-  name: 'app',
-  created() {
-    this.$store.dispatch({ type: 'loadBoards' })
-    this.$store.dispatch({ type: 'loadUsers' })
-    userManageService.query()
-    console.log(this.$store.getters.currBoard?.style.bgColor)
+import { userManageService } from './services/user-manage-service.js'
 
-  },
-  computed:{
-    currBoardStyle(){
-      console.log(this.$store.getters?.currBoard?.style?.bgColor)
-      return this.$store.getters.currBoard?.style?.bgColor
-    },
-    currBoard(){
-      return this.$store.getters.currBoard?.style
-    },
-    boardStlye(){
-       return {'background-color': this.currBoard?.bgColor,'background-image': 'url('+this. currBoard?.bgImg+')'}
-    }
-  },
-  components: {
-    appHeader,
-  },
+export default {
+	name: 'app',
+	created() {
+		this.$store.dispatch({ type: 'loadBoards' })
+		this.$store.dispatch({ type: 'loadUsers' })
+		userManageService.query()
+		console.log(this.$store.getters.currBoard?.style.bgColor)
+
+	},
+	computed: {
+		currBoardStyle() {
+			console.log(this.$store.getters?.currBoard?.style?.bgColor)
+			return this.$store.getters.currBoard?.style?.bgColor
+		},
+		currBoard() {
+			return this.$store.getters.currBoard?.style
+		},
+		boardStlye() {
+			return { 'background-color': this.currBoard?.bgColor, 'background-image': 'url(' + this.currBoard?.bgImg + ')' }
+		}
+	},
+	components: {
+		appHeader,
+	},
 }
 
 </script>
 
-<style >
-  #app{
-    /* background-color: red; */
-    /* background-color: v-bind('color'); */
-    /* background:'yellow'; */
-  }
-</style>

@@ -22,18 +22,12 @@
       <members-preview :board="board" />
 
       <div class="invite-members-container">
-
         <button class="btn" @click="isInviteModal = !isInviteModal">
           <span class="board-header-invite-icon"></span> Invite
         </button>
 
-        <invite-members
-          :board="board"
-          @closeInviteModal="closeModal"
-          v-if="isInviteModal"
-        />
+        <invite-members :board="board" @closeInviteModal="closeModal" v-if="isInviteModal" />
       </div>
-
     </section>
 
     <section>
@@ -42,12 +36,11 @@
       </button>
 
       <button class="btn show-menu" @click="toggleBoardMenu">
-        <span class="board-header-menu-icon"> </span>Show menu
+        <span class="board-header-menu-icon"></span>Show menu
       </button>
 
-      <board-menu-modal :isOpen="isMenuModal"/>
+      <board-menu-modal :isOpen="isMenuModal" />
     </section>
-
   </header>
 </template>
 
@@ -79,10 +72,10 @@ export default {
   },
   methods: {
     editTitle(title) {
-      this.$emit("editTitle", title);
+      this.$emit('editTitle', title);
     },
     toggleFavorite(isFavorite) {
-      this.$emit("toggleFavorite", isFavorite);
+      this.$emit('toggleFavorite', isFavorite);
     },
     closeModal() {
       this.isInviteModal = false;

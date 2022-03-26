@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-    name: "add-group",
+    name: 'add-group',
     data() {
         return {
             isFocused: false,

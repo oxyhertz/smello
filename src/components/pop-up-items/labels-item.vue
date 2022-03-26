@@ -8,18 +8,12 @@
           @click="addLabel(label._id)"
           :style="{ 'background-color': label.color }"
           class="label-txt"
-          >{{ label.title }}</span
-        >
+        >{{ label.title }}</span>
         <div :class="{ 'hover-marker': null }"></div>
-        <span
-          @click.stop="updateCurrData(label), (isCreating = true)"
-          class="edit-labels"
-        ></span>
+        <span @click.stop="updateCurrData(label), (isCreating = true)" class="edit-labels"></span>
       </li>
     </ul>
-    <button @click="setLabel(), (isCreating = true)" class="create-label-btn">
-      Create a new label
-    </button>
+    <button @click="setLabel(), (isCreating = true)" class="create-label-btn">Create a new label</button>
   </div>
   <section v-else>
     <h3>Name</h3>
@@ -33,17 +27,18 @@
 </template>
 
 <script>
-import colorPicker from "../../components/color-picker.vue";
-import { utilService } from "../../services/utils-service";
+import colorPicker from '../../components/color-picker.vue';
+import { utilService } from '../../services/utils-service';
+
 export default {
-  props: ["board"],
+  props: ['board'],
   data() {
     return {
       isCreating: null,
-      title: "",
-      color: "",
+      title: '',
+      color: '',
       boardLabels: null,
-      currentTaskId: "",
+      currentTaskId: '',
     };
   },
   created() {
@@ -63,7 +58,7 @@ export default {
       if (!this.color) return;
       var id = this.currentTaskId || utilService.makeId();
       const item = {
-        type: "labels",
+        type: 'labels',
         item: {
           color: this.color,
           title: this.title,
@@ -79,17 +74,17 @@ export default {
         this.boardLabels.push(item.item);
       }
       var updatedLabels = this.boardLabels;
-      this.$emit("updateLabels", updatedLabels, item);
-      this.currentTaskId = "";
+      this.$emit('updateLabels', updatedLabels, item);
+      this.currentTaskId = '';
     },
     addLabel(id) {
       const item = {
-        type: "labels",
+        type: 'labels',
         item: {
           _id: id,
         },
       };
-      this.$emit("addItem", item);
+      this.$emit('addItem', item);
     },
   },
   components: {

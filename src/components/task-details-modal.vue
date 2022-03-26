@@ -126,14 +126,15 @@
     </section>
   </section>
 </template>
+
+
 <script>
-import popupMain from "./pop-up-main.vue";
+import popupMain from './pop-up-main.vue';
 import attachment from "./attachment-cmp.vue";
-import { Comment } from "@vue/runtime-core";
-import taskComboList from "./task-details-cmps/task-combo-list.vue";
-import taskCheckList from "./task-details-cmps/task-checklist.vue";
-import { utilService } from "../services/utils-service";
+import taskComboList from './task-details-cmps/task-combo-list.vue';
+import taskCheckList from './task-details-cmps/task-checklist.vue';
 import contenteditable from 'vue-contenteditable'
+
 export default {
   data() {
     return {
@@ -150,7 +151,7 @@ export default {
   methods: {
     setDate(action) {
       (this.actionType = action),
-        (this.popupData = { name: "Dates", style: { top: "-24vh" } });
+        (this.popupData = { name: 'Dates', style: { top: '-24vh' } });
     },
     updateCover(cover) {
       this.taskToEdit.cover = cover;
@@ -158,23 +159,23 @@ export default {
     },
     setMembers(action) {
       (this.actionType = action),
-        (this.popupData = { name: "Members", style: { top: "126px" } });
+        (this.popupData = { name: 'Members', style: { top: '126px' } });
     },
     setLabels(action) {
       (this.actionType = action),
-        (this.popupData = { name: "Labels", style: { top: "165px" } });
+        (this.popupData = { name: 'Labels', style: { top: '165px' } });
     },
     setAttachments(action) {
       (this.actionType = action),
-        (this.popupData = { name: "Attachments", style: { top: "268px" } });
+        (this.popupData = { name: 'Attachments', style: { top: '268px' } });
     },
     setChecklist(action) {
       (this.actionType = action),
-        (this.popupData = { name: "Add checklist", style: { top: "200px" } });
+        (this.popupData = { name: 'Add checklist', style: { top: '200px' } });
     },
     setCover(action) {
       this.actionType = action;
-      this.popupData = { name: 'Cover', style: { top: "250px" } }
+      this.popupData = { name: 'Cover', style: { top: '250px' } }
     },
     closePopup() {
       this.actionType = null
@@ -182,22 +183,22 @@ export default {
     },
     setItem(item) { },
     addItem(item) {
-      if (item.type === "attachment") {
+      if (item.type === 'attachment') {
         if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];
         this.taskToEdit.attachments.push(item.item);
         this.onTaskEdit();
-      } else if (item.type === "dueDate") {
+      } else if (item.type === 'dueDate') {
         if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
         this.taskToEdit.dueDate = item.item;
         this.onTaskEdit();
         this.closePopup();
-      } else if (item.type === "status") {
+      } else if (item.type === 'status') {
         this.taskToEdit.status = item.item;
       }
-      else if (item.type === "checklist") {
+      else if (item.type === 'checklist') {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);
-      } else if (item.type === "members") {
+      } else if (item.type === 'members') {
         if (!this.taskToEdit.members) this.taskToEdit.members = [];
         if (this.taskToEdit.members.some((member) => member._id === item.item._id)) {
           const idx = this.taskToEdit.members.findIndex((member) => member._id === item.item._id);
@@ -205,7 +206,7 @@ export default {
         } else {
           this.taskToEdit.members.push(item.item);
         }
-      } else if (item.type === "labels") {
+      } else if (item.type === 'labels') {
         if (!this.taskToEdit.labelIds) this.taskToEdit.labelIds = [];
         if (this.taskToEdit.labelIds.includes(item.item._id)) {
           const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
@@ -217,7 +218,7 @@ export default {
       this.onTaskEdit();
     },
     updateItem({ type, val }) {
-      if (type === "checklists") {
+      if (type === 'checklists') {
         const checklists = this.taskToEdit.checklists;
         const idx = checklists.findIndex((checklist) => checklist._id === val._id);
         if (val.title) checklists.splice(idx, 1, val); // edit
@@ -226,9 +227,9 @@ export default {
       this.onTaskEdit();
     },
     onTaskEdit() {
-      console.log("this.taskToEdit", this.taskToEdit);
+      console.log('this.taskToEdit', this.taskToEdit);
       this.$store.dispatch({
-        type: "setTask",
+        type: 'setTask',
         task: JSON.parse(JSON.stringify(this.taskToEdit)),
       });
       this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
@@ -236,14 +237,14 @@ export default {
     async updateLabels(updatedLabels, item) {
       try {
         await this.$store.dispatch({
-          type: "setBoardPrefs",
-          key: "labels",
+          type: 'setBoardPrefs',
+          key: 'labels',
           val: updatedLabels,
         });
         this.addItem(item);
         this.closePopup();
       } catch (err) {
-        console.log("err", err);
+        console.log('err', err);
       }
     },
     cancelDescEdit() {

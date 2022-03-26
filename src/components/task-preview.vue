@@ -40,9 +40,12 @@
     </section>
   </Draggable>
 </template>
+
+
 <script>
 import { Draggable } from 'vue3-smooth-dnd';
 import moment from 'moment';
+
 export default {
   name: 'task-preview',
   props: {
@@ -64,7 +67,7 @@ export default {
   },
   computed: {
     date() {
-      return moment(this.task.dueDate).format("lll").split(",")[0];
+      return moment(this.task.dueDate).format('lll').split(',')[0];
     },
     tasksDone() {
       const numOfDoneTodos = this.task.checklists.reduce((acc, { todos }) => {

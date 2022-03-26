@@ -6,18 +6,18 @@
             :style="{ 'background-color': color.color }"
             :key="color.title"
             @click="updateColor(color.color)"
-        > <span class="selected"></span></div>
-        
-       
+        >
+            <span class="selected"></span>
+        </div>
     </section>
 </template>
 
-<script>
 
+<script>
 export default {
-    name: "color-picker",
-    props:{
-        importedColors:Array,
+    name: 'color-picker',
+    props: {
+        importedColors: Array,
     },
     data() {
         return {

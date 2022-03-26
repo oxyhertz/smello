@@ -31,37 +31,40 @@
     </main>
   </div>
 </template>
+
+
 <script>
-import dateItem from "./pop-up-items/date-item.vue";
-import labelsItem from "./pop-up-items/labels-item.vue";
-import membersItem from "./pop-up-items/members-item.vue";
-import checklistItem from "./pop-up-items/checklist-item.vue";
-import attachmentItem from "./pop-up-items/attachment-item.vue";
-import coverItem from "./pop-up-items/cover-item.vue";
+import dateItem from './pop-up-items/date-item.vue';
+import labelsItem from './pop-up-items/labels-item.vue';
+import membersItem from './pop-up-items/members-item.vue';
+import checklistItem from './pop-up-items/checklist-item.vue';
+import attachmentItem from './pop-up-items/attachment-item.vue';
+import coverItem from './pop-up-items/cover-item.vue';
+
 export default {
-  name: "pop-up-main",
+  name: 'pop-up-main',
   props: {
     popupData: Object,
     action: String,
     task: Object,
   },
   methods: {
-    updateCover(cover){
+    updateCover(cover) {
       console.log(cover)
-      this.$emit('updateCover',cover)
+      this.$emit('updateCover', cover)
     },
     updateLabels(updatedLabels, item) {
-      this.$emit("updateLabels", updatedLabels, item);
+      this.$emit('updateLabels', updatedLabels, item);
     },
     closePopup() {
-      this.$emit("closePopup");
+      this.$emit('closePopup');
     },
     addItem(item) {
-              console.log('item', item)
+      console.log('item', item)
 
-      this.$emit("addItem", item);
+      this.$emit('addItem', item);
     },
-    removeItem() {},
+    removeItem() { },
   },
   computed: {
     currBoard() {

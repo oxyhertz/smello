@@ -21,19 +21,19 @@
 
 <script>
 export default {
-  props: ["board"],
+  props: ['board'],
   methods: {
-    addMember({fullname, username, imgUrl, _id}) {
+    addMember({ fullname, username, imgUrl, _id }) {
       const member = {
         type: 'members',
-        item:{
+        item: {
           fullname,
           username,
           imgUrl,
           _id,
         }
       }
-      this.$emit('addItem',member);
+      this.$emit('addItem', member);
     },
   },
 };
