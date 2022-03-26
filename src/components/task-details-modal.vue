@@ -1,6 +1,8 @@
 <template>
   <section class="task-details-modal">
-    <div v-if="taskToEdit.cover" :style="coverStyle" class="task-cover"></div>
+    <div v-if="taskToEdit.cover" :style="coverStyle" class="task-cover">
+      <span class="icon-cancel" @click="closeModal"></span>
+    </div>
     <div class="header">
       <span class="icon title-icon"></span>
       <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title" />
@@ -175,7 +177,8 @@ export default {
       this.popupData = { name: 'Cover', style: { top: "250px" } }
     },
     closePopup() {
-      (this.actionType = null), (this.popupData = null);
+       this.actionType = null
+       this.popupData = null
     },
     setItem(item) { },
     addItem(item) {
@@ -246,6 +249,9 @@ export default {
     cancelDescEdit() {
       this.taskToEdit.description = this.task.description;
       this.isDescEditMode = false;
+    },
+    closeModal(){
+      this.$emit('closeModal')
     }
   },
   computed: {

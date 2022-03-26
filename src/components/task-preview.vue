@@ -3,9 +3,18 @@
     <section class="task-preview" :style="taskStyle">
       <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline' "></div>
       <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
-        <p :class="{'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl}">{{ task.title }}</p>
+        <p class="title" :class="{'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl}">{{ task.title }}</p>
       <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
 
+        <div v-if="task.dueDate">
+                <span
+                  class="preview-icon"
+                  :style="{ 'font-size': 12 + 'px' }"
+                  :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
+                >
+                  {{ date }}</span
+                >
+        </div>
         <div class="preview-icon" v-if="task.description">
           <span class="icon-description"></span>
         </div>
@@ -20,6 +29,12 @@
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
 
+         <div class="preview-icon members" v-if="task.members?.length">
+              <div v-for="member in task.members" :key="member._id">
+                <avatar :size="28" color="white" :name="member.fullname"></avatar>
+              </div>
+            </div>
+
       </div>
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
@@ -28,6 +43,7 @@
 
 <script>
 import { Draggable } from 'vue3-smooth-dnd';
+import moment from 'moment';
 
 export default {
   name: 'task-preview',
@@ -50,6 +66,9 @@ export default {
     }
   },
   computed: {
+    date() {
+      return moment(this.task.dueDate).format("lll").split(",")[0];
+    },
     tasksDone() {
       const numOfDoneTodos = this.task.checklists.reduce((acc, { todos }) => {
         return acc + todos.reduce((acc, todo) => {

@@ -42,7 +42,7 @@
     <add-group @add="addGroup" />
   </Container>
   <div class="overlay" :class="{ 'open-overlay': isTaskDetail }" @click.stop="closeModal"></div>
-  <task-details-modal v-if="isTaskDetail" @editTask="editTask" />
+  <task-details-modal @closeModal="closeModal" v-if="isTaskDetail" @editTask="editTask" />
 </template>
 
 <script>
