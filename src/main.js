@@ -7,10 +7,12 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { focusDirective } from './directives/';
 import Avatar from 'vue3-avatar';
+import vClickOutside from "click-outside-vue3";
 
 const app = createApp(App).component('avatar', Avatar);
 app.directive('focus', focusDirective);
 
+app.use(vClickOutside);
 app.use(router);
 app.use(store);
 app.use(ElementPlus);

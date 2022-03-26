@@ -28,7 +28,6 @@
 
 
 <script>
-import vClickOutside from 'click-outside-vue3';
 
 export default {
     name: 'add-group',
@@ -37,9 +36,6 @@ export default {
             isFocused: false,
             groupTitle: ''
         }
-    },
-    directives: {
-        clickOutside: vClickOutside.directive
     },
     methods: {
         addGroup() {
