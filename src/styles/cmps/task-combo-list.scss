@@ -64,3 +64,27 @@
   font-family: system-ui;
   letter-spacing: 0.6px;
 }
+
+.due-date {
+  cursor: pointer;
+  & .title {
+    border-bottom: 4px;
+    background-color: rgba(9, 30, 66, 0.04);
+    min-height: 32px;
+    min-height: 32px;
+    padding: 5px;
+    &:hover{
+      background-color: rgba(9, 30, 66, 0.08);
+    }
+  }
+}
+
+.open-icon {
+  @include icon('\e923');
+  color: $clr4;
+}
+
+.date-checkbox {
+  margin-top: 8px;
+  margin-right: 6px;
+}

@@ -27,9 +27,9 @@
     </section>
     <section v-if="dueDate" class="due-date">
       <h3>Due date</h3>
-      <section class="flex">
-        <input type="checkbox" />
-        <div>{{ date }}</div>
+      <section class="due-date flex">
+        <input type="checkbox" class="date-checkbox" />
+        <div class="title">{{ date }} <span class="open-icon"></span></div>
       </section>
     </section>
   </section>

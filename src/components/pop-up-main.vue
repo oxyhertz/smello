@@ -57,6 +57,8 @@ export default {
       this.$emit("closePopup");
     },
     addItem(item) {
+              console.log('item', item)
+
       this.$emit("addItem", item);
     },
     removeItem() {},
