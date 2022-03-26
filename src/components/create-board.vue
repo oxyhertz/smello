@@ -28,6 +28,12 @@
         </div>
         <div class="background-picker-container">
             <p>Background</p>
+            <div class="cover-mini-photos">
+                <div v-for="pic in randPics" :key="pic._id" @click="updateBgImg(pic.full, pic._id)">
+                    <img :src="pic.thumb" alt />
+                    <span class="icon-check"></span>
+                </div>
+            </div>
             <color-picker @updateColor="updateBgColor"></color-picker>
         </div>
         <div>
@@ -43,16 +49,22 @@
 
 <script>
 import { boardService } from "../services/board-service.js";
+import { imagesService } from '../services/images-service.js'
+
 import colorPicker from "./color-picker.vue";
 export default {
     name: 'create-board',
     data() {
         return {
             boardToAdd: null,
+            randPics: null,
+            currPic: null,
         }
     },
     async created() {
         this.boardToAdd = await boardService.getEmptyBoard();
+        this.randPics = await imagesService.getImages('mountains', 4);
+        console.log(this.randPics)
     },
     methods: {
         async addBoard() {
@@ -67,13 +79,16 @@ export default {
         },
         updateBgColor(color) {
             this.boardToAdd.style.bgColor = color;
-            console.log(this.boardToAdd.style.bgColor);
+        },
+        updateBgImg(url, id) {
+            this.boardToAdd.style.bgImg = url
+            this.currPic = id
         }
 
     },
     computed: {
         bgColor() {
-            return { "background-color": this.boardToAdd.style.bgColor }
+            return { 'background-color': this.boardToAdd.style.bgColor, 'background-image': 'url(' + this.boardToAdd.style?.bgImg + ')' }
         }
     },
     components: {

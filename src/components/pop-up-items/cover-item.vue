@@ -1,4 +1,5 @@
 <template>
+    <span class="icon-back cover-popup" v-if="photoSearch" @click="photoSearch = false"></span>
     <section class="cover-item" v-if="!photoSearch">
         <div class="cover-preview">
             <h4>Size</h4>
