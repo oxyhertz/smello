@@ -7,7 +7,6 @@ export default {
     currentBoard: null,
     currentGroup: null,
     currentTask: null,
-    isBoardPage: false,
   },
   getters: {
     boards({ boards }) {
@@ -28,9 +27,6 @@ export default {
     },
     currTask({ currentTask }) {
       return currentTask;
-    },
-    isBoardPage({ isBoardPage }) {
-      return isBoardPage;
     },
   },
   mutations: {
@@ -91,9 +87,6 @@ export default {
         currTask => currTask._id === task.taskId
       );
       state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1);
-    },
-    setIsBoardPage(state, { isBoard }) {
-      state.isBoardPage = isBoard;
     },
   },
   actions: {

@@ -1,5 +1,5 @@
 <template>
-  <header class="main-header flex space-between" :class="{'header-bg-color' : isBoardPage}">
+  <header class="main-header flex space-between" :class="{'header-bg-color' : isBoard}">
     <div class="flex">
       <span class="menu-btn"></span>
       <section class="header-logo flex align-items">
@@ -121,8 +121,8 @@ export default {
     member() {
       return this.$store.getters.user;
     },
-    isBoardPage(){
-      return this.$store.getters.isBoardPage
+    isBoard(){
+      return this.$store.getters.currBoard
     }
   },
   components: {
