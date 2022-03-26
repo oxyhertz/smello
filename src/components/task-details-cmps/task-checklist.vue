@@ -3,21 +3,24 @@
         <header>
             <section class="block-title">
                 <span class="icon checklist-icon"></span>
+            </section>
+
+            <section class="checklist-header-container">
                 <input
                     type="text"
-                    class="checklist-title"
+                    class="checklist-title-input"
                     @blur="updateTask"
                     v-model="checklistToEdit.title"
                 />
-            </section>
 
-            <section class="header-options">
-                <button
-                    v-if="isAnyTodoDone"
-                    @click="isHideDone = !isHideDone"
-                    class="hide-show-btn"
-                >{{ hideBtnTxt }}</button>
-                <button @click="deleteChecklist">Delete</button>
+                <section class="header-actions flex">
+                    <button
+                        v-if="isAnyTodoDone"
+                        @click="isHideDone = !isHideDone"
+                        class="hide-show-btn"
+                    >{{ hideBtnTxt }}</button>
+                    <button @click="deleteChecklist">Delete</button>
+                </section>
             </section>
         </header>
 
@@ -31,6 +34,7 @@
                 <div class="todo-container" v-if="isHideDone ? !todo.isDone : true">
                     <input type="checkbox" v-model="todo.isDone" @change="updateTask" />
                     <textarea
+                        spellcheck="false"
                         :class="{ completed: todo.isDone }"
                         @blur="updateTask"
                         v-model="todo.title"
