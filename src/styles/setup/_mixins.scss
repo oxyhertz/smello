@@ -65,12 +65,11 @@
   }
 }
 
-
-//modal 
+//modal
 
 @mixin modal-act($top: 36px) {
   position: absolute;
-  top:$top;
+  top: $top;
   width: 304px;
   padding: 10px;
   z-index: 10;
@@ -118,7 +117,6 @@
   }
 }
 
-
 @mixin board-btn($type: regular, $bg: $header-btn-clr, $clr: $clr3, $padding: $spacing, $hover: $header-btn-clr-dark) {
   width: fit-content;
   display: inline-flex;
@@ -137,23 +135,41 @@
 
 // Type
 
+@mixin popupInput() {
+  margin-top: 7px;
+  display: block;
+  line-height: 20px;
+  padding: 8px 12px;
+  background-color: #fafbfc;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px #dfe1e6;
+  font-size: 14px;
+  transition-duration: 85ms;
+  transition-property: background-color, border-color, box-shadow;
+  transition-timing-function: ease;
+  width: 100%;
+
+  &:focus {
+    box-shadow: inset 0 0 0 2px #0079bf;
+  }
+}
+
 @mixin type($type: bold) {
-  // type options: 
-  // 1.bold 
-  // 2.boldCondensed 
+  // type options:
+  // 1.bold
+  // 2.boldCondensed
   // 3.condensed
   @if $type == bold {
     font-variation-settings: "wght" 430;
-  } 
-  @else if $type == boldCondensed {
+  } @else if $type == boldCondensed {
     font-variation-settings: "wght" 430, "wdth" 80;
     letter-spacing: em(6.72px);
-  } 
-  @else if $type == condensed {
+  } @else if $type == condensed {
     font-variation-settings: "wdth" 80;
     letter-spacing: em(6.72px);
-  }
-  @else if $type == light {
+  } @else if $type == light {
     font-variation-settings: "wght" 200;
   }
 }
@@ -162,31 +178,31 @@
   font-size: 12px;
   color: $mainClr;
   display: flex;
-  
-  p{
-      padding: 0 4px 0 2px;
+
+  p {
+    padding: 0 4px 0 2px;
   }
-  
-  span{
-      font-size: 16px;
-      height: 20px; 
-      line-height: 20px;
-      width: 20px;
+
+  span {
+    font-size: 16px;
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
   }
 }
 
-@mixin icon($icon, $fz : 16px, $lh : 16px, $margin: inherit, $clr:#172b4d) {
+@mixin icon($icon, $fz: 16px, $lh: 16px, $margin: inherit, $clr: #172b4d) {
   font-family: Trello;
   font-size: $fz;
   line-height: $lh;
   color: $clr;
-  &::before{
+  &::before {
     content: $icon;
     margin: $margin;
   }
 }
 
-@mixin boardHeader($content: none){
+@mixin boardHeader($content: none) {
   color: white;
   content: $content;
   font-size: 16px;
@@ -210,13 +226,13 @@
 }
 
 @mixin addSaveBtn($width: 53px, $margin: 5px 0 0 0, $clr: white) {
-    background-color: #0079bf;
-    border: none;
-    color: $clr;
-    width: $width;
-    margin: $margin;
+  background-color: #0079bf;
+  border: none;
+  color: $clr;
+  width: $width;
+  margin: $margin;
 
-    &:hover{
-        background-color: #026aa7;
-    }
+  &:hover {
+    background-color: #026aa7;
+  }
 }
