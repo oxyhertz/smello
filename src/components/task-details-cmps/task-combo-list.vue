@@ -56,6 +56,7 @@ export default {
       if (this.dateStatus) status = 'completed';
       else if (this.dueDate < Date.now()) status = 'overdue'
       else status = ''
+      console.log('statussssssssssssssssss', status)
       const item = {
         type: 'status',
         item: status
@@ -104,5 +105,13 @@ export default {
       return moment(this.dueDate).format('lll');
     },
   },
+  watch: {
+    'dueDate'() {
+      console.log('hhhhh')
+      this.updateStatus()
+    }
+
+  }
+
 };
 </script>
