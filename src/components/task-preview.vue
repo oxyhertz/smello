@@ -5,7 +5,6 @@
       <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
         <p class="title" :class="{'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl}">{{ task.title }}</p>
       <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
-
         <div v-if="task.dueDate">
                 <span
                   class="preview-icon"
@@ -18,33 +17,27 @@
         <div class="preview-icon" v-if="task.description">
           <span class="icon-description"></span>
         </div>
-
         <div class="preview-icon" v-if="task.attachments?.length">
           <span class="icon-attachment"></span>
           <p>{{ task.attachments?.length }}</p>
         </div>
-
         <div class="preview-icon" v-if="task.checklists?.length && numOfTodos" :class="{completed: tasksDone === numOfTodos}">
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
-
          <div class="preview-icon members" v-if="task.members?.length">
               <div v-for="member in task.members" :key="member._id">
                 <avatar :size="28" color="white" :name="member.fullname"></avatar>
               </div>
             </div>
-
       </div>
       <!-- <button @click.stop="removeTask">Delete</button> -->
     </section>
   </Draggable>
 </template>
-
 <script>
 import { Draggable } from 'vue3-smooth-dnd';
 import moment from 'moment';
-
 export default {
   name: 'task-preview',
   props: {
@@ -53,7 +46,6 @@ export default {
       required: true,
     },
   },
-
   data() {
     return {};
   },
@@ -85,8 +77,7 @@ export default {
         return {'background-color':this.task.cover.color};
       if(this.task.cover?.imgUrl){
         return {'background-image': 'url('+this.task.cover.imgUrl+')','height':'260px'}
-      }  
-      
+      }
     },
     taskStyle(){
       console.log(this.task.cover)
@@ -99,9 +90,9 @@ export default {
             'background-image': 'url('+this.task.cover.imgUrl+')',
             'min-height': this.task.cover.imgUrl ? '250px' : '',
              'color': '#fff',
-             'padding-top': this.task.cover.imgUrl ? '215px' : '30px', 
+             'padding-top': this.task.cover.imgUrl ? '215px' : '30px',
           }
-          return style 
+          return style
       }
     }
   }

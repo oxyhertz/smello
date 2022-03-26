@@ -56,6 +56,7 @@ export default {
     updateStatus() {
       var status 
       if (this.dateStatus) status = "completed";
+      else if (this.dueDate < Date.now()) status = "overdue"
       else status = ""
       const item ={
         type: 'status',
@@ -75,8 +76,6 @@ export default {
   },
   computed: {
     status() {
-      console.log('this.currStatus', this.currStatus)
-      console.log('this.currStatus', this.currStatus)
       if (this.currStatus === "completed") return "completed";
       else if (this.dueDate < Date.now()) return "overdue";
     },
