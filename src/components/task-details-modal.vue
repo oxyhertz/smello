@@ -72,49 +72,53 @@
       </div>
       <!-- <location :card="card" /> -->
       <div class="actions-btns-container">
-        <h3>Suggested</h3>
+        <!-- <h3>Suggested</h3>
         <button>
           <span class="icon-member"></span>
           Join
-        </button>
-        <h3>Add To card</h3>
-        <button @click="setMembers('membersItem')">
-          <span class="icon-members"></span>
-          Members
-        </button>
-        <button @click="setLabels('labelsItem')">
-          <span class="icon-label"></span>
-          Labels
-        </button>
-        <button @click="setChecklist('checklistItem')">
-          <span class="icon-checklist"></span>
-          Checklist
-        </button>
-        <button @click="setDate('dateItem')">
-          <span class="icon-time"></span>
-          Dates
-        </button>
-        <button @click="setAttachments('attachmentItem')">
-          <span class="icon-attachment"></span>
-          Attachments
-        </button>
-        <button>
-          <span class="icon-location"></span>
-          Location
-        </button>
-        <button @click="setCover('coverItem')">
-          <span class="icon-cover"></span>
-          cover
-        </button>
-        <h3>Actions</h3>
-        <button>
-          <span class="icon-copy"></span>
-          Copy
-        </button>
-        <button>
-          <span class="icon-share"></span>
-          Share
-        </button>
+        </button>-->
+        <div>
+          <h3>Add To card</h3>
+          <button @click="setMembers('membersItem')">
+            <span class="icon-members"></span>
+            Members
+          </button>
+          <button @click="setLabels('labelsItem')">
+            <span class="icon-label"></span>
+            Labels
+          </button>
+          <button @click="setChecklist('checklistItem')">
+            <span class="icon-checklist"></span>
+            Checklist
+          </button>
+          <button @click="setDate('dateItem')">
+            <span class="icon-time"></span>
+            Dates
+          </button>
+          <button @click="setAttachments('attachmentItem')">
+            <span class="icon-attachment"></span>
+            Attachments
+          </button>
+          <button>
+            <span class="icon-location"></span>
+            Location
+          </button>
+          <button @click="setCover('coverItem')">
+            <span class="icon-cover"></span>
+            cover
+          </button>
+        </div>
+        <div>
+          <h3>Actions</h3>
+          <button>
+            <span class="icon-copy"></span>
+            Copy
+          </button>
+          <button>
+            <span class="icon-share"></span>
+            Share
+          </button>
+        </div>
         <popup-main
           :task="task"
           @closePopup="closePopup"
