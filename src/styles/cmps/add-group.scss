@@ -22,6 +22,12 @@
             padding: 8px 12px;
             box-shadow: inset 0 0 0 2px #0079bf;
             background-color: #fff;
+            font-size: 14px;
+            font-weight: 400;
+
+            &::placeholder {
+                color: #738094;
+            }
         }
 
         & .add-group-btns {
