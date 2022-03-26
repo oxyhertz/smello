@@ -3,7 +3,6 @@
     <section class="task-preview" :style="taskStyle">
       <div class="task-preview-cover" :style="coverStyle"  v-if="task.cover?.type === 'header'"></div>
         <p>{{ task.title }}</p>
-          {{task}}
       <div class="icon-container flex">
 
         <div class="preview-icon" v-if="task.description">

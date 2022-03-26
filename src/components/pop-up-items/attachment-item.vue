@@ -9,7 +9,7 @@
             <!-- <img src="https://clippingpathgreat.com/wp-content/uploads/2021/04/upload-files-1024x707.jpg" alt=""> -->
             <!-- <input hidden type="file" @change="onUploadImg"/> -->
         </label>
-        <img v-else src="../../images/Bar-Preloader-1.gif" alt="">
+        <img v-else src="../../images/loader.svg" alt="">
          <input 
             hidden
             type="file"
@@ -22,16 +22,7 @@
         <button  @click="AddAttachment">Attach</button>
         
     </div>
-    <!-- <div class="attachment-item">
-        <label v-if="!isLoading">
-            <img src="https://clippingpathgreat.com/wp-content/uploads/2021/04/upload-files-1024x707.jpg" alt="">
-            <input hidden type="file" @change="onUploadImg"/>
-        </label>
-        <img v-else src="../../images/Bar-Preloader-1.gif" alt="">
-        <label class="attach-link" for="attach-link">Attach a link</label>
-        <input v-model="imgUrl" v-focus type="text" name="" id="attach-link">
-        <button  @click="AddAttachment">Attach</button>
-    </div> -->
+
 </template>
 <script>
 import { utilService } from '../../services/utils-service'
@@ -75,19 +66,6 @@ export default {
           this.isLoading = false;
           this.$emit("closePopup")
       },
-    //  async onUploadImg(ev){
-    //       this.isLoading = true
-    //       const fileName = ev.target.files[0].name;
-    //       const res = await uploadImg(ev)
-    //       this.setAttachment(res.url,fileName)
-    //       const item ={
-    //           type:'attachment',
-    //           item:JSON.parse(JSON.stringify(this.attachment))
-    //       }
-    //       this.$emit('addItem',item)
-    //       this.isLoading = false;
-    //       this.$emit("closePopup")
-    //   },
     async AddAttachment(){
       const fileName = this.imgUrl.substring(this.imgUrl.lastIndexOf('/')+1);
        this.setAttachment(this.imgUrl,fileName) 
