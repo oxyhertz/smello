@@ -79,7 +79,7 @@
           <span class="icon-checklist"></span>
           Checklist
         </button>
-        <button>
+        <button  @click="setDate('dueDateItem')">
           <span class="icon-time"></span>
           Dates
         </button>
@@ -140,6 +140,10 @@ export default {
     console.log("this.taskToEdit", this.taskToEdit);
   },
   methods: {
+    setDate(action) {
+      (this.actionType = action),
+        (this.popupData = { name: "Dates", style: { top: "245px" } });
+    },
     setMembers(action) {
       (this.actionType = action),
         (this.popupData = { name: "Members", style: { top: "126px" } });
