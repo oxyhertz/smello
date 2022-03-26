@@ -32,6 +32,7 @@
   </div>
 </template>
 <script>
+import dateItem from "./pop-up-items/date-item.vue";
 import labelsItem from "./pop-up-items/labels-item.vue";
 import membersItem from "./pop-up-items/members-item.vue";
 import checklistItem from "./pop-up-items/checklist-item.vue";
@@ -70,7 +71,8 @@ export default {
     checklistItem,
     attachmentItem,
     coverItem,
-    membersItem
+    dateItem,
+    membersItem,
   },
 };
 </script>

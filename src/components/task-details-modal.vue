@@ -80,7 +80,7 @@
           <span class="icon-checklist"></span>
           Checklist
         </button>
-        <button  @click="setDate('dueDateItem')">
+        <button  @click="setDate('dateItem')">
           <span class="icon-time"></span>
           Dates
         </button>
@@ -144,7 +144,7 @@ export default {
   methods: {
     setDate(action) {
       (this.actionType = action),
-        (this.popupData = { name: "Dates", style: { top: "245px" } });
+        (this.popupData = { name: "Dates", style: { top: "-24vh" } });
     },
      updateCover(cover){
            this.taskToEdit.cover = cover;
