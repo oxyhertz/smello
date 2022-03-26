@@ -1,10 +1,11 @@
 .board-header {
   margin: 18px 0 10px 12px;
+
   & .btn {
    @include lightBtn;
   }
   
-  .fa-star:hover {
+  .board-header-favorite:hover {
     color: $favorite-clr;
     transform: scale(1.2);
   }
@@ -19,8 +20,21 @@
 }
 .board-header-title {
   margin-inline-start: 1rem;
-  margin-bottom: 7px;
-  font-size: 1.3rem;
+  margin-bottom: 8px;
+  
+  
+  input {
+    font-size: 18px;
+    padding: 6px 12px;
+    &:not(:focus) {
+      color: white
+    }
+  }
+
+  & .editable:hover {
+    border-radius: $border-rsize;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .board-header-board-icon::before {

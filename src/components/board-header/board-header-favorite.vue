@@ -1,6 +1,6 @@
 <template>
-    <section class="board-header-favorite">
-        <i @click="toggleFavorite" :class="favoriteIcon"></i>
+    <section class="board-header-favorite" @click="toggleFavorite">
+        <i :class="favoriteIcon"></i>
     </section>
 </template>
 
