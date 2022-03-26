@@ -89,4 +89,8 @@
         display: inline;
         width: inherit;
     }
+
+    &.labels {
+        flex-wrap: wrap;
+    }
 }
