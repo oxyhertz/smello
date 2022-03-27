@@ -4,7 +4,7 @@
       <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline'"></div>
       <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
 
-      <div v-if="labels" class="preview-icon labels">
+      <div v-if="labels && this.task.cover?.type !== 'inline'" class="preview-icon labels">
         <div v-for="label, idx in labels" :key="idx">
           <div
             @click.stop="openLabel = !openLabel"
