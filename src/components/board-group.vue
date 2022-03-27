@@ -20,7 +20,6 @@
         </section>
 
         <Container
-          class
           orientation="vertical"
           group-name="col-items"
           :shouldAcceptDrop="
