@@ -231,7 +231,7 @@ export default {
       this.onTaskEdit();
     },
     onTaskEdit() {
-      console.log('this.taskToEdit', this.taskToEdit);
+      // console.log('this.taskToEdit', this.taskToEdit);
       this.$store.dispatch({
         type: 'setTask',
         task: JSON.parse(JSON.stringify(this.taskToEdit)),

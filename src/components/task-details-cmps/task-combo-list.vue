@@ -108,8 +108,8 @@ export default {
     'dueDate'() {
       console.log('watch updateStatus')
       this.updateStatus()
-    }
-
+    },
+    deep: true,
   }
 
 };

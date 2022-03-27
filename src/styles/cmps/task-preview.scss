@@ -93,4 +93,19 @@
     &.labels {
         flex-wrap: wrap;
     }
+    &.date {
+        padding-right: 3px;
+    }
+}
+
+.clock-icon {
+    @include icon("");
+    margin-left: 1px;
+}
+
+.icon-container {
+    margin-bottom: 4px;
+    & > * {
+        margin-inline-end: 8px;
+    }
 }
