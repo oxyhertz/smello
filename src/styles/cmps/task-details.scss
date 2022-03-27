@@ -9,7 +9,7 @@
   min-height: 900px;
   z-index: 15;
   border-radius: 2px;
-  padding: 25px 15px 30px 60px;
+  padding: 20px 15px 30px 60px;
   color: $mainClr;
   margin: 48px auto;
   overflow: visible;
@@ -82,7 +82,8 @@
     }
     .icon-cancel {
       position: absolute;
-      right: 0;
+      right: -12px;
+      top: -15px;
       font-size: 20px;
       cursor: pointer;
       width: 40px;
@@ -100,7 +101,7 @@
       position: absolute;
       margin-left: -40px;
       &::before {
-        content: "\e911";
+        content: '\e911';
       }
     }
   }
@@ -117,7 +118,7 @@
     align-items: center;
     margin-top: 45px;
     .icon::before {
-      content: "\e900";
+      content: '\e900';
     }
   }
   .task-description {
@@ -127,7 +128,7 @@
     margin-bottom: 30px;
     span {
       &::before {
-        content: "\e921";
+        content: '\e921';
       }
     }
   }
@@ -163,7 +164,7 @@
     }
 
     &[contenteditable]:empty::before {
-      content: "Add a more detailed description";
+      content: 'Add a more detailed description';
     }
   }
   .save-close-description {
@@ -188,7 +189,7 @@
   }
   .attachment-container {
     .icon::before {
-      content: "\e908";
+      content: '\e908';
     }
   }
 

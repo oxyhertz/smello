@@ -47,7 +47,10 @@
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
-        <div class="preview-icon members" v-if="task.members?.length">
+        <div
+          class="preview-icon members"
+          v-if="task.members?.length && this.task.cover?.type !== 'inline'"
+        >
           <div v-for="member in task.members" :key="member._id" class="member">
             <avatar :size="28" color="white" :name="member.fullname"></avatar>
           </div>
