@@ -136,7 +136,7 @@
   border-radius: 3px;
   outline: none;
   box-shadow: unset;
-  margin-right: 7px;
+  margin-right: 9px;
   & input {
     border: 0;
     outline: 0;
@@ -172,4 +172,11 @@
 .notification-header {
   font-size: 17px;
   margin-right: 12px;
+}
+
+.icon.icon-info {
+  margin-inline-end: 8.5px;
+}
+.icon.icon-bell {
+  margin-inline-end: 5px;
 }
