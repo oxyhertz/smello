@@ -5,16 +5,14 @@
       <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
 
       <div v-if="labels && this.task.cover?.type !== 'inline'" class="preview-icon labels">
-        <div v-for="label, idx in labels" :key="idx">
-          <div
-            @click.stop="toggleLabels"
-            class="label"
-            :style="{ 'background-color': label.color }"
-            :class="{ 'openLabel': labelStatus }"
-          >
-            <span class="label" v-if="labelStatus">{{ label.title }}</span>
-          </div>
-        </div>
+        <div
+          v-for="label, idx in labels"
+          :key="idx"
+          @click.stop="toggleLabels"
+          class="label"
+          :style="{ 'background-color': label.color }"
+          :class="{ 'openLabel': labelStatus }"
+        >{{ label.title }}</div>
       </div>
       <p
         class="title"
