@@ -33,9 +33,14 @@
     </div>
 
     <section class="secondery-container flex align-items">
-      <div class="main-header-input flex">
+      <div class="main-header-input flex" :class="{ focused: isInputFocused }" @click="focusInput">
         <span class="icon-search flex"></span>
-        <input v-model="search" placeholder="Search" />
+        <input
+          v-model="search"
+          @blur="isInputFocused = false;"
+          ref="headerInput"
+          placeholder="Search"
+        />
       </div>
       <span class="icon icon-info"></span>
       <span class="icon icon-bell"></span>
@@ -56,6 +61,7 @@ export default {
     return {
       search: '',
       isCreateBoard: false,
+      isInputFocused: false,
       Search,
     };
   },
@@ -63,6 +69,10 @@ export default {
     home() {
       this.$router.push('/board');
     },
+    focusInput() {
+      this.$refs.headerInput.focus();
+      this.isInputFocused = true;
+    }
   },
   computed: {
     member() {
