@@ -160,7 +160,7 @@ export default {
   methods: {
     setDate(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Dates', style: { top: '-24vh' } });
+        (this.popupData = { name: 'Dates', style: { top: '190px' } });
     },
     updateCover(cover) {
       this.taskToEdit.cover = cover;
@@ -263,8 +263,10 @@ export default {
       this.isDescEditMode = false;
     },
     saveDescEdit() {
-      this.onTaskEdit();
-      this.isDescEditMode = false
+      if (this.isDescEditMode) {
+        this.onTaskEdit();
+        this.isDescEditMode = false;
+      }
     },
     closeModal() {
       this.$emit('closeModal')

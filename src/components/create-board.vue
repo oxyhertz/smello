@@ -2,6 +2,7 @@
     <section class="create-board-modal" v-if="boardToAdd">
         <header>
             <p>Create Board</p>
+
             <span @click="closeModal">
                 <svg
                     width="10"
@@ -19,7 +20,7 @@
                 </svg>
             </span>
         </header>
-        <div class="create-board-preview" :style="bgColor">
+        <div class="create-board-preview" :style="bgStyle">
             <img
                 src="../images//board-preview-skeleton.14cda5dc635d1f13bc48.svg"
                 alt
@@ -30,8 +31,8 @@
             <p>Background</p>
             <div class="cover-mini-photos">
                 <div v-for="pic in randPics" :key="pic._id" @click="updateBgImg(pic.full, pic._id)">
-                    <img :src="pic.thumb" :class="{ 'low-opacity ': currPic === pic._id }" />
-                    <span class="icon-check" v-if="currPic === pic._id"></span>
+                    <img :src="pic.thumb" :class="{ 'low-opacity ': bgImg === pic._id }" />
+                    <span class="icon-check" v-if="bgImg === pic._id"></span>
                 </div>
             </div>
             <color-picker @updateColor="updateBgColor"></color-picker>
@@ -58,7 +59,8 @@ export default {
         return {
             boardToAdd: null,
             randPics: null,
-            currPic: null,
+            bgImg: null,
+            bgCurrColor: '#cacabb',
         }
     },
     async created() {
@@ -77,16 +79,20 @@ export default {
             this.$emit('closeCreateModal');
         },
         updateBgColor(color) {
+            this.bgCurrColor = color
             this.boardToAdd.style.bgColor = color;
+            this.bgImg = null;
+            this.boardToAdd.style.bgImg = '';
+
         },
         updateBgImg(url, id) {
             this.boardToAdd.style.bgImg = url
-            this.currPic = id
+            this.bgImg = id
         }
 
     },
     computed: {
-        bgColor() {
+        bgStyle() {
             return { 'background-color': this.boardToAdd.style.bgColor, 'background-image': 'url(' + this.boardToAdd.style?.bgImg + ')' }
         }
     },

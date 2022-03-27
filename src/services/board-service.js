@@ -91,22 +91,37 @@ function getEmptyBoard() {
       bgColor: '#cacabb',
     },
     labels: [
-      {
-        _id: 'l101',
-        title: 'Done',
-        color: '#61bd4f',
-      },
-      {
-        _id: 'l102',
-        title: 'Progress',
-        color: '#61bd33',
-      },
-      {
-        _id: 'l103',
-        title: 'ASAP',
-        color: '#f0f0f0',
-      },
-    ],
+    {
+        "color": "#f5dd29",
+        "title": "Day",
+        "_id": "l102"
+    },
+    {
+        "color": "#a7ffeb",
+        "title": "Remarket",
+        "_id": "l103"
+    },
+    {
+        "color": "#d7aefb",
+        "title": "Demand Marketing",
+        "_id": "enT4D7oh"
+    },
+    {
+        "color": "#33a9bb",
+        "title": "Partners",
+        "_id": "rtbnYyfi"
+    },
+    {
+        "color": "#16243d",
+        "title": "Government",
+        "_id": "5leaLS2n"
+    },
+    {
+        "color": "#f28b82",
+        "title": "Planning",
+        "_id": "NuwdhQ9L"
+    }
+],
     members: [],
     groups: [
       {

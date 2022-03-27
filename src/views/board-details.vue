@@ -28,7 +28,6 @@ import boardGroup from '../components/board-group.vue';
 import { utilService } from '../services/utils-service.js';
 import { boardService } from '../services/board-service.js';
 import boardHeader from '../components/board-header.vue'
-import axios from 'axios';
 
 export default {
 	name: 'board-details',
@@ -105,9 +104,9 @@ export default {
 				this.$store.commit(toCommit)
 			})
 		},
-		addMember(member) {
-			console.log(this.board.members)
-			this.board.members.push(member)
+		async addMember(members) {
+			await this.$store.dispatch({ type: 'setBoardPrefs', key: 'members', val: members });
+			this.board = this.currBoard
 		}
 	},
 	computed: {

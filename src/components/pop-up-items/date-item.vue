@@ -1,6 +1,8 @@
 <template>
-  <Datepicker v-model="date" inline autoApply></Datepicker>
-  <button @click="saveDueDate" class="save">save</button>
+  <section class="date-item">
+    <Datepicker class="date-picker" v-model="date" inline autoApply></Datepicker>
+    <button @click="saveDueDate" class="save">save</button>
+  </section>
 </template>
 
 

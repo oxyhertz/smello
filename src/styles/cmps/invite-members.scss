@@ -16,6 +16,24 @@
       opacity: 0.5;
     }
   }
+
+  input {
+    @include popupInput();
+    margin-bottom: 10px;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 10px 10px 0;
+    cursor: pointer;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: $clr7;
+    }
+  }
 }
 
 .invite-members-container {
