@@ -20,7 +20,10 @@
         class="title"
         :class="{ 'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl }"
       >{{ task.title }}</p>
-      <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
+      <div
+        class="icon-container flex"
+        v-if="this.task.cover?.type !== 'inline' && task.dueDate || task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos"
+      >
         <div v-if="task.dueDate">
           <span
             class="preview-icon date"

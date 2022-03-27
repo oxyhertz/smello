@@ -5,7 +5,7 @@
   padding-right: 6px;
 
   &::before {
-    content: "";
+    content: '';
     font-size: 18px;
     font-family: trello;
     color: #fff;
@@ -22,6 +22,11 @@
     height: 20px;
     width: 20px;
     color: white;
+  }
+
+  .icon {
+    color: white;
+    font-size: 20px;
   }
 
   &.header-bg-color {
