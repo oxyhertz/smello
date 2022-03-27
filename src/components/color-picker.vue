@@ -7,7 +7,7 @@
             :key="color.title"
             @click="updateColor(color.color)"
         >
-            <span class="selected"></span>
+            <span class="icon-complete"></span>
         </div>
     </section>
 </template>

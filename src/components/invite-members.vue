@@ -20,13 +20,13 @@
             </span>
         </header>
         <main>
-            <input type="text" />
+            <input type="text" v-model="filterBy.name" placeholder="Member name" />
+            <h4>Add Member</h4>
             <ul>
-                <li
-                    v-for="(user, idx) in getRelevantUsers"
-                    :key="idx"
-                    @click="addMember(user)"
-                >{{ user.fullname }}</li>
+                <li v-for="(user, idx) in getRelevantUsers" :key="idx" @click="addMember(user)">
+                    <avatar size="32" :name="user.fullname"></avatar>
+                    <p>{{ user.fullname }}</p>
+                </li>
             </ul>
         </main>
     </section>
@@ -40,9 +40,15 @@ export default {
     },
     data() {
         return {
+            appUsers: null,
+            filterBy: {
+                name: ''
+            }
         }
     },
     created() {
+        this.appUsers = this.users;
+
     },
     methods: {
         closeModal() {
@@ -55,8 +61,10 @@ export default {
                 imgUrl
             }
 
-            console.log(newMember)
-            this.$emit('addMember', newMember)
+            console.log(this.board)
+            let newBoard = JSON.parse(JSON.stringify(this.board))
+            newBoard.members.push(newMember)
+            this.$emit('addMember', newBoard.members);
 
         }
     },
@@ -65,11 +73,12 @@ export default {
             return this.$store.getters.getAllUsers
         },
         getRelevantUsers() {
-            let users = this.users;
-            console.log(this.board.members)
+            let users = JSON.parse(JSON.stringify(this.appUsers));
+            const regex = new RegExp(this.filterBy.name, 'i');
+            users = users.filter(user => regex.test(user.fullname));
             return users.filter(user => {
                 return !this.board.members.some(member => {
-                    console.log(user.fullname, user._id, 'userid')
+
                     console.log(member.fullname, member._id, 'memberId')
                     return user._id === member._id
                 })

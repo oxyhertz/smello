@@ -2,9 +2,9 @@
   margin: 18px 0 10px 12px;
 
   & .btn {
-   @include lightBtn;
+    @include lightBtn;
   }
-  
+
   .board-header-favorite:hover {
     color: $favorite-clr;
     transform: scale(1.2);
@@ -17,17 +17,21 @@
     color: white;
     @include board-btn($bg: rgba(240, 248, 255, 0));
   }
+
+  button {
+    align-items: stretch;
+    gap: 5px;
+  }
 }
 .board-header-title {
   margin-inline-start: 1rem;
   margin-bottom: 8px;
-  
-  
+
   input {
     font-size: 18px;
     padding: 6px 12px;
     &:not(:focus) {
-      color: white
+      color: white;
     }
   }
 

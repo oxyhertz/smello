@@ -160,7 +160,7 @@ export default {
   methods: {
     setDate(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Dates', style: { top: '-24vh' } });
+        (this.popupData = { name: 'Dates', style: { top: '190px' } });
     },
     updateCover(cover) {
       this.taskToEdit.cover = cover;
