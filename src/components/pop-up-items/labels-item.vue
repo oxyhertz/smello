@@ -61,7 +61,6 @@ export default {
     },
     setLabel() {
       if (!this.color) return;
-      console.log('this.boardLabels', this.boardLabels)
       var id = this.currentTaskId || utilService.makeId();
       const item = {
         type: 'labels',
