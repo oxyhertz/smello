@@ -137,6 +137,21 @@
   outline: none;
   box-shadow: unset;
   margin-right: 9px;
+
+  &.focused {
+    background-color: #fff;
+    .icon-search {
+      &::before {
+        color: unset;
+      }
+      color: black;
+    }
+
+    input::placeholder {
+      color: black;
+    }
+  }
+
   & input {
     border: 0;
     outline: 0;
