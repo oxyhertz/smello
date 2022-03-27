@@ -61,7 +61,8 @@
     background-color: #61bd4f;
     border-radius: $border-rsize;
     color: white;
-    padding: 2px;
+    padding: 2px 3px 2px 2px;
+
     span {
       color: white;
     }
@@ -70,7 +71,7 @@
     background-color: #ec9488;
     border-radius: $border-rsize;
     color: white;
-    padding: 2px;
+    padding: 2px 5px 2px 2px;
     span {
       color: white;
     }
@@ -111,7 +112,7 @@
     flex-wrap: wrap;
   }
   &.date {
-    padding-right: 3px;
+    padding-right: 5px;
   }
 }
 

@@ -2,18 +2,17 @@
   cursor: pointer;
   margin-left: $draggable-spacing;
   margin-right: $draggable-spacing;
-  margin-top: 3px;
   padding: 4px 3px 2px;
   display: flex;
   color: #5e6c84;
-  
+
   .plus-icon::before {
-      content: "\e901";
-      font-family: Trello;
-      padding: 3px;
-      padding-left: 8px;
-      font-size: 16px;
-      line-height: 20px;
+    content: "\e901";
+    font-family: Trello;
+    padding: 3px;
+    padding-left: 8px;
+    font-size: 16px;
+    line-height: 20px;
   }
 
   .add-task-txt {
@@ -61,10 +60,9 @@
     font-size: 24px;
     line-height: 24px;
     color: #6b778c;
-    
+
     &:hover {
       color: #172b4d;
     }
   }
 }
-
