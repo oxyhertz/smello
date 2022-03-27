@@ -9,7 +9,7 @@
   min-height: 900px;
   z-index: 15;
   border-radius: 2px;
-  padding: 25px 20px 30px 60px;
+  padding: 25px 15px 30px 60px;
   color: $mainClr;
   margin: 48px auto;
   overflow: visible;
@@ -106,7 +106,6 @@
   }
   .task-detail-main {
     display: flex;
-    gap: 15px;
     margin-top: 20px;
     .task-content {
       flex: 3;
@@ -133,7 +132,7 @@
     }
   }
   .description-textarea {
-    max-width: 500px;
+    max-width: 506px;
     cursor: pointer;
     background: none;
     font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
@@ -172,9 +171,11 @@
     align-items: baseline;
     gap: 10px;
   }
+
   .actions-btns-container {
     position: relative;
     flex: 1;
+    margin-left: 18px;
     h3 {
       color: #5e6c84;
       font-size: 12px;

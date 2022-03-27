@@ -19,7 +19,7 @@
             class
           />
         </svg>
-        <span class="logo">Trello</span>
+        <span class="logo">Drello</span>
       </section>
 
       <div class="create-board-container flex align-items">
