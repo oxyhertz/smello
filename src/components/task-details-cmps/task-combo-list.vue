@@ -41,7 +41,9 @@
 <script>
 import moment from 'moment';
 export default {
-  props: ['comboData'],
+  props: {
+    task: Object
+  },
   data() {
     return {
       dateStatus: false,
@@ -78,16 +80,16 @@ export default {
       else if (this.dueDate < Date.now()) return 'overdue';
     },
     currStatus() {
-      return this.comboData.status;
+      return this.task.status;
     },
     dueDate() {
-      return this.comboData.dueDate;
+      return this.task.dueDate;
     },
     members() {
-      return this.comboData.members;
+      return this.task.members;
     },
     labelIds() {
-      return this.comboData.labelIds;
+      return this.task.labelIds;
     },
     boardLabels() {
       return this.$store.getters.currBoard.labels;

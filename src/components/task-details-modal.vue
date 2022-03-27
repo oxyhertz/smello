@@ -13,7 +13,7 @@
       <div class="task-content">
         <task-combo-list
           v-if="taskToEdit.members || taskToEdit.labelIds || taskToEdit.dueDate"
-          :comboData="taskToEdit"
+          :task="taskToEdit"
           @setLabels="setLabels('labelsItem')"
           @setDate="setDate('dateItem')"
           @setMembers="setMembers('membersItem')"
