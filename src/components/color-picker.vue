@@ -7,7 +7,7 @@
             :key="color.title"
             @click="updateColor(color.color)"
         >
-            <span class="icon-complete"></span>
+            <span class="icon-complete" v-if="currColor === color.color"></span>
         </div>
     </section>
 </template>
@@ -21,13 +21,14 @@ export default {
     },
     data() {
         return {
+            currColor: '',
             colors: [
                 { color: '#bdea8a', title: 'Lightgreen' },
                 { color: '#fff475', title: 'Lightyellow' },
                 { color: '#a7ffeb', title: 'Greenblue' },
                 { color: '#f28b82', title: 'Lightorange' },
                 { color: '#d7aefb', title: 'Lightpink' },
-                { color: '#e8eaed', title: 'lightgrey' },
+                { color: '#ffb248', title: 'lightgrey' },
                 { color: '#16243d', title: 'darkblue' },
                 { color: '#69c494', title: 'lightdarkgreen' },
                 { color: '#33a9bb', title: 'lightblue' },
@@ -38,6 +39,7 @@ export default {
     methods: {
         updateColor(color) {
             this.selectedColor = true
+            this.currColor = color;
             this.$emit('updateColor', color);
         },
     },

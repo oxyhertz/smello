@@ -1,4 +1,4 @@
-.color-picker{
+.color-picker {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -7,6 +7,14 @@
   // & .selected{
   //   @include icon("")
   // }
+
+  .icon-complete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+  }
 }
 
 .color-picker > div {
@@ -19,7 +27,4 @@
   &:hover {
     filter: saturate(85%) brightness(85%);
   }
-  }
-
-
-  
+}
