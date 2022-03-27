@@ -7,15 +7,19 @@
     drag-class="dragging"
     @drop="onColumnDrop($event)"
   >
-    <Draggable class v-for="group in scene.groups" :key="group._id">
+    <Draggable class v-for="(group, idx) in scene.groups" :key="group._id">
       <section class="group-container">
         <section class="group-title">
-          <textarea class="group-title inline-input">{{ group.title }}</textarea>
+          <textarea
+            :value="group.title"
+            @change="editGroupTitle($event, group, idx)"
+            spellcheck="false"
+            class="group-title inline-input"
+          ></textarea>
           <span class="menu-icon"></span>
         </section>
 
         <Container
-          class
           orientation="vertical"
           group-name="col-items"
           :shouldAcceptDrop="
@@ -63,7 +67,7 @@ import taskDetailsModal from '../components/task-details-modal.vue'
 
 export default {
   name: 'board-group',
-  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask', 'cleanStore'],
+  emits: ['columnChange', 'addGroup', 'removeTask', 'addTask', 'taskChange', 'editTask', 'cleanStore', 'editGroup'],
   props: {
     groups: {
       type: Array,
@@ -93,6 +97,13 @@ export default {
     },
     addGroup(title) {
       this.$emit('addGroup', title);
+    },
+    editGroupTitle($event, group, idx) {
+      const newTitle = $event.target.value;
+      if (!newTitle) return $event.target.value = group.title;
+      const groupToSave = JSON.parse(JSON.stringify(group));
+      groupToSave.title = newTitle;
+      this.$emit('editGroup', { groupIdx: idx, newGroup: groupToSave });
     },
     removeTask(taskId, groupId) {
       const task = {

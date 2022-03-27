@@ -5,7 +5,7 @@
   padding-right: 6px;
 
   &::before {
-    content: '';
+    content: "";
     font-size: 18px;
     font-family: trello;
     color: #fff;
@@ -38,6 +38,10 @@
 
   .header-logo {
     padding-top: 2px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+    }
   }
 
   .create-btn {
@@ -139,6 +143,7 @@
 }
 
 .info-header {
+  cursor: pointer;
   margin-right: 18px;
   color: white;
 }

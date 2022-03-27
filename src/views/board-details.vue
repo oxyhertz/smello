@@ -14,6 +14,7 @@
 				@taskChange="taskChange"
 				@columnChange="columnChange"
 				@addGroup="addGroup"
+				@editGroup="editGroup"
 				@cleanStore="cleanStore"
 				:groups="board.groups"
 				:board="board"
@@ -82,6 +83,11 @@ export default {
 		},
 		addGroup(groupTitle) {
 			this.$store.dispatch({ type: 'addGroup', groupTitle })
+		},
+		editGroup({ groupIdx, newGroup }) {
+			// console.log('aaaaaaaa', groupIdx, newGroup);
+			console.log('asdjkyhasdkjsaghdkjsahdkjsadhkjsadhk')
+			this.$store.dispatch({ type: 'setGroup', groupIdx, newGroup })
 		},
 		columnChange(boardGroups) {
 			this.$store.dispatch({ type: 'setGroups', groups: boardGroups });
