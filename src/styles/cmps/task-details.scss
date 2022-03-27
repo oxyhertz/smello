@@ -80,6 +80,22 @@
     & + p {
       margin-top: 5px;
     }
+    .icon-cancel {
+      position: absolute;
+      right: 0;
+      font-size: 20px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        background-color: #091e4214;
+        border-radius: 50%;
+        // padding: 12px;
+      }
+    }
     span.icon {
       position: absolute;
       margin-left: -40px;
@@ -219,6 +235,24 @@
 @media (max-width: 768px) {
   .task-details-modal {
     width: 100%;
+    .task-detail-main {
+      flex-direction: column;
+
+      .actions-btns-container {
+        & > div {
+          display: flex;
+          flex-wrap: wrap;
+          //   gap: 3px;
+          & > h3 {
+            width: 100%;
+          }
+          & > * {
+            margin-right: 8px;
+            width: calc(50% - 8px);
+          }
+        }
+      }
+    }
   }
 }
 

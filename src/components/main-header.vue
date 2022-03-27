@@ -2,7 +2,7 @@
   <header class="main-header flex space-between" :class="{ 'header-bg-color': isBoard }">
     <div class="flex">
       <span class="menu-btn"></span>
-      <section class="header-logo flex align-items">
+      <section class="header-logo flex align-items" @click="home">
         <svg
           aria-hidden="true"
           focusable="false"
@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     home() {
-      this.$router.push('/home');
+      this.$router.push('/board');
     },
   },
   computed: {
