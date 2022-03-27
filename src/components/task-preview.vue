@@ -5,16 +5,14 @@
       <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
 
       <div v-if="labels && this.task.cover?.type !== 'inline'" class="preview-icon labels">
-        <div v-for="label, idx in labels" :key="idx">
-          <div
-            @click.stop="openLabel = !openLabel"
-            class="label"
-            :style="{ 'background-color': label.color }"
-            :class="{ 'openLabel': openLabel }"
-          >
-            <span class="label" v-if="openLabel">{{ label.title }}</span>
-          </div>
-        </div>
+        <div
+          v-for="label, idx in labels"
+          :key="idx"
+          @click.stop="toggleLabels"
+          class="label"
+          :style="{ 'background-color': label.color }"
+          :class="{ 'openLabel': labelStatus }"
+        >{{ label.title }}</div>
       </div>
       <p
         class="title"
@@ -75,10 +73,10 @@ export default {
       type: Object,
       required: true,
     },
+    labelStatus: Boolean
   },
   data() {
     return {
-      openLabel: false,
     };
   },
   components: {
@@ -90,6 +88,9 @@ export default {
     },
     removeTask() {
       this.$emit('removeTask', this.task._id)
+    },
+    toggleLabels() {
+      this.$emit('toggleLabels');
     }
   },
   computed: {

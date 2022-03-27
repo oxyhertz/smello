@@ -5,7 +5,7 @@
   padding-right: 6px;
 
   &::before {
-    content: '';
+    content: "";
     font-size: 18px;
     font-family: trello;
     color: #fff;
@@ -130,27 +130,32 @@
 
 .main-header-input {
   height: 33px;
-  width: 16.5vw;
+  width: 251px;
   background-color: rgba(255, 255, 255, 0.2);
   border: 0.4px solid rgba(255, 255, 255, 0.25);
-  outline: 0;
   border-radius: 3px;
   outline: none;
   box-shadow: unset;
   margin-right: 7px;
-
-  &::placeholder {
-    margin-left: 100px;
-    color: white;
+  & input {
+    border: 0;
+    outline: 0;
+    background-color: rgb(53 136 185);
+    &::placeholder {
+      color: white;
+    }
   }
 }
 
-.search-icon-header {
-  position: absolute;
-  // color: white;
-
-  & svg {
-    color: white;
+.secondery-container {
+  & .icon-search {
+    align-items: center;
+    margin-inline-end: 4px;
+    margin-inline-start: 3px;
+    &::before {
+      font-size: 21px;
+      color: white;
+    }
   }
 }
 
