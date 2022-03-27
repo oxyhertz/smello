@@ -34,11 +34,13 @@
         >
           <!-- tasks -->
           <task-preview
-            @removeTask="removeTask($event, group._id)"
             v-for="task in group.tasks"
+            @removeTask="removeTask($event, group._id)"
             @click="openTask(board, group, task)"
+            @toggleLabels="toggleLabels"
             :key="task._id"
             :task="task"
+            :labelStatus="isLabelsOpen"
           />
         </Container>
         <task-add @addTask="addTask($event, group._id)" />
@@ -78,7 +80,8 @@ export default {
   data() {
     return {
       scene: { groups: this.groups },
-      isTaskDetail: false
+      isTaskDetail: false,
+      isLabelsOpen: false
     };
   },
   components: {
@@ -126,6 +129,9 @@ export default {
     closeModal() {
       this.isTaskDetail = false
       this.$emit('cleanStore', ['Task', 'Group']);
+    },
+    toggleLabels() {
+      this.isLabelsOpen = !this.isLabelsOpen;
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult;
