@@ -22,7 +22,11 @@
         <main>
             <input type="text" />
             <ul>
-                <li v-for="(user, idx) in getRelevantUsers" :key="idx">{{ user.fullname }}</li>
+                <li
+                    v-for="(user, idx) in getRelevantUsers"
+                    :key="idx"
+                    @click="addMember(user)"
+                >{{ user.fullname }}</li>
             </ul>
         </main>
     </section>
@@ -43,6 +47,17 @@ export default {
     methods: {
         closeModal() {
             this.$emit('closeInviteModal')
+        },
+        addMember({ fullname, _id, imgUrl }) {
+            const newMember = {
+                fullname,
+                _id,
+                imgUrl
+            }
+
+            console.log(newMember)
+            this.$emit('addMember', newMember)
+
         }
     },
     computed: {
@@ -53,7 +68,11 @@ export default {
             let users = this.users;
             console.log(this.board.members)
             return users.filter(user => {
-                return !this.board.members.some(member => user._id === member._id)
+                return !this.board.members.some(member => {
+                    console.log(user.fullname, user._id, 'userid')
+                    console.log(member.fullname, member._id, 'memberId')
+                    return user._id === member._id
+                })
             })
         }
     }

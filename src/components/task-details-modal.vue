@@ -4,6 +4,7 @@
       <span class="icon-cancel" @click="closeModal"></span>
     </div>
     <div class="header">
+      <span class="icon-cancel" v-if="!taskToEdit.cover" @click="closeModal"></span>
       <span class="icon title-icon"></span>
       <input type="text" @blur="onTaskEdit" v-model="taskToEdit.title" class="task-details-title" />
     </div>
@@ -105,7 +106,7 @@
           </button>
           <button @click="setCover('coverItem')">
             <span class="icon-cover"></span>
-            cover
+            Cover
           </button>
         </div>
         <div>

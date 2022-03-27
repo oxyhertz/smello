@@ -1,6 +1,11 @@
 <template>
 	<section v-if="board" class="board-container" :style="boardStyle">
-		<board-header :board="board" @editTitle="editBoardTitle" @toggleFavorite="toggleFavorite" />
+		<board-header
+			:board="board"
+			@editTitle="editBoardTitle"
+			@addMember="addMember"
+			@toggleFavorite="toggleFavorite"
+		/>
 		<section class="group-container-scrollable">
 			<board-group
 				@removeTask="removeTask"
@@ -23,6 +28,7 @@ import boardGroup from '../components/board-group.vue';
 import { utilService } from '../services/utils-service.js';
 import { boardService } from '../services/board-service.js';
 import boardHeader from '../components/board-header.vue'
+import axios from 'axios';
 
 export default {
 	name: 'board-details',
@@ -35,12 +41,23 @@ export default {
 			board: null,
 		};
 	},
+	watch: {
+		async '$route.params.boardId'(newId, oldId) {
+			await this.$store.dispatch({
+				type: 'setCurrentBoard',
+				boardId: newId,
+			});
+			this.board = this.currBoard;
+
+		}
+	},
 	async created() {
 		await this.$store.dispatch({
 			type: 'setCurrentBoard',
 			boardId: this.$route.params.boardId,
 		});
 		this.board = this.currBoard;
+
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
@@ -87,6 +104,10 @@ export default {
 				toCommit[item.toLowerCase()] = null;
 				this.$store.commit(toCommit)
 			})
+		},
+		addMember(member) {
+			console.log(this.board.members)
+			this.board.members.push(member)
 		}
 	},
 	computed: {

@@ -29,6 +29,7 @@
         <invite-members
           :board="board"
           @closeInviteModal="closeModal"
+          @addMember="addMember"
           v-if="isInviteModal"
           v-click-outside="closeModal"
         />
@@ -88,6 +89,10 @@ export default {
     toggleBoardMenu() {
       this.isMenuModal = !this.isMenuModal;
     },
+    addMember(member) {
+      console.log(member)
+      this.$emit('addMember', member)
+    }
   },
   computed: {
     boardTitle() {
