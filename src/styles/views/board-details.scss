@@ -1,7 +1,7 @@
 .group-container-scrollable {
-    height: calc(100vh - 110px);
+    height: calc(100vh - 108px);
     overflow-x: auto;
-    
+
     &::-webkit-scrollbar {
         height: 12px;
         width: 12px;
