@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <section class="flex align-items">
+    <section class="flex align-items right-side-container">
       <span class="search-icon-header">
         <label for="tdE9Z4jFsBrsmjAbSKgDoVhPIR7SBy9S">
           <span class="nch-icon _3W-26fmi3tFfon _1X1mC-Jr6D4C2k _2yNU7HZlDagCbE">
