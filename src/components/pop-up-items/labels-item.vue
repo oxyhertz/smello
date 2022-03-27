@@ -37,14 +37,19 @@ export default {
       isCreating: null,
       title: '',
       color: '',
-      boardLabels: null,
+      // boardLabels: null,
       currentTaskId: '',
     };
   },
   created() {
-    this.boardLabels = JSON.parse(JSON.stringify(this.board.labels));
+    // this.boardLabels = JSON.parse(JSON.stringify(this.board.labels));
+    // this.boardLabels = this.board.labels;
   },
-  computed: {},
+  computed: {
+    boardLabels() {
+      return JSON.parse(JSON.stringify(this.board.labels))
+    }
+  },
   methods: {
     updateCurrData(label) {
       this.currentTaskId = label._id
@@ -56,6 +61,7 @@ export default {
     },
     setLabel() {
       if (!this.color) return;
+      console.log('this.boardLabels', this.boardLabels)
       var id = this.currentTaskId || utilService.makeId();
       const item = {
         type: 'labels',
@@ -73,6 +79,7 @@ export default {
       } else {
         this.boardLabels.push(item.item);
       }
+      console.log('updatedLabels, item', updatedLabels, item)
       var updatedLabels = this.boardLabels;
       this.$emit('updateLabels', updatedLabels, item);
       this.currentTaskId = '';
@@ -90,6 +97,11 @@ export default {
   components: {
     colorPicker,
   },
+  // watch: {
+  //   'boardLabels'() {
+  //   },
+  //   deep: true,
+  // }
 };
 </script>
 <style>

@@ -23,10 +23,13 @@
       <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
         <div v-if="task.dueDate">
           <span
-            class="preview-icon"
+            class="preview-icon date"
             :style="{ 'font-size': 12 + 'px' }"
             :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
-          >{{ date }}</span>
+          >
+            <span class="clock-icon" v-if="task.status?.length"></span>
+            {{ date }}
+          </span>
         </div>
         <div class="preview-icon" v-if="task.description">
           <span class="icon-description"></span>

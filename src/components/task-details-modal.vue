@@ -207,6 +207,7 @@ export default {
       else if (item.type === 'checklist') {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);
+        this.closePopup();
       } else if (item.type === 'members') {
         if (!this.taskToEdit.members) this.taskToEdit.members = [];
         if (this.taskToEdit.members.some((member) => member._id === item.item._id)) {
@@ -236,7 +237,7 @@ export default {
       this.onTaskEdit();
     },
     onTaskEdit() {
-      console.log('this.taskToEdit', this.taskToEdit);
+      // console.log('this.taskToEdit', this.taskToEdit);
       this.$store.dispatch({
         type: 'setTask',
         task: JSON.parse(JSON.stringify(this.taskToEdit)),

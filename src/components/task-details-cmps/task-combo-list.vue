@@ -47,7 +47,9 @@ export default {
       dateStatus: false,
     };
   },
-  created() { },
+  created() {
+    if (this.status === 'completed') this.dateStatus = true
+  },
   methods: {
     updateStatus() {
       var status
@@ -102,5 +104,13 @@ export default {
       return moment(this.dueDate).format('lll');
     },
   },
+  watch: {
+    'dueDate'() {
+      console.log('watch updateStatus')
+      this.updateStatus()
+    },
+    deep: true,
+  }
+
 };
 </script>
