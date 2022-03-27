@@ -7,7 +7,7 @@
             :key="color.title"
             @click="updateColor(color.color)"
         >
-            <span class="icon-complete" v-if="currColor === color.color"></span>
+            <span class="icon-complete" v-if="currColor === color.color && !bgImg"></span>
         </div>
     </section>
 </template>
@@ -18,6 +18,7 @@ export default {
     name: 'color-picker',
     props: {
         importedColors: Array,
+        bgImg: String
     },
     data() {
         return {

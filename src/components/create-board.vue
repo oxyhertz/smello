@@ -1,5 +1,5 @@
 <template>
-    <section class="create-board-modal" v-if="boardToAdd">
+    <section class="create-board-modal" v-click-outside="closeModal" v-if="boardToAdd">
         <header>
             <p>Create Board</p>
 
@@ -35,7 +35,7 @@
                     <span class="icon-check" v-if="bgImg === pic._id"></span>
                 </div>
             </div>
-            <color-picker @updateColor="updateBgColor"></color-picker>
+            <color-picker :bgImg="bgImg" @updateColor="updateBgColor"></color-picker>
         </div>
         <div>
             <label>
@@ -59,7 +59,7 @@ export default {
         return {
             boardToAdd: null,
             randPics: null,
-            bgImg: null,
+            bgImg: '',
             bgCurrColor: '#cacabb',
         }
     },
@@ -81,7 +81,7 @@ export default {
         updateBgColor(color) {
             this.bgCurrColor = color
             this.boardToAdd.style.bgColor = color;
-            this.bgImg = null;
+            this.bgImg = '';
             this.boardToAdd.style.bgImg = '';
 
         },

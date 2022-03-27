@@ -45,7 +45,7 @@
         <span class="board-header-menu-icon"></span>Show menu
       </button>
 
-      <board-menu-modal :isOpen="isMenuModal" />
+      <board-menu-modal :isOpen="isMenuModal" @closeMenu="isMenuModal = false" />
     </section>
   </header>
 </template>

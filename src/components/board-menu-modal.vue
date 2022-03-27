@@ -1,13 +1,24 @@
 <template>
-  <div v-if="isOpen" class="board-menu-modal flex" :class="{ open: isOpen }">
-    <h4>Menu</h4>
-    <span class="close-board-modal"></span>
+  <div v-if="isOpen" class="board-menu-modal" :class="{ open: isOpen }">
+    <header>
+      <h3>Menu</h3>
+      <span class="close-board-modal" @click="closeMenu"></span>
+    </header>
+    <div class="about-board">
+      <span class="icon-trello"></span>
+      <p>About this board</p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: ['isOpen'],
+  methods: {
+    closeMenu() {
+      this.$emit('closeMenu')
+    }
+  }
 };
 </script>
 
