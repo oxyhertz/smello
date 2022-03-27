@@ -262,8 +262,10 @@ export default {
       this.isDescEditMode = false;
     },
     saveDescEdit() {
-      this.onTaskEdit();
-      this.isDescEditMode = false
+      if (this.isDescEditMode) {
+        this.onTaskEdit();
+        this.isDescEditMode = false;
+      }
     },
     closeModal() {
       this.$emit('closeModal')
