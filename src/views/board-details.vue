@@ -89,10 +89,12 @@ export default {
 		setTask({ title, groupId }) {
 			var task = { title };
 			this.$store.dispatch({ type: 'setTask', groupId, task, });
+
 		},
 		editTask(editedTask) {
 			console.log(editedTask)
 			this.$store.dispatch({ type: 'setTask', task: editedTask });
+			// this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
 		},
 		quickUpdateTask() {
 			this.$store.dispatch({ type: 'setTask', task: editedTask });

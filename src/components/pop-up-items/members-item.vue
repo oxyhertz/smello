@@ -24,7 +24,10 @@
 
 <script>
 export default {
-  props: ['board'],
+  props: {
+    board: Object,
+    task: Object,
+  },
   data() {
     return {
 
@@ -49,10 +52,13 @@ export default {
       return this.board.members.map(member => member.fullname)
     },
     currTask() {
-      return this.$store.getters.currTask
+      // if (this.$store.getters.currTask) return this.$store.getters.currTask
+      return this.task
+
     },
     currTaskMembersIds() {
-      let members = this.currTask.members
+      let members = this.currTask?.members
+      // if (!members) members = []
       if (members) {
         return members.map(member => member._id)
       } else return []

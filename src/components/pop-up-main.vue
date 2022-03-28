@@ -27,6 +27,7 @@
         @updateLabels="updateLabels"
         @closePopup="closePopup"
         @updateCover="updateCover"
+        :task="task"
       ></component>
     </main>
   </div>
@@ -47,7 +48,10 @@ export default {
     popupData: Object,
     action: String,
     task: Object,
-    actionType: '',
+    actionType: ''
+  },
+  created() {
+    console.log(this.task)
   },
   methods: {
     updateCover(cover) {
@@ -57,6 +61,7 @@ export default {
       this.$emit('updateLabels', updatedLabels, item);
     },
     closePopup() {
+      console.log('close')
       this.$emit('closePopup');
     },
     addItem(item) {

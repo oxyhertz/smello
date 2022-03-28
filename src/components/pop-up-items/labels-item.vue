@@ -50,6 +50,8 @@ export default {
   created() {
     // this.boardLabels = JSON.parse(JSON.stringify(this.board.labels));
     // this.boardLabels = this.board.labels;
+    if (!this.board) console.log('noboard')
+    console.log(this.board)
   },
   computed: {
     boardLabels() {
@@ -105,6 +107,7 @@ export default {
           _id: id,
         },
       };
+      console.log('additem')
       this.$emit('addItem', item);
     },
   },

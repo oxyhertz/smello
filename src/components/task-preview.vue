@@ -76,6 +76,8 @@
         <!-- <button @click.stop="removeTask">Delete</button> -->
       </section>
       <quick-edit
+        @addItem="updateTask"
+        :task="task"
         @openTask="openTask"
         :style="quickEditPos"
         v-if="isQuickEdit"
@@ -109,7 +111,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$refs.tasky.getBoundingClientRect())
   },
   created() {
     this.taskCopy = JSON.parse(JSON.stringify(this.task))
@@ -137,8 +138,9 @@ export default {
       this.$emit('onQuickEdit', false)
       this.isQuickEdit = false
     },
-    updateTask() {
-      this.$emit('updateTask', JSON.parse(JSON.stringify(this.taskCopy)))
+    updateTask(_, editedTask = this.taskCopy) {
+      console.log(editedTask)
+      this.$emit('updateTask', JSON.parse(JSON.stringify(editedTask)))
       console.log(this.taskCopy.title)
     },
     openTask() {
