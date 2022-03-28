@@ -212,11 +212,10 @@ export default {
       if (id) {
         currTxt = this.task.activities.find(CurrComment => CurrComment._id === id).txt;
         this.lastAtIndex = currTxt.length - 2
-        console.log('this.lassssssssssssssssssssssssssssssssss', this.lastAtIndex)
       } else currTxt = this.comment;
       var atIndex = currTxt.indexOf('@', this.lastAtIndex + 1);
       if (atIndex !== -1) this.lastAtIndex = atIndex;
-      if ((atIndex !== -1) && (currTxt[atIndex - 1] === " ")) {
+      if (((atIndex !== -1) && (currTxt[atIndex - 1] === " ")) || ((currTxt.length === 1) && (currTxt === "@"))) {
         this.isFindMembers = true;
       }
     },
