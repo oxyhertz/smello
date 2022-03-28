@@ -18,10 +18,7 @@
         class="title"
         :class="{ 'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl }"
       >{{ task.title }}</p>
-      <div
-        class="icon-container flex"
-        v-if="this.task.cover?.type !== 'inline' && task.dueDate || task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos"
-      >
+      <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
         <div v-if="task.dueDate">
           <span
             class="preview-icon date"
@@ -47,10 +44,7 @@
           <span class="icon-checklist"></span>
           <p>{{ tasksDone }} / {{ numOfTodos }}</p>
         </div>
-        <div
-          class="preview-icon members"
-          v-if="task.members?.length && this.task.cover?.type !== 'inline'"
-        >
+        <div class="preview-icon members" v-if="task.members?.length">
           <div v-for="member in task.members" :key="member._id" class="member">
             <avatar :size="28" color="white" :name="member.fullname"></avatar>
           </div>
