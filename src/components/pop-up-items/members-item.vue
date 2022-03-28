@@ -1,6 +1,6 @@
 <template >
   <section v-if="board" class="members-item">
-    <input type="text" placeholder="Search members" />
+    <input type="text" placeholder="Search members" @input="findMembers" />
     <h3>Board members</h3>
     <ul>
       <li
@@ -13,7 +13,7 @@
           <div class="avatar">
             <avatar :size="32" color="white" :name="member.fullname"></avatar>
           </div>
-          <span class="name">{{ member.fullname }}</span>
+          <span class="name">{{ member.username }}</span>
         </div>
         <!-- <span class="username">({{ member.username }})</span> -->
         <span class="icon-complete" v-if="currTaskMembersIds.includes(member._id)"></span>

@@ -416,6 +416,7 @@ export default {
       })
     }
     this.$emit('cleanStore');
+
   },
 };
 </script>
