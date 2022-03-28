@@ -356,3 +356,11 @@
   left: 71px;
   background-color: #8a2be200 !important;
 }
+
+.comment-text li a {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 400;
+}

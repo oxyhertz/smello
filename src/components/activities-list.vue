@@ -23,10 +23,16 @@
                     class="close-comment-edit"
                     @click="updateItem(comment._id, false)"
                 ></button>
-                <button
+                <i class="fa-regular fa-face-smile-plus"></i>
+                <a
                     v-if="!comment.isEditing && user._id === comment.byMember._id"
                     @click="(isEditing = true), (updateItem(comment._id, true))"
-                >Edit</button>
+                >Edit</a>
+                <span v-if="!comment.isEditing && user._id === comment.byMember._id">-</span>
+                <a
+                    v-if="!comment.isEditing && user._id === comment.byMember._id"
+                    @click="deleteItem(comment._id)"
+                >Delete</a>
             </li>
         </ul>
     </section>
@@ -51,11 +57,16 @@ export default {
             this.isEditing = false
             this.$emit('closeComment')
         },
+        deleteItem(id) {
+            var comment = {
+                _id: id
+            }
+            this.$emit('updateItem', { type: 'comment', val: JSON.parse(JSON.stringify(comment)) });
+        },
         updateItem(id, isEditingCurrTask) {
             var currTask = JSON.parse(JSON.stringify(this.task));
             var comment = currTask.activities.find(comment => comment._id === id);
             comment.isEditing = isEditingCurrTask;
-            console.log('is, isEditingCurrTask', comment)
             this.$emit('updateItem', { type: 'comment', val: JSON.parse(JSON.stringify(comment)) });
             this.txt = '';
         }
