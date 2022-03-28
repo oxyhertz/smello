@@ -41,7 +41,7 @@ export default {
 		inputSize() {
 			const MAX_SIZE = 60;
 			const MIN_SIZE = 1;
-			const size = this.titleToEdit.length - 4;
+			const size = this.titleToEdit.length - 2;
 
 			if (size < MIN_SIZE) return MIN_SIZE;
 			else if (size > MAX_SIZE) return MAX_SIZE;

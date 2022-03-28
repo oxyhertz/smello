@@ -83,7 +83,7 @@ export default {
       state.currentBoard.groups.splice(groupIdx, 1, newGroup);
     },
     setTask(state, { groupId, task }) {
-     let groupIdx;
+      let groupIdx;
       if (state.currentGroup) groupId = state.currentGroup._id;
 
       if (groupId) {
@@ -104,10 +104,6 @@ export default {
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
-
-
-      
-
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(

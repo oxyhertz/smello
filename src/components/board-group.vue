@@ -54,6 +54,7 @@
 
   <div class="overlay" :class="{ 'open-overlay': isTaskDetail }">
     <task-details-modal
+      @cleanStore="cleanStore"
       v-click-outside="closeModal"
       @closeModal="closeModal"
       v-if="isTaskDetail"
@@ -97,6 +98,9 @@ export default {
     taskDetailsModal
   },
   methods: {
+    cleanStore() {
+      this.$emit('cleanStore', ['Task', 'Group']);
+    },
     openTask(board, group, task) {
       console.log('opentak')
       if (this.isQuickEdit) return
@@ -134,7 +138,6 @@ export default {
     },
     closeModal() {
       this.isTaskDetail = false
-      this.$emit('cleanStore', ['Task', 'Group']);
     },
     toggleLabels() {
       this.isLabelsOpen = !this.isLabelsOpen;
