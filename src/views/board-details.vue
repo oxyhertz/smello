@@ -91,6 +91,10 @@ export default {
 			this.$store.dispatch({ type: 'setTask', groupId, task, });
 		},
 		editTask(editedTask) {
+			console.log(editedTask)
+			this.$store.dispatch({ type: 'setTask', task: editedTask });
+		},
+		quickUpdateTask() {
 			this.$store.dispatch({ type: 'setTask', task: editedTask });
 		},
 		addGroup(groupTitle) {

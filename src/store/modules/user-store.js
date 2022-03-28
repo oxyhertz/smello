@@ -1,18 +1,11 @@
 import { userService } from '../../services/user-service';
-import { userManageService } from '../../services/user-manage-service';
+// import { userManageService } from '../../services/user-manage-service';
 import { utilService } from '../../services/utils-service';
 
 export default {
   state: {
-    loggedinUser: {
-      _id: 'hgfd43',
-      fullname: 'Guest',
-      username: 'Guest',
-      password: 'guest',
-      imgUrl: 'http://some-img.jpg',
-      mentions: [],
-      allUsers: [],
-    },
+    loggedinUser: userService.getLoggedinUser(),
+    allUsers: []
   },
   getters: {
     user(state) {
@@ -32,7 +25,7 @@ export default {
     },
   },
   mutations: {
-    setUser(state, { user }) {
+    setLoggedinUser(state, { user }) {
       state.loggedinUser = user;
     },
     setUsers(state, { users }) {
@@ -41,14 +34,17 @@ export default {
   },
   actions: {
     async loadUsers({ commit, state }) {
-      const users = await userManageService.query();
-      commit({ type: 'setUsers', users });
+      try {
+        const users = await userService.getUsers();
+        commit({ type: 'setUsers', users });
+      } catch (err) {
+        console.log(err);
+      }
     },
     async login({ commit }, { cred }) {
       try {
         const user = await userService.login(cred);
-        commit({ type: 'setUser', user });
-        utilService.saveToSessionStorage('user', user);
+        commit({ type: 'setLoggedinUser', user });
       } catch (err) {
         console.log(err);
       }
@@ -56,8 +52,7 @@ export default {
     async signup({ commit }, { cred }) {
       try {
         const user = await userService.signup(cred);
-        commit({ type: 'setUser', user });
-        utilService.saveToSessionStorage('user', user);
+        commit({ type: 'setLoggedinUser', user });
       } catch (err) {
         console.log(err);
       }
@@ -65,8 +60,7 @@ export default {
     async logout({ commit }) {
       try {
         await userService.logout();
-        commit({ type: 'setUser', user: null });
-        sessionStorage.removeItem('user');
+        commit({ type: 'setLoggedinUser', user: null });
       } catch (err) {
         console.log(err);
       }

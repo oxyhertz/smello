@@ -11,6 +11,9 @@ import { boardService } from '../services/board-service.js';
 
 export default {
 	name: 'workspace',
+	async created() {
+		await this.$store.dispatch({ type: 'loadBoards' })
+	},
 	methods: {
 		async toggleFavorite(id) {
 			const board = await boardService.getBoardById(id)

@@ -83,10 +83,17 @@ export default {
       state.currentBoard.groups.splice(groupIdx, 1, newGroup);
     },
     setTask(state, { groupId, task }) {
+     let groupIdx;
       if (state.currentGroup) groupId = state.currentGroup._id;
-      const groupIdx = state.currentBoard.groups.findIndex(
-        group => group._id === groupId
-      );
+
+      if (groupId) {
+        groupIdx = state.currentBoard.groups.findIndex(group => group._id === groupId);
+      } else {
+        groupIdx = state.currentBoard.groups.findIndex(group => {
+          return (group.tasks.findIndex(t => t._id === task._id) !== -1)
+        })
+      }
+
       if (task._id) {
         const taskIdx = state.currentBoard.groups[groupIdx].tasks.findIndex(
           currTask => currTask._id === task._id
@@ -97,6 +104,10 @@ export default {
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
+
+
+      
+
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(

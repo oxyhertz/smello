@@ -9,7 +9,22 @@
   overflow-y: scroll;
 }
 
+.overlay-flat {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.438);
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: scroll;
+}
+
 .open-overlay {
+  z-index: 5;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.open-overlay-2 {
   z-index: 5;
   pointer-events: auto;
   opacity: 1;

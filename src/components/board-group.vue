@@ -35,8 +35,10 @@
           <!-- tasks -->
           <task-preview
             v-for="task in group.tasks"
+            @updateTask="updateTask"
+            @onQuickEdit="onQuickEdit"
             @removeTask="removeTask($event, group._id)"
-            @click="openTask(board, group, task)"
+            @click.stop="openTask(board, group, task)"
             @toggleLabels="toggleLabels"
             :key="task._id"
             :task="task"
@@ -82,7 +84,8 @@ export default {
     return {
       scene: { groups: this.groups },
       isTaskDetail: false,
-      isLabelsOpen: false
+      isLabelsOpen: false,
+      isQuickEdit: false,
     };
   },
   components: {
@@ -98,6 +101,9 @@ export default {
       this.$emit('cleanStore', ['Task', 'Group']);
     },
     openTask(board, group, task) {
+      console.log('opentak')
+      console.log()
+      if (this.isQuickEdit) return
       this.isTaskDetail = true;
       this.$store.commit({ type: 'setCurrGroup', group })
       this.$store.commit({ type: 'setCurrTask', task })
@@ -185,6 +191,19 @@ export default {
         ];
       };
     },
+    onQuickEdit(state) {
+      console.log(state)
+      this.isQuickEdit = state;
+      console.log(this.isQuickEdit)
+    },
+    updateTask(task) {
+      console.log(task)
+      const taskGroup = this.groups.filter(group => {
+        group.tasks.some(groupTask => groupTask._id === task._id)
+        return group._id
+      })
+      this.$emit('editTask', task)
+    }
   },
 };
 </script>
