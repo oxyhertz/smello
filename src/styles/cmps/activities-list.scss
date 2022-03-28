@@ -5,6 +5,15 @@
     height: 35px;
     border-radius: 3px;
     padding: 8px 12px;
+    & input {
+        border: 0;
+        pointer-events: none;
+    }
+    &.open input {
+        pointer-events: all;
+        width: 100%;
+        outline: none;
+    }
 }
 
 .activity {
