@@ -74,28 +74,21 @@
             <input
               :class="{ open: isComment }"
               @click="isComment = true"
+              @input="findMembers"
               placeholder="Write a comment..."
               type="text"
               v-model="comment"
             />
-            <div
+            <comment-actions
               v-if="isComment"
               :class="{ open: isComment }"
               class="comments-main-container flex space-between"
-            >
-              <div @click="addComment" class="comment-save">
-                <button class="save">Save</button>
-              </div>
-              <div class="comment-actions flex">
-                <span class="icon-attachment"></span>
-                <span class="icon-find-members"></span>
-                <span class="icon-emojis"></span>
-                <span class="title-icon"></span>
-              </div>
-            </div>
+              @addComment="addComment"
+              @closeComment="closeComment"
+            />
           </div>
         </div>
-        <activities-list :task="task" :miniUser="user" />
+        <activities-list :task="task" :user="miniUser" @updateItem="updateItem" />
       </div>
       <!-- <location :card="card" /> -->
       <div class="actions-btns-container">
@@ -171,6 +164,7 @@ import taskComboList from './task-details-cmps/task-combo-list.vue';
 import taskCheckList from './task-details-cmps/task-checklist.vue';
 import contenteditable from 'vue-contenteditable'
 import activitiesList from './activities-list.vue'
+import commentActions from './comment-actions.vue'
 
 export default {
   data() {
@@ -291,7 +285,13 @@ export default {
         const idx = checklists.findIndex((checklist) => checklist._id === val._id);
         if (val.title) checklists.splice(idx, 1, val); // edit
         else checklists.splice(idx, 1); // deletion
-      } else this.taskToEdit[type] = val;
+      } else if (type === 'comment') {
+        const activities = this.taskToEdit.activities;
+        const idx = activities.findIndex((activity) => activity._id === val._id);
+        if (val.txt?.length) activities.splice(idx, 1, val); // edit
+        else activities.splice(idx, 1); // deletion
+      }
+      else this.taskToEdit[type] = val;
       this.onTaskEdit();
     },
     onTaskEdit() {
@@ -337,7 +337,7 @@ export default {
       return this.$store.getters.currGroup;
     },
     task() {
-      return this.$store.getters.currTask;
+      return JSON.parse(JSON.stringify(this.$store.getters.currTask))
     },
     currUser() {
       return this.$store.getters.user;
@@ -355,7 +355,22 @@ export default {
     taskComboList,
     taskCheckList,
     contenteditable,
-    activitiesList
+    activitiesList,
+    commentActions
   },
+  unmounted() {
+    if (!this.task?.activities?.length) return
+    var openComments = this.task.activities.map(comment => { if (comment.isEditing) return comment })
+    console.log('this.task', openComments)
+    // console.log('openComments', openComments)
+    openComments.forEach(comment => {
+      if (comment) {
+        comment.isEditing = false
+        this.updateItem({ type: 'comment', val: comment });
+      }
+    })
+    this.$emit('cleanStore');
+  },
+
 };
 </script>
