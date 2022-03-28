@@ -39,6 +39,7 @@ export default {
         commit({ type: 'setUsers', users });
       } catch (err) {
         console.log(err);
+        throw err;
       }
     },
     async login({ commit }, { cred }) {
@@ -47,6 +48,7 @@ export default {
         commit({ type: 'setLoggedinUser', user });
       } catch (err) {
         console.log(err);
+        throw err;
       }
     },
     async signup({ commit }, { cred }) {
@@ -55,6 +57,7 @@ export default {
         commit({ type: 'setLoggedinUser', user });
       } catch (err) {
         console.log(err);
+        throw err;
       }
     },
     async logout({ commit }) {
@@ -63,6 +66,7 @@ export default {
         commit({ type: 'setLoggedinUser', user: null });
       } catch (err) {
         console.log(err);
+        throw err;
       }
     },
   },

@@ -9,7 +9,8 @@ export const userService = {
   logout,
   getLoggedinUser,
   getUsers,
-  getUserById
+  getUserById,
+  getGuestUser
 };
 
 function getUsers() {
@@ -36,6 +37,14 @@ async function signup(cred) {
 function logout() {
   sessionStorage.removeItem(LOGGEDIN_USER_KEY);
   return httpService.post(ENDPOINT + '/logout');
+}
+
+function getGuestUser() {
+  return {
+    fullname: 'Guest',
+    username: 'guest',
+    password: 'guest',
+  };
 }
 
 function _saveLocalUser(user) {

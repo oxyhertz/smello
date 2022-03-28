@@ -47,6 +47,7 @@ export default {
     popupData: Object,
     action: String,
     task: Object,
+    actionType: '',
   },
   methods: {
     updateCover(cover) {
