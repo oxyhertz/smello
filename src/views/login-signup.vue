@@ -1,24 +1,35 @@
 <template>
-    <header>
-        <h1>Drello</h1>
-    </header>
-    <main class="login-container">
-        <h3>Log in to Drello</h3>
-        <form @submit.prevent="onLoginSignup">
-            <input type="text" v-model="user.username" placeholder="Enter Username" />
-            <input
-                v-if="!isLogin"
-                v-model="user.fullname"
-                type="text"
-                placeholder="Enter Full Name"
-            />
-            <input type="password" v-model="user.password" placeholder="Enter password" />
-            <button class="login-btn">Log in</button>
-        </form>
+    <section class="main-container">
+        <header>
+            <span class="icon-trello"></span>
+            <h1>Drello</h1>
+        </header>
+        <main class="login-container">
+            <h2>Log in to Drello</h2>
+            <form @submit.prevent>
+                <input type="text" v-model="user.username" placeholder="Enter Username" />
+                <input
+                    v-if="!isLogin"
+                    v-model="user.fullname"
+                    type="text"
+                    placeholder="Enter Full Name"
+                />
+                <input type="password" v-model="user.password" placeholder="Enter password" />
 
-        <hr />
-        <p @click="toggleLoginSignup">{{ loginSignupTxt }}</p>
-    </main>
+                <button class="login-btn" @click="onLoginSignup">{{ loginSignupBtnTxt }}</button>
+
+                <div class="login-option-sep">Or</div>
+
+                <button class="login-with-google" @click="handleGoogleLogin">
+                    <span class="google-icon"></span>
+                    <span class="btn-txt">Continue with Google</span>
+                </button>
+            </form>
+
+            <hr />
+            <p @click="toggleLoginSignup" class="change-form-link">{{ loginSignupLinkTxt }}</p>
+        </main>
+    </section>
 </template>
 
 
@@ -48,6 +59,25 @@ export default {
                 console.log(err)
             }
         },
+        async handleGoogleLogin() {
+            try {
+                const googleUser = await this.$gAuth.signIn();
+                if (!googleUser) return;
+                const username = googleUser.getBasicProfile().getEmail();
+                const fullname = googleUser.getBasicProfile().getName();
+                const imgUrl = googleUser.getBasicProfile().getImageUrl();
+                const userToSave = { username, fullname, imgUrl, type: 'google' }
+                try {
+                    await this.$store.dispatch({ type: 'login', cred: userToSave });
+                } catch (err) {
+                    await this.$store.dispatch({ type: 'signup', cred: userToSave });
+                }
+                this.$router.push('/board');
+
+            } catch (err) {
+                console.log(err);
+            }
+        },
         toggleLoginSignup() {
             this.isLogin = !this.isLogin;
             this.fullname = '';
@@ -56,7 +86,10 @@ export default {
         }
     },
     computed: {
-        loginSignupTxt() {
+        loginSignupBtnTxt() {
+            return this.isLogin ? 'Login' : 'Signup';
+        },
+        loginSignupLinkTxt() {
             return this.isLogin ? 'Sign up for an account' : 'Already have an account? Log in';
         }
     }
