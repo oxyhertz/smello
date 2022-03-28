@@ -64,12 +64,38 @@
           </div>
           <button class="show-details-btn">Show Details</button>
         </div>
-        <div class="comment-text-container">
-          <avatar size="32" :name="currUser.fullname"></avatar>
+        <div
+          v-click-outside="closeComment"
+          :class="{ open: isComment }"
+          class="comment-text-container"
+        >
           <div class="comment-text">
-            <input placeholder="Write a comment..." type="text" />
+            <avatar size="32" :name="currUser.fullname"></avatar>
+            <input
+              :class="{ open: isComment }"
+              @click="isComment = true"
+              placeholder="Write a comment..."
+              type="text"
+              v-model="comment"
+            />
+            <div
+              v-if="isComment"
+              :class="{ open: isComment }"
+              class="comments-main-container flex space-between"
+            >
+              <div @click="addComment" class="comment-save">
+                <button class="save">Save</button>
+              </div>
+              <div class="comment-actions flex">
+                <span class="icon-attachment"></span>
+                <span class="icon-find-members"></span>
+                <span class="icon-emojis"></span>
+                <span class="title-icon"></span>
+              </div>
+            </div>
           </div>
         </div>
+        <activities-list :task="task" :miniUser="user" />
       </div>
       <!-- <location :card="card" /> -->
       <div class="actions-btns-container">
@@ -138,11 +164,13 @@
 
 
 <script>
+import { utilService } from '../services/utils-service.js'
 import popupMain from './pop-up-main.vue';
 import attachment from "./attachment-cmp.vue";
 import taskComboList from './task-details-cmps/task-combo-list.vue';
 import taskCheckList from './task-details-cmps/task-checklist.vue';
 import contenteditable from 'vue-contenteditable'
+import activitiesList from './activities-list.vue'
 
 export default {
   data() {
@@ -152,12 +180,37 @@ export default {
       popupData: null,
       actionType: null,
       isDescEditMode: false,
+      isComment: false,
+      comment: '',
     };
   },
   created() {
     this.taskToEdit = JSON.parse(JSON.stringify(this.task));
+    this.isComment = false
   },
   methods: {
+    closeComment() {
+      this.isComment = false
+    },
+    addComment() {
+      const item = {
+        type: 'comment',
+        item: {
+          byMember: this.miniUser,
+          createdAt: Date.now(),
+          task: {
+            _id: this.task._id,
+            title: this.task.title,
+          },
+          txt: this.comment,
+          _id: utilService.makeId(),
+          isComment: true,
+        }
+      }
+      this.addItem(item);
+      this.closeComment()
+      this.comment = ''
+    },
     setDate(action) {
       (this.actionType = action),
         (this.popupData = { name: 'Dates', style: { top: '190px' } });
@@ -196,15 +249,19 @@ export default {
         if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];
         this.taskToEdit.attachments.push(item.item);
         this.onTaskEdit();
+      } else if (item.type === 'comment') {
+        console.log('item-comment', item)
+        if (!this.taskToEdit.activities) this.taskToEdit.activities = [];
+        this.taskToEdit.activities.push(item.item);
       } else if (item.type === 'dueDate') {
         if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
         this.taskToEdit.dueDate = item.item;
         this.onTaskEdit();
         this.closePopup();
-      } else if (item.type === 'status') {
-        this.taskToEdit.status = item.item;
       }
-      else if (item.type === 'checklist') {
+      else if (item.type === 'status') {
+        this.taskToEdit.status = item.item;
+      } else if (item.type === 'checklist') {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);
         this.closePopup();
@@ -270,7 +327,7 @@ export default {
     },
     closeModal() {
       this.$emit('closeModal')
-    }
+    },
   },
   computed: {
     board() {
@@ -287,6 +344,9 @@ export default {
     },
     coverStyle() {
       return { 'background-color': this.taskToEdit.cover.color, 'background-image': 'url(' + this.taskToEdit.cover.imgUrl + ')' }
+    },
+    miniUser() {
+      return this.$store.getters.miniUser
     }
   },
   components: {
@@ -294,7 +354,8 @@ export default {
     attachment,
     taskComboList,
     taskCheckList,
-    contenteditable
+    contenteditable,
+    activitiesList
   },
 };
 </script>

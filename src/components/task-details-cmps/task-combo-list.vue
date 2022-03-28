@@ -111,7 +111,7 @@ export default {
       console.log('watch updateStatus')
       this.updateStatus()
     },
-    deep: true,
+    // deep: true,
   }
 
 };
