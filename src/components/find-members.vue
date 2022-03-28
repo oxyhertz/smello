@@ -5,7 +5,7 @@
             <li
                 v-for="member in board.members"
                 :key="member._id"
-                class="member flex align-items space-between"
+                class="member find flex align-items space-between"
                 @click.stop="addMember(member)"
             >
                 <div class="member-container flex align-items justify-center">

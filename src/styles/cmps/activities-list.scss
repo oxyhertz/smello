@@ -13,6 +13,12 @@
         pointer-events: all;
         width: 100%;
         outline: none;
+        box-shadow: unset;
+    }
+    &.open {
+        box-shadow: unset;
+        border-bottom-right-radius: unset;
+        border-bottom-left-radius: unset;
     }
 }
 

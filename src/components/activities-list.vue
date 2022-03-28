@@ -7,28 +7,30 @@
                     <span class="member">{{ activity.byMember.username }}</span>
                     <timeago class="time" :datetime="activity.createdAt" />
                 </div>
-                <div class="task-activity-txt" :class="{ open: activity.isEditing }">
-                    <input
-                        v-model="activity.txt"
-                        type="text"
-                        v-click-outside="closeComment"
-                        @input="findMembers(activity._id)"
+                <div class="try" :class="{ open: activity.isEditing }">
+                    <div class="task-activity-txt" :class="{ open: activity.isEditing }">
+                        <input
+                            v-model="activity.txt"
+                            type="text"
+                            v-click-outside="closeComment"
+                            @input="findMembers(activity._id)"
+                        />
+                    </div>
+                    <comment-actions
+                        :pp="activity._id"
+                        :popo="isEditing"
+                        v-if="activity.isEditing"
+                        :class="{ open: activity.isEditing }"
+                        class="comments-main-container flex space-between"
+                        @updateItem="updateItem"
                     />
                 </div>
-                <comment-actions
-                    :pp="activity._id"
-                    :popo="isEditing"
-                    v-if="activity.isEditing"
-                    :class="{ open: activity.isEditing }"
-                    class="comments-main-container flex space-between"
-                    @updateItem="updateItem"
-                />
                 <button
                     v-if="activity.isEditing"
                     class="close-comment-edit"
                     @click="updateItem(activity._id, false)"
                 ></button>
-                <i class="fa-regular fa-face-smile-plus"></i>
+                <i v-if="!activity.isEditing" class="fa-regular fa-face-smile-plus"></i>
                 <a
                     v-if="!activity.isEditing && user._id === activity.byMember._id"
                     @click="(isEditing = true), (updateItem(activity._id, true))"
@@ -82,7 +84,7 @@ export default {
             this.currActivityId = id
             var currTask = JSON.parse(JSON.stringify(this.task));
             var comment = currTask.activities.find(comment => comment._id === id);
-            if (this.memberToAdd && this.isEditing) comment.txt += this.memberToAdd.username
+            // if (this.memberToAdd && this.isEditing) comment.txt += this.memberToAdd.username
             comment.isEditing = isEditingCurrTask;
             this.$emit('updateItem', { type: 'comment', val: JSON.parse(JSON.stringify(comment)) });
             this.txt = '';
@@ -104,3 +106,10 @@ export default {
     }
 }
 </script>
+
+<style>
+.try.open {
+    border-radius: 3px;
+    box-shadow: 0 1px 3px #091e4240, 0 0 0 1px #091e4214;
+}
+</style>
