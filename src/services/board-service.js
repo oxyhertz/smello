@@ -16,7 +16,7 @@ function getBoards(filterBy) {
 }
 
 function getBoardById(boardId) {
-    return httpService.get(`board/${boardId}`);
+    if (boardId) return httpService.get(`board/${boardId}`);
 }
 
 function removeBoard(boardId) {
