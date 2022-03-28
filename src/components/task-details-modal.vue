@@ -24,7 +24,6 @@
             <span class="icon"></span>
             <h3>Description</h3>
           </div>
-
           <div v-click-outside="saveDescEdit" class="description-container">
             <contenteditable
               @click="isDescEditMode = true"
@@ -73,8 +72,8 @@
             <avatar size="32" :name="currUser.fullname"></avatar>
             <input
               :class="{ open: isComment }"
-              @click="isComment = true"
-              @input="findMembers"
+              @click="openComment"
+              @input="tagMembers(null)"
               placeholder="Write a comment..."
               type="text"
               v-model="comment"
@@ -88,7 +87,13 @@
             />
           </div>
         </div>
-        <activities-list :task="task" :user="miniUser" @updateItem="updateItem" />
+        <activities-list
+          :task="task"
+          :user="miniUser"
+          @updateItem="updateItem"
+          @findMembers="tagMembers"
+          :memberToAdd="memberToAdd"
+        />
       </div>
       <!-- <location :card="card" /> -->
       <div class="actions-btns-container">
@@ -151,11 +156,10 @@
           @updateLabels="updateLabels"
         />
       </div>
+      <find-members v-if="isFindMembers" :board="board" class="find-members" @addTag="addTag" />
     </section>
   </section>
 </template>
-
-
 <script>
 import { utilService } from '../services/utils-service.js'
 import popupMain from './pop-up-main.vue';
@@ -165,7 +169,7 @@ import taskCheckList from './task-details-cmps/task-checklist.vue';
 import contenteditable from 'vue-contenteditable'
 import activitiesList from './activities-list.vue'
 import commentActions from './comment-actions.vue'
-
+import findMembers from './find-members.vue'
 export default {
   data() {
     return {
@@ -176,6 +180,9 @@ export default {
       isDescEditMode: false,
       isComment: false,
       comment: '',
+      isFindMembers: false,
+      lastAtIndex: 0,
+      memberToAdd: '',
     };
   },
   created() {
@@ -183,10 +190,46 @@ export default {
     this.isComment = false
   },
   methods: {
+    openComment() {
+      this.isComment = true
+      if (!this.comment) {
+        this.lastAtIndex = 0
+      }
+    },
+    addTag(member) {
+      this.memberToAdd = member
+      this.tagMembers()
+    },
+    tagMembers(id) {
+      if (this.isFindMembers) {
+        this.isFindMembers = !this.isFindMembers
+        if (this.isComment) {
+          this.comment += this.memberToAdd.username
+          return this.memberToAdd = ''
+        }
+      }
+      var currTxt;
+      if (id) {
+        currTxt = this.task.activities.find(CurrComment => CurrComment._id === id).txt;
+        this.lastAtIndex = currTxt.length - 2
+        console.log('this.lassssssssssssssssssssssssssssssssss', this.lastAtIndex)
+      } else currTxt = this.comment;
+      var atIndex = currTxt.indexOf('@', this.lastAtIndex + 1);
+      if (atIndex !== -1) this.lastAtIndex = atIndex;
+      if ((atIndex !== -1) && (currTxt[atIndex - 1] === " ")) {
+        this.isFindMembers = true;
+      }
+    },
     closeComment() {
-      this.isComment = false
+      if (this.isComment) {
+        console.log('this.las', this.lastAtIndex)
+        this.lastAtIndex = 0;
+        this.isComment = false
+        this.comments = ''
+      }
     },
     addComment() {
+      this.lastAtIndex = 0;
       const item = {
         type: 'comment',
         item: {
@@ -356,21 +399,23 @@ export default {
     taskCheckList,
     contenteditable,
     activitiesList,
-    commentActions
+    commentActions,
+    findMembers,
   },
   unmounted() {
-    if (!this.task?.activities?.length) return
-    var openComments = this.task.activities.map(comment => { if (comment.isEditing) return comment })
-    console.log('this.task', openComments)
-    // console.log('openComments', openComments)
-    openComments.forEach(comment => {
-      if (comment) {
-        comment.isEditing = false
-        this.updateItem({ type: 'comment', val: comment });
-      }
-    })
+    this.lastAtIndex = 0;
+    if (this.task?.activities?.length) {
+      var openComments = this.task.activities.map(comment => { if (comment.isEditing) return comment })
+      console.log('this.task', openComments)
+      // console.log('openComments', openComments)
+      openComments.forEach(comment => {
+        if (comment) {
+          comment.isEditing = false
+          this.updateItem({ type: 'comment', val: comment });
+        }
+      })
+    }
     this.$emit('cleanStore');
   },
-
 };
 </script>
