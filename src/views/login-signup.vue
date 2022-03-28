@@ -6,7 +6,7 @@
         </header>
         <main class="login-container">
             <h2>Log in to Drello</h2>
-            <form @submit.prevent="onLoginSignup">
+            <form @submit.prevent>
                 <input type="text" v-model="user.username" placeholder="Enter Username" />
                 <input
                     v-if="!isLogin"
@@ -15,9 +15,12 @@
                     placeholder="Enter Full Name"
                 />
                 <input type="password" v-model="user.password" placeholder="Enter password" />
-                <button class="login-btn">{{ loginSignupBtnTxt }}</button>
+
+                <button class="login-btn" @click="onLoginSignup">{{ loginSignupBtnTxt }}</button>
+
                 <div class="login-option-sep">Or</div>
-                <button class="login-with">
+
+                <button class="login-with-google" @click="handleGoogleLogin">
                     <span class="google-icon"></span>
                     <span class="btn-txt">Continue with Google</span>
                 </button>
@@ -54,6 +57,25 @@ export default {
                 this.$router.push('/board');
             } catch (err) {
                 console.log(err)
+            }
+        },
+        async handleGoogleLogin() {
+            try {
+                const googleUser = await this.$gAuth.signIn();
+                if (!googleUser) return;
+                const username = googleUser.getBasicProfile().getEmail();
+                const fullname = googleUser.getBasicProfile().getName();
+                const imgUrl = googleUser.getBasicProfile().getImageUrl();
+                const userToSave = { username, fullname, imgUrl, type: 'google' }
+                try {
+                    await this.$store.dispatch({ type: 'login', cred: userToSave });
+                } catch (err) {
+                    await this.$store.dispatch({ type: 'signup', cred: userToSave });
+                }
+                this.$router.push('/board');
+
+            } catch (err) {
+                console.log(err);
             }
         },
         toggleLoginSignup() {
