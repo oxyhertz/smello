@@ -22,6 +22,7 @@
         <Container
           orientation="vertical"
           group-name="col-items"
+          non-drag-area-selector=".on-quick-edit"
           :shouldAcceptDrop="
             (e, payload) => e.groupName === 'col-items' && !payload.loading
           "
