@@ -1,15 +1,14 @@
 <template>
     <section>
         <ul v-if="task.activities?.length">
-            <div>yes</div>
             <li v-for="activity in task.activities" :key="activity._id">
-                <avatar size="32" :name="activity.byMember.fullname"></avatar>
-                <div>
-                    <span>{{ activity.byMember.username }}</span>
-                    <span>{{ activity.txt }}</span>
+                <avatar class="activity-avatar" size="32" :name="activity.byMember.fullname"></avatar>
+                <div :class="{ activity: activity.isComment }">
+                    <span class="member">{{ activity.byMember.username }}</span>
+                    <timeago class="time" :datetime="activity.createdAt" />
                 </div>
-                <div>
-                    <timeago :datetime="activity.createdAt" />
+                <div class="task-activity-txt">
+                    <span>{{ activity.txt }}</span>
                 </div>
             </li>
         </ul>

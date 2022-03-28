@@ -252,7 +252,7 @@ export default {
       } else if (item.type === 'comment') {
         console.log('item-comment', item)
         if (!this.taskToEdit.activities) this.taskToEdit.activities = [];
-        this.taskToEdit.activities.push(item.item);
+        this.taskToEdit.activities.unshift(item.item);
       } else if (item.type === 'dueDate') {
         if (!this.taskToEdit.dueDate) this.taskToEdit.dueDate = [];
         this.taskToEdit.dueDate = item.item;
