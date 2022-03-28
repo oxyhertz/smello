@@ -234,6 +234,14 @@
       box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
       padding: 8px 12px;
       height: 35px;
+
+      &:not(.open) {
+        cursor: pointer;
+        &:hover {
+          box-shadow: 0 1px 1px #091e4240, 0 0 0 1px #091e4214;
+        }
+      }
+
       &.open {
         box-shadow: unset;
       }
@@ -304,6 +312,7 @@
 }
 
 .comments-main-container {
+  cursor: auto;
   margin-top: 3px;
   border-radius: 3px;
   margin-left: 11px;
@@ -315,6 +324,7 @@
   &.open {
     height: 49px;
     margin: unset;
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 0 1px #091e4214;
   }
 }
 
