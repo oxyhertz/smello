@@ -40,10 +40,13 @@ export default {
     },
     methods: {
         async onLoginSignup() {
-            const actionType = this.isLogin ? 'login' : 'signup';
-            console.log(actionType);
-            await this.$store.dispatch({ type: actionType, cred: this.user });
-            this.$router.push('/board');
+            try {
+                const actionType = this.isLogin ? 'login' : 'signup';
+                await this.$store.dispatch({ type: actionType, cred: this.user });
+                this.$router.push('/board');
+            } catch (err) {
+                console.log(err)
+            }
         },
         toggleLoginSignup() {
             this.isLogin = !this.isLogin;
