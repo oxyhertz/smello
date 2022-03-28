@@ -75,7 +75,11 @@
         </div>
         <!-- <button @click.stop="removeTask">Delete</button> -->
       </section>
-      <quick-edit v-if="isQuickEdit" :class="{ 'on-quick-edit': isQuickEdit }"></quick-edit>
+      <quick-edit
+        :style="quickEditPos"
+        v-if="isQuickEdit"
+        :class="{ 'on-quick-edit': isQuickEdit }"
+      ></quick-edit>
     </div>
     <div class="overlay" @click.stop="closeQuickEdit" :class="{ 'open-overlay': isQuickEdit }"></div>
   </Draggable>
@@ -186,6 +190,13 @@ export default {
         }
         return style
       }
+    },
+    quickEditPos() {
+      const top = this.$refs.tasky.getBoundingClientRect().y;
+      const right = this.$refs.tasky.getBoundingClientRect().right;
+      console.log(top)
+      console.log(right)
+      return { top: top + 'px', left: right + 'px' }
     }
   }
 };
