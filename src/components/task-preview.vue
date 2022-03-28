@@ -1,57 +1,83 @@
 <template>
   <Draggable v-if="task">
-    <section class="task-preview" :style="taskStyle">
-      <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline'"></div>
-      <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
+    <div class="task-preview-container">
+      <section
+        class="task-preview"
+        :style="taskStyle"
+        @mouseover="editIcon = true"
+        @mouseleave="editIcon = false"
+        :class="{ 'on-quick-edit': isQuickEdit }"
+        ref="tasky"
+      >
+        <span class="icon-edit" v-if="editIcon" @click.stop="quickEdit"></span>
+        <div class="dark-wrap" v-if="this.task.cover?.imgUrl && this.task.cover.type === 'inline'"></div>
+        <div class="task-preview-cover" :style="coverStyle" v-if="task.cover?.type === 'header'"></div>
 
-      <div v-if="labels && this.task.cover?.type !== 'inline'" class="preview-icon labels">
+        <div v-if="labels && this.task.cover?.type !== 'inline'" class="preview-icon labels">
+          <div
+            v-for="label, idx in labels"
+            :key="idx"
+            @click.stop="toggleLabels"
+            class="label"
+            :style="{ 'background-color': label.color }"
+            :class="{ 'openLabel': labelStatus }"
+          >{{ label.title }}</div>
+        </div>
+        <p
+          v-if="!isQuickEdit"
+          class="title"
+          :class="{ 'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl }"
+        >{{ task.title }}</p>
+        <textarea
+          v-model="taskCopy.title"
+          @input="updateTask"
+          v-if="isQuickEdit"
+          name
+          id
+          cols="30"
+          rows="10"
+        ></textarea>
         <div
-          v-for="label, idx in labels"
-          :key="idx"
-          @click.stop="toggleLabels"
-          class="label"
-          :style="{ 'background-color': label.color }"
-          :class="{ 'openLabel': labelStatus }"
-        >{{ label.title }}</div>
-      </div>
-      <p
-        class="title"
-        :class="{ 'pos-absolute': this.task.cover?.type === 'inline' && this.task.cover?.imgUrl }"
-      >{{ task.title }}</p>
-      <div class="icon-container flex" v-if="this.task.cover?.type !== 'inline'">
-        <div v-if="task.dueDate">
-          <span
-            class="preview-icon date"
-            :style="{ 'font-size': 12 + 'px' }"
-            :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
-          >
-            <span class="clock-icon" v-if="task.status?.length"></span>
-            {{ date }}
-          </span>
-        </div>
-        <div class="preview-icon" v-if="task.description">
-          <span class="icon-description"></span>
-        </div>
-        <div class="preview-icon" v-if="task.attachments?.length">
-          <span class="icon-attachment"></span>
-          <p>{{ task.attachments?.length }}</p>
-        </div>
-        <div
-          class="preview-icon"
-          v-if="task.checklists?.length && numOfTodos"
-          :class="{ completed: tasksDone === numOfTodos }"
+          class="icon-container flex"
+          v-if="this.task.cover?.type !== 'inline'"
+          :class="{ 'p-b-10': task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length }"
         >
-          <span class="icon-checklist"></span>
-          <p>{{ tasksDone }} / {{ numOfTodos }}</p>
-        </div>
-        <div class="preview-icon members" v-if="task.members?.length">
-          <div v-for="member in task.members" :key="member._id" class="member">
-            <avatar :size="28" color="white" :name="member.fullname"></avatar>
+          <div v-if="task.dueDate">
+            <span
+              class="preview-icon date"
+              :style="{ 'font-size': 12 + 'px' }"
+              :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
+            >
+              <span class="clock-icon" v-if="task.status?.length"></span>
+              {{ date }}
+            </span>
+          </div>
+          <div class="preview-icon" v-if="task.description">
+            <span class="icon-description"></span>
+          </div>
+          <div class="preview-icon" v-if="task.attachments?.length">
+            <span class="icon-attachment"></span>
+            <p>{{ task.attachments?.length }}</p>
+          </div>
+          <div
+            class="preview-icon"
+            v-if="task.checklists?.length && numOfTodos"
+            :class="{ completed: tasksDone === numOfTodos }"
+          >
+            <span class="icon-checklist"></span>
+            <p>{{ tasksDone }} / {{ numOfTodos }}</p>
+          </div>
+          <div class="preview-icon members" v-if="task.members?.length">
+            <div v-for="member in task.members" :key="member._id" class="member">
+              <avatar :size="28" color="white" :name="member.fullname"></avatar>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- <button @click.stop="removeTask">Delete</button> -->
-    </section>
+        <!-- <button @click.stop="removeTask">Delete</button> -->
+      </section>
+      <quick-edit v-if="isQuickEdit" :class="{ 'on-quick-edit': isQuickEdit }"></quick-edit>
+    </div>
+    <div class="overlay" @click.stop="closeQuickEdit" :class="{ 'open-overlay': isQuickEdit }"></div>
   </Draggable>
 </template>
 
@@ -59,6 +85,7 @@
 <script>
 import { Draggable } from 'vue3-smooth-dnd';
 import moment from 'moment';
+import quickEdit from './quick-edit.vue'
 
 export default {
   name: 'task-preview',
@@ -71,10 +98,21 @@ export default {
   },
   data() {
     return {
+      editIcon: false,
+      isQuickEdit: false,
+      taskCopy: null,
     };
+  },
+  mounted() {
+    console.log(this.$refs.tasky.getBoundingClientRect())
+  },
+  created() {
+    this.taskCopy = JSON.parse(JSON.stringify(this.task))
+
   },
   components: {
     Draggable,
+    quickEdit
   },
   methods: {
     toggleLabel() {
@@ -85,6 +123,18 @@ export default {
     },
     toggleLabels() {
       this.$emit('toggleLabels');
+    },
+    quickEdit() {
+      this.$emit('onQuickEdit', true)
+      this.isQuickEdit = true;
+    },
+    closeQuickEdit() {
+      this.$emit('onQuickEdit', false)
+      this.isQuickEdit = false
+    },
+    updateTask() {
+      this.$emit('updateTask', JSON.parse(JSON.stringify(this.taskCopy)))
+      console.log(this.taskCopy.title)
     }
   },
   computed: {
