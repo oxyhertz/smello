@@ -36,6 +36,7 @@
           <task-preview
             v-for="task in group.tasks"
             @updateTask="updateTask"
+            @openTask="openTask(board, group, task)"
             @onQuickEdit="onQuickEdit"
             @removeTask="removeTask($event, group._id)"
             @click.stop="openTask(board, group, task)"
@@ -98,7 +99,6 @@ export default {
   methods: {
     openTask(board, group, task) {
       console.log('opentak')
-      console.log()
       if (this.isQuickEdit) return
       this.isTaskDetail = true;
       this.$store.commit({ type: 'setCurrGroup', group })
