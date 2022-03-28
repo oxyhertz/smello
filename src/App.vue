@@ -11,12 +11,8 @@ import { userManageService } from './services/user-manage-service.js'
 
 export default {
 	name: 'app',
-	created() {
-		this.$store.dispatch({ type: 'loadBoards' })
-		this.$store.dispatch({ type: 'loadUsers' })
-		userManageService.query()
-
-
+	async created() {
+		await this.$store.dispatch({ type: 'loadUsers' })
 	},
 	computed: {
 		currBoardStyle() {

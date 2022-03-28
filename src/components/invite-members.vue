@@ -48,7 +48,6 @@ export default {
     },
     created() {
         this.appUsers = this.users;
-
     },
     methods: {
         closeModal() {
@@ -78,7 +77,6 @@ export default {
             users = users.filter(user => regex.test(user.fullname));
             return users.filter(user => {
                 return !this.board.members.some(member => {
-
                     console.log(member.fullname, member._id, 'memberId')
                     return user._id === member._id
                 })

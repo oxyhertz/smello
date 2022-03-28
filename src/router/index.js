@@ -3,6 +3,7 @@ import home from '../views/home.vue';
 import workspace from '../views/workspace.vue';
 import boardDetails from '../views/board-details.vue';
 import taskDetails from '../views/task-details.vue';
+import loginSignup from '../views/login-signup.vue';
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -33,6 +34,12 @@ const router = createRouter({
       //   }
       // ],
     },
+    {
+      path: '/login',
+      name: 'login-signup',
+      component: loginSignup,
+      alias: '/signup'
+    }
   ],
 });
 

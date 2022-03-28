@@ -45,7 +45,7 @@
       <span class="icon icon-info"></span>
       <span class="icon icon-bell"></span>
       <!-- <i class="fa-regular fa-bell notification-header"></i> -->
-      <avatar size="32" color="white" :name="member.fullname" class="avatar-header"></avatar>
+      <avatar v-if="member" size="32" color="white" :name="member.fullname" class="avatar-header"></avatar>
     </section>
   </header>
 </template>
