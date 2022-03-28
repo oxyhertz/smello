@@ -12,7 +12,6 @@
 </template>
 
 <script>
-// import Avatar from "vue3-avatar";
 export default {
     name: 'members-preview',
     props: {

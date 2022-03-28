@@ -12,8 +12,9 @@
                     <div class="avatar">
                         <avatar :size="28" color="white" :name="member.fullname"></avatar>
                     </div>
-                    <span class="name">{{ member.username }}</span>
+                    <span class="name">{{ member.fullname }}</span>
                 </div>
+                <span class="username">({{ member.username }})</span>
             </li>
         </ul>
     </section>
