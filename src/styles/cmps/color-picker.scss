@@ -28,3 +28,16 @@
     filter: saturate(85%) brightness(85%);
   }
 }
+
+.color-picker.wide {
+  & > div {
+    width: calc(50% - 5px);
+    cursor: pointer;
+    height: 96px;
+    border-radius: 8px;
+
+    .icon-complete {
+      font-size: 36px;
+    }
+  }
+}

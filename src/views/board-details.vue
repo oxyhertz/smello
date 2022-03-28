@@ -1,6 +1,7 @@
 <template>
 	<section v-if="board" class="board-container" :style="boardStyle">
 		<board-header
+			@setBg="setBg"
 			:board="board"
 			@editTitle="editBoardTitle"
 			@addMember="addMember"
@@ -42,13 +43,24 @@ export default {
 		};
 	},
 	watch: {
-		async '$route.params.boardId'(newId, oldId) {
-			await this.$store.dispatch({
-				type: 'setCurrentBoard',
-				boardId: newId,
-			});
-			this.board = this.currBoard;
+		// async '$route.params.boardId'(newId, oldId) {
+		// 	await this.$store.dispatch({
+		// 		type: 'setCurrentBoard',
+		// 		boardId: newId,
+		// 	});
+		// 	this.board = JSON.parse(JSON.stringify(this.currBoard));
 
+		// },
+		'$route.params.boardId': {
+			async handler(newId, oldId) {
+				await this.$store.dispatch({
+					type: 'setCurrentBoard',
+					boardId: newId,
+				});
+				this.board = JSON.parse(JSON.stringify(this.currBoard));
+				console.log(this.board)
+			},
+			deep: true
 		}
 	},
 	async created() {
@@ -113,6 +125,17 @@ export default {
 		async addMember(members) {
 			await this.$store.dispatch({ type: 'setBoardPrefs', key: 'members', val: members });
 			this.board = this.currBoard
+		},
+		async setBg(bg) {
+			this.board.style[bg.type] = bg.val
+			if (bg.type === 'bgColor') this.board.style.bgImg = ''
+			await this.$store.dispatch({ type: 'saveBoard', board: this.board })
+			await this.$store.dispatch({
+				type: 'setCurrentBoard',
+				boardId: this.board._id,
+			});
+
+
 		}
 	},
 	computed: {
@@ -123,7 +146,7 @@ export default {
 			return this.$store.getters.currBoard;
 		},
 		boardStyle() {
-			return { 'background-color': ',' };
+			// return { 'background-color': ',' };
 		}
 	}
 }

@@ -13,7 +13,7 @@ export default {
 	name: 'workspace',
 	methods: {
 		async toggleFavorite(id) {
-			const board = await boardService.getById(id)
+			const board = await boardService.getBoardById(id)
 			board.isFavorite = !board.isFavorite
 			this.$store.dispatch({ type: 'saveBoard', board })
 		}

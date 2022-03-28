@@ -41,7 +41,7 @@ export default {
         updateColor(color) {
             this.selectedColor = true
             this.currColor = color;
-            this.$emit('updateColor', color);
+            this.$emit('updateColor', color, 'bgColor');
         },
     },
 

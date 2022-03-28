@@ -45,7 +45,12 @@
         <span class="board-header-menu-icon"></span>Show menu
       </button>
 
-      <board-menu-modal :isOpen="isMenuModal" @closeMenu="isMenuModal = false" />
+      <board-menu-modal
+        @setBg="setBg"
+        :board="board"
+        :isOpen="isMenuModal"
+        @closeMenu="isMenuModal = false"
+      />
     </section>
   </header>
 </template>
@@ -92,6 +97,9 @@ export default {
     addMember(member) {
       console.log(member)
       this.$emit('addMember', member)
+    },
+    setBg(bg) {
+      this.$emit('setBg', bg)
     }
   },
   computed: {
