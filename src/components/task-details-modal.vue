@@ -124,7 +124,7 @@
             <span class="icon-attachment"></span>
             Attachments
           </button>
-          <button>
+          <button @click="setLocation('locationItem')">
             <span class="icon-location"></span>
             Location
           </button>
@@ -246,6 +246,10 @@ export default {
       this.addItem(item);
       this.closeComment()
       this.comment = ''
+    },
+    setLocation(action) {
+      (this.actionType = action),
+        (this.popupData = { name: 'Location', style: { top: '110px' } });
     },
     setDate(action) {
       (this.actionType = action),

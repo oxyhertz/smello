@@ -1,10 +1,10 @@
 <template >
   <section v-if="board" class="members-item">
-    <input type="text" placeholder="Search members" @input="findMembers" />
+    <input type="text" placeholder="Search members" @input="findMembers" v-model="filterBy.name" />
     <h3>Board members</h3>
     <ul>
       <li
-        v-for="member in board.members"
+        v-for="member in getRelevantUsers"
         :key="member._id"
         class="member flex align-items space-between"
         @click.stop="addMember(member)"
@@ -30,7 +30,9 @@ export default {
   },
   data() {
     return {
-
+      filterBy: {
+        name: ''
+      }
     }
   },
   methods: {
@@ -48,8 +50,13 @@ export default {
     },
   },
   computed: {
+    getRelevantUsers() {
+      let users = JSON.parse(JSON.stringify(this.boardMembers));
+      const regex = new RegExp(this.filterBy.name, 'i');
+      return users.filter(user => regex.test(user.fullname));
+    },
     boardMembers() {
-      return this.board.members.map(member => member.fullname)
+      return this.board.members
     },
     currTask() {
       // if (this.$store.getters.currTask) return this.$store.getters.currTask
