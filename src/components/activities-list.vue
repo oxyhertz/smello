@@ -1,37 +1,42 @@
 <template>
     <section>
         <ul v-if="task.activities?.length" class="comment-text">
-            <li v-for="comment, idx in task.activities" :key="comment._id">
-                <avatar class="activity-avatar" size="32" :name="comment.byMember.fullname"></avatar>
-                <div :class="{ activity: comment.isComment }">
-                    <span class="member">{{ comment.byMember.username }}</span>
-                    <timeago class="time" :datetime="comment.createdAt" />
+            <li v-for="activity in task.activities" :key="activity._id">
+                <avatar class="activity-avatar" size="32" :name="activity.byMember.fullname"></avatar>
+                <div :class="{ activity: activity.isComment }">
+                    <span class="member">{{ activity.byMember.username }}</span>
+                    <timeago class="time" :datetime="activity.createdAt" />
                 </div>
-                <div class="task-activity-txt" :class="{ open: comment.isEditing }">
-                    <input v-model="comment.txt" type="text" v-click-outside="closeComment" />
+                <div class="task-activity-txt" :class="{ open: activity.isEditing }">
+                    <input
+                        v-model="activity.txt"
+                        type="text"
+                        v-click-outside="closeComment"
+                        @input="findMembers(activity._id)"
+                    />
                 </div>
                 <comment-actions
-                    :pp="comment._id"
+                    :pp="activity._id"
                     :popo="isEditing"
-                    v-if="comment.isEditing"
-                    :class="{ open: comment.isEditing }"
+                    v-if="activity.isEditing"
+                    :class="{ open: activity.isEditing }"
                     class="comments-main-container flex space-between"
                     @updateItem="updateItem"
                 />
                 <button
-                    v-if="comment.isEditing"
+                    v-if="activity.isEditing"
                     class="close-comment-edit"
-                    @click="updateItem(comment._id, false)"
+                    @click="updateItem(activity._id, false)"
                 ></button>
                 <i class="fa-regular fa-face-smile-plus"></i>
                 <a
-                    v-if="!comment.isEditing && user._id === comment.byMember._id"
-                    @click="(isEditing = true), (updateItem(comment._id, true))"
+                    v-if="!activity.isEditing && user._id === activity.byMember._id"
+                    @click="(isEditing = true), (updateItem(activity._id, true))"
                 >Edit</a>
-                <span v-if="!comment.isEditing && user._id === comment.byMember._id">-</span>
+                <span v-if="!activity.isEditing && user._id === activity.byMember._id">-</span>
                 <a
-                    v-if="!comment.isEditing && user._id === comment.byMember._id"
-                    @click="deleteItem(comment._id)"
+                    v-if="!activity.isEditing && user._id === activity.byMember._id"
+                    @click="deleteItem(activity._id)"
                 >Delete</a>
             </li>
         </ul>
@@ -39,22 +44,31 @@
 </template>
 
 <script>
+import { comment } from 'postcss'
 import commentActions from './comment-actions.vue'
 export default {
     name: 'activities-list',
     props: {
         task: Object,
         user: Object,
+        memberToAdd: Object,
     },
     data() {
         return {
-            isEditing: false,
+            isEditing: '',
             txt: [],
+            lastAtIndex: 0,
+            currActivityId: '',
         }
     },
     methods: {
+        findMembers(id) {
+            this.$emit('findMembers', id)
+        },
+
         closeComment() {
-            this.isEditing = false
+            if (this.isEditing)
+                this.isEditing = false
             this.$emit('closeComment')
         },
         deleteItem(id) {
@@ -64,8 +78,12 @@ export default {
             this.$emit('updateItem', { type: 'comment', val: JSON.parse(JSON.stringify(comment)) });
         },
         updateItem(id, isEditingCurrTask) {
+            if (!this.isEditing) this.isEditing = true
+            console.log('this.isEditing', this.isEditing)
+            this.currActivityId = id
             var currTask = JSON.parse(JSON.stringify(this.task));
             var comment = currTask.activities.find(comment => comment._id === id);
+            if (this.memberToAdd) comment.txt += this.memberToAdd.username
             comment.isEditing = isEditingCurrTask;
             this.$emit('updateItem', { type: 'comment', val: JSON.parse(JSON.stringify(comment)) });
             this.txt = '';
@@ -73,6 +91,17 @@ export default {
     },
     components: {
         commentActions,
+    },
+    watch: {
+        'memberToAdd'() {
+            // console.log(this.isEditing);
+            if (this.isEditing) {
+                this.updateItem(this.currActivityId, true)
+            }
+        },
+        'isEditing'() {
+            console.log(this.isEditing);
+        },
     }
 }
 </script>
