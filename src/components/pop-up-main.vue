@@ -61,7 +61,6 @@ export default {
       this.$emit('updateLabels', updatedLabels, item);
     },
     closePopup() {
-      console.log('close')
       this.$emit('closePopup');
     },
     addItem(item) {

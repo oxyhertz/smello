@@ -76,6 +76,7 @@
         <!-- <button @click.stop="removeTask">Delete</button> -->
       </section>
       <quick-edit
+        @removeTask="removeTask"
         @addItem="updateTask"
         :task="task"
         @openTask="openTask"
@@ -139,9 +140,7 @@ export default {
       this.isQuickEdit = false
     },
     updateTask(_, editedTask = this.taskCopy) {
-      console.log(editedTask)
       this.$emit('updateTask', JSON.parse(JSON.stringify(editedTask)))
-      console.log(this.taskCopy.title)
     },
     openTask() {
       this.closeQuickEdit()

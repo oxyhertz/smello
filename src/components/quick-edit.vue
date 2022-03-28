@@ -23,7 +23,7 @@
         <div class="btn" @click="setCmp('dateItem', { name: 'Dates', style: labelsStyle })">
             <span class="icon-time"></span>Edit Dates
         </div>
-        <div class="btn">
+        <div class="btn" @click="$emit('removeTask')">
             <span class="icon-cancel"></span>
             Remove
         </div>
@@ -55,7 +55,15 @@ export default {
     },
     created() {
         this.taskToEdit = JSON.parse(JSON.stringify(this.task))
-        console.log(this.taskToEdit)
+    },
+    mounted() {
+        console.log(this.$refs.editLabels.getBoundingClientRect())
+        const rect = this.$refs.editLabels.getBoundingClientRect();
+        console.log(rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth))
+
     },
     methods: {
         openTask() {
