@@ -28,7 +28,7 @@ app.use(timeago);
 app.use(DKToast);
 app.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyCXIuYnEwB0nApadyuf5XR1uGXg0RmbQWg',
+        key: 'AIzaSyDxg1BG-_6y4c06PrVYvHH76q51dKWkOGs',
     },
 })
 app.mount('#app');
