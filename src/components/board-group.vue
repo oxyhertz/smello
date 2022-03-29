@@ -137,8 +137,8 @@ export default {
       const task = {
         title,
         groupId,
+        members: []
       };
-
       this.$emit('addTask', task);
     },
     editTask(editedTask) {

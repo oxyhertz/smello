@@ -134,7 +134,8 @@ export default {
         labelsStyle() {
             let top = this.$refs.editLabels.getBoundingClientRect().bottom;
             const right = this.$refs.editLabels.getBoundingClientRect().x;
-            console.log('opopup heifght', this.popupHeight)
+            console.log(this.$refs.popup)
+            // console.log('opopup heifght', this.popupHeight)
             if (window.innerHeight - top - this.popupHeight < 0) {
                 console.log('low')
                 console.log((window.innerHeight - top - this.popupHeight))

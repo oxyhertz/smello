@@ -175,13 +175,47 @@ export default {
 		},
 		groupsToDisplay() {
 			let filteredGroups = [];
-			console.log(this.filterBy)
+			const board = JSON.parse(JSON.stringify(this.board))
 			const regex = new RegExp(this.filterBy.title, 'i')
-			filteredGroups = this.board.groups.filter((group) => regex.test(group.title))
+			filteredGroups = board.groups.filter((group) => regex.test(group.title) || group.tasks.some(task => regex.test(task.title)))
+			console.log(this.filterBy)
 			if (this.filterBy.members.length) {
-				// filteredGroups.filter()
+				filteredGroups = filteredGroups.filter(group => {
+					return group.tasks.some(task => {
+						return task.members?.some(member => {
+							// console.log(member._id)
+							return this.filterBy.members.includes(member._id)
+						})
+					})
+				})
+				filteredGroups = filteredGroups.map(group => {
+					group.tasks = group.tasks.filter(task => {
+						if (!task.members) task.members = []
+						return task.members?.some(member => this.filterBy.members.includes(member._id))
+					})
+					return group
+				})
 			}
-			return filteredGroups;
+
+			if (this.filterBy.labels.length) {
+				filteredGroups = filteredGroups.filter(group => {
+					return group.tasks.some(task => {
+						return task.labelIds?.some(label => {
+							// console.log(member._id)
+							return this.filterBy.labels.includes(label)
+						})
+					})
+				})
+
+			}
+			if (this.filterBy.dueDate) {
+				if (this.filterBy.dueDate === 'overdue') {
+					filteredGroups = filteredGroups.filter(group => {
+						return group.tasks.some(task => task.status === 'overdue')
+					})
+				}
+			}
+			return filteredGroups
 		}
 	}
 }

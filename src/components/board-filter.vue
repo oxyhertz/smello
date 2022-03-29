@@ -118,7 +118,8 @@ export default {
                 title: '',
                 labels: [],
                 members: [],
-                dueDate: null,
+                dueDate: []
+
             }
         }
     },
