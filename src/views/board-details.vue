@@ -26,10 +26,11 @@
 </template>
 
 <script>
-
+import { nextTick } from 'vue'
 import boardGroup from '../components/board-group.vue';
 import { utilService } from '../services/utils-service.js';
 import { boardService } from '../services/board-service.js';
+import { socketService } from '../services/socket-service.js';
 import boardHeader from '../components/board-header.vue'
 
 export default {
@@ -46,6 +47,7 @@ export default {
 			}
 		};
 	},
+
 	watch: {
 		// async '$route.params.boardId'(newId, oldId) {
 		// 	await this.$store.dispatch({
@@ -61,24 +63,40 @@ export default {
 					type: 'setCurrentBoard',
 					boardId: newId,
 				});
-				this.board = JSON.parse(JSON.stringify(this.currBoard));
-				console.log(this.board)
+				this.board = null;
+				await nextTick();
+				this.board = this.currBoard;
 			},
 			deep: true
 		}
 	},
 	async created() {
-		await this.$store.dispatch({
-			type: 'setCurrentBoard',
-			boardId: this.$route.params.boardId,
-		});
+		await this.loadBoard()
 		this.board = this.currBoard;
-
+		const { boardId } = this.$route.params;
+		socketService.emit("board topic", boardId);
+		// socketService.on('board update', this.loadBoard())
+		socketService.on('board update', this.loadBoard)
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
 	},
 	methods: {
+		async loadBoard() {
+			try {
+				await this.$store.dispatch({
+					type: 'setCurrentBoard',
+					boardId: this.$route.params.boardId,
+				});
+				this.board = null;
+				await nextTick();
+				this.board = this.currBoard;
+
+				console.log(this.currBoard);
+			} catch (err) {
+				console.log('err', err)
+			}
+		},
 		removeTask(task) {
 			// var activity = boardService.addActivity(
 			//   "Task removed ",
