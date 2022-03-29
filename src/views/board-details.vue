@@ -28,8 +28,6 @@
 <script>
 import { nextTick } from 'vue'
 import boardGroup from '../components/board-group.vue';
-import { utilService } from '../services/utils-service.js';
-import { boardService } from '../services/board-service.js';
 import { socketService } from '../services/socket-service.js';
 import boardHeader from '../components/board-header.vue'
 
@@ -71,6 +69,7 @@ export default {
 		// socketService.emit("board topic", boardId);
 
 		// socketService.on('board update', this.loadBoard())
+		socketService.on('tag user', this.tagUser)
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
@@ -83,7 +82,6 @@ export default {
 					top: '90px',
 					right: '90px',
 					position: 'absolute',
-					'background-color': '#0079bf',
 				},
 				class: 'toast',
 				positionX: 'left',
