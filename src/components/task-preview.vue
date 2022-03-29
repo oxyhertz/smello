@@ -133,6 +133,7 @@ export default {
     },
     removeTask() {
       this.$emit('removeTask', this.task._id)
+      this.$emit('onQuickEdit', false)
     },
     toggleLabels() {
       this.$emit('toggleLabels');
