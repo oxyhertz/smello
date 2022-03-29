@@ -23,11 +23,12 @@
         <div class="btn" @click="setCmp('dateItem', { name: 'Dates', style: labelsStyle })">
             <span class="icon-time"></span>Edit Dates
         </div>
-        <div class="btn">
+        <div class="btn" @click="$emit('removeTask')">
             <span class="icon-cancel"></span>
             Remove
         </div>
         <popup-main
+            ref="popup"
             :task="task"
             :popupData="popupData"
             :action="actionType"
@@ -36,6 +37,7 @@
             @updateLabels="updateLabels"
             @closePopup="actionType = ''"
             @updateCover="updateCover"
+            @popupHeight="setPopupHeight"
         />
     </section>
 </template>
@@ -50,16 +52,27 @@ export default {
         return {
             actionType: '',
             popupData: null,
-            taskToEdit: null
+            taskToEdit: null,
+            popupHeight: null,
         }
     },
     created() {
         this.taskToEdit = JSON.parse(JSON.stringify(this.task))
-        console.log(this.taskToEdit)
+    },
+    mounted() {
+        const rect = this.$refs.editLabels.getBoundingClientRect();
+        console.log(rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth))
     },
     methods: {
         openTask() {
             this.$emit('openTask')
+        },
+        setPopupHeight(height) {
+            this.popupHeight = height;
+            console.log(height)
         },
         setCmp(type, data) {
             console.log(type)
@@ -119,10 +132,14 @@ export default {
     },
     computed: {
         labelsStyle() {
-            const top = this.$refs.editLabels.getBoundingClientRect().bottom;
+            let top = this.$refs.editLabels.getBoundingClientRect().bottom;
             const right = this.$refs.editLabels.getBoundingClientRect().x;
-            console.log(top)
-            console.log(right)
+            console.log('opopup heifght', this.popupHeight)
+            if (window.innerHeight - top - this.popupHeight < 0) {
+                console.log('low')
+                console.log((window.innerHeight - top - this.popupHeight))
+                top = this.popupHeight + (window.innerHeight - top - this.popupHeight)
+            }
             return { top: top + 'px', left: right + 'px', position: 'fixed' }
         },
         membersStyle() {
