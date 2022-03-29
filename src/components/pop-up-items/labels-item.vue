@@ -1,9 +1,15 @@
 <template>
   <div v-if="board && !isCreating" class="labels-item">
-    <input type="text" placeholder="Search labels..." v-focus class="label-item-input" />
+    <input
+      type="text"
+      placeholder="Search labels..."
+      v-focus
+      class="label-item-input"
+      v-model="filterBy.title"
+    />
     <h3>Labels</h3>
     <ul>
-      <li class="label" v-for="label in board.labels" :key="label._id">
+      <li class="label" v-for="label in getRelevantLabels" :key="label._id">
         <span
           @click="addLabel(label._id)"
           :style="{ 'background-color': label.color }"
@@ -39,6 +45,9 @@ export default {
   props: ['board'],
   data() {
     return {
+      filterBy: {
+        title: ''
+      },
       isCreating: null,
       isEditing: null,
       title: '',
@@ -54,6 +63,11 @@ export default {
     console.log(this.board)
   },
   computed: {
+    getRelevantLabels() {
+      let labels = JSON.parse(JSON.stringify(this.boardLabels));
+      const regex = new RegExp(this.filterBy.title, 'i');
+      return labels.filter(label => regex.test(label.title));
+    },
     boardLabels() {
       return JSON.parse(JSON.stringify(this.board.labels))
     }

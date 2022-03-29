@@ -41,6 +41,7 @@ import membersItem from './pop-up-items/members-item.vue';
 import checklistItem from './pop-up-items/checklist-item.vue';
 import attachmentItem from './pop-up-items/attachment-item.vue';
 import coverItem from './pop-up-items/cover-item.vue';
+import locationItem from './pop-up-items/location-item.vue';
 
 export default {
   name: 'pop-up-main',
@@ -85,6 +86,7 @@ export default {
     coverItem,
     dateItem,
     membersItem,
+    locationItem,
   },
 };
 </script>
