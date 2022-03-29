@@ -25,12 +25,12 @@
                     <span class="btn-txt">Continue with Google</span>
                 </button>
 
-                <!-- <v-facebook-login
+                <v-facebook-login
                     app-id="540935014124365"
                     @login="handleFacebookLogin"
                     @logout="handleFacebookLogout"
                     @options="{ autoLogAppEvents: false }"
-                ></v-facebook-login>-->
+                ></v-facebook-login>
             </form>
 
             <hr />
@@ -41,7 +41,7 @@
 
 
 <script>
-// import VFacebookLogin from 'vue-facebook-login-component-next'
+import VFacebookLogin from 'vue-facebook-login-component-next'
 
 export default {
     name: 'login-signup',
@@ -56,7 +56,7 @@ export default {
         }
     },
     components: {
-        // VFacebookLogin
+        VFacebookLogin
     },
     created() {
         this.isLogin = (this.$route.path === '/login');
