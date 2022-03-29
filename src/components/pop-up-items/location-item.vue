@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Autocomplete @input="getItems" :results="items"></Autocomplete>
+        <input type="text" placeholder="Yes.." ref="origin" />
     </div>
     <GMapMap
         class="maps"
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import Autocomplete from 'vue3-autocomplete'
-import { mapsService } from '../../services/maps-service.js'
+// import { mapsService } from '../../services/maps-service.js'
 export default {
 
     data() {
         return {
+            originAutocomplete: '',
             center: { lat: 32.109333, lng: 34.855499 },
             markers: [
                 {
@@ -52,8 +52,15 @@ export default {
         }
     },
     created() {
-        console.log('oppppppppppppppppppppppppppppppppp')
-        mapsService.getPlaces()
+        // mapsService.getPlaces()
+    },
+    mounted() {
+        this.originAutocomplete = new google.maps.Autocomplete(
+            this.$refs["origin"],
+        );
+        originAutocomplete.addListener("place_changed", () => {
+            console.log(originAutocomplete.getPlaces());
+        })
     },
     methods: {
         tlv() {
@@ -68,7 +75,7 @@ export default {
 
     },
     components: {
-        Autocomplete,
+        // Autocomplete,
     }
 
 }

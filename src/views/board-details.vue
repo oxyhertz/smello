@@ -1,8 +1,8 @@
 <template>
-	<section v-if="board" class="board-container" :style="boardStyle">
+	<section v-if="currBoard" class="board-container" :style="boardStyle">
 		<board-header
 			@setBg="setBg"
-			:board="board"
+			:board="currBoard"
 			@editTitle="editBoardTitle"
 			@addMember="addMember"
 			@toggleFavorite="toggleFavorite"
@@ -19,7 +19,7 @@
 				@editGroup="editGroup"
 				@cleanStore="cleanStore"
 				:groups="groupsToDisplay"
-				:board="board"
+				:board="currBoard"
 			/>
 		</section>
 	</section>
@@ -41,7 +41,7 @@ export default {
 	},
 	data() {
 		return {
-			board: null,
+			// board: null,
 			filterBy: {
 				title: '',
 				labels: [],
@@ -66,11 +66,11 @@ export default {
 	},
 	async created() {
 		await this.loadBoard()
-		this.board = this.currBoard;
-		const { boardId } = this.$route.params;
-		socketService.emit("board topic", boardId);
+		// this.board = this.currBoard;
+		// const { boardId } = this.$route.params;
+		// socketService.emit("board topic", boardId);
+
 		// socketService.on('board update', this.loadBoard())
-		socketService.on('board update', this.loadBoard)
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
@@ -177,7 +177,7 @@ export default {
 			let filteredGroups = [];
 			console.log(this.filterBy)
 			const regex = new RegExp(this.filterBy.title, 'i')
-			filteredGroups = this.board.groups.filter((group) => regex.test(group.title))
+			filteredGroups = this.currBoard.groups.filter((group) => regex.test(group.title))
 			if (this.filterBy.members.length) {
 				// filteredGroups.filter()
 			}
