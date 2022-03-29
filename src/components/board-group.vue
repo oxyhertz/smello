@@ -103,7 +103,6 @@ export default {
       this.$emit('cleanStore', ['Task', 'Group']);
     },
     openTask(board, group, task) {
-      console.log('opentak')
       if (this.isQuickEdit) return
       this.isTaskDetail = true;
       this.$store.commit({ type: 'setCurrGroup', group })

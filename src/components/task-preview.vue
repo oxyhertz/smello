@@ -79,7 +79,7 @@
             </div>
           </div>
         </div>
-        <button @click.stop="removeTask">Delete</button>
+        <!-- <button @click.stop="removeTask">Delete</button> -->
       </section>
       <quick-edit
         @removeTask="removeTask"
@@ -133,6 +133,7 @@ export default {
     },
     removeTask() {
       this.$emit('removeTask', this.task._id)
+      this.$emit('onQuickEdit', false)
     },
     toggleLabels() {
       this.$emit('toggleLabels');
