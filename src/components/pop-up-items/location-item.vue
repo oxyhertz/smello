@@ -1,4 +1,7 @@
 <template>
+    <div>
+        <Autocomplete @input="getItems" :results="items"></Autocomplete>
+    </div>
     <GMapMap
         class="maps"
         :center="center"
@@ -22,6 +25,8 @@
 </template>
 
 <script>
+import Autocomplete from 'vue3-autocomplete'
+import 'vue3-autocomplete/dist/vue3-autocomplete.css'
 export default {
 
     data() {
@@ -58,6 +63,9 @@ export default {
             this.center = { lat: 32.017136, lng: 34.745441 }
         }
 
+    },
+    components: {
+        Autocomplete,
     }
 
 }
@@ -68,3 +76,6 @@ export default {
     height: 20vh;
 }
 </style>
+
+
+
