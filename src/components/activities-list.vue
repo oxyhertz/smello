@@ -30,7 +30,7 @@
                     class="close-comment-edit"
                     @click="updateItem(activity._id, false)"
                 ></button>
-                <i v-if="!activity.isEditing" class="fa-regular fa-face-smile-plus"></i>
+
                 <a
                     v-if="!activity.isEditing && user._id === activity.byMember._id"
                     @click="(isEditing = true), (updateItem(activity._id, true))"
