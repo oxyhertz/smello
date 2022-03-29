@@ -6,6 +6,7 @@
 			@editTitle="editBoardTitle"
 			@addMember="addMember"
 			@toggleFavorite="toggleFavorite"
+			@setFilter="setFilter"
 		/>
 		<section class="group-container-scrollable">
 			<board-group
@@ -17,7 +18,7 @@
 				@addGroup="addGroup"
 				@editGroup="editGroup"
 				@cleanStore="cleanStore"
-				:groups="board.groups"
+				:groups="groupsToDisplay"
 				:board="board"
 			/>
 		</section>
@@ -40,6 +41,9 @@ export default {
 	data() {
 		return {
 			board: null,
+			filterBy: {
+				title: ''
+			}
 		};
 	},
 	watch: {
@@ -140,9 +144,12 @@ export default {
 				type: 'setCurrentBoard',
 				boardId: this.board._id,
 			});
-
-
-		}
+		},
+		setFilter(filterBy) {
+			const copyfilter = JSON.parse(JSON.stringify(filterBy))
+			this.filterBy = copyfilter;
+			// this.$store.dispatch({ type: 'setFilter', filterBy: copyfilter })
+		},
 	},
 	computed: {
 		groups() {
@@ -153,6 +160,13 @@ export default {
 		},
 		boardStyle() {
 			// return { 'background-color': ',' };
+		},
+		groupsToDisplay() {
+			let filteredGroups = [];
+			const regex = new RegExp(this.filterBy.title, 'i')
+			filteredGroups = this.board.groups.filter((group) => regex.test(group.title))
+			console.log(filteredGroups)
+			return filteredGroups;
 		}
 	}
 }

@@ -37,7 +37,7 @@
     </section>
 
     <section>
-      <button class="btn">
+      <button class="btn" @click="isFilterModal = !isFilterModal">
         <span class="board-header-filter-icon"></span>Filter
       </button>
 
@@ -45,6 +45,13 @@
         <span class="board-header-menu-icon"></span>Show menu
       </button>
 
+      <board-filter
+        @setFilter="setFilter"
+        v-click-outside="closeFilterModal"
+        @closeFilter="closeFilterModal"
+        v-if="isFilterModal"
+        :board="board"
+      />
       <board-menu-modal
         @setBg="setBg"
         :board="board"
@@ -62,6 +69,7 @@ import membersPreview from "./members-preview.vue";
 import inviteMembers from "./invite-members.vue";
 import boardMenuModal from "./board-menu-modal.vue";
 import boardFilter from './board-filter.vue'
+import BoardFilter from './board-filter.vue';
 
 export default {
   name: "board-header",
@@ -73,6 +81,7 @@ export default {
     return {
       isInviteModal: false,
       isMenuModal: false,
+      isFilterModal: false
     };
   },
   components: {
@@ -81,7 +90,8 @@ export default {
     membersPreview,
     inviteMembers,
     boardMenuModal,
-    boardFilter
+    boardFilter,
+    BoardFilter
   },
   methods: {
     editTitle(title) {
@@ -93,6 +103,9 @@ export default {
     closeModal() {
       this.isInviteModal = false;
     },
+    closeFilterModal() {
+      this.isFilterModal = false
+    },
     toggleBoardMenu() {
       this.isMenuModal = !this.isMenuModal;
     },
@@ -102,6 +115,9 @@ export default {
     },
     setBg(bg) {
       this.$emit('setBg', bg)
+    },
+    setFilter(filterBy) {
+      this.$emit('setFilter', filterBy)
     }
   },
   computed: {

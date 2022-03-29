@@ -1,0 +1,49 @@
+.board-filter {
+  z-index: 1;
+  position: fixed;
+  right: 0;
+  top: 44px;
+  height: calc(100vh - 65px);
+  background-color: #ffffff;
+  width: 384px;
+  padding: 15px 10px 10px 10px;
+  box-shadow: 0 12px 24px -6px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+  transition: all 0.3s;
+  color: #091e42;
+
+  header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+    align-items: center;
+    .icon-cancel {
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .search-inp {
+    input {
+      @include popupInput();
+    }
+    h4 {
+      color: #5e6c84;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      margin-top: 20px;
+      margin-top: 0;
+      margin-bottom: 4px;
+    }
+    p {
+      color: #5e6c84;
+      font-size: 11px;
+      line-height: 14px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+  }
+}
