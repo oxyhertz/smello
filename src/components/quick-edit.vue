@@ -23,7 +23,7 @@
         <div class="btn" @click="setCmp('dateItem', { name: 'Dates', style: labelsStyle })">
             <span class="icon-time"></span>Edit Dates
         </div>
-        <div class="btn" @click="$emit('removeTask')">
+        <div class="btn" @click.stop="$emit('removeTask')">
             <span class="icon-cancel"></span>
             Remove
         </div>
