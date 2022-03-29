@@ -16,6 +16,94 @@
             />
             <p>Search cards, members, labels, and more.</p>
         </div>
+        <div class="members">
+            <h4>Members</h4>
+            <ul>
+                <li v-for="(member, idx) in board.members" :key="member._id">
+                    <input
+                        :value="member._id"
+                        v-model="filterBy.members"
+                        @change="setFilter"
+                        type="checkbox"
+                        :id="member._id"
+                    />
+                    <avatar size="24" :name="member.fullname"></avatar>
+                    <p>{{ member.fullname }}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="dates">
+            <h4>Due date</h4>
+            <ul>
+                <li>
+                    <label>
+                        <input
+                            @change="setFilter"
+                            v-model="filterBy.dueDate"
+                            type="checkbox"
+                            value="no-dates"
+                        />
+                        <span class="icon-date"></span>
+                        <p>No dates</p>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input
+                            @change="setFilter"
+                            v-model="filterBy.dueDate"
+                            type="checkbox"
+                            value="overdue"
+                        />
+                        <span class="icon-time red-bg"></span>
+                        <p>Overdue</p>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input
+                            @change="setFilter"
+                            v-model="filterBy.dueDate"
+                            type="checkbox"
+                            value="next-day"
+                        />
+                        <span class="icon-time wait-bg"></span>
+                        <p>Due in the next day</p>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="labels">
+            <h4>Labels</h4>
+            <ul>
+                <li>
+                    <label>
+                        <input
+                            @change="setFilter"
+                            type="checkbox"
+                            v-model="filterBy.labels"
+                            value="none"
+                        />
+                        <span class="icon-label"></span>
+                        <p>No labels</p>
+                    </label>
+                </li>
+                <li v-for="label in board.labels">
+                    <label>
+                        <input
+                            :value="label._id"
+                            v-model="filterBy.labels"
+                            @change="setFilter"
+                            type="checkbox"
+                            :id="label._id"
+                        />
+                        <div class="label" :style="{ 'background-color': label.color }">
+                            <p>{{ label.title }}</p>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </div>
     </section>
 </template>
 <script>
@@ -27,7 +115,10 @@ export default {
     data() {
         return {
             filterBy: {
-                title: ''
+                title: '',
+                labels: [],
+                members: [],
+                dueDate: null,
             }
         }
     },
@@ -36,6 +127,7 @@ export default {
             this.$emit('closeFilter')
         },
         setFilter() {
+            console.log(this.filterBy.labels)
             this.$emit('setFilter', { ...this.filterBy })
         },
     },
