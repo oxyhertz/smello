@@ -24,6 +24,13 @@
                     <span class="google-icon"></span>
                     <span class="btn-txt">Continue with Google</span>
                 </button>
+
+                <v-facebook-login
+                    app-id="540935014124365"
+                    @login="handleFacebookLogin"
+                    @logout="handleFacebookLogout"
+                    @options="{ autoLogAppEvents: false }"
+                ></v-facebook-login>
             </form>
 
             <hr />
@@ -34,6 +41,8 @@
 
 
 <script>
+import VFacebookLogin from 'vue-facebook-login-component-next'
+
 export default {
     name: 'login-signup',
     data() {
@@ -45,6 +54,9 @@ export default {
             },
             isLogin: true
         }
+    },
+    components: {
+        VFacebookLogin
     },
     created() {
         this.isLogin = (this.$route.path === '/login');
@@ -80,6 +92,12 @@ export default {
             } catch (err) {
                 console.log(err);
             }
+        },
+        handleFacebookLogin(response) {
+            console.log("User Successfully Logged In", response)
+        },
+        handleFacebookLogout(response) {
+            console.log(response);
         },
         toggleLoginSignup() {
             this.isLogin = !this.isLogin;
