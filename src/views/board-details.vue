@@ -7,6 +7,7 @@
 			@addMember="addMember"
 			@toggleFavorite="toggleFavorite"
 			@setFilter="setFilter"
+			:filterBy="filterBy"
 		/>
 		<section class="group-container-scrollable">
 			<board-group
@@ -201,15 +202,21 @@ export default {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {
 						return task.labelIds?.some(label => {
-							// console.log(member._id)
 							return this.filterBy.labels.includes(label)
 						})
 					})
 				})
 				filteredGroups = filteredGroups.map(group => {
 					group.tasks = group.tasks.filter(task => {
-						if (!task.members) task.members = []
-						return task.members?.some(member => this.filterBy.members.includes(member._id))
+						if (this.filterBy.labels.includes('none')) {
+							console.log('nondddddddddddde')
+							// return !task.labelIds.length
+
+						}
+						return task.labelIds?.some(label => {
+							if (label === 'none') return
+							return this.filterBy.labels.includes(label)
+						})
 					})
 					return group
 				})

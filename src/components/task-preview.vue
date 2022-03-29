@@ -37,41 +37,43 @@
           cols="30"
           rows="10"
         ></textarea>
-        <div
-          class="icon-container flex"
-          v-if="this.task.cover?.type !== 'inline'"
-          :class="{ 'p-b-10': task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length }"
-        >
-          <div v-if="task.dueDate">
-            <span
-              class="preview-icon date"
-              :style="{ 'font-size': 12 + 'px' }"
-              :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
-            >
-              <span class="clock-icon" v-if="task.status?.length"></span>
-              {{ date }}
-            </span>
-          </div>
-          <div class="preview-icon" v-if="task.description">
-            <span class="icon-description"></span>
-          </div>
-
-          <div class="preview-icon" v-if="numOfComments">
-            <span class="icon-chat"></span>
-            <p>{{ numOfComments }}</p>
-          </div>
-
-          <div class="preview-icon" v-if="task.attachments?.length">
-            <span class="icon-attachment"></span>
-            <p>{{ task.attachments?.length }}</p>
-          </div>
+        <div class="icons">
           <div
-            class="preview-icon"
-            v-if="task.checklists?.length && numOfTodos"
-            :class="{ completed: tasksDone === numOfTodos }"
+            class="icon-container flex"
+            v-if="this.task.cover?.type !== 'inline'"
+            :class="{ 'p-b-10': task.status?.length || task.attachments?.length || task.checklists?.length && numOfTodos || task.members?.length }"
           >
-            <span class="icon-checklist"></span>
-            <p>{{ tasksDone }} / {{ numOfTodos }}</p>
+            <div v-if="task.dueDate">
+              <span
+                class="preview-icon date"
+                :style="{ 'font-size': 12 + 'px' }"
+                :class="{ completed: task.status === 'completed', overdue: task.status === 'overdue' }"
+              >
+                <span class="clock-icon" v-if="task.status?.length"></span>
+                {{ date }}
+              </span>
+            </div>
+            <div class="preview-icon" v-if="task.description">
+              <span class="icon-description"></span>
+            </div>
+
+            <div class="preview-icon" v-if="numOfComments">
+              <span class="icon-chat"></span>
+              <p>{{ numOfComments }}</p>
+            </div>
+
+            <div class="preview-icon" v-if="task.attachments?.length">
+              <span class="icon-attachment"></span>
+              <p>{{ task.attachments?.length }}</p>
+            </div>
+            <div
+              class="preview-icon"
+              v-if="task.checklists?.length && numOfTodos"
+              :class="{ completed: tasksDone === numOfTodos }"
+            >
+              <span class="icon-checklist"></span>
+              <p>{{ tasksDone }} / {{ numOfTodos }}</p>
+            </div>
           </div>
           <div class="preview-icon members" v-if="task.members?.length">
             <div v-for="member in task.members" :key="member._id" class="member">

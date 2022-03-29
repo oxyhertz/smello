@@ -110,7 +110,8 @@
 export default {
     name: 'close-filter',
     props: {
-        board: Object
+        board: Object,
+        filter: Object
     },
     data() {
         return {
@@ -122,6 +123,10 @@ export default {
 
             }
         }
+    },
+    created() {
+        console.log(this.filter)
+        this.filterBy = this.filter
     },
     methods: {
         closeFilter() {
