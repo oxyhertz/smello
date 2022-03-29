@@ -1,5 +1,7 @@
 import { boardService } from '../../services/board-service.js';
 import { utilService } from '../../services/utils-service.js';
+import { socketService } from '../../services/socket-service.js';
+
 export default {
   state: {
     boards: [],
@@ -126,14 +128,16 @@ export default {
         board.createdBy = getters.miniUser; // should come from server later?
         board.members = [getters.miniUser]; // should come from server later?
       }
+      socketService.emit('set board', board)
 
-      try {
-        const savedBoard = await boardService.saveBoard(board);
-        commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
-        return savedBoard;
-      } catch (err) {
-        console.log(err);
-      }
+
+      // try {
+      //   const savedBoard = await boardService.saveBoard(board);
+      //   commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
+      //   return savedBoard;
+      // } catch (err) {
+      //   console.log(err);
+      // }
     },
     async removeBoard({ commit }, { boardId }) {
       try {
@@ -145,6 +149,7 @@ export default {
     },
     async setCurrentBoard({ commit }, { boardId }) {
       try {
+        console.log('ddddddddddddddddd', boardId);
         const board = await boardService.getBoardById(boardId);
         commit({ type: 'setCurrentBoard', board });
       } catch (err) {
