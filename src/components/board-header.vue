@@ -61,6 +61,7 @@ import boardHeaderFavorite from "./board-header/board-header-favorite.vue";
 import membersPreview from "./members-preview.vue";
 import inviteMembers from "./invite-members.vue";
 import boardMenuModal from "./board-menu-modal.vue";
+import boardFilter from './board-filter.vue'
 
 export default {
   name: "board-header",
@@ -80,6 +81,7 @@ export default {
     membersPreview,
     inviteMembers,
     boardMenuModal,
+    boardFilter
   },
   methods: {
     editTitle(title) {

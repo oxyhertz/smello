@@ -124,6 +124,7 @@ export default {
         taskId,
         groupId,
       };
+      console.log(task)
       this.$emit('removeTask', task);
     },
     addTask(title, groupId) {
