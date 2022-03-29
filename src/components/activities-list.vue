@@ -1,7 +1,11 @@
 <template>
     <section>
         <ul v-if="task.activities?.length" class="comment-text">
-            <li v-for="activity in task.activities" :key="activity._id">
+            <li
+                v-for="activity in task.activities"
+                :key="activity._id"
+                :class="{ open: activity.isEditing }"
+            >
                 <avatar class="activity-avatar" size="32" :name="activity.byMember.fullname"></avatar>
                 <div :class="{ activity: activity.isComment }">
                     <span class="member">{{ activity.byMember.username }}</span>
@@ -108,6 +112,10 @@ export default {
 </script>
 
 <style>
+.comment-text li.open {
+    height: 106px;
+}
+
 .try.open {
     border-radius: 3px;
     box-shadow: 0 1px 3px #091e4240, 0 0 0 1px #091e4214;
