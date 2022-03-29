@@ -203,7 +203,7 @@ export default {
     tagMembers(id) {
       if (this.isFindMembers) {
         this.isFindMembers = !this.isFindMembers
-        if (this.isComment) {
+        if (this.isComment && this.memberToAdd) {
           this.comment += this.memberToAdd.username
           return this.memberToAdd = ''
         }
