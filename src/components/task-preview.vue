@@ -55,6 +55,12 @@
           <div class="preview-icon" v-if="task.description">
             <span class="icon-description"></span>
           </div>
+
+          <div class="preview-icon" v-if="numOfComments">
+            <span class="icon-chat"></span>
+            <p>{{ numOfComments }}</p>
+          </div>
+
           <div class="preview-icon" v-if="task.attachments?.length">
             <span class="icon-attachment"></span>
             <p>{{ task.attachments?.length }}</p>
@@ -197,6 +203,10 @@ export default {
         }
         return style
       }
+    },
+    numOfComments() {
+      if (!this.task.activities?.length) return 0;
+      return this.task.activities.reduce((acc, activity) => activity.isComment ? acc + 1 : acc, 0);
     },
     quickEditPos() {
       const top = this.$refs.tasky.getBoundingClientRect().y;
