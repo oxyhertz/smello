@@ -79,7 +79,7 @@
             </div>
           </div>
         </div>
-        <!-- <button @click.stop="removeTask">Delete</button> -->
+        <button @click.stop="removeTask">Delete</button>
       </section>
       <quick-edit
         @addItem="updateTask"

@@ -14,7 +14,6 @@
                 :key="index"
                 v-for="(m, index) in markers"
                 :position="m.position"
-                :clickable="true"
                 @click="center = m.position"
             />
         </GMapCluster>
@@ -26,7 +25,7 @@
 
 <script>
 import Autocomplete from 'vue3-autocomplete'
-import 'vue3-autocomplete/dist/vue3-autocomplete.css'
+import { mapsService } from '../../services/maps-service.js'
 export default {
 
     data() {
@@ -51,6 +50,10 @@ export default {
                 , // Along list of clusters
             ]
         }
+    },
+    created() {
+        console.log('oppppppppppppppppppppppppppppppppp')
+        mapsService.getPlaces()
     },
     methods: {
         tlv() {
