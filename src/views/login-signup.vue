@@ -63,10 +63,13 @@ export default {
             try {
                 const googleUser = await this.$gAuth.signIn();
                 if (!googleUser) return;
+
+                const userId = googleUser.getBasicProfile().getId();
                 const username = googleUser.getBasicProfile().getEmail();
                 const fullname = googleUser.getBasicProfile().getName();
                 const imgUrl = googleUser.getBasicProfile().getImageUrl();
-                const userToSave = { username, fullname, imgUrl, type: 'google' }
+
+                const userToSave = { username, fullname, password: userId, imgUrl }
                 try {
                     await this.$store.dispatch({ type: 'login', cred: userToSave });
                 } catch (err) {
