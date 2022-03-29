@@ -193,9 +193,7 @@ export default {
       };
     },
     onQuickEdit(state) {
-      console.log(state)
       this.isQuickEdit = state;
-      console.log(this.isQuickEdit)
     },
     updateTask(task) {
       console.log(task)

@@ -1,5 +1,5 @@
 <template>
-  <div class="pop-up-main" :style="popupData.style">
+  <div ref="popup" class="pop-up-main" :style="popupData.style">
     <header>
       <p>{{ popupData.name }}</p>
       <span @click="$emit('closePopup')">
@@ -48,10 +48,15 @@ export default {
     popupData: Object,
     action: String,
     task: Object,
-    actionType: ''
+    actionType: '',
+
   },
   created() {
     console.log(this.task)
+  },
+  mounted() {
+    console.log(this.$refs.popup)
+    this.$emit('popupHeight', this.$refs.popup.clientHeight)
   },
   methods: {
     updateCover(cover) {
