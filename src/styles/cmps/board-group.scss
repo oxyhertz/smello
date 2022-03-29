@@ -1,4 +1,7 @@
 .group-container {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 132px);
   width: $group-size;
   background-color: $clr7;
   border-radius: $border-rsize;

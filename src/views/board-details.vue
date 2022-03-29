@@ -1,8 +1,8 @@
 <template>
-	<section v-if="board" class="board-container" :style="boardStyle">
+	<section v-if="currBoard" class="board-container" :style="boardStyle">
 		<board-header
 			@setBg="setBg"
-			:board="board"
+			:board="currBoard"
 			@editTitle="editBoardTitle"
 			@addMember="addMember"
 			@toggleFavorite="toggleFavorite"
@@ -20,7 +20,7 @@
 				@editGroup="editGroup"
 				@cleanStore="cleanStore"
 				:groups="groupsToDisplay"
-				:board="board"
+				:board="currBoard"
 			/>
 		</section>
 	</section>
@@ -29,8 +29,6 @@
 <script>
 import { nextTick } from 'vue'
 import boardGroup from '../components/board-group.vue';
-import { utilService } from '../services/utils-service.js';
-import { boardService } from '../services/board-service.js';
 import { socketService } from '../services/socket-service.js';
 import boardHeader from '../components/board-header.vue'
 
@@ -42,7 +40,7 @@ export default {
 	},
 	data() {
 		return {
-			board: null,
+			// board: null,
 			filterBy: {
 				title: '',
 				labels: [],
@@ -67,16 +65,30 @@ export default {
 	},
 	async created() {
 		await this.loadBoard()
-		this.board = this.currBoard;
-		const { boardId } = this.$route.params;
-		socketService.emit("board topic", boardId);
+		// this.board = this.currBoard;
+		// const { boardId } = this.$route.params;
+		// socketService.emit("board topic", boardId);
+
 		// socketService.on('board update', this.loadBoard())
-		socketService.on('board update', this.loadBoard)
+		socketService.on('tag user', this.tagUser)
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
 	},
 	methods: {
+		tagUser(activity) {
+			this.$toast(activity.txt, {
+				duration: 2000,
+				styles: {
+					top: '90px',
+					right: '90px',
+					position: 'absolute',
+				},
+				class: 'toast',
+				positionX: 'left',
+				positionY: 'top',
+			});
+		},
 		async loadBoard() {
 			try {
 				await this.$store.dispatch({
@@ -94,7 +106,7 @@ export default {
 		},
 		removeTask(task) {
 			// var activity = boardService.addActivity(
-			//   "Task removed ",
+			//   "Task removed",
 			//   this.user, <--from a getter
 			//   currTask
 			// );
@@ -165,6 +177,9 @@ export default {
 		},
 	},
 	computed: {
+		miniUser() {
+			return this.$store.getters.miniUser;
+		},
 		groups() {
 			return this.$store.getters.boardGroups;
 		},
@@ -176,7 +191,7 @@ export default {
 		},
 		groupsToDisplay() {
 			let filteredGroups = [];
-			const board = JSON.parse(JSON.stringify(this.board))
+			const board = JSON.parse(JSON.stringify(this.currBoard))
 			const regex = new RegExp(this.filterBy.title, 'i')
 			filteredGroups = board.groups.filter((group) => regex.test(group.title) || group.tasks.some(task => regex.test(task.title)))
 			console.log(this.filterBy)
@@ -234,3 +249,12 @@ export default {
 	}
 }
 </script>
+
+
+<style>
+.toast {
+	width: 20%;
+	height: 70px;
+	background-color: #0079bf;
+}
+</style>

@@ -61,13 +61,10 @@
 </template>
 
 <script>
-import { userService } from '../services/user-service.js';
-
 export default {
 	name: 'home-page',
 	methods: {
-		async moveToBoards() {
-			await this.$store.dispatch({ type: 'login', cred: userService.getGuestUser() });
+		moveToBoards() {
 			this.$router.push('/board')
 		}
 	}

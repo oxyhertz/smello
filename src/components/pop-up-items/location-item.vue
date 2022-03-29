@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Autocomplete @input="getItems" :results="items"></Autocomplete>
+        <input type="text" placeholder="Yes.." ref="autocomplete" />
     </div>
     <GMapMap
         class="maps"
@@ -18,18 +18,14 @@
             />
         </GMapCluster>
     </GMapMap>
-    <!-- <el-button type="primary" plain @click="tlv">TLV</el-button>
-    <el-button type="primary" plain @click="had">HAD</el-button>
-    <el-button type="primary" plain @click="btym">BT-YM</el-button>-->
 </template>
 
 <script>
-import Autocomplete from 'vue3-autocomplete'
-import { mapsService } from '../../services/maps-service.js'
+import axios from 'axios'
 export default {
-
     data() {
         return {
+            autocomplete: '',
             center: { lat: 32.109333, lng: 34.855499 },
             markers: [
                 {
@@ -37,38 +33,54 @@ export default {
                         lat: 32.109333, lng: 34.855499
                     },
                 },
-                {
-                    position: {
-                        lat: 32.434046, lng: 34.919652
-                    },
-                },
-                {
-                    position: {
-                        lat: 32.017136, lng: 34.745441
-                    },
-                }
-                , // Along list of clusters
+
             ]
         }
     },
-    created() {
-        console.log('oppppppppppppppppppppppppppppppppp')
-        mapsService.getPlaces()
+    mounted() {
+        this.autocomplete = new google.maps.places.Autocomplete(
+            this.$refs["autocomplete"],
+            {
+                types: ['establishment'],
+                componentRestrictions: { 'country': ['IL'] },
+                fields: ['place._id', 'geometry', 'name']
+            });
+
+        this.autocomplete.addListener("place_changed", this.yes)
     },
     methods: {
-        tlv() {
-            this.center = { lat: 32.109333, lng: 34.855499 }
+        yes() {
+            console.log(this.autocomplete.getPlace());
+            this.onSearch()
         },
-        had() {
-            this.center = { lat: 32.434046, lng: 34.919652 }
+        onPanTo(lat = 35.6895, lng = 139.6917) {
+            this.center = {
+                lat,
+                lng,
+            }
+            this.markers[0].position = {
+                lat,
+                lng,
+            }
+            console.log('this.center', this.center)
         },
-        btym() {
-            this.center = { lat: 32.017136, lng: 34.745441 }
-        }
+        geocode(val) {
+            axios
+                .get('https://maps.googleapis.com/maps/api/geocode/json', {
+                    params: {
+                        address: val,
+                        key: 'AIzaSyCv9mke4qM6dFwfae-VsXNlKlW2Mnk4kBk',
+                    },
+                })
+                .then(res => res.data.results[0].geometry.location)
+                .then(res => this.onPanTo(res.lat, res.lng));
+        },
 
+        onSearch() {
+            this.geocode(this.$refs["autocomplete"].value);
+        }
     },
     components: {
-        Autocomplete,
     }
 
 }
