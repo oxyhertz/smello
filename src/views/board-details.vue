@@ -206,6 +206,13 @@ export default {
 						})
 					})
 				})
+				filteredGroups = filteredGroups.map(group => {
+					group.tasks = group.tasks.filter(task => {
+						if (!task.members) task.members = []
+						return task.members?.some(member => this.filterBy.members.includes(member._id))
+					})
+					return group
+				})
 
 			}
 			if (this.filterBy.dueDate) {
