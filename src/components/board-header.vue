@@ -77,7 +77,7 @@ export default {
   emits: ["editTitle", "toggleFavorite"],
   props: {
     board: Object,
-    filterBy: Object,
+    filterBy: Object
   },
   data() {
     return {
