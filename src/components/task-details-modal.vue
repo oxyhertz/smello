@@ -161,7 +161,8 @@
   </section>
 </template>
 <script>
-import { utilService } from '../services/utils-service.js'
+import { utilService } from '../services/utils-service.js';
+import { socketService } from '../services/socket-service.js';
 import popupMain from './pop-up-main.vue';
 import attachment from "./attachment-cmp.vue";
 import taskComboList from './task-details-cmps/task-combo-list.vue';
@@ -170,6 +171,8 @@ import contenteditable from 'vue-contenteditable'
 import activitiesList from './activities-list.vue'
 import commentActions from './comment-actions.vue'
 import findMembers from './find-members.vue'
+
+
 export default {
   data() {
     return {
@@ -204,6 +207,7 @@ export default {
       if (this.isFindMembers) {
         this.isFindMembers = !this.isFindMembers
         if (this.isComment && this.memberToAdd) {
+          console.log('this.memberToAdd', this.memberToAdd)
           this.comment += this.memberToAdd.username
           return this.memberToAdd = ''
         }
@@ -243,6 +247,24 @@ export default {
           isComment: true,
         }
       }
+
+      const activity = {
+        by: this.miniUser,
+        createdAt: Date.now(),
+        txt: `${this.miniUser.username} tagged you`
+      }
+
+      item.item.txt.split(' ').forEach(txt => {
+        if (txt[0] === '@') {
+          const username = txt.substring(1);
+          const user = this.board.members.find(member => member.username === username);
+          if (user) {
+            activity.to = user;
+            socketService.emit('notify user tag', activity)
+          }
+        }
+      })
+
       this.addItem(item);
       this.closeComment()
       this.comment = ''

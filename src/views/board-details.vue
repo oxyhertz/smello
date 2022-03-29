@@ -68,14 +68,30 @@ export default {
 		await this.loadBoard()
 		this.board = this.currBoard;
 		const { boardId } = this.$route.params;
+		socketService.emit('set-user-socket', this.miniUser._id);
 		socketService.emit("board topic", boardId);
 		// socketService.on('board update', this.loadBoard())
 		socketService.on('board update', this.loadBoard)
+		socketService.on('tag user', this.tagUser)
 	},
 	unmounted() {
 		this.$store.commit({ type: 'setCurrentBoard', board: null })
 	},
 	methods: {
+		tagUser(activity) {
+			this.$toast(activity.txt, {
+				duration: 2000,
+				styles: {
+					top: '90px',
+					right: '90px',
+					position: 'absolute',
+					'background-color': '#0079bf',
+				},
+				class: 'toast',
+				positionX: 'left',
+				positionY: 'top',
+			});
+		},
 		async loadBoard() {
 			try {
 				await this.$store.dispatch({
@@ -164,6 +180,9 @@ export default {
 		},
 	},
 	computed: {
+		miniUser() {
+			return this.$store.getters.miniUser;
+		},
 		groups() {
 			return this.$store.getters.boardGroups;
 		},
@@ -186,3 +205,12 @@ export default {
 	}
 }
 </script>
+
+
+<style>
+.toast {
+	width: 20%;
+	height: 70px;
+	background-color: #0079bf;
+}
+</style>
