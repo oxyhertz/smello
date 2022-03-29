@@ -1,34 +1,36 @@
 <template>
-    <section class="main-container">
-        <header>
-            <span class="icon-trello"></span>
-            <h1>Drello</h1>
-        </header>
-        <main class="login-container">
-            <h2>Log in to Drello</h2>
-            <form @submit.prevent>
-                <input type="text" v-model="user.username" placeholder="Enter Username" />
-                <input
-                    v-if="!isLogin"
-                    v-model="user.fullname"
-                    type="text"
-                    placeholder="Enter Full Name"
-                />
-                <input type="password" v-model="user.password" placeholder="Enter password" />
+    <section class="login-wrapper">
+        <section class="main-container">
+            <header>
+                <span class="icon-trello"></span>
+                <h1>Drello</h1>
+            </header>
+            <main class="login-container">
+                <h2>Log in to Drello</h2>
+                <form @submit.prevent>
+                    <input type="text" v-model="user.username" placeholder="Enter Username" />
+                    <input
+                        v-if="!isLogin"
+                        v-model="user.fullname"
+                        type="text"
+                        placeholder="Enter Full Name"
+                    />
+                    <input type="password" v-model="user.password" placeholder="Enter password" />
 
-                <button class="login-btn" @click="onLoginSignup">{{ loginSignupBtnTxt }}</button>
+                    <button class="login-btn" @click="onLoginSignup">{{ loginSignupBtnTxt }}</button>
 
-                <div class="login-option-sep">Or</div>
+                    <div class="login-option-sep">Or</div>
 
-                <button class="login-with-google" @click="handleGoogleLogin">
-                    <span class="google-icon"></span>
-                    <span class="btn-txt">Continue with Google</span>
-                </button>
-            </form>
+                    <button class="login-with-google" @click="handleGoogleLogin">
+                        <span class="google-icon"></span>
+                        <span class="btn-txt">Continue with Google</span>
+                    </button>
+                </form>
 
-            <hr />
-            <p @click="toggleLoginSignup" class="change-form-link">{{ loginSignupLinkTxt }}</p>
-        </main>
+                <hr />
+                <p @click="toggleLoginSignup" class="change-form-link">{{ loginSignupLinkTxt }}</p>
+            </main>
+        </section>
     </section>
 </template>
 
