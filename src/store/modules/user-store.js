@@ -1,6 +1,7 @@
 import { userService } from '../../services/user-service';
 // import { userManageService } from '../../services/user-manage-service';
 import { utilService } from '../../services/utils-service';
+import { socketService } from '../../services/socket-service'
 
 export default {
   state: {
@@ -15,6 +16,7 @@ export default {
       return state.allUsers;
     },
     miniUser({ loggedinUser }) {
+      if (!loggedinUser) return;
       const miniUser = {
         _id: loggedinUser._id,
         fullname: loggedinUser.fullname,
@@ -26,6 +28,7 @@ export default {
   },
   mutations: {
     setLoggedinUser(state, { user }) {
+      socketService.emit('set-user-socket', user._id)
       state.loggedinUser = user;
     },
     setUsers(state, { users }) {
