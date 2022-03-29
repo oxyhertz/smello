@@ -357,6 +357,10 @@
   background-color: #8a2be200 !important;
 }
 
+.comment-text li a:first-of-type {
+  margin-left: 1px;
+}
+
 .comment-text li a {
   text-decoration: underline;
   cursor: pointer;
