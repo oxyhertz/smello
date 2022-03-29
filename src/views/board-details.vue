@@ -179,7 +179,7 @@ export default {
 			const regex = new RegExp(this.filterBy.title, 'i')
 			filteredGroups = this.board.groups.filter((group) => regex.test(group.title))
 			if (this.filterBy.members.length) {
-				// filteredGroups = this.board
+				// filteredGroups.filter()
 			}
 			return filteredGroups;
 		}
