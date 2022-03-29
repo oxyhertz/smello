@@ -128,16 +128,16 @@ export default {
         board.createdBy = getters.miniUser; // should come from server later?
         board.members = [getters.miniUser]; // should come from server later?
       }
-      socketService.emit('set board', board)
+      // socketService.emit('set board', board)
 
 
-      // try {
-      //   const savedBoard = await boardService.saveBoard(board);
-      //   commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
-      //   return savedBoard;
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        const savedBoard = await boardService.saveBoard(board);
+        commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
+        return savedBoard;
+      } catch (err) {
+        console.log(err);
+      }
     },
     async removeBoard({ commit }, { boardId }) {
       try {

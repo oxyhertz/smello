@@ -43,28 +43,22 @@ export default {
 		return {
 			board: null,
 			filterBy: {
-				title: ''
+				title: '',
+				labels: [],
+				members: [],
+				dueDate: null,
 			}
 		};
 	},
 
 	watch: {
-		// async '$route.params.boardId'(newId, oldId) {
-		// 	await this.$store.dispatch({
-		// 		type: 'setCurrentBoard',
-		// 		boardId: newId,
-		// 	});
-		// 	this.board = JSON.parse(JSON.stringify(this.currBoard));
-
-		// },
 		'$route.params.boardId': {
+			immediate: true,
 			async handler(newId, oldId) {
 				await this.$store.dispatch({
 					type: 'setCurrentBoard',
 					boardId: newId,
 				});
-				this.board = null;
-				await nextTick();
 				this.board = this.currBoard;
 			},
 			deep: true
@@ -181,9 +175,12 @@ export default {
 		},
 		groupsToDisplay() {
 			let filteredGroups = [];
+			console.log(this.filterBy)
 			const regex = new RegExp(this.filterBy.title, 'i')
 			filteredGroups = this.board.groups.filter((group) => regex.test(group.title))
-			console.log(filteredGroups)
+			if (this.filterBy.members.length) {
+				// filteredGroups = this.board
+			}
 			return filteredGroups;
 		}
 	}

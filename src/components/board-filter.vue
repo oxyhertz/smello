@@ -127,7 +127,6 @@ export default {
             this.$emit('closeFilter')
         },
         setFilter() {
-            console.log(this.filterBy.labels)
             this.$emit('setFilter', { ...this.filterBy })
         },
     },

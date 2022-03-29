@@ -98,6 +98,13 @@ export default {
     addGroup,
     taskDetailsModal
   },
+  watch: {
+    groups(newGroup, oldGroup) {
+      this.scene = {
+        groups: newGroup
+      }
+    }
+  },
   methods: {
     cleanStore() {
       this.$emit('cleanStore', ['Task', 'Group']);
