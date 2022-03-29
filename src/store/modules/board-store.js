@@ -45,6 +45,7 @@ export default {
       state.boards = boards;
     },
     saveBoard(state, { board }) {
+      console.log(board, 'zissu');
       const idx = state.boards.findIndex(b => b._id === board._id);
       if (idx !== -1) state.boards.splice(idx, 1, board);
       else state.boards.push(board);
@@ -119,6 +120,13 @@ export default {
       try {
         const boards = await boardService.getBoards(state.filterBy);
         commit({ type: 'setBoards', boards });
+        socketService.off('board update')
+        socketService.on('board update', board => {
+          console.log('board', board)
+          commit({ type: 'saveBoard', board });
+          commit({ type: 'setCurrentBoard', board });
+
+        })
       } catch (err) {
         console.log(err);
       }
@@ -128,10 +136,9 @@ export default {
         board.createdBy = getters.miniUser; // should come from server later?
         board.members = [getters.miniUser]; // should come from server later?
       }
-      // socketService.emit('set board', board)
-
 
       try {
+        console.log('saveBoard', board);
         const savedBoard = await boardService.saveBoard(board);
         commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
         return savedBoard;
@@ -149,7 +156,6 @@ export default {
     },
     async setCurrentBoard({ commit }, { boardId }) {
       try {
-        console.log('ddddddddddddddddd', boardId);
         const board = await boardService.getBoardById(boardId);
         commit({ type: 'setCurrentBoard', board });
       } catch (err) {
