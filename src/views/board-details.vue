@@ -93,7 +93,7 @@ export default {
 		},
 		removeTask(task) {
 			// var activity = boardService.addActivity(
-			//   "Task removed ",
+			//   "Task removed",
 			//   this.user, <--from a getter
 			//   currTask
 			// );

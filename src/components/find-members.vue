@@ -14,7 +14,7 @@
                     </div>
                     <span class="name">{{ member.fullname }}</span>
                 </div>
-                <span class="username">({{ member.username }})</span>
+                <span class="username">{{ member.fullname }}</span>
             </li>
         </ul>
     </section>
