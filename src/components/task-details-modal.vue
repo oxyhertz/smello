@@ -124,7 +124,7 @@
             <span class="icon-attachment"></span>
             Attachments
           </button>
-          <button>
+          <button @click="setLocation('locationItem')">
             <span class="icon-location"></span>
             Location
           </button>
@@ -212,11 +212,10 @@ export default {
       if (id) {
         currTxt = this.task.activities.find(CurrComment => CurrComment._id === id).txt;
         this.lastAtIndex = currTxt.length - 2
-        console.log('this.lassssssssssssssssssssssssssssssssss', this.lastAtIndex)
       } else currTxt = this.comment;
       var atIndex = currTxt.indexOf('@', this.lastAtIndex + 1);
       if (atIndex !== -1) this.lastAtIndex = atIndex;
-      if ((atIndex !== -1) && (currTxt[atIndex - 1] === " ")) {
+      if (((atIndex !== -1) && (currTxt[atIndex - 1] === " ")) || ((currTxt.length === 1) && (currTxt === "@"))) {
         this.isFindMembers = true;
       }
     },
@@ -247,6 +246,10 @@ export default {
       this.addItem(item);
       this.closeComment()
       this.comment = ''
+    },
+    setLocation(action) {
+      (this.actionType = action),
+        (this.popupData = { name: 'Location', style: { top: '110px' } });
     },
     setDate(action) {
       (this.actionType = action),
