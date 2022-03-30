@@ -162,12 +162,13 @@ export default {
 			// this.board = this.currBoard
 		},
 		async setBg(bg) {
-			this.board.style[bg.type] = bg.val
-			if (bg.type === 'bgColor') this.board.style.bgImg = ''
-			await this.$store.dispatch({ type: 'saveBoard', board: this.board })
+			const board = JSON.parse(JSON.stringify(this.currBoard))
+			board.style[bg.type] = bg.val
+			if (bg.type === 'bgColor') board.style.bgImg = ''
+			await this.$store.dispatch({ type: 'saveBoard', board: board })
 			await this.$store.dispatch({
 				type: 'setCurrentBoard',
-				boardId: this.board._id,
+				boardId: board._id,
 			});
 		},
 		setFilter(filterBy) {

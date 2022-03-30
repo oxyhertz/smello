@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper" :style="boardStlye">
-		<app-header />
+		<app-header v-if="!isHomePage" />
 		<router-view />
 	</div>
 </template>
@@ -29,6 +29,9 @@ export default {
 		},
 		boardStlye() {
 			return { 'background-color': this.currBoard?.bgColor, 'background-image': 'url(' + this.currBoard?.bgImg + ')' }
+		},
+		isHomePage() {
+			return this.$store.getters.isHomePage
 		}
 	},
 	components: {
