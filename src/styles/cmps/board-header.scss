@@ -1,8 +1,19 @@
 .board-header {
-  margin: 18px 0 10px 12px;
+  // margin: 18px 0 10px 12px;
+  flex-wrap: wrap;
+
+  .menu-left-header {
+    flex-wrap: wrap;
+  }
+  .right-btns {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
 
   & .btn {
     @include lightBtn;
+    background-color: #ffffff3d;
     align-items: flex-start;
   }
 
@@ -17,6 +28,11 @@
   > * {
     color: white;
     @include board-btn($bg: rgba(240, 248, 255, 0));
+    height: auto;
+    @media (max-width: 785px) {
+      padding: 0;
+      padding-top: 10px;
+    }
   }
 
   button {
@@ -30,7 +46,7 @@
 
   input {
     font-size: 18px;
-    padding: 6px 12px;
+    padding: 6px 1px 6px 12px;
     &:not(:focus) {
       color: white;
     }
@@ -38,7 +54,7 @@
 
   & .editable:hover:not(:focus) {
     border-radius: $border-rsize;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #ffffff52;
   }
 }
 
@@ -73,7 +89,7 @@
 }
 
 .members-preview {
-  margin-inline-start: 2.5vw;
+  margin-inline-start: 20px;
   margin-bottom: 8px;
 }
 
@@ -84,4 +100,12 @@
 .show-menu {
   margin-inline-start: 8px;
   padding: 7px 16px;
+}
+
+@media (max-width: 785px) {
+  .board-header {
+    .right-btns {
+      padding: 0;
+    }
+  }
 }

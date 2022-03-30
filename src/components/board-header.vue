@@ -18,7 +18,6 @@
         @toggleFavorite="toggleFavorite"
         :favorite="boardFavoriteStatus"
       />
-
       <members-preview :board="board" />
 
       <div class="invite-members-container">
@@ -36,7 +35,7 @@
       </div>
     </section>
 
-    <section>
+    <section class="right-btns">
       <button class="btn" @click="isFilterModal = !isFilterModal">
         <span class="board-header-filter-icon"></span>Filter
       </button>

@@ -10,13 +10,20 @@
     <h3>Labels</h3>
     <ul>
       <li class="label" v-for="label in getRelevantLabels" :key="label._id">
+        <div
+          class="hover"
+          :style="{ 'background-color': label.color }"
+          :class="{ 'hover-marker': null }"
+        ></div>
         <span
           @click="addLabel(label._id)"
           :style="{ 'background-color': label.color }"
           class="label-txt"
         >{{ label.title }}</span>
-        <div :class="{ 'hover-marker': null }"></div>
-        <span @click.stop="updateCurrData(label)" class="edit-labels"></span>
+        <span
+          @click.stop="updateCurrData(label), (isCreating = true)(isEditing = true)"
+          class="edit-labels"
+        ></span>
       </li>
     </ul>
     <button @click="setLabel(), (isCreating = true)" class="create-label-btn">Create a new label</button>
