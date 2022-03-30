@@ -358,7 +358,7 @@ export default {
         // if (this.taskToEdit.labelIds.includes(item.item._id) || (item.order === 'delete')) {
         if (this.taskToEdit.labelIds.includes(item.item._id)) {
           const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
-          this.taskToEdit.labelIds.splice(idx, 1);
+          if (item.item === this.taskToEdit.labelIds[idx]) this.taskToEdit.labelIds.splice(idx, 1);
         } else {
           this.taskToEdit.labelIds.push(item.item._id);
         }
