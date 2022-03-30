@@ -195,7 +195,7 @@ export default {
 			const board = JSON.parse(JSON.stringify(this.currBoard))
 			const regex = new RegExp(this.filterBy.title, 'i')
 			filteredGroups = board.groups.filter((group) => regex.test(group.title) || group.tasks.some(task => regex.test(task.title)))
-			console.log(this.filterBy)
+
 			if (this.filterBy.members.length) {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {
@@ -213,6 +213,7 @@ export default {
 					return group
 				})
 			}
+
 			if (this.filterBy.labels.length) {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {
@@ -235,6 +236,7 @@ export default {
 					return group
 				})
 			}
+
 			if (this.filterBy.dueDate) {
 				if (this.filterBy.dueDate === 'overdue') {
 					filteredGroups = filteredGroups.filter(group => {
