@@ -13,9 +13,8 @@
           <div class="avatar">
             <avatar :size="32" color="white" :name="member.fullname"></avatar>
           </div>
-          <span class="name">{{ member.fullname }}</span>
+          <span class="name">{{ member.fullname }} ({{ member.username }})</span>
         </div>
-        <span class="username">({{ member.username }})</span>
         <span class="icon-complete" v-if="currTaskMembersIds.includes(member._id)"></span>
       </li>
     </ul>

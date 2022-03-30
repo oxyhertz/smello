@@ -212,10 +212,20 @@ export default {
       return this.task.activities.reduce((acc, activity) => activity.isComment ? acc + 1 : acc, 0);
     },
     quickEditPos() {
-      const top = this.$refs.tasky.getBoundingClientRect().y;
-      const right = this.$refs.tasky.getBoundingClientRect().right;
-
+      let top = this.$refs.tasky.getBoundingClientRect().y;
+      let right = this.$refs.tasky.getBoundingClientRect().right;
+      let left = this.$refs.tasky.getBoundingClientRect().left;
+      if (window.innerHeight - top - 210 < 0) {
+        top = top - 210 + 40
+      }
+      if (window.innerWidth - right - 240 < 10) {
+        console.log(window.innerWidth - right - 240)
+        console.log('low')
+        right = left - 245;
+        return { top: top + 'px', left: right + 'px', 'align-items': 'flex-end' }
+      }
       return { top: top + 'px', left: right + 'px' }
+
     }
   }
 };
