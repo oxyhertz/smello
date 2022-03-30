@@ -62,6 +62,10 @@
               <p>{{ numOfComments }}</p>
             </div>
 
+            <div class="preview-icon" v-if="task.location">
+              <span class="icon-location"></span>
+            </div>
+
             <div class="preview-icon" v-if="task.attachments?.length">
               <span class="icon-attachment"></span>
               <p>{{ task.attachments?.length }}</p>
