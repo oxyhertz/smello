@@ -62,6 +62,7 @@
               <GMapMarker :position="task.location" />
             </GMapCluster>
           </GMapMap>
+          <a @click="deleteMap">Delete</a>
         </div>
 
         <task-check-list
@@ -207,6 +208,10 @@ export default {
     this.isComment = false
   },
   methods: {
+    deleteMap() {
+      this.taskToEdit.location = '';
+      this.onTaskEdit();
+    },
     openComment() {
       this.isComment = true
       if (!this.comment) {

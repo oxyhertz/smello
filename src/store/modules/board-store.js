@@ -91,6 +91,7 @@ export default {
     setTask(state, { groupId, task, action }) {
       let groupIdx;
       let activityTxt;
+      var currTask = state.currentTask
 
       console.log(action)
       if (action) activityTxt = `Edited ${action.type} in ${task.title}`
@@ -115,11 +116,11 @@ export default {
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
-
+      if (action?.type === 'members' && currTask?.members.length > task?.members.length) return
       const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, title: task.title })
       if (action?.type === 'members') activity.toMember = action.item;
       state.currentBoard.activities.unshift(activity);
-      socketService.emit('activity notify', activity)
+      socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
@@ -139,8 +140,10 @@ export default {
         commit({ type: 'setBoards', boards });
         socketService.off('board update')
         socketService.on('board update', board => {
-          commit({ type: 'saveBoard', board });
-          if (board._id === state.currentBoard._id) commit({ type: 'setCurrentBoard', board });
+          if (board._id === state.currentBoard?._id) {
+            commit({ type: 'saveBoard', board });
+            commit({ type: 'setCurrentBoard', board });
+          }
         })
       } catch (err) {
         console.log(err);
