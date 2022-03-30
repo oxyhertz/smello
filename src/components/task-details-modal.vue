@@ -221,7 +221,7 @@ export default {
       if (this.isFindMembers) {
         this.isFindMembers = !this.isFindMembers
         if (this.isComment && this.memberToAdd) {
-          this.comment += this.memberToAdd.username
+          this.comment += this.memberToAdd.fullname
           return this.memberToAdd = ''
         }
       }
