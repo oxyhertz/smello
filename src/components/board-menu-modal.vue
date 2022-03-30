@@ -26,14 +26,7 @@
     <section>
       <ul>
         <li v-for="activity in board.activities" :key="activity._id">
-          <div>
-            <avatar class="activity-avatar" size="32" :name="activity.byMember.fullname"></avatar>
-            <span>{{ activity.byMember.fullname }} -</span>
-            <span>{{ activity.txt }}</span>
-          </div>
-          <div>
-            <timeago class="time" :datetime="activity.createdAt" />
-          </div>
+          <div></div>
         </li>
       </ul>
     </section>
