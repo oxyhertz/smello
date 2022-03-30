@@ -1,4 +1,13 @@
 .task-details-modal {
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #5e6c84;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 1px;
+  }
+
   span.icon {
     font-family: Trello;
     font-size: 24px;
@@ -102,7 +111,7 @@
       position: absolute;
       margin-left: -40px;
       &::before {
-        content: '\e911';
+        content: "\e911";
       }
     }
   }
@@ -119,7 +128,7 @@
     align-items: center;
     margin-top: 45px;
     .icon::before {
-      content: '\e900';
+      content: "\e900";
     }
   }
   .task-description {
@@ -129,7 +138,7 @@
     margin-bottom: 30px;
     span {
       &::before {
-        content: '\e921';
+        content: "\e921";
       }
     }
   }
@@ -164,7 +173,7 @@
     }
 
     &[contenteditable]:empty::before {
-      content: 'Add a more detailed description';
+      content: "Add a more detailed description";
     }
   }
   .save-close-description {
@@ -189,7 +198,7 @@
   }
   .attachment-container {
     .icon::before {
-      content: '\e908';
+      content: "\e908";
     }
   }
 
@@ -288,15 +297,15 @@
   margin-top: -11px;
 
   .icon-find-members {
-    @include icon('\e946');
+    @include icon("\e946");
   }
 
   .icon-emojis {
-    @include icon('');
+    @include icon("");
   }
 
   & .title-icon {
-    @include icon('\e911');
+    @include icon("\e911");
   }
 
   & > * {
@@ -355,7 +364,7 @@
 // }
 
 .close-comment-edit {
-  @include icon('');
+  @include icon("");
   cursor: pointer;
   position: relative;
   top: -38px;
