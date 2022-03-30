@@ -16,10 +16,7 @@
           class="label-txt"
         >{{ label.title }}</span>
         <div :class="{ 'hover-marker': null }"></div>
-        <span
-          @click.stop="updateCurrData(label), (isCreating = true)(isEditing = true)"
-          class="edit-labels"
-        ></span>
+        <span @click.stop="updateCurrData(label)" class="edit-labels"></span>
       </li>
     </ul>
     <button @click="setLabel(), (isCreating = true)" class="create-label-btn">Create a new label</button>
@@ -31,8 +28,8 @@
     <color-picker @updateColor="updateColor"></color-picker>
     <div class="labels-actions flex space-between">
       <button class="save create flex" @click="setLabel()">Save</button>
-      <!-- <button v-if="isEditing" class="delete-label flex" @click="setLabel('delete')">Delete</button> -->
-      <button v-if="isEditing" class="delete-label flex">Delete</button>
+      <button v-if="isEditing" class="delete-label flex" @click="removeLabel()">Delete</button>
+      <!-- <button v-if="isEditing" class="delete-label flex">Delete</button> -->
     </div>
   </section>
 </template>
@@ -54,13 +51,8 @@ export default {
       color: '',
       // boardLabels: null,
       currentTaskId: '',
+      currLabel: '',
     };
-  },
-  created() {
-    // this.boardLabels = JSON.parse(JSON.stringify(this.board.labels));
-    // this.boardLabels = this.board.labels;
-    if (!this.board) console.log('noboard')
-    console.log(this.board)
   },
   computed: {
     getRelevantLabels() {
@@ -74,6 +66,8 @@ export default {
   },
   methods: {
     updateCurrData(label) {
+      this.isCreating = true
+      this.isEditing = true
       this.currentTaskId = label._id
       this.title = label.title
       this.color = label.color
@@ -92,16 +86,6 @@ export default {
           _id: id,
         },
       };
-      // if (order === 'delete') {
-      //   var idx = this.boardLabels.findIndex(
-      //     (label) => label._id === this.currentTaskId
-      //   );
-      //   this.boardLabels.splice(idx, 1);
-      //   item.order = 'delete'
-      //   this.$emit('updateLabels', this.boardLabels, item);
-      //   return this.$emit('addItem', item);
-
-      // }
       if (this.currentTaskId) {
         var idx = this.boardLabels.findIndex(
           (label) => label._id === this.currentTaskId
@@ -121,7 +105,6 @@ export default {
           _id: id,
         },
       };
-      console.log('additem')
       this.$emit('addItem', item);
     },
   },
