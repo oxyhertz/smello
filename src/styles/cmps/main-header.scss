@@ -5,7 +5,7 @@
   padding-right: 6px;
 
   &::before {
-    content: "";
+    content: '';
     font-size: 18px;
     font-family: trello;
     color: #fff;
@@ -21,6 +21,10 @@
   .create-board-container {
     .create-btn {
       margin: 0;
+      .icon-plus {
+        display: none;
+        color: #fff;
+      }
     }
   }
 
@@ -194,4 +198,40 @@
 }
 .icon.icon-bell {
   margin-inline-end: 5px;
+}
+
+@media (max-width: 1000px) {
+  .main-header {
+    .create-board-container {
+      .create-btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p {
+          display: none;
+        }
+        .icon-plus {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 790px) {
+  .main-header-input {
+    cursor: pointer;
+    width: 33px;
+    &.focused {
+      .icon-search {
+        color: #fff;
+      }
+      background-color: rgba(255, 255, 255, 0);
+    }
+    input {
+      display: none;
+    }
+  }
 }
