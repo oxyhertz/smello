@@ -119,7 +119,7 @@ export default {
       const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, title: task.title })
       if (action?.type === 'members') activity.toMember = action.item;
       state.currentBoard.activities.unshift(activity);
-      socketService.emit('activity notify', activity)
+      socketService.emit('activity notify', { activity, boardMembers: state.currentBoard.members })
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
