@@ -388,6 +388,7 @@ export default {
       this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
     },
     async updateLabels(updatedLabels, item) {
+      if (item.item?.isDelete) return this.removeLabel(updatedLabels, item)
       try {
         await this.$store.dispatch({
           type: 'setBoardPrefs',
@@ -399,6 +400,18 @@ export default {
       } catch (err) {
         console.log('err', err);
       }
+    },
+    removeLabel(updatedLabels, item) {
+      const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
+      this.taskToEdit.labelIds.splice(idx, 1);
+      this.onTaskEdit();
+      this.closePopup();
+
+      this.$store.dispatch({
+        type: 'setBoardPrefs',
+        key: 'labels',
+        val: updatedLabels,
+      });
     },
     cancelDescEdit() {
       this.taskToEdit.description = this.task.description;
