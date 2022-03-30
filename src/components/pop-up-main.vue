@@ -1,5 +1,5 @@
 <template>
-  <div ref="popup" class="pop-up-main" :style="popupData.style">
+  <div ref="popup" class="pop-up-main" :style="popupData.style" v-click-outside="closePopup">
     <header>
       <p>{{ popupData.name }}</p>
       <span @click="$emit('closePopup')">
