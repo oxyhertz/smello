@@ -358,7 +358,8 @@ export default {
         // if (this.taskToEdit.labelIds.includes(item.item._id) || (item.order === 'delete')) {
         if (this.taskToEdit.labelIds.includes(item.item._id)) {
           const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
-          if (item.item === this.taskToEdit.labelIds[idx]) this.taskToEdit.labelIds.splice(idx, 1);
+          var currLabel = this.taskToEdit.labelIds[idx]
+          if (item.item.color === currLabel.color && item.item.title === currLabel.title) this.taskToEdit.labelIds.splice(idx, 1);
         } else {
           this.taskToEdit.labelIds.push(item.item._id);
         }
