@@ -130,7 +130,6 @@ export default {
         taskId,
         groupId,
       };
-      console.log(task)
       this.$emit('removeTask', task);
     },
     addTask(title, groupId) {
@@ -203,7 +202,6 @@ export default {
       this.isQuickEdit = state;
     },
     updateTask(task) {
-      console.log(task)
       const taskGroup = this.groups.filter(group => {
         group.tasks.some(groupTask => groupTask._id === task._id)
         return group._id

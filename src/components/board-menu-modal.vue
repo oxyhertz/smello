@@ -23,6 +23,13 @@
     <change-bg @setBg="setBg" @changeCmp="changeCmp" v-if="currSection === 'changeBg'"></change-bg>
     <bg-photos @setBg="setBg" v-if="currSection === 'bgPhotos'"></bg-photos>
     <color-picker class="wide" @updateColor="setBg" v-if="currSection === 'colorPicker'"></color-picker>
+    <section>
+      <ul>
+        <li v-for="activity in board.activities" :key="activity._id">
+          <div></div>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 
@@ -42,7 +49,6 @@ export default {
     }
   },
   created() {
-    console.log(this.currSection)
   },
   unmounted() {
     this.currSection = 'Menu'
@@ -54,7 +60,6 @@ export default {
     },
     changeCmp(cmp) {
       this.currSection = cmp
-      console.log(cmp)
     },
     setBg(bg, type = 'bgImg') {
 

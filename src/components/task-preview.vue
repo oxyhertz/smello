@@ -62,6 +62,10 @@
               <p>{{ numOfComments }}</p>
             </div>
 
+            <div class="preview-icon" v-if="task.location">
+              <span class="icon-location"></span>
+            </div>
+
             <div class="preview-icon" v-if="task.attachments?.length">
               <span class="icon-attachment"></span>
               <p>{{ task.attachments?.length }}</p>
@@ -157,10 +161,7 @@ export default {
     }
   },
   computed: {
-    // openLabel() {
-    //   console.log('openLabel', this.$store.getters.openLabel)
-    //   return this.$store.getters.openLabels;
-    // },
+
     board() {
       return this.$store.getters.currBoard
     },
@@ -213,8 +214,7 @@ export default {
     quickEditPos() {
       const top = this.$refs.tasky.getBoundingClientRect().y;
       const right = this.$refs.tasky.getBoundingClientRect().right;
-      console.log(top)
-      console.log(right)
+
       return { top: top + 'px', left: right + 'px' }
     }
   }

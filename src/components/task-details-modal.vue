@@ -221,8 +221,7 @@ export default {
       if (this.isFindMembers) {
         this.isFindMembers = !this.isFindMembers
         if (this.isComment && this.memberToAdd) {
-          console.log('this.memberToAdd', this.memberToAdd)
-          this.comment += this.memberToAdd.username
+          this.comment += this.memberToAdd.fullname
           return this.memberToAdd = ''
         }
       }
@@ -239,7 +238,6 @@ export default {
     },
     closeComment() {
       if (this.isComment) {
-        console.log('this.las', this.lastAtIndex)
         this.lastAtIndex = 0;
         this.isComment = false
         this.comments = ''
@@ -319,14 +317,12 @@ export default {
       this.actionType = null
       this.popupData = null
     },
-    setItem(item) { },
     addItem(item) {
       if (item.type === 'attachment') {
         if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];
         this.taskToEdit.attachments.push(item.item);
         this.onTaskEdit();
       } else if (item.type === 'comment') {
-        console.log('item-comment', item)
         if (!this.taskToEdit.activities) this.taskToEdit.activities = [];
         this.taskToEdit.activities.unshift(item.item);
       } else if (item.type === 'dueDate') {
@@ -355,16 +351,17 @@ export default {
         }
       } else if (item.type === 'labels') {
         if (!this.taskToEdit.labelIds) this.taskToEdit.labelIds = [];
-        // if (this.taskToEdit.labelIds.includes(item.item._id) || (item.order === 'delete')) {
         if (this.taskToEdit.labelIds.includes(item.item._id)) {
           const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
           var currLabel = this.taskToEdit.labelIds[idx]
-          if (item.item.color === currLabel.color && item.item.title === currLabel.title) this.taskToEdit.labelIds.splice(idx, 1);
+          if ((item.item.color === currLabel.color && item.item.title === currLabel.title)) {
+            this.taskToEdit.labelIds.splice(idx, 1);
+          }
         } else {
           this.taskToEdit.labelIds.push(item.item._id);
         }
       }
-      this.onTaskEdit();
+      this.onTaskEdit(item);
     },
     updateItem({ type, val }) {
       if (type === 'checklists') {
@@ -381,15 +378,17 @@ export default {
       else this.taskToEdit[type] = val;
       this.onTaskEdit();
     },
-    onTaskEdit() {
+    onTaskEdit(action = null) {
       // console.log('this.taskToEdit', this.taskToEdit);
       this.$store.dispatch({
         type: 'setTask',
         task: JSON.parse(JSON.stringify(this.taskToEdit)),
+        action
       });
       this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
     },
     async updateLabels(updatedLabels, item) {
+      if (item.item?.isDelete) return this.removeLabel(updatedLabels, item)
       try {
         await this.$store.dispatch({
           type: 'setBoardPrefs',
@@ -401,6 +400,18 @@ export default {
       } catch (err) {
         console.log('err', err);
       }
+    },
+    removeLabel(updatedLabels, item) {
+      const idx = this.taskToEdit.labelIds.findIndex((label) => label === item.item._id);
+      this.taskToEdit.labelIds.splice(idx, 1);
+      this.onTaskEdit();
+      this.closePopup();
+
+      this.$store.dispatch({
+        type: 'setBoardPrefs',
+        key: 'labels',
+        val: updatedLabels,
+      });
     },
     cancelDescEdit() {
       this.taskToEdit.description = this.task.description;
@@ -450,8 +461,6 @@ export default {
     this.lastAtIndex = 0;
     if (this.task?.activities?.length) {
       var openComments = this.task.activities.map(comment => { if (comment.isEditing) return comment })
-      console.log('this.task', openComments)
-      // console.log('openComments', openComments)
       openComments.forEach(comment => {
         if (comment) {
           comment.isEditing = false

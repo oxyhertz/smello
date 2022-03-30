@@ -35,40 +35,16 @@
         <div class="dates">
             <h4>Due date</h4>
             <ul>
-                <li>
+                <li v-for="option in dueDateOptions" :key="option._id">
                     <label>
                         <input
                             @change="setFilter"
                             v-model="filterBy.dueDate"
                             type="checkbox"
-                            value="no-dates"
+                            :value="option.val"
                         />
-                        <span class="icon-date"></span>
-                        <p>No dates</p>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input
-                            @change="setFilter"
-                            v-model="filterBy.dueDate"
-                            type="checkbox"
-                            value="overdue"
-                        />
-                        <span class="icon-time red-bg"></span>
-                        <p>Overdue</p>
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input
-                            @change="setFilter"
-                            v-model="filterBy.dueDate"
-                            type="checkbox"
-                            value="next-day"
-                        />
-                        <span class="icon-time wait-bg"></span>
-                        <p>Due in the next day</p>
+                        <span :class="option.classList"></span>
+                        <p>{{ option.txt }}</p>
                     </label>
                 </li>
             </ul>
@@ -115,6 +91,11 @@ export default {
     },
     data() {
         return {
+            dueDateOptions: [
+                { _id: '1', txt: 'No dates', classList: 'icon-date', val: 'no-dates' },
+                { _id: '2', txt: 'Overdue', classList: 'icon-time red-bg', val: 'overdue' },
+                { _id: '3', txt: 'Due in the next day', classList: 'icon-time wait-bg', val: 'next-day' },
+            ],
             filterBy: {
                 title: '',
                 labels: [],
@@ -124,7 +105,6 @@ export default {
         }
     },
     created() {
-        console.log(this.filter)
         this.filterBy = this.filter
     },
     methods: {
@@ -132,6 +112,7 @@ export default {
             this.$emit('closeFilter')
         },
         setFilter() {
+            console.log(this.filter)
             this.$emit('setFilter', { ...this.filterBy })
         },
     },

@@ -61,10 +61,7 @@ export default {
     },
     mounted() {
         const rect = this.$refs.editLabels.getBoundingClientRect();
-        console.log(rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth))
+
     },
     methods: {
         openTask() {
@@ -72,25 +69,20 @@ export default {
         },
         setPopupHeight(height) {
             this.popupHeight = height;
-            console.log(height)
         },
         setCmp(type, data) {
-            console.log(type)
-            console.log(data)
             this.actionType = type;
             this.popupData = data
         },
         updateLabels(updatedLabels, item) {
-            console.log(updatedLabels)
-            console.log(item)
+
         },
         updateCover(cover) {
-            console.log(cover)
+
             this.taskToEdit.cover = cover;
             this.$emit('addItem', '_', this.taskToEdit)
         },
         addItem(item) {
-            console.log(item)
             if (item.type === 'labels') {
                 if (!this.taskToEdit.labelIds) this.taskToEdit.labelIds = [];
                 if (this.taskToEdit.labelIds.includes(item.item._id)) {
@@ -125,7 +117,6 @@ export default {
                 this.addItem(item);
                 // this.closePopup();
             } catch (err) {
-                console.log('err', err);
             }
         },
 
@@ -134,11 +125,8 @@ export default {
         labelsStyle() {
             let top = this.$refs.editLabels.getBoundingClientRect().bottom;
             const right = this.$refs.editLabels.getBoundingClientRect().x;
-            console.log(this.$refs.popup)
-            // console.log('opopup heifght', this.popupHeight)
             if (window.innerHeight - top - this.popupHeight < 0) {
-                console.log('low')
-                console.log((window.innerHeight - top - this.popupHeight))
+
                 top = this.popupHeight + (window.innerHeight - top - this.popupHeight)
             }
             return { top: top + 'px', left: right + 'px', position: 'fixed' }
@@ -146,8 +134,7 @@ export default {
         membersStyle() {
             const top = this.$refs.editMembers.getBoundingClientRect().bottom;
             const right = this.$refs.editMembers.getBoundingClientRect().x;
-            console.log(top)
-            console.log(right)
+
             return { top: top + 'px', left: right + 'px', position: 'fixed' }
         }
     },

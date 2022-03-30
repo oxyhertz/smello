@@ -17,7 +17,7 @@
     align-items: flex-start;
   }
 
-  .board-header-favorite:hover {
+  .board-header-favorite:hover .fa-star {
     color: $favorite-clr;
     transform: scale(1.2);
   }
@@ -59,24 +59,24 @@
 }
 
 .board-header-board-icon::before {
-  @include boardHeader('\e942');
+  @include boardHeader("\e942");
 }
 
 .board-header-invite-icon::before {
-  @include boardHeader('\e902');
+  @include boardHeader("\e902");
 }
 
 .board-header-filter-icon::before {
   padding-inline-start: 5px;
-  @include boardHeader('\e92d');
+  @include boardHeader("\e92d");
 }
 
 .board-header-menu-icon::before {
-  @include boardHeader('\e951');
+  @include boardHeader("\e951");
 }
 
 .board-header-open-icon::before {
-  @include boardHeader('\e923');
+  @include boardHeader("\e923");
 }
 
 .board-header-favorite {

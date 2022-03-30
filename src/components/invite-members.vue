@@ -60,7 +60,6 @@ export default {
                 imgUrl
             }
 
-            console.log(this.board)
             let newBoard = JSON.parse(JSON.stringify(this.board))
             newBoard.members.push(newMember)
             this.$emit('addMember', newBoard.members);
@@ -77,7 +76,6 @@ export default {
             users = users.filter(user => regex.test(user.fullname));
             return users.filter(user => {
                 return !this.board.members.some(member => {
-                    console.log(member.fullname, member._id, 'memberId')
                     return user._id === member._id
                 })
             })
