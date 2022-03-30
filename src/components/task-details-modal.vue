@@ -50,6 +50,20 @@
             <attachment :attachments="taskToEdit.attachments" @updateAttachments="updateItem" />
           </div>
         </div>
+        <div v-if="task.location" class="location-container">
+          <GMapMap
+            class="maps"
+            :center="task.location"
+            :zoom="7"
+            map-type-id="terrain"
+            style="width: 500px; height: 300px"
+          >
+            <GMapCluster>
+              <GMapMarker :position="task.location" />
+            </GMapCluster>
+          </GMapMap>
+        </div>
+
         <task-check-list
           v-for="checklist in taskToEdit.checklists"
           :key="checklist._id"
@@ -323,6 +337,10 @@ export default {
       }
       else if (item.type === 'status') {
         this.taskToEdit.status = item.item;
+      }
+      else if (item.type === 'location') {
+        this.taskToEdit.location = item.item;
+        this.closePopup();
       } else if (item.type === 'checklist') {
         if (!this.taskToEdit.checklists) this.taskToEdit.checklists = [];
         this.taskToEdit.checklists.push(item.item);
