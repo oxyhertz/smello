@@ -140,8 +140,10 @@ export default {
         commit({ type: 'setBoards', boards });
         socketService.off('board update')
         socketService.on('board update', board => {
-          commit({ type: 'saveBoard', board });
-          if (board._id === state.currentBoard._id) commit({ type: 'setCurrentBoard', board });
+          if (board._id === state.currentBoard?._id) {
+            commit({ type: 'saveBoard', board });
+            commit({ type: 'setCurrentBoard', board });
+          }
         })
       } catch (err) {
         console.log(err);
