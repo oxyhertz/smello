@@ -317,7 +317,6 @@ export default {
       this.actionType = null
       this.popupData = null
     },
-    setItem(item) { },
     addItem(item) {
       if (item.type === 'attachment') {
         if (!this.taskToEdit.attachments) this.taskToEdit.attachments = [];

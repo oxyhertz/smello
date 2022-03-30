@@ -9,6 +9,7 @@
 import appHeader from './components/main-header.vue'
 import { socketService } from './services/socket-service';
 import { userService } from './services/user-service.js';
+import { ElNotification } from 'element-plus'
 
 
 export default {
@@ -21,12 +22,26 @@ export default {
 		await this.$store.dispatch({ type: 'loadBoards' })
 	},
 	methods: {
+		notify(isPrivate = null) {
+			if (isPrivate) {
+				ElNotification({
+					title: 'Success',
+					message: 'This is a success message',
+					type: 'success',
+				})
+			} else ElNotification({
+				title: 'global change',
+				message: 'This is an info message',
+				type: 'info',
+			})
+		},
 		notifyActivity(activity) {
 			if (activity.toMember?._id) {
 				if (userService.getLoggedinUser()._id === activity.toMember._id) {
-					// notify()
+					this.notify(true)
+					console.log('hi', userService.getLoggedinUser().fullname)
 				}
-			} else console.log('everybody')
+			} else this.notify()
 		},
 	},
 	computed: {
