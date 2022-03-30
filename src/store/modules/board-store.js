@@ -5,7 +5,6 @@ import { socketService } from '../../services/socket-service.js';
 export default {
   state: {
     boards: [],
-    filterBy: { name: '', sortBy: '' },
     currentBoard: null,
     currentGroup: null,
     currentTask: null,
@@ -33,7 +32,7 @@ export default {
     },
     currTask({ currentTask }) {
       return currentTask;
-    },
+    }
   },
   mutations: {
     toggleLabel(state) {
@@ -214,10 +213,6 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
-    setFilter({ dispatch, commit }, { filterBy }) {
-      commit({ type: 'setFilter', filterBy });
-      dispatch({ type: 'loadBoards' });
-    },
+    }
   },
 };

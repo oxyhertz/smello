@@ -45,7 +45,7 @@ export default {
 				title: '',
 				labels: [],
 				members: [],
-				dueDate: null,
+				dueDate: [],
 			}
 		};
 	},
@@ -183,7 +183,6 @@ export default {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {
 						return task.members?.some(member => {
-							// console.log(member._id)
 							return this.filterBy.members.includes(member._id)
 						})
 					})
@@ -196,6 +195,7 @@ export default {
 					return group
 				})
 			}
+
 			if (this.filterBy.labels.length) {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {
@@ -217,6 +217,7 @@ export default {
 					return group
 				})
 			}
+
 			if (this.filterBy.dueDate) {
 				if (this.filterBy.dueDate === 'overdue') {
 					filteredGroups = filteredGroups.filter(group => {
