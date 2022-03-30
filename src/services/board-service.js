@@ -95,5 +95,6 @@ function getEmptyBoard() {
                 tasks: [],
             },
         ],
+        activities: []
     });
 }

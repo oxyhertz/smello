@@ -30,6 +30,7 @@
 import { nextTick } from 'vue'
 import boardGroup from '../components/board-group.vue';
 import { socketService } from '../services/socket-service.js';
+import { boardService } from '../services/board-service';
 import boardHeader from '../components/board-header.vue'
 
 export default {
@@ -110,7 +111,6 @@ export default {
 		setTask({ title, groupId }) {
 			var task = { title };
 			this.$store.dispatch({ type: 'setTask', groupId, task, });
-
 		},
 		editTask(editedTask) {
 			this.$store.dispatch({ type: 'setTask', task: editedTask });

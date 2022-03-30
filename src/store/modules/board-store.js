@@ -1,6 +1,7 @@
 import { boardService } from '../../services/board-service.js';
 import { utilService } from '../../services/utils-service.js';
 import { socketService } from '../../services/socket-service.js';
+import { userService } from '../../services/user-service.js';
 
 export default {
   state: {
@@ -70,10 +71,16 @@ export default {
     },
     addGroup(state, { group }) {
       state.currentBoard.groups.push(group);
+      const activity = boardService.addActivity('Added group', userService.getLoggedinUser(), { type: 'group', _id: group._id, title: group.title })
+      state.currentBoard.activities.unshift(activity);
     },
     removeGroup(state, { groupId }) {
       const idx = state.currentBoard.groups.indexOf(group => group._id === groupId);
+      const { _id, title } = state.currentBoard.groups[idx];
       state.currentBoard.groups.splice(idx, 1);
+
+      const activity = boardService.addActivity('removed group', userService.getLoggedinUser(), { type: 'group', _id, title })
+      state.currentBoard.activities.unshift(activity);
     },
     setCurrGroups(state, { groups }) {
       state.currentBoard.groups = groups;
@@ -81,8 +88,14 @@ export default {
     setGroup(state, { groupIdx, newGroup }) {
       state.currentBoard.groups.splice(groupIdx, 1, newGroup);
     },
-    setTask(state, { groupId, task }) {
+    setTask(state, { groupId, task, action }) {
       let groupIdx;
+      let activityTxt;
+
+      console.log(action)
+      if (action) activityTxt = `Edited ${action.type} in ${task.title}`
+      else activityTxt = task._id ? `Edited task ${task.title}` : `Added task ${task.title}`
+
       if (state.currentGroup) groupId = state.currentGroup._id;
 
       if (groupId) {
@@ -102,12 +115,20 @@ export default {
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
+
+      const activity = boardService.addActivity(activityTxt, userService.getLoggedinUser(), { type: 'task', _id: task._id, title: task.title })
+      if (action.type === 'members') activity.toMember = action.item;
+      state.currentBoard.activities.unshift(activity);
     },
     removeTask(state, { task }) {
       const taskIdx = state.currentBoard.groups[task.groupIdx].tasks.findIndex(
         currTask => currTask._id === task.taskId
       );
+      const { _id, title } = state.currentBoard.groups[task.groupIdx].tasks[taskIdx];
       state.currentBoard.groups[task.groupIdx].tasks.splice(taskIdx, 1);
+
+      const activity = boardService.addActivity('Removed task', userService.getLoggedinUser(), { type: 'task', _id, title })
+      state.currentBoard.activities.unshift(activity);
     },
   },
   actions: {
@@ -197,9 +218,9 @@ export default {
         console.log(err);
       }
     },
-    async setTask({ commit, state, dispatch }, { groupId, task }) {
+    async setTask({ commit, state, dispatch }, { groupId, task, action }) {
       try {
-        commit({ type: 'setTask', groupId, task });
+        commit({ type: 'setTask', groupId, task, action });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
       } catch (err) {
         console.log(err);
