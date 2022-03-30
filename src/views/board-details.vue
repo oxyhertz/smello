@@ -7,6 +7,7 @@
 			@addMember="addMember"
 			@toggleFavorite="toggleFavorite"
 			@setFilter="setFilter"
+			:filterBy="filterBy"
 		/>
 		<section class="group-container-scrollable">
 			<board-group
@@ -57,9 +58,9 @@ export default {
 					type: 'setCurrentBoard',
 					boardId: newId,
 				});
-				this.board = this.currBoard;
+				// this.board = this.currBoard;
 			},
-			deep: true
+			deep: true,
 		}
 	},
 	async created() {
@@ -96,7 +97,7 @@ export default {
 				});
 				this.board = null;
 				await nextTick();
-				this.board = this.currBoard;
+				// this.board = this.currBoard;
 
 				console.log(this.currBoard);
 			} catch (err) {
@@ -158,15 +159,16 @@ export default {
 		},
 		async addMember(members) {
 			await this.$store.dispatch({ type: 'setBoardPrefs', key: 'members', val: members });
-			this.board = this.currBoard
+			// this.board = this.currBoard
 		},
 		async setBg(bg) {
-			this.board.style[bg.type] = bg.val
-			if (bg.type === 'bgColor') this.board.style.bgImg = ''
-			await this.$store.dispatch({ type: 'saveBoard', board: this.board })
+			const board = JSON.parse(JSON.stringify(this.currBoard))
+			board.style[bg.type] = bg.val
+			if (bg.type === 'bgColor') board.style.bgImg = ''
+			await this.$store.dispatch({ type: 'saveBoard', board: board })
 			await this.$store.dispatch({
 				type: 'setCurrentBoard',
-				boardId: this.board._id,
+				boardId: board._id,
 			});
 		},
 		setFilter(filterBy) {
@@ -190,13 +192,57 @@ export default {
 		},
 		groupsToDisplay() {
 			let filteredGroups = [];
-			console.log(this.filterBy)
+			const board = JSON.parse(JSON.stringify(this.currBoard))
 			const regex = new RegExp(this.filterBy.title, 'i')
-			filteredGroups = this.currBoard.groups.filter((group) => regex.test(group.title))
+			filteredGroups = board.groups.filter((group) => regex.test(group.title) || group.tasks.some(task => regex.test(task.title)))
+			console.log(this.filterBy)
 			if (this.filterBy.members.length) {
-				// filteredGroups.filter()
+				filteredGroups = filteredGroups.filter(group => {
+					return group.tasks.some(task => {
+						return task.members?.some(member => {
+							// console.log(member._id)
+							return this.filterBy.members.includes(member._id)
+						})
+					})
+				})
+				filteredGroups = filteredGroups.map(group => {
+					group.tasks = group.tasks.filter(task => {
+						if (!task.members) task.members = []
+						return task.members?.some(member => this.filterBy.members.includes(member._id))
+					})
+					return group
+				})
 			}
-			return filteredGroups;
+			if (this.filterBy.labels.length) {
+				filteredGroups = filteredGroups.filter(group => {
+					return group.tasks.some(task => {
+						return task.labelIds?.some(label => {
+							return this.filterBy.labels.includes(label)
+						})
+					})
+				})
+				filteredGroups = filteredGroups.map(group => {
+					group.tasks = group.tasks.filter(task => {
+						if (this.filterBy.labels.includes('none')) {
+							console.log('nondddddddddddde')
+							// return !task.labelIds.length
+						}
+						return task.labelIds?.some(label => {
+							if (label === 'none') return
+							return this.filterBy.labels.includes(label)
+						})
+					})
+					return group
+				})
+			}
+			if (this.filterBy.dueDate) {
+				if (this.filterBy.dueDate === 'overdue') {
+					filteredGroups = filteredGroups.filter(group => {
+						return group.tasks.some(task => task.status === 'overdue')
+					})
+				}
+			}
+			return filteredGroups
 		}
 	}
 }

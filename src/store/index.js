@@ -4,9 +4,19 @@ import userStore from './modules/user-store';
 
 const store = createStore({
   strict: true,
-  state: {},
-  getters: {},
-  mutations: {},
+  state: {
+    isHomePage: false,
+  },
+  getters: {
+    isHomePage({isHomePage}){
+      return isHomePage
+    }
+  },
+  mutations: {
+    setHomePage(state,{isHome}){
+      state.isHomePage = isHome
+    }
+  },
   actions: {},
   modules: {
     boardStore,

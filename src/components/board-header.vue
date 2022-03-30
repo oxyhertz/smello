@@ -51,6 +51,7 @@
         @closeFilter="closeFilterModal"
         v-if="isFilterModal"
         :board="board"
+        :filter="filterBy"
       />
       <board-menu-modal
         @setBg="setBg"
@@ -76,6 +77,7 @@ export default {
   emits: ["editTitle", "toggleFavorite"],
   props: {
     board: Object,
+    filterBy: Object
   },
   data() {
     return {

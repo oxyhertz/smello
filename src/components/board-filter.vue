@@ -110,7 +110,8 @@
 export default {
     name: 'close-filter',
     props: {
-        board: Object
+        board: Object,
+        filter: Object
     },
     data() {
         return {
@@ -118,9 +119,13 @@ export default {
                 title: '',
                 labels: [],
                 members: [],
-                dueDate: null,
+                dueDate: []
             }
         }
+    },
+    created() {
+        console.log(this.filter)
+        this.filterBy = this.filter
     },
     methods: {
         closeFilter() {

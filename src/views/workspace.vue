@@ -1,5 +1,5 @@
 <template lang="">
-    <section class="workspace-container">
+    <section class="workspace-container main-layout">
         <h2>Workspace</h2>
         <board-list @toggleFavorite="toggleFavorite" :boards="boards"></board-list>
     </section>
