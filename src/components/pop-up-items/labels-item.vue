@@ -28,7 +28,7 @@
     <color-picker @updateColor="updateColor"></color-picker>
     <div class="labels-actions flex space-between">
       <button class="save create flex" @click="setLabel()">Save</button>
-      <button v-if="isEditing" class="delete-label flex" @click="removeLabel()">Delete</button>
+      <button v-if="isEditing" class="delete-label flex" @click="removeLabel">Delete</button>
       <!-- <button v-if="isEditing" class="delete-label flex">Delete</button> -->
     </div>
   </section>
@@ -50,8 +50,7 @@ export default {
       title: '',
       color: '',
       // boardLabels: null,
-      currentTaskId: '',
-      currLabel: '',
+      currentLabelId: '',
     };
   },
   computed: {
@@ -65,10 +64,23 @@ export default {
     }
   },
   methods: {
+    removeLabel() {
+      var idx = this.boardLabels.findIndex(
+        (label) => label._id === this.currentLabelId);
+      this.boardLabels.splice(idx, 1);
+      const item = {
+        type: 'labels',
+        item: {
+          _id: this.currentLabelId,
+          isDelete: true
+        }
+      }
+      this.$emit('updateLabels', this.boardLabels, item);
+    },
     updateCurrData(label) {
       this.isCreating = true
       this.isEditing = true
-      this.currentTaskId = label._id
+      this.currentLabelId = label._id
       this.title = label.title
       this.color = label.color
     },
@@ -77,7 +89,7 @@ export default {
     },
     setLabel() {
       if (!this.color) return;
-      var id = this.currentTaskId || utilService.makeId();
+      var id = this.currentLabelId || utilService.makeId();
       const item = {
         type: 'labels',
         item: {
@@ -86,9 +98,9 @@ export default {
           _id: id,
         },
       };
-      if (this.currentTaskId) {
+      if (this.currentLabelId) {
         var idx = this.boardLabels.findIndex(
-          (label) => label._id === this.currentTaskId
+          (label) => label._id === this.currentLabelId
         );
         this.boardLabels.splice(idx, 1, item.item);
       } else {
@@ -96,7 +108,7 @@ export default {
       }
       var updatedLabels = this.boardLabels;
       this.$emit('updateLabels', updatedLabels, item);
-      this.currentTaskId = '';
+      this.currentLabelId = '';
     },
     addLabel(id) {
       const item = {

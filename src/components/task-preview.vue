@@ -157,10 +157,7 @@ export default {
     }
   },
   computed: {
-    // openLabel() {
-    //   console.log('openLabel', this.$store.getters.openLabel)
-    //   return this.$store.getters.openLabels;
-    // },
+
     board() {
       return this.$store.getters.currBoard
     },
@@ -213,8 +210,7 @@ export default {
     quickEditPos() {
       const top = this.$refs.tasky.getBoundingClientRect().y;
       const right = this.$refs.tasky.getBoundingClientRect().right;
-      console.log(top)
-      console.log(right)
+
       return { top: top + 'px', left: right + 'px' }
     }
   }

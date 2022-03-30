@@ -42,7 +42,6 @@ export default {
     }
   },
   created() {
-    console.log(this.currSection)
   },
   unmounted() {
     this.currSection = 'Menu'
@@ -54,7 +53,6 @@ export default {
     },
     changeCmp(cmp) {
       this.currSection = cmp
-      console.log(cmp)
     },
     setBg(bg, type = 'bgImg') {
 

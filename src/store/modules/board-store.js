@@ -37,15 +37,12 @@ export default {
   },
   mutations: {
     toggleLabel(state) {
-      // console.log('openLabel', openLabels)
       state.openLabels = !state.openLabels
-      console.log('openLabel', state.openLabels)
     },
     setBoards(state, { boards }) {
       state.boards = boards;
     },
     saveBoard(state, { board }) {
-      console.log(board, 'zissu');
       const idx = state.boards.findIndex(b => b._id === board._id);
       if (idx !== -1) state.boards.splice(idx, 1, board);
       else state.boards.push(board);
@@ -103,7 +100,6 @@ export default {
         );
         state.currentBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task);
       } else {
-        console.log('new task');
         task._id = utilService.makeId();
         state.currentBoard.groups[groupIdx].tasks.push(task);
       }
@@ -188,12 +184,7 @@ export default {
     },
     async removeGroup({ state, commit, dispatch }, { groupId }) {
       try {
-        // const board = await boardService.removeGroup(
-        //   state.currentBoard,
-        //   groupId
-        // );
         commit({ type: 'removeGroup', groupId });
-        // commit({ type: 'setCurrentBoard', board });
         await dispatch({ type: 'saveBoard', board: state.currentBoard });
       } catch {
         console.log(err);

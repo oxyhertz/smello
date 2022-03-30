@@ -112,7 +112,6 @@ export default {
       this.isMenuModal = !this.isMenuModal;
     },
     addMember(member) {
-      console.log(member)
       this.$emit('addMember', member)
     },
     setBg(bg) {

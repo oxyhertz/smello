@@ -48,11 +48,9 @@ export default {
     },
     methods: {
         async setPics() {
-            console.log('setting imgs')
             this.randPics = await imagesService.getImages(this.keyword, 12)
         },
         setImgUrl(url) {
-            console.log(url)
             this.$emit('setImgUrl', url)
         }
     }

@@ -52,11 +52,8 @@ export default {
     actionType: '',
 
   },
-  created() {
-    console.log(this.task)
-  },
+
   mounted() {
-    console.log(this.$refs.popup)
     this.$emit('popupHeight', this.$refs.popup.clientHeight)
   },
   methods: {

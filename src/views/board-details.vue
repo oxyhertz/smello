@@ -97,19 +97,11 @@ export default {
 				});
 				this.board = null;
 				await nextTick();
-				// this.board = this.currBoard;
-
-				console.log(this.currBoard);
 			} catch (err) {
 				console.log('err', err)
 			}
 		},
 		removeTask(task) {
-			// var activity = boardService.addActivity(
-			//   "Task removed",
-			//   this.user, <--from a getter
-			//   currTask
-			// );
 			this.$store.dispatch({
 				type: 'removeTask',
 				task,
@@ -121,9 +113,7 @@ export default {
 
 		},
 		editTask(editedTask) {
-			console.log(editedTask)
 			this.$store.dispatch({ type: 'setTask', task: editedTask });
-			// this.$store.commit({ type: 'setCurrTask', task: JSON.parse(JSON.stringify(this.taskToEdit)) });
 		},
 		quickUpdateTask() {
 			this.$store.dispatch({ type: 'setTask', task: editedTask });
@@ -132,8 +122,6 @@ export default {
 			this.$store.dispatch({ type: 'addGroup', groupTitle })
 		},
 		editGroup({ groupIdx, newGroup }) {
-			// console.log('aaaaaaaa', groupIdx, newGroup);
-			console.log('asdjkyhasdkjsaghdkjsahdkjsadhkjsadhk')
 			this.$store.dispatch({ type: 'setGroup', groupIdx, newGroup })
 		},
 		columnChange(boardGroups) {
@@ -174,7 +162,6 @@ export default {
 		setFilter(filterBy) {
 			const copyfilter = JSON.parse(JSON.stringify(filterBy))
 			this.filterBy = copyfilter;
-			// this.$store.dispatch({ type: 'setFilter', filterBy: copyfilter })
 		},
 	},
 	computed: {
@@ -187,15 +174,11 @@ export default {
 		currBoard() {
 			return this.$store.getters.currBoard;
 		},
-		boardStyle() {
-			// return { 'background-color': ',' };
-		},
 		groupsToDisplay() {
 			let filteredGroups = [];
 			const board = JSON.parse(JSON.stringify(this.currBoard))
 			const regex = new RegExp(this.filterBy.title, 'i')
 			filteredGroups = board.groups.filter((group) => regex.test(group.title) || group.tasks.some(task => regex.test(task.title)))
-			console.log(this.filterBy)
 			if (this.filterBy.members.length) {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {
@@ -224,8 +207,7 @@ export default {
 				filteredGroups = filteredGroups.map(group => {
 					group.tasks = group.tasks.filter(task => {
 						if (this.filterBy.labels.includes('none')) {
-							console.log('nondddddddddddde')
-							// return !task.labelIds.length
+
 						}
 						return task.labelIds?.some(label => {
 							if (label === 'none') return

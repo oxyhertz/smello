@@ -124,7 +124,6 @@ export default {
         }
     },
     created() {
-        console.log(this.filter)
         this.filterBy = this.filter
     },
     methods: {

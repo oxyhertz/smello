@@ -99,7 +99,6 @@ export default {
             this.$emit('updateCover', this.coverToEdit)
         },
         setImgUrl(url) {
-            console.log(url)
             this.coverToEdit.imgUrl = url
             this.updateCover()
 

@@ -13,7 +13,6 @@ export const userManageService = {
 };
 
 function query() {
-  console.log('query user');
   return storageService.query(USER_KEY);
 }
 

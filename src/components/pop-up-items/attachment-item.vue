@@ -47,7 +47,6 @@ export default {
             let file;
             if (ev.type === 'change') file = ev.target.files[0];
             else if (ev.type === 'drop') file = ev.dataTransfer.files[0];
-            console.log('ev', ev);
             this.onUploadImg(file); // send the file to upload it
         },
         async onUploadImg(file) {

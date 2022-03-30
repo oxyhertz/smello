@@ -84,7 +84,6 @@ export default {
             this.$emit('updateItem', { type: 'comment', val: JSON.parse(JSON.stringify(comment)) });
         },
         updateItem(id, isEditingCurrTask) {
-            console.log('this.isEditing', this.isEditing)
             this.currActivityId = id
             var currTask = JSON.parse(JSON.stringify(this.task));
             var comment = currTask.activities.find(comment => comment._id === id);
@@ -99,14 +98,11 @@ export default {
     },
     watch: {
         'memberToAdd'() {
-            // console.log(this.isEditing);
             if (this.isEditing) {
                 this.updateItem(this.currActivityId, true)
             }
         },
-        'isEditing'() {
-            console.log(this.isEditing);
-        },
+
     }
 }
 </script>
