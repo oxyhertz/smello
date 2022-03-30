@@ -99,7 +99,6 @@ export default {
 				await nextTick();
 				// this.board = this.currBoard;
 
-				console.log(this.currBoard);
 			} catch (err) {
 				console.log('err', err)
 			}
@@ -195,7 +194,6 @@ export default {
 			const board = JSON.parse(JSON.stringify(this.currBoard))
 			const regex = new RegExp(this.filterBy.title, 'i')
 			filteredGroups = board.groups.filter((group) => regex.test(group.title) || group.tasks.some(task => regex.test(task.title)))
-			console.log(this.filterBy)
 			if (this.filterBy.members.length) {
 				filteredGroups = filteredGroups.filter(group => {
 					return group.tasks.some(task => {

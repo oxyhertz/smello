@@ -285,11 +285,11 @@ export default {
     },
     setLocation(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Location', style: { top: '110px' } });
+        (this.popupData = { name: 'Location', style: { top: '240px' } });
     },
     setDate(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Dates', style: { top: '190px' } });
+        (this.popupData = { name: 'Dates', style: { top: '180px' } });
     },
     updateCover(cover) {
       this.taskToEdit.cover = cover;
@@ -297,23 +297,23 @@ export default {
     },
     setMembers(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Members', style: { top: '126px' } });
+        (this.popupData = { name: 'Members', style: { top: '59px' } });
     },
     setLabels(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Labels', style: { top: '165px' } });
+        (this.popupData = { name: 'Labels', style: { top: '99px' } });
     },
     setAttachments(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Attachments', style: { top: '268px' } });
+        (this.popupData = { name: 'Attachments', style: { top: '220px' } });
     },
     setChecklist(action) {
       (this.actionType = action),
-        (this.popupData = { name: 'Add checklist', style: { top: '200px' } });
+        (this.popupData = { name: 'Add checklist', style: { top: '140px' } });
     },
     setCover(action) {
       this.actionType = action;
-      this.popupData = { name: 'Cover', style: { top: '250px' } }
+      this.popupData = { name: 'Cover', style: { top: '300px' } }
     },
     closePopup() {
       this.actionType = null

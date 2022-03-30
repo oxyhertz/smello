@@ -102,7 +102,7 @@
       position: absolute;
       margin-left: -40px;
       &::before {
-        content: "\e911";
+        content: '\e911';
       }
     }
   }
@@ -119,7 +119,7 @@
     align-items: center;
     margin-top: 45px;
     .icon::before {
-      content: "\e900";
+      content: '\e900';
     }
   }
   .task-description {
@@ -129,12 +129,11 @@
     margin-bottom: 30px;
     span {
       &::before {
-        content: "\e921";
+        content: '\e921';
       }
     }
   }
   .description-textarea {
-    max-width: 506px;
     cursor: pointer;
     background: none;
     font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
@@ -165,7 +164,7 @@
     }
 
     &[contenteditable]:empty::before {
-      content: "Add a more detailed description";
+      content: 'Add a more detailed description';
     }
   }
   .save-close-description {
@@ -190,7 +189,7 @@
   }
   .attachment-container {
     .icon::before {
-      content: "\e908";
+      content: '\e908';
     }
   }
 
@@ -256,18 +255,24 @@
 @media (max-width: 768px) {
   .task-details-modal {
     width: 100%;
+    padding: 20px 24px 30px 58px;
+    .task-cover {
+      margin: -25px -24px 30px -58px;
+    }
     .task-detail-main {
       flex-direction: column;
 
       .actions-btns-container {
-        & > div {
+        margin-left: -37px;
+        margin-top: 70px;
+        & > div:not(.pop-up-main) {
           display: flex;
           flex-wrap: wrap;
           //   gap: 3px;
-          & > h3 {
+          & > h3:not(.pop-up-main) {
             width: 100%;
           }
-          & > * {
+          & > *:not(.pop-up-main) {
             margin-right: 8px;
             width: calc(50% - 8px);
           }
@@ -283,15 +288,15 @@
   margin-top: -11px;
 
   .icon-find-members {
-    @include icon("\e946");
+    @include icon('\e946');
   }
 
   .icon-emojis {
-    @include icon("");
+    @include icon('');
   }
 
   & .title-icon {
-    @include icon("\e911");
+    @include icon('\e911');
   }
 
   & > * {
@@ -350,7 +355,7 @@
 // }
 
 .close-comment-edit {
-  @include icon("");
+  @include icon('');
   cursor: pointer;
   position: relative;
   top: -38px;

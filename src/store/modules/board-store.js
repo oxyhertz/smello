@@ -45,7 +45,6 @@ export default {
       state.boards = boards;
     },
     saveBoard(state, { board }) {
-      console.log(board, 'zissu');
       const idx = state.boards.findIndex(b => b._id === board._id);
       if (idx !== -1) state.boards.splice(idx, 1, board);
       else state.boards.push(board);
