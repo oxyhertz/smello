@@ -7,7 +7,8 @@ export const boardService = {
     saveBoard,
     getBoardById,
     getEmptyBoard,
-    getEmptyGroup
+    getEmptyGroup,
+    addActivity
 }
 
 function getBoards(filterBy) {
@@ -34,6 +35,16 @@ function getEmptyGroup(title = '', tasks = []) {
         title,
         tasks,
     };
+}
+
+function addActivity(activityTxt, byMember, task) {
+    return {
+        _id: utilService.makeId(),
+        byMember,
+        txt: activityTxt,
+        task,
+        createdAt: Date.now()
+    }
 }
 
 function getEmptyBoard() {
