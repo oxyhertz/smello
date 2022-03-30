@@ -30,7 +30,7 @@
     <h3>Select a color</h3>
     <color-picker @updateColor="updateColor"></color-picker>
     <div class="labels-actions flex space-between">
-      <button class="save create flex" @click="setLabel(null)">Save</button>
+      <button class="save create flex" @click="setLabel()">Save</button>
       <!-- <button v-if="isEditing" class="delete-label flex" @click="setLabel('delete')">Delete</button> -->
       <button v-if="isEditing" class="delete-label flex">Delete</button>
     </div>
@@ -81,7 +81,7 @@ export default {
     updateColor(selectedColor) {
       this.color = selectedColor;
     },
-    setLabel(order) {
+    setLabel() {
       if (!this.color) return;
       var id = this.currentTaskId || utilService.makeId();
       const item = {
