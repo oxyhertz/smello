@@ -129,14 +129,13 @@ export default {
         console.log(err);
       }
     },
-    async saveBoard({ getters, commit }, { board }) {
+    async saveBoard({ getters, commit }, { board, activity }) {
       if (!board._id) {
-        board.createdBy = getters.miniUser; // should come from server later?
-        board.members = [getters.miniUser]; // should come from server later?
+        board.createdBy = getters.miniUser; // should come from server later
+        board.members = [getters.miniUser]; // should come from server later
       }
 
       try {
-        console.log('saveBoard', board);
         const savedBoard = await boardService.saveBoard(board);
         commit({ type: 'saveBoard', board: JSON.parse(JSON.stringify(savedBoard)) });
         return savedBoard;

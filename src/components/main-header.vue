@@ -27,7 +27,10 @@
           class="create-btn"
           @click="isCreateBoard = !isCreateBoard"
           :class="{ 'light-btn-bg': isBoard }"
-        >Create</button>
+        >
+          <p>Create</p>
+          <span class="icon-plus"></span>
+        </button>
         <createBoard @closeCreateModal="isCreateBoard = false" v-if="isCreateBoard"></createBoard>
       </div>
     </div>
